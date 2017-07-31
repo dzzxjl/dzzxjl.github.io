@@ -16,16 +16,16 @@
     
     
 
-    <meta name="description" content="取参数 路由Route Filter 数据操作 重定向">
+    <meta name="description" content="从大三开始接触jsp+servlet，对于后端陆陆续续有了近两年的学习，虽然没写过太多代码，但是对于整个web处理的流程有了简单的理解，故浅谈以记之。  前端由于后端与前端的紧密性，前端不可避而不谈。我喜欢把前端想象为一个面对用户的接口，其好处在于能够在任意终端上的web浏览器上运行，浏览器上展示的这个页面实质是个response，我们后文再谈，先谈前端的关注点request,用户在web页面上的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈web后端 | dzzxjl">
 <meta property="og:url" content="http://yoursite.com/2017/07/31/浅谈web后端/index.html">
 <meta property="og:site_name" content="dzzxjl">
-<meta property="og:description" content="取参数 路由Route Filter 数据操作 重定向">
-<meta property="og:updated_time" content="2017-07-31T03:40:06.000Z">
+<meta property="og:description" content="从大三开始接触jsp+servlet，对于后端陆陆续续有了近两年的学习，虽然没写过太多代码，但是对于整个web处理的流程有了简单的理解，故浅谈以记之。  前端由于后端与前端的紧密性，前端不可避而不谈。我喜欢把前端想象为一个面对用户的接口，其好处在于能够在任意终端上的web浏览器上运行，浏览器上展示的这个页面实质是个response，我们后文再谈，先谈前端的关注点request,用户在web页面上的">
+<meta property="og:updated_time" content="2017-07-31T09:48:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈web后端 | dzzxjl">
-<meta name="twitter:description" content="取参数 路由Route Filter 数据操作 重定向">
+<meta name="twitter:description" content="从大三开始接触jsp+servlet，对于后端陆陆续续有了近两年的学习，虽然没写过太多代码，但是对于整个web处理的流程有了简单的理解，故浅谈以记之。  前端由于后端与前端的紧密性，前端不可避而不谈。我喜欢把前端想象为一个面对用户的接口，其好处在于能够在任意终端上的web浏览器上运行，浏览器上展示的这个页面实质是个response，我们后文再谈，先谈前端的关注点request,用户在web页面上的">
     
     
     
@@ -175,12 +175,21 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p>取参数</p>
-<p>路由<br>Route</p>
-<p>Filter</p>
-<p>数据操作</p>
-<p>重定向</p>
-
+    <p>从大三开始接触jsp+servlet，对于后端陆陆续续有了近两年的学习，虽然没写过太多代码，但是对于整个web处理的流程有了简单的理解，故浅谈以记之。</p>
+<hr>
+<h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><p>由于后端与前端的紧密性，前端不可避而不谈。我喜欢把前端想象为一个面对用户的接口，其好处在于能够在任意终端上的web浏览器上运行，浏览器上展示的这个页面实质是个<em>response</em>，我们后文再谈，先谈前端的关注点<em>request</em>,用户在web页面上的操作将会构成产生各种行为，最典型的就是填写表单，在用户点击构成跳转行为的按钮后将会产生一个<em>request</em>,他主要包括两个方面，其一是用户的浏览器客户端消息，譬如ip地址,浏览器型号版本等，另外就是用户输入信息，他往往以get或者post的形式进行传输，这部分信息也是后台处理的基础。</p>
+<p>用户访问页面的过程：</p>
+<ul>
+<li>用户输入网址</li>
+<li>浏览器加载HTML/CSS/JS，图片资源等</li>
+<li>浏览器将结果绘制成图形</li>
+<li>用户通过鼠标，键盘等与页面交互</li>
+</ul>
+<h4 id="获取用户输入"><a href="#获取用户输入" class="headerlink" title="获取用户输入"></a>获取用户输入</h4><p>用户的输入一般是以<em>Map<name:value></name:value></em>的形式通过<em>request</em>的包装传输到后端的，此时在后端，以java为例，我们只需要获取到<em>request</em>对象，然后根据<em>name</em>名便可获取到对应的value，得到value之后最终交由相应的算法进行处理。在这个地方要注意一点，用户的输入不单单是简单的表单信息，往往还会是各种富媒体文件，各类框架往往针对这点有各自的处理方式。</p>
+<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p>可以将一个网站的整体脉络理解成一棵树，网站的根即为”/“，这个根目录通常是在服务器端进行定义，注意我们树的节点往往是链接，而不是通常意义下的文件。比如<em>/user/add</em>，第二层的节点往往为我们要操作的实体对象，第三层则是动作，这点现阶段被定义为<em>Restful API</em>，具体可以参考阮一峰关于此的介绍。后端关键处理的是url与相应的服务器端处理行为之间的映射，以<em>java</em>的spring mvc框架为例，先通过user字符串映射到UserController类中，在根据字符串add映射到addUser的方法上，接下来的方法体内定义的便是对于数据的处理逻辑。</p>
+<h4 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h4><p>中文即过滤器，目前我对于它的理解也非常浅显，认为过滤器就是类似一个分类机，将不同的对象分别交付予不同的功能模块进行处理，而且这个行为往往是批量的。</p>
+<h4 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h4><p>ORM</p>
+<h4 id="Redirect"><a href="#Redirect" class="headerlink" title="Redirect"></a>Redirect</h4>
   </section>
 
   <section class="post-comments">
