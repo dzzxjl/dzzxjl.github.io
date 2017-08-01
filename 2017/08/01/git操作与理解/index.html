@@ -7,7 +7,7 @@
     
 
     <title>
-      归档: 2015/4 
+      git操作与理解 | dzzxjl 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,12 +16,16 @@
     
     
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归档: 2015&#x2F;4">
-<meta property="og:url" content="http://yoursite.com/archives/2015/04/index.html">
+    <meta name="description" content="打开github.com，寻找到入站信息，  Joined GitHub on January 17, 2014  已经近四年了。喜欢github分享与开源的精神，愿这个程序员大家庭越来越好。今天记录一下使用git的相关心得。 之前一直不理解git push origin master中的origin的意义，今天特意百度一下，实质这个origin代表的就是远程的仓库，我们在本地的git目录下使用g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git操作与理解 | dzzxjl">
+<meta property="og:url" content="http://yoursite.com/2017/08/01/git操作与理解/index.html">
 <meta property="og:site_name" content="dzzxjl">
+<meta property="og:description" content="打开github.com，寻找到入站信息，  Joined GitHub on January 17, 2014  已经近四年了。喜欢github分享与开源的精神，愿这个程序员大家庭越来越好。今天记录一下使用git的相关心得。 之前一直不理解git push origin master中的origin的意义，今天特意百度一下，实质这个origin代表的就是远程的仓库，我们在本地的git目录下使用g">
+<meta property="og:updated_time" content="2017-08-01T02:40:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="归档: 2015&#x2F;4">
+<meta name="twitter:title" content="git操作与理解 | dzzxjl">
+<meta name="twitter:description" content="打开github.com，寻找到入站信息，  Joined GitHub on January 17, 2014  已经近四年了。喜欢github分享与开源的精神，愿这个程序员大家庭越来越好。今天记录一下使用git的相关心得。 之前一直不理解git push origin master中的origin的意义，今天特意百度一下，实质这个origin代表的就是远程的仓库，我们在本地的git目录下使用g">
     
     
     
@@ -146,47 +150,58 @@ classes that you can use:
         <div class="content-wrapper__inner entry">
             
 
+<article class="post-container post-container--single">
 
-  <h1 class="archive-title">归档: 2015/4</h1>
-  <hr class="post-list__divider" />
-
-
-<div class="main-post-list">
-    <ol class="post-list">
+  <header class="post-header">
     
-    
-    <li>
+    <h1 class="post-title">git操作与理解</h1>
 
-      <h2 class="post-list__post-title post-title">
-        <a href="/2015/04/15/关于乐视/" title="link to 关于乐视">关于乐视</a>
-      </h2>
-
-      <div class="post-list__meta">
-
-        <time datetime="2015-04-15" class="post-list__meta--date date">2015-04-15</time> 
-      </div>
-
-      <div class="excerpt">
-        
-      </div>
-
-      <hr class="post-list__divider" />
-    </li>
-    
-  </ol>
-
-  <hr class="post-list__divider " />
-
-<nav class="pagination" role="navigation">
     
 
-    <span class="pagination__page-number"> 1 / 1</span>
+    <div class="post-meta">
+      <time datetime="2017-08-01" class="post-meta__date date">2017-08-01</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
     
     
-</nav>
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>打开github.com，寻找到入站信息，</p>
+<blockquote>
+<p>Joined GitHub on <a href="https://github.com/dzzxjl?tab=overview&amp;from=2014-01-01&amp;to=2014-01-31#contribution-joined-github-6430442-2014-01-17" target="_blank" rel="external">January 17, 2014</a></p>
+</blockquote>
+<p>已经近四年了。喜欢github分享与开源的精神，愿这个程序员大家庭越来越好。今天记录一下使用git的相关心得。</p>
+<p>之前一直不理解git push origin master中的origin的意义，今天特意百度一下，实质这个origin代表的就是远程的仓库，我们在本地的git目录下使用git remote -v命令，可以得到如下信息：</p>
+<blockquote>
+<p>origin    git@github.com:dzzxjl/Cluster-analysis-platform.git (fetch)<br>origin    git@github.com:dzzxjl/Cluster-analysis-platform.git (push)</p>
+</blockquote>
+<p>可以看到这是一个远程的url，举个不恰当的例子，这里的url我们可以看做一个网站，而提交时的命令git push -u origin master中的master可以看做是一个端口，这样通过二级坐标来定义一个地址。</p>
+<p>再次引用知乎的一段话来加深对于origin的理解：</p>
+<blockquote>
+<p>origin指向的是repository，master只是这个repository中默认创建的第一个branch。当你git push的时候因为origin和master都是默认创建的，所以可以这样省略，但是这个是bad practice，因为当你换一个branch再git push的时候，有时候就纠结了。</p>
+</blockquote>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
 
 
-</div>
+</article>
+
+
             <footer class="footer">
 
     <span class="footer__copyright">&copy; 2017. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | Good Luck</span>
@@ -215,6 +230,18 @@ classes that you can use:
 
 
     
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
     
     
     <!--kill ie6 -->
