@@ -16,16 +16,16 @@
     
     
 
-    <meta name="description" content="T在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。  \ 与 \ \">
+    <meta name="description" content="泛型在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。  泛型出现的最引人注目的一个原因是为了创造容器类。 以下两个为经常在源码中看到的 1&amp;lt;? extends T&amp;gt; 与 &amp;lt;? super T&amp;gt;  ? &amp;lt;= T ? &amp;gt;= T  1&amp;lt;T extends Comparable&amp;lt;T&amp;gt;&amp;gt;与&amp;lt;T e">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中的T | dzzxjl">
 <meta property="og:url" content="http://yoursite.com/2017/08/02/Java中的T/index.html">
 <meta property="og:site_name" content="dzzxjl">
-<meta property="og:description" content="T在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。  \ 与 \ \">
-<meta property="og:updated_time" content="2017-08-03T10:13:46.000Z">
+<meta property="og:description" content="泛型在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。  泛型出现的最引人注目的一个原因是为了创造容器类。 以下两个为经常在源码中看到的 1&amp;lt;? extends T&amp;gt; 与 &amp;lt;? super T&amp;gt;  ? &amp;lt;= T ? &amp;gt;= T  1&amp;lt;T extends Comparable&amp;lt;T&amp;gt;&amp;gt;与&amp;lt;T e">
+<meta property="og:updated_time" content="2017-08-09T03:33:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的T | dzzxjl">
-<meta name="twitter:description" content="T在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。  \ 与 \ \">
+<meta name="twitter:description" content="泛型在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。  泛型出现的最引人注目的一个原因是为了创造容器类。 以下两个为经常在源码中看到的 1&amp;lt;? extends T&amp;gt; 与 &amp;lt;? super T&amp;gt;  ? &amp;lt;= T ? &amp;gt;= T  1&amp;lt;T extends Comparable&amp;lt;T&amp;gt;&amp;gt;与&amp;lt;T e">
     
     
     
@@ -175,9 +175,22 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p>T在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。</p>
-<p> \<t extends="" ?=""> 与 \<t super="" ?=""></t></t></p>
-<p>\<t extends="" comparable\<t="">&gt;与\<t extends="" comparable<?="" super="" t="">&gt;的不同</t></t></p>
+    <p>泛型在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。</p>
+<p> 泛型出现的最引人注目的一个原因是为了创造<strong>容器类</strong>。</p>
+<p>以下两个为经常在源码中看到的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;? extends T&gt; 与 &lt;? <span class="keyword">super</span> T&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>? &lt;= T</li>
+<li>? &gt;= T</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T extends Comparable&lt;T&gt;&gt;与&lt;T extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>1 类型 T 必须实现 <code>Comparable</code> 接口，并且这个接口的类型是 T。只有这样，T 的实例之间才能相互比较大小。例如，在实际调用时若使用的具体类是 Dog，那么 Dog 必须 <code>implements Comparable&lt;Dog&gt;</code></li>
+<li>2 类型 T 必须实现 <code>Comparable</code> 接口，并且这个接口的类型是 T 或 T 的任一父类。这样声明后，T 的实例之间，T 的实例和它的父类的实例之间，可以相互比较大小。例如，在实际调用时若使用的具体类是 Dog (假设 Dog 有一个父类 Animal），Dog 可以从 Animal 那里继承 <code>Comparable&lt;Animal&gt;</code> ，或者自己 <code>implements Comparable&lt;Dog&gt;</code></li>
+</ul>
+<blockquote>
+<p>理解了边界所在，你才能成为程序高手。 ——《Thinking in java》</p>
+</blockquote>
 
   </section>
 
