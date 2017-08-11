@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      dia&#34;OS&#34;i | 十一城 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="dzzxjl">
+    
+    
+
+    <meta name="description" content="注：本文主要基于CentOS 7.0来理解操作系统，想深入理解OS，推荐阅读《鸟哥的私房菜》、《30天自制操作系统》  穷玩车，富玩表，屌丝玩电脑。  这个电脑可以理解成操作系统， 而且很不严谨地说，每个人接触的第一个电脑程序就是操作系统。 我印象中接触的第一个操作系统是windows98，那时也就七八岁，当时对98的认识就是可以打单机游戏，时间太过久远，现在能记得的只有超级马里奥了。后来，发现邻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dia&quot;OS&quot;i | 十一城">
+<meta property="og:url" content="http://yoursite.com/2015/03/13/dia"OS"i/index.html">
+<meta property="og:site_name" content="十一城">
+<meta property="og:description" content="注：本文主要基于CentOS 7.0来理解操作系统，想深入理解OS，推荐阅读《鸟哥的私房菜》、《30天自制操作系统》  穷玩车，富玩表，屌丝玩电脑。  这个电脑可以理解成操作系统， 而且很不严谨地说，每个人接触的第一个电脑程序就是操作系统。 我印象中接触的第一个操作系统是windows98，那时也就七八岁，当时对98的认识就是可以打单机游戏，时间太过久远，现在能记得的只有超级马里奥了。后来，发现邻">
+<meta property="og:image" content="http://7xie74.com1.z0.glb.clouddn.com/windows_install">
+<meta property="og:updated_time" content="2017-08-11T10:17:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dia&quot;OS&quot;i | 十一城">
+<meta name="twitter:description" content="注：本文主要基于CentOS 7.0来理解操作系统，想深入理解OS，推荐阅读《鸟哥的私房菜》、《30天自制操作系统》  穷玩车，富玩表，屌丝玩电脑。  这个电脑可以理解成操作系统， 而且很不严谨地说，每个人接触的第一个电脑程序就是操作系统。 我印象中接触的第一个操作系统是windows98，那时也就七八岁，当时对98的认识就是可以打单机游戏，时间太过久远，现在能记得的只有超级马里奥了。后来，发现邻">
+<meta name="twitter:image" content="http://7xie74.com1.z0.glb.clouddn.com/windows_install">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">十一城</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          跬步千里，小流江海。
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">dia&#34;OS&#34;i</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2015-03-13" class="post-meta__date date">2015-03-13</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p><em>注：本文主要基于CentOS 7.0来理解操作系统，想深入理解OS，推荐阅读《鸟哥的私房菜》、《30天自制操作系统》</em></p>
+<blockquote>
+<p>穷玩车，富玩表，屌丝玩电脑。</p>
+</blockquote>
+<p>这个电脑可以理解成操作系统，</p>
+<p>而且很不严谨地说，每个人接触的第一个电脑程序就是操作系统。</p>
+<p>我印象中接触的第一个操作系统是windows98，那时也就七八岁，当时对98的认识就是可以打单机游戏，时间太过久远，现在能记得的只有超级马里奥了。后来，发现邻居家的电脑开机画面上的数字已经由98变成了2000，伴随着的是，电脑可以打开一个窗口，然后向其中输入一串神奇的数字4399就可以打游戏了，其中射击类型为主。</p>
+<p>再后来就进入到了window xp时代，我与很多人一样对xp有着好感，因为自己从xp才真正开始了解电脑，而且使用这个系统将近9年。xp公认是一个非常优秀的桌面操作系统，在它身上我度过了那少年时代。而可悲的是，把大部分时间花在了游戏上。</p>
+<p>高中时代，我除了周末与节假日几乎很少碰电脑，因此兴趣自然而然的转移到了手机上，因为手机这个东西24h可以接触，对于最早接触的MTK的山寨机我们很难将其定义为操作系统，我真正地接触手机端的操作系统第一个还是Symbian，从塞班系统我开始认识到原来手机就是micro computer。</p>
+<p>那段时间，我对操作系统开始很痴迷，我发现原来不止symbian，我开始了解到Andriod ，ios ，bbos，wp，并对每个系统大体上有了些许了解，例如安卓的开放，ios的封闭，bbos的安全与企业级功能，wp可怜的用户数量。</p>
+<p>从那时开始，我才发现操作系统是这样的多元化，当时我便产生了一个疑问，为什么移动终端上的OS这么多元化，那么PC端，每次开机画面都是醒目的windows的logo，难道电脑端只有这一种操作系统，why？后来我才从互联网上了解到mac，发现了mac上运行的便不是windows，而是mac os x ，但是当时对这个也是一知半解。即使当时了解到安卓是源于linux的，但对于linux是什么东西也不懂。</p>
+<p>就这样带着很多疑惑来到了大学，我期待着了解更多关于操作系统的知识。</p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com/windows_install" alt="安装操作系统"></p>
+<p><em>2014年寒假期间，痴迷于系统的安装绘制的系统安装网络图</em></p>
+<p>来到大学后，我通过各种信息源去了解操作系统。此时我认识到，操作系统是处于硬件与软件的中间位置，他衔接着软硬件，意义可见一斑。对于操作系统的功能，难以一言以蔽之。可以理解成一个管家，处理着计算机所有内部大大小小的事务，有些看得见，有些看不见，终极目的就是为我们——使用者来服务。</p>
+<p>站在学科的角度，操作系统主要功能模块有以下这些：</p>
+<h3 id="文件系统（File-system）"><a href="#文件系统（File-system）" class="headerlink" title="文件系统（File system）"></a>文件系统（File system）</h3><blockquote>
+<p>计算机的<strong>文件系统</strong>是一种存储和组织计算机数据的方法，它使得对其存取和查找变得容易，文件系统使用<strong>文件</strong>和<strong>树形目录</strong>的抽象逻辑概念代替了硬盘和光盘等物理设备使用数据块的概念，用户使用文件系统来保存数据不必关心数据实际保存在硬盘（或者光盘）的地址为多少的数据块上，只需要记住这个文件的所属目录和文件名。</p>
+</blockquote>
+<p>文件系统是一套实现了数据的存储、分级组织、存取和获取等操作的抽象数据类型（Abstract data type）。</p>
+<ul>
+<li>centos从7开始使用XFS作为缺省操作系统，之前为Ext4</li>
+<li>目前win10支持FAT12/FAT16     FAT32/VFAT     NTFS</li>
+<li>部分Linux发行版默认不支持NTFS文件系统</li>
+<li>macOS使用APFS</li>
+</ul>
+<p>随着互联网产生的数据量越来越多，<strong>分布式文件系统</strong>在更多的场合开始派上用场。在这样的文件系统中，客户端并非直接存取底层的资料<a href="https://zh.wikipedia.org/wiki/%E5%84%B2%E5%AD%98%E5%8D%80%E5%A1%8A" target="_blank" rel="external">储存区块</a>，而是通过网络，以特定的<a href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E5%82%B3%E8%BC%B8%E5%8D%94%E5%AE%9A" target="_blank" rel="external">通讯协定</a>和伺服器沟通。通过通讯协定的设计，可以让客户端和伺服器端都能根据<a href="https://zh.wikipedia.org/wiki/%E5%AD%98%E5%8F%96%E6%8E%A7%E5%88%B6%E4%B8%B2%E5%88%97" target="_blank" rel="external">存取控制清单</a>或是授权，来限制对于档案系统的存取。</p>
+<p>可能包含的功能有</p>
+<ul>
+<li><a href="https://zh.wikipedia.org/w/index.php?title=%E8%B3%87%E6%96%99%E8%A4%87%E8%A3%BD&amp;action=edit&amp;redlink=1" target="_blank" rel="external">资料复制</a></li>
+<li><a href="https://zh.wikipedia.org/w/index.php?title=%E5%AE%B9%E9%8C%AF&amp;action=edit&amp;redlink=1" target="_blank" rel="external">容错</a></li>
+</ul>
+<p>通过著名的CAP定理来进行权衡</p>
+<ul>
+<li>一致性（Consistency）</li>
+<li>可用性（Availability）</li>
+<li>网路分隔的容忍程度（Partition tolerance）</li>
+</ul>
+<h3 id="内存管理（Memory-management）"><a href="#内存管理（Memory-management）" class="headerlink" title="内存管理（Memory management）"></a>内存管理（Memory management）</h3><p>以java内存模型为例</p>
+<h3 id="进程管理（Processing-management）"><a href="#进程管理（Processing-management）" class="headerlink" title="进程管理（Processing management）"></a>进程管理（Processing management）</h3><p>centos7使用ps命令可以查看当前系统正在执行的进程。</p>
+<p>进程定义：正在运行的程序，是系统进行资源分配的独立单位，每个进程拥有自己的一套变量。</p>
+<p>进程的意义：可以提高CPU的使用率</p>
+<p>进程与线程</p>
+<ul>
+<li>新生（<em>new</em>）：行程新产生中。</li>
+<li>执行（<em>running</em>）：正在执行。</li>
+<li>等待（<em>waiting</em>）：等待某事发生，例如等待使用者输入完成。亦称“阻塞”（<em>blocked</em>）</li>
+<li>就绪（<em>ready</em>）：排队中，等待CPU。</li>
+<li>结束（<em>terminated</em>）：完成执行。</li>
+</ul>
+<h3 id="网络通讯（Networking）"><a href="#网络通讯（Networking）" class="headerlink" title="网络通讯（Networking）"></a>网络通讯（Networking）</h3><p>以访问web为例</p>
+<h3 id="安全机制（Security）"><a href="#安全机制（Security）" class="headerlink" title="安全机制（Security）"></a>安全机制（Security）</h3><h3 id="驱动程序（Device-drivers）"><a href="#驱动程序（Device-drivers）" class="headerlink" title="驱动程序（Device drivers）"></a>驱动程序（Device drivers）</h3><h3 id="用户界面（User-interface）"><a href="#用户界面（User-interface）" class="headerlink" title="用户界面（User interface）"></a>用户界面（User interface）</h3><p>怎么样，有没有觉得OS——Oh,So cool!</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c74812f514823dcc232a43bf4fa01aee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
