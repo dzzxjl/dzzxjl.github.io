@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      内存溢出与内存泄漏 | 十一城 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="dzzxjl">
+    
+    
+
+    <meta name="description" content="今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。 内存泄漏 Memory Leak 在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。  因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存溢出与内存泄漏 | 十一城">
+<meta property="og:url" content="http://yoursite.com/2017/08/23/内存溢出与内存泄漏/index.html">
+<meta property="og:site_name" content="十一城">
+<meta property="og:description" content="今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。 内存泄漏 Memory Leak 在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。  因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄">
+<meta property="og:updated_time" content="2017-08-23T09:59:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="内存溢出与内存泄漏 | 十一城">
+<meta name="twitter:description" content="今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。 内存泄漏 Memory Leak 在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。  因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">十一城</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          跬步千里，小流江海。
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">内存溢出与内存泄漏</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-08-23" class="post-meta__date date">2017-08-23</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。</p>
+<h2 id="内存泄漏-Memory-Leak"><a href="#内存泄漏-Memory-Leak" class="headerlink" title="内存泄漏 Memory Leak"></a>内存泄漏 Memory Leak</h2><blockquote>
+<p>在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就<strong>失去了对该段内存的控制</strong>，从而造成了内存的浪费。</p>
+</blockquote>
+<p>因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄漏就是发生在这个区域。内存泄露是指分配出去的内存没有被回收回来，由于失去了对该内存区域的控制，因而造成了资源的浪费。Java中一般不会产生内存泄露，因为有垃圾回收器自动回收垃圾，但这也不绝对，当我们new了对象，并保存了其引用，但是后面一直没用它，而垃圾回收器又不会去回收它，这边会造成内存泄露。</p>
+<p>随着越来越多的服务器程序采用Java技术，例如JSP，Servlet， EJB等，服务器程序往往长期运行。另外，在很多嵌入式系统中，内存的总量非常有限。内存泄露问题也就变得十分关键，即使每次运行少量泄漏，长期运行之后，系统也是面临崩溃的危险。</p>
+<p>对象的释放是由GC决定和执行的。在Java中，<strong>内存的分配是由程序完成的，而内存的释放是有GC完成的，这种收支两条线的方法确实简化了程序员的工作</strong>。但同时，它也加重了JVM的工作。这也是Java程序运行速度较慢的原因之一。因为，GC为了能够正确释放对象，GC必须监控每一个对象的运行状态，包括对象的申请、引用、被引用、赋值等，GC都需要进行监控。</p>
+<h2 id="内存溢出-Out-of-Memory"><a href="#内存溢出-Out-of-Memory" class="headerlink" title="内存溢出 Out of Memory"></a>内存溢出 Out of Memory</h2><p>内存溢出是指程序所需要的内存超出了系统所能分配的内存（包括动态扩展）的上限。</p>
+<p>这在java中往往体现为OutOfMemoryError异常，通常会出现以下几种情况：</p>
+<ul>
+<li>Java堆溢出——jvm在启动的时候会以一个参数设置虚拟机的堆大小，当堆满即出现溢出。</li>
+<li>虚拟机和本地方法栈溢出</li>
+<li>方法区和运行时常量池溢出——方法区溢出也是一种常见的内存溢出异常，一个类要被垃圾回收器回收掉，判定条件是比较严苛的。在经常动态产生大量Class的应用中，需要特别注意类的回收状况。这类场景包括CGLib字节码增强、动态语言、大量JSP或者动态产生JSP文件的应用、基于OSGi的应用等                                                                                                                                  </li>
+<li>本机直接内存溢出</li>
+</ul>
+<p>参考：<a href="https://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/" target="_blank" rel="external">IBM</a></p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c74812f514823dcc232a43bf4fa01aee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
