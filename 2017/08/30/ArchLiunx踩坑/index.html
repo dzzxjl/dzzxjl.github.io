@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      ArchLiunx踩坑 | 十一城 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="dzzxjl">
+    
+    
+
+    <meta name="description" content="ArchLinux在极客圈好像一直深受好评，许多人都放弃使用mac转而采用thinkpad+archlinux的方式。今天又被几个al的桌面给吸引了，于是踩坑装archlinux。 ##安装 安装的过程只需要参照简书上的这篇文章就可以了，需要注意的一点是网络连接，后面会提及 网络我按照教程配置了网络，以为成功了，因为在光盘启动时是可以正常连接网络的，但是restart后用pacman命令下载软件包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArchLiunx踩坑 | 十一城">
+<meta property="og:url" content="http://yoursite.com/2017/08/30/ArchLiunx踩坑/index.html">
+<meta property="og:site_name" content="十一城">
+<meta property="og:description" content="ArchLinux在极客圈好像一直深受好评，许多人都放弃使用mac转而采用thinkpad+archlinux的方式。今天又被几个al的桌面给吸引了，于是踩坑装archlinux。 ##安装 安装的过程只需要参照简书上的这篇文章就可以了，需要注意的一点是网络连接，后面会提及 网络我按照教程配置了网络，以为成功了，因为在光盘启动时是可以正常连接网络的，但是restart后用pacman命令下载软件包">
+<meta property="og:updated_time" content="2017-08-30T10:22:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ArchLiunx踩坑 | 十一城">
+<meta name="twitter:description" content="ArchLinux在极客圈好像一直深受好评，许多人都放弃使用mac转而采用thinkpad+archlinux的方式。今天又被几个al的桌面给吸引了，于是踩坑装archlinux。 ##安装 安装的过程只需要参照简书上的这篇文章就可以了，需要注意的一点是网络连接，后面会提及 网络我按照教程配置了网络，以为成功了，因为在光盘启动时是可以正常连接网络的，但是restart后用pacman命令下载软件包">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">十一城</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          跬步千里，小流江海。
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">ArchLiunx踩坑</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-08-30" class="post-meta__date date">2017-08-30</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>ArchLinux在极客圈好像一直深受好评，许多人都放弃使用mac转而采用thinkpad+archlinux的方式。今天又被几个al的桌面给吸引了，于是踩坑装archlinux。</p>
+<p>##安装</p>
+<p>安装的过程只需要参照<a href="http://www.jianshu.com/p/98b8965b1d10" target="_blank" rel="external">简书上的这篇文章</a>就可以了，需要注意的一点是网络连接，后面会提及</p>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>我按照教程配置了网络，以为成功了，因为在光盘启动时是可以正常连接网络的，但是restart后用pacman命令下载软件包出现一连串的错误，紧接使用ping命令发现未连接，才定位到网络出现了问题，找到了如下方案解决：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">在这个文件中添加：</div><div class="line"></div><div class="line">&gt;interface = eth0</div><div class="line"></div><div class="line">保存退出之后，敲入命令</div><div class="line"></div><div class="line">&gt;dhcpcd</div><div class="line"></div><div class="line">马上发现一切正常工作了</div></pre></td></tr></table></figure>
+<h2 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h2><p>archlinux 启动后一直卡在 reached target graphical interface</p>
+<p>参阅网上资料「Systemd 开机流程（boot process）消息」，不是「错误消息（error message）」，只通过这个消息解决不了任何问题。这个消息提供的线索是 systemd 启动了 X window system（X11，Xorg）（通过 systemd-analyze plot &gt; boot.png 你可以直观地看到这个启动流程）。之后 X11 干了什么，它不知道，所以也没法告诉你。所以需要去 /var/log/Xorg.0.log 和 /var/log/Xorg.0.log.old 看 Xorg 哪里出了问题。这个问题属于硬件驱动版块。</p>
+<p>于是将问题定位到显卡驱动+桌面安装错误的问题上</p>
+<p>目前尚未解决…</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c74812f514823dcc232a43bf4fa01aee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
