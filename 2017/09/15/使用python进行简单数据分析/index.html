@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      使用python进行简单数据分析 | 十一城 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="dzzxjl">
+    
+    
+
+    <meta name="description" content="开学这几天没有啥重要的事，正好手里头里面有一些同届与同班新生的数据，做了些简单的分析并生成了可视化的效果图，在此进行简单的记录，总之现在python用起来越来越顺手了，也越来越喜欢python的简单与精炼。 在编码前，梳理了简单的思路 同届数据分析上《数理逻辑》这门课的时候，点名时，发现名字里面包含“宇”这个字的可真不少，所以当时就想着看看到底多少人的名字里面有。在此也就仅从两个维度来进行数据的分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用python进行简单数据分析 | 十一城">
+<meta property="og:url" content="http://yoursite.com/2017/09/15/使用python进行简单数据分析/index.html">
+<meta property="og:site_name" content="十一城">
+<meta property="og:description" content="开学这几天没有啥重要的事，正好手里头里面有一些同届与同班新生的数据，做了些简单的分析并生成了可视化的效果图，在此进行简单的记录，总之现在python用起来越来越顺手了，也越来越喜欢python的简单与精炼。 在编码前，梳理了简单的思路 同届数据分析上《数理逻辑》这门课的时候，点名时，发现名字里面包含“宇”这个字的可真不少，所以当时就想着看看到底多少人的名字里面有。在此也就仅从两个维度来进行数据的分">
+<meta property="og:image" content="http://7xie74.com1.z0.glb.clouddn.com/figure_1.png">
+<meta property="og:image" content="http://7xie74.com1.z0.glb.clouddn.com/figure_2.png">
+<meta property="og:image" content="http://7xie74.com1.z0.glb.clouddn.com/figure_5.png">
+<meta property="og:image" content="http://7xie74.com1.z0.glb.clouddn.com/figure_3.png">
+<meta property="og:image" content="http://7xie74.com1.z0.glb.clouddn.com/figure_4.png">
+<meta property="og:updated_time" content="2017-09-15T11:54:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用python进行简单数据分析 | 十一城">
+<meta name="twitter:description" content="开学这几天没有啥重要的事，正好手里头里面有一些同届与同班新生的数据，做了些简单的分析并生成了可视化的效果图，在此进行简单的记录，总之现在python用起来越来越顺手了，也越来越喜欢python的简单与精炼。 在编码前，梳理了简单的思路 同届数据分析上《数理逻辑》这门课的时候，点名时，发现名字里面包含“宇”这个字的可真不少，所以当时就想着看看到底多少人的名字里面有。在此也就仅从两个维度来进行数据的分">
+<meta name="twitter:image" content="http://7xie74.com1.z0.glb.clouddn.com/figure_1.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">十一城</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          跬步千里，小流江海。
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">使用python进行简单数据分析</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-09-15" class="post-meta__date date">2017-09-15</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>开学这几天没有啥重要的事，正好手里头里面有一些同届与同班新生的数据，做了些简单的分析并生成了可视化的效果图，在此进行简单的记录，总之现在python用起来越来越顺手了，也越来越喜欢python的简单与精炼。</p>
+<p>在编码前，梳理了简单的思路</p>
+<h2 id="同届数据分析"><a href="#同届数据分析" class="headerlink" title="同届数据分析"></a>同届数据分析</h2><p>上《数理逻辑》这门课的时候，点名时，发现名字里面包含“宇”这个字的可真不少，所以当时就想着看看到底多少人的名字里面有。在此也就仅从两个维度来进行数据的分析，第一则是姓的频次，第二就是名字中单词的频次。</p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com/figure_1.png" alt=""></p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com/figure_2.png" alt=""></p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com/figure_5.png" alt=""></p>
+<h2 id="同班数据分析"><a href="#同班数据分析" class="headerlink" title="同班数据分析"></a>同班数据分析</h2><p>这里主要对出生年月进行了分析</p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com/figure_3.png" alt=""></p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com/figure_4.png" alt=""></p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2017. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c74812f514823dcc232a43bf4fa01aee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
