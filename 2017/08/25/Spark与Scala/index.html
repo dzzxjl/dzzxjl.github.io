@@ -16,16 +16,16 @@
     
     
 
-    <meta name="description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装Spark连接jupyter为什么Spark会选择Scala？ API能做得优雅; 这是框架设计师第一个要考虑的问题，框架的用户是应用开发程序员，API是否优雅直接影">
+    <meta name="description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装与配置mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark与Scala | 十一城">
 <meta property="og:url" content="http://yoursite.com/2017/08/25/Spark与Scala/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装Spark连接jupyter为什么Spark会选择Scala？ API能做得优雅; 这是框架设计师第一个要考虑的问题，框架的用户是应用开发程序员，API是否优雅直接影">
-<meta property="og:updated_time" content="2017-10-17T15:37:54.000Z">
+<meta property="og:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装与配置mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下">
+<meta property="og:updated_time" content="2017-10-18T15:18:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark与Scala | 十一城">
-<meta name="twitter:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装Spark连接jupyter为什么Spark会选择Scala？ API能做得优雅; 这是框架设计师第一个要考虑的问题，框架的用户是应用开发程序员，API是否优雅直接影">
+<meta name="twitter:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装与配置mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下">
     
     
     
@@ -180,7 +180,46 @@ classes that you can use:
 </blockquote>
 <p>spark本身是由scala编写，运行在JVM上。</p>
 <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>scala为spark做了很多优化工作  spark相对hadoop做了很多优化</p>
-<h2 id="Spark的安装"><a href="#Spark的安装" class="headerlink" title="Spark的安装"></a>Spark的安装</h2><h2 id="Spark连接jupyter"><a href="#Spark连接jupyter" class="headerlink" title="Spark连接jupyter"></a>Spark连接jupyter</h2><h2 id="为什么Spark会选择Scala？"><a href="#为什么Spark会选择Scala？" class="headerlink" title="为什么Spark会选择Scala？"></a>为什么Spark会选择Scala？</h2><ul>
+<h2 id="Spark的安装与配置"><a href="#Spark的安装与配置" class="headerlink" title="Spark的安装与配置"></a>Spark的安装与配置</h2><p>mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下将下行添加至配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PYSPARK_PYTHON=python3</div></pre></td></tr></table></figure>
+<h2 id="Spark连接jupyter"><a href="#Spark连接jupyter" class="headerlink" title="Spark连接jupyter"></a>Spark连接jupyter</h2><ol>
+<li><p>Install <a href="https://www.continuum.io/downloads#_macosx" target="_blank" rel="external">anaconda</a> for OSX.</p>
+</li>
+<li><p>Install <a href="http://jupyter.org/" target="_blank" rel="external">jupyter</a> typing the next line in your terminal <a href="http://jupyter.readthedocs.org/en/latest/install.html" target="_blank" rel="external">Click me for more info</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~$ conda install jupyter</div></pre></td></tr></table></figure>
+</li>
+<li><p>Update jupyter just in case.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~$ conda update jupyter</div></pre></td></tr></table></figure>
+</li>
+<li><p>Download <a href="https://spark.apache.org/downloads.html" target="_blank" rel="external">Apache Spark</a> and compile it, or download and uncompress <a href="http://www.apache.org/dyn/closer.lua/spark/spark-1.5.1/spark-1.5.1-bin-hadoop2.6.tgz" target="_blank" rel="external">Apache Spark 1.5.1 + Hadoop 2.6</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~$ cd Downloads </div><div class="line">ilovejobs@mymac:~/Downloads$ wget http://www.apache.org/dyn/closer.lua/spark/spark-1.5.1/spark-1.5.1-bin-hadoop2.6.tgz</div></pre></td></tr></table></figure>
+</li>
+<li><p>Create an <code>Apps</code> folder on your home (i.e):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~/Downloads$ mkdir ~/Apps</div></pre></td></tr></table></figure>
+</li>
+<li><p>Move the uncompressed folder <code>spark-1.5.1</code> to the <code>~/Apps</code> directory.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~/Downloads$ mv spark-1.5.1/ ~/Apps</div></pre></td></tr></table></figure>
+</li>
+<li><p>Move to the <code>~/Apps</code> directory and verify that spark is there.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~/Downloads$ cd ~/Apps</div><div class="line">ilovejobs@mymac:~/Apps$ ls -l</div><div class="line">drwxr-xr-x ?? ilovejobs ilovejobs 4096 ?? ?? ??:?? spark-1.5.1</div></pre></td></tr></table></figure>
+</li>
+<li><p><em>Here is the first tricky part</em>. Add the spark binaries to your <code>$PATH</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~/Apps$ cd</div><div class="line">ilovejobs@mymac:~$ echo &quot;export $HOME/apps/spark/bin:$PATH&quot; &gt;&gt; .profile</div></pre></td></tr></table></figure>
+</li>
+<li><p><em>Here is the second tricky part</em>. Add this environment variables also:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~$ echo &quot;export PYSPARK_DRIVER_PYTHON=ipython&quot; &gt;&gt; .profile</div><div class="line">ilovejobs@mymac:~$ echo &quot;export PYSPARK_DRIVER_PYTHON_OPTS=&apos;notebook&apos; pyspark&quot; &gt;&gt; .profile</div></pre></td></tr></table></figure>
+</li>
+<li><p>Source the profile to make these variables available for this <strong>terminal</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~$ source .profile</div></pre></td></tr></table></figure>
+</li>
+<li><p>Create a <code>~/notebooks</code> directory.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~$ mkdir notebooks</div></pre></td></tr></table></figure>
+</li>
+<li><p>Move to <code>~/notebooks</code> and run pyspark:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~$ cd notebooks</div><div class="line">ilovejobs@mymac:~/notebooks$ pyspark</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="为什么Spark会选择Scala？"><a href="#为什么Spark会选择Scala？" class="headerlink" title="为什么Spark会选择Scala？"></a>为什么Spark会选择Scala？</h2><ul>
 <li>API能做得优雅; 这是框架设计师第一个要考虑的问题，框架的用户是应用开发程序员，API是否优雅直接影响用户体验。</li>
 <li>能融合到Hadoop生态圈，要用JVM语言; Hadoop现在是大数据事实标准，Spark并不是要取代Hadoop，而是要完善Hadoop生态。JVM语言大部分可能会想到Java，但Java做出来的API太丑，或者想实现一个优雅的API太费劲。</li>
 <li>速度要快; Scala是静态编译的，所以和JRuby,Groovy比起来速度会快很多，非常接近Java。</li>
