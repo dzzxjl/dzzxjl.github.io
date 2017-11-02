@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/25/Spark与Scala/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装与配置mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下">
-<meta property="og:updated_time" content="2017-10-20T11:44:42.000Z">
+<meta property="og:updated_time" content="2017-10-27T08:14:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark与Scala | 十一城">
 <meta name="twitter:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装与配置mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下">
@@ -226,10 +226,18 @@ classes that you can use:
 </ul>
 <h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><h2 id="SparkContext"><a href="#SparkContext" class="headerlink" title="SparkContext"></a>SparkContext</h2><p>默认情况下一台电脑只能拥有一个SparkContext，特别是在使用jupyter的时候，如果一个notebook启用了SparkContext，需要遵循以下步骤，从而在新创建的notebook上在使用sc</p>
 <ul>
-<li>关闭原来的SparkContext，即调用sc.stop()</li>
-<li>关闭kernel</li>
-<li>在新的notebook重启</li>
-<li>不需要新创建，直接获取sc</li>
+<li><p>关闭原来的SparkContext，即调用sc.stop()</p>
+</li>
+<li><p>关闭kernel</p>
+</li>
+<li><p>在新的notebook重启</p>
+</li>
+<li><p>不需要新创建，直接获取sc</p>
+</li>
+<li><blockquote>
+<p>也可添加重启pyspark组合操作</p>
+</blockquote>
+</li>
 </ul>
 
   </section>
