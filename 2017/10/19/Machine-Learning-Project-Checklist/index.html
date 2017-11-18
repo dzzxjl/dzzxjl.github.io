@@ -16,16 +16,16 @@
     
     
 
-    <meta name="description" content="Machine Learning Project Checklist Frame the problem and look at the big picture. 将问题框架化并且关注重点 Get the data. 获取数据 Explore the data to gain insights. 探索数据从而洞悉数据  Prepare the data to better expose the u">
+    <meta name="description" content="原文来自于《Hands-On Machine Learning with Scikit-Learn and TensorFlow》附录，是系统学习机器学习非常不错的入门书籍，希望通过此checklist能更好地认识数据挖掘的整个流程与重点，感谢@swordspoet补充与校对  Machine Learning Project Checklist Frame the problem and lo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Machine-Learning-Project-Checklist | 十一城">
 <meta property="og:url" content="http://yoursite.com/2017/10/19/Machine-Learning-Project-Checklist/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="Machine Learning Project Checklist Frame the problem and look at the big picture. 将问题框架化并且关注重点 Get the data. 获取数据 Explore the data to gain insights. 探索数据从而洞悉数据  Prepare the data to better expose the u">
-<meta property="og:updated_time" content="2017-10-19T13:59:25.000Z">
+<meta property="og:description" content="原文来自于《Hands-On Machine Learning with Scikit-Learn and TensorFlow》附录，是系统学习机器学习非常不错的入门书籍，希望通过此checklist能更好地认识数据挖掘的整个流程与重点，感谢@swordspoet补充与校对  Machine Learning Project Checklist Frame the problem and lo">
+<meta property="og:updated_time" content="2017-11-18T10:42:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Machine-Learning-Project-Checklist | 十一城">
-<meta name="twitter:description" content="Machine Learning Project Checklist Frame the problem and look at the big picture. 将问题框架化并且关注重点 Get the data. 获取数据 Explore the data to gain insights. 探索数据从而洞悉数据  Prepare the data to better expose the u">
+<meta name="twitter:description" content="原文来自于《Hands-On Machine Learning with Scikit-Learn and TensorFlow》附录，是系统学习机器学习非常不错的入门书籍，希望通过此checklist能更好地认识数据挖掘的整个流程与重点，感谢@swordspoet补充与校对  Machine Learning Project Checklist Frame the problem and lo">
     
     
     
@@ -175,34 +175,38 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <h2 id="Machine-Learning-Project-Checklist"><a href="#Machine-Learning-Project-Checklist" class="headerlink" title="Machine Learning Project Checklist"></a>Machine Learning Project Checklist</h2><ol>
+    <blockquote>
+<p>原文来自于<a href="https://book.douban.com/subject/26840215/" target="_blank" rel="external">《Hands-On Machine Learning with Scikit-Learn and TensorFlow》</a>附录，是系统学习机器学习非常不错的入门书籍，希望通过此checklist能更好地认识数据挖掘的整个流程与重点，感谢<a href="https://github.com/swordspoet" target="_blank" rel="external">@swordspoet</a>补充与校对</p>
+</blockquote>
+<h1 id="Machine-Learning-Project-Checklist"><a href="#Machine-Learning-Project-Checklist" class="headerlink" title="Machine Learning Project Checklist"></a>Machine Learning Project Checklist</h1><ol>
 <li>Frame the problem and look at the big picture. 将问题框架化并且关注重点</li>
 <li>Get the data. 获取数据</li>
-<li>Explore the data to gain insights. 探索数据从而洞悉数据 </li>
+<li>Explore the data to gain insights. 探索数据从而洞悉数据</li>
 <li>Prepare the data to better expose the underlying data patterns to Machine Learning algorithms. 准备数据从而更好地将底层数据模式提供给机器学习算法</li>
 <li>Explore many different models and short-list the best ones. 探索许多不同的模型并列出最好的那些</li>
 <li>Fine-tune your models and combine them into a great solution. 调整模型并将它们结合为很棒的解决方案</li>
-<li>Present your solution. 展示你的解决方案 </li>
+<li>Present your solution. 展示你的解决方案</li>
 <li>Launch, monitor, and maintain your system 建立，监督并维护你的系统</li>
 </ol>
-<h2 id="Frame-the-Problem-and-Look-at-the-Big-Picture"><a href="#Frame-the-Problem-and-Look-at-the-Big-Picture" class="headerlink" title="Frame the Problem and Look at the Big Picture"></a>Frame the Problem and Look at the Big Picture</h2><ol>
+<hr>
+<h2 id="1-Frame-the-Problem-and-Look-at-the-Big-Picture"><a href="#1-Frame-the-Problem-and-Look-at-the-Big-Picture" class="headerlink" title="1. Frame the Problem and Look at the Big Picture"></a>1. Frame the Problem and Look at the Big Picture</h2><ol>
 <li>Define the objective in business terms. 用商务术语定义目标</li>
 <li>How will your solution be used? 你的解决方案怎样被使用？</li>
 <li>What are the current solutions/workarounds (if any)? 当前的解决方案/解决方法是什么（如果有的话）？</li>
-<li>How should you frame this problem (supervised/unsupervised, online/offline,etc.)? </li>
-<li>How should performance be measured? </li>
-<li>Is the performance measure aligned with the business objective? </li>
-<li>What would be the minimum performance needed to reach the business objective? </li>
-<li>What are comparable problems? Can you reuse experience or tools? </li>
-<li>Is human expertise available? </li>
-<li>How would you solve the problem manually? </li>
-<li>List the assumptions you (or others) have made so far. </li>
+<li>How should you frame this problem (supervised/unsupervised, online/offline,etc.)? 如何框架化问题？（监督/无监督？在线/离线？）</li>
+<li>How should performance be measured? 如何度量模型的表现？</li>
+<li>Is the performance measure aligned with the business objective? 方案的表现是否和商业目标一致？</li>
+<li>What would be the minimum performance needed to reach the business objective?</li>
+<li>What are comparable problems? Can you reuse experience or tools? 类似的问题如何解决？是否可以重复使用经验或工具？</li>
+<li>Is human expertise available? 人员是否专业？</li>
+<li>How would you solve the problem manually? 你如何动手解决问题？</li>
+<li>List the assumptions you (or others) have made so far. 列出你目前所做的假设</li>
 <li>Verify assumptions if possible. 如果可能，请验证假设</li>
 </ol>
-<h2 id="Get-the-Data"><a href="#Get-the-Data" class="headerlink" title="Get the Data"></a>Get the Data</h2><p>Note: automate as much as possible so you can easily get fresh data. </p>
+<h2 id="2-Get-the-Data"><a href="#2-Get-the-Data" class="headerlink" title="2. Get the Data"></a>2. Get the Data</h2><p>Note: automate as much as possible so you can easily get fresh data.</p>
 <ol>
-<li>List the data you need and how much you need.  列出你需要的数据和数据量</li>
-<li>Find and document where you can get that data. 寻找并文档化哪里可以得到那些数据</li>
+<li>List the data you need and how much you need. 列出你需要的数据和数据量</li>
+<li>Find and document where you can get that data. 寻找并记录哪里可以得到那些数据</li>
 <li>Check how much space it will take. 核对它需要多大的存储空间</li>
 <li>Check legal obligations, and get authorization if necessary. 核对法律义务并在必要时获取授权</li>
 <li>Get access authorizations. 获取使用授权</li>
@@ -210,13 +214,13 @@ classes that you can use:
 <li>Get the data. 获取数据</li>
 <li>Convert the data to a format you can easily manipulate (without changing the data itself). 将数据转换为你可以容易操作的格式（不改变数据源本身的情况下）</li>
 <li>Ensure sensitive information is deleted or protected (e.g., anonymized). 确保敏感信息被删除或保护（比如匿名化）</li>
-<li>Check the size and type of data (time series, sample, geographical, etc.). 核对数据的尺寸和类型（时间序列、样本、地理信息等）</li>
+<li>Check the size and type of data (time series, sample, geographical, etc.). 核对数据的大小和类型（时间序列、样本、地理信息等）</li>
 <li>Sample a test set, put it aside, and never look at it (no data snooping!). 抽样出测试集，将它放在一边，以后不需要关注它（不是数据窥探！）</li>
 </ol>
-<h2 id="Explore-the-Data"><a href="#Explore-the-Data" class="headerlink" title="Explore the Data"></a>Explore the Data</h2><p>Note: try to get insights from a field expert for these steps. 注意：尝试从领域专家那获取这些步骤的见解</p>
+<h2 id="3-Explore-the-Data"><a href="#3-Explore-the-Data" class="headerlink" title="3. Explore the Data"></a>3. Explore the Data</h2><p>Note: try to get insights from a field expert for these steps. 注意：尝试从领域专家那获取这些步骤的见解</p>
 <ol>
 <li>Create a copy of the data for exploration (sampling it down to a manageable size if necessary). 创建数据副本用来探索（如有必要，将其取样至可管理的大小）</li>
-<li>Create a Jupyter notebook to keep a record of your data exploration. 创建一个Jupyter笔记本用来保持记录你的数据探索的过程</li>
+<li>Create a Jupyter notebook to keep a record of your data exploration. 创建一个 Jupyter notebook 用来保持记录你的数据探索的过程</li>
 <li>Study each attribute and its characteristics: 研究每个属性和它的特点<ul>
 <li>Name 名称</li>
 <li>Type (categorical, int/float, bounded/unbounded, text, structured, etc.) 类型（种类，整形/浮点型，有界/无界，文本，结构化数据等）</li>
@@ -234,26 +238,26 @@ classes that you can use:
 <li>Identify extra data that would be useful 确定出也许要用的额外数据</li>
 <li>Document what you have learned. 用文档记录你所了解到的东西</li>
 </ol>
-<h2 id="Prepare-the-Data"><a href="#Prepare-the-Data" class="headerlink" title="Prepare the Data"></a>Prepare the Data</h2><p>Notes: </p>
+<h2 id="4-Prepare-the-Data"><a href="#4-Prepare-the-Data" class="headerlink" title="4. Prepare the Data"></a>4. Prepare the Data</h2><p>Notes:</p>
 <ul>
 <li>Work on copies of the data (keep the original dataset intact). 在数据副本上进行工作（保持原来的数据集完好无损）</li>
 <li>Write functions for all data transformations you apply, for five reasons: 写出所有你要应用数据转换的函数，因为以下五点原因：<ul>
 <li>So you can easily prepare the data the next time you get a fresh dataset 当你下次拿到一个新的数据集时可以容易地准备数据</li>
 <li>So you can apply these transformations in future projects 你可以在未来的项目中应用这些转换</li>
-<li>To clean and prepare the test set 用来清洗并准备测试数据集 </li>
-<li>To clean and prepare new data instances once your solution is live </li>
+<li>To clean and prepare the test set 用来清洗并准备测试数据集</li>
+<li>To clean and prepare new data instances once your solution is live 一旦项目上线可以用来清洗和准备新的数据集</li>
 <li>To make it easy to treat your preparation choices as hyperparameters</li>
 </ul>
 </li>
 </ul>
 <ol>
 <li>Data cleaning: 数据清洗：<ul>
-<li>Fix or remove outliers (optional). 修补或移除异常点（可选）</li>
+<li>Fix or remove outliers (optional). 修正或移除异常点（可选）</li>
 <li>Fill in missing values (e.g., with zero, mean, median…) or drop their rows (orcolumns). 填补缺失值（比如用零，平均值，中位数…）</li>
 </ul>
 </li>
 <li>Feature selection (optional): 特征提取（可选）：<ul>
-<li>Drop the attributes that provide no useful information for the task. 丢弃无法为任务提供有用信息的属性</li>
+<li>Drop the attributes that provide no useful information for the task. 丢弃无法为任务提供有用信息的特征</li>
 </ul>
 </li>
 <li>Feature engineering, where appropriate: 特征工程<ul>
@@ -263,15 +267,15 @@ classes that you can use:
 <li>Aggregate features into promising new features. 将一些特征融合为有益的新特征</li>
 </ul>
 </li>
-<li>Feature scaling: standardize or normalize features. 特征尺度：将特征标准化、正则化</li>
+<li>Feature scaling: standardize or normalize features. 特征规约：将特征标准化、规范化</li>
 </ol>
-<h2 id="Short-List-Promising-Models"><a href="#Short-List-Promising-Models" class="headerlink" title="Short-List Promising Models"></a>Short-List Promising Models</h2><p>Notes: </p>
+<h2 id="5-Short-List-Promising-Models"><a href="#5-Short-List-Promising-Models" class="headerlink" title="5. Short-List Promising Models"></a>5. Short-List Promising Models</h2><p>Notes:</p>
 <ul>
 <li>If the data is huge, you may want to sample smaller training sets so you can train many different models in a reasonable time (be aware that this penalizes complexmodels such as large neural nets or Random Forests). 如果数据非常大，你可以抽样出小的训练集从而训练许多不同的模型</li>
 <li>Once again, try to automate these steps as much as possible. 一次又一次，尝试将这些步骤尽可能地自动化处理</li>
 </ul>
 <ol>
-<li>Train many quick and dirty models from different categories (e.g., linear, naiveBayes, SVM, Random Forests, neural net, etc.) using standard parameters. 使用标准参数从不同类型的模型（比如线性模型，朴素贝叶斯，支持向量机，随机森林，神经网络等）</li>
+<li>Train many quick and dirty models from different categories (e.g., linear, naiveBayes, SVM, Random Forests, neural net, etc.) using standard parameters. 使用标准参数训练快速、粗糙的模型（比如线性模型，朴素贝叶斯，支持向量机，随机森林，神经网络等）</li>
 <li>Measure and compare their performance. 衡量并比较他们的表现<ul>
 <li>For each model, use N-fold cross-validation and compute the mean and standarddeviation of the performance measure on the N folds. 对于每个模型使用N折交叉验证法，并且计算基于N折的均值与方差</li>
 </ul>
@@ -285,21 +289,21 @@ classes that you can use:
 <li>Have one or two more quick iterations of the five previous steps. 对之前的五个步骤进行一至两次的快速遍历</li>
 <li>Short-list the top three to five most promising models, preferring models that make different types of errors. 列出前三到五名最有用的模型</li>
 </ol>
-<h2 id="Fine-Tune-the-System"><a href="#Fine-Tune-the-System" class="headerlink" title="Fine-Tune the System"></a>Fine-Tune the System</h2><p>Notes: </p>
+<h2 id="6-Fine-Tune-the-System"><a href="#6-Fine-Tune-the-System" class="headerlink" title="6. Fine-Tune the System"></a>6. Fine-Tune the System</h2><p>Notes:</p>
 <ul>
 <li>You will want to use as much data as possible for this step, especially as you movetoward the end of fine-tuning. 这一步你将会使用尽可能多的数据，特别是当你进行到这一步的最后阶段时</li>
 <li>As always automate what you can. 像之前一样尽可能让你做的自动化</li>
 </ul>
 <ol>
-<li>Fine-tune the hyperparameters using cross-validation. <ul>
-<li>Treat your data transformation choices as hyperparameters, especially whenyou are not sure about them (e.g., should I replace missing values with zero or with the median value? Or just drop the rows?). </li>
-<li>Unless there are very few hyperparameter values to explore, prefer randomsearch over grid search. If training is very long, you may prefer a Bayesianoptimization approach (e.g., using Gaussian process priors).</li>
+<li>Fine-tune the hyperparameters using cross-validation. 使用交叉验证方法调节超参数<ul>
+<li>Treat your data transformation choices as hyperparameters, especially when you are not sure about them (e.g., should I replace missing values with zero or with the median value? Or just drop the rows?). 要像调节超参数那样对待数据转换的过程，特别是当你不知如何下手的时候（比如，我应该是用平均值还是中位数替换缺失值？或者还是直接丢弃它们？）</li>
+<li>Unless there are very few hyperparameter values to explore, prefer randomsearch over grid search. If training is very long, you may prefer a Bayesianoptimization approach (e.g., using Gaussian process priors). 除非只有很少的超参数，最好使用随机搜索而非网格搜索。如果训练的时间很长，你应该使用贝叶斯优化方法（比如，使用高斯处理）</li>
 </ul>
 </li>
 <li>Try Ensemble methods. Combining your best models will often perform better than running them individually. 尝试集成方法，将模型结合起来往往比单独运行他们表现地要好</li>
 <li>Once you are confident about your final model, measure its performance on the test set to estimate the generalization error. 一旦你对你最终的模型很有自信，在测试集上测试以衡量它的表现来估计泛化误差</li>
 </ol>
-<h2 id="Present-Your-Solution"><a href="#Present-Your-Solution" class="headerlink" title="Present Your Solution"></a>Present Your Solution</h2><ol>
+<h2 id="7-Present-Your-Solution"><a href="#7-Present-Your-Solution" class="headerlink" title="7. Present Your Solution"></a>7. Present Your Solution</h2><ol>
 <li>Document what you have done. 将你做的工作整理成文档</li>
 <li>Create a nice presentation. 制作精美的展示<ul>
 <li>Make sure you highlight the big picture first. 确保你首先突出重点</li>
@@ -311,13 +315,13 @@ classes that you can use:
 <li>List your assumptions and your system’s limitations. 列出你的假设和系统的限制</li>
 </ul>
 </li>
-<li>Ensure your key findings are communicated through beautiful visualizations or easy-to-remember statements (e.g., “the median income is the number-one predictor of housing prices”). 确保你的主要发现是通过漂亮的可视化方式或容易记住的语句来传达的（例如，“平均收入是房价预测的头号预测者”）</li>
+<li>Ensure your key findings are communicated through beautiful visualizations or easy-to-remember statements (e.g., “the median income is the number-one predictor of housing prices”). 确保你的主要发现是通过漂亮的可视化方式或容易记住的语言来表达的（例如，“平均收入是房价预测的头号预测者”）</li>
 </ol>
-<h2 id="Launch"><a href="#Launch" class="headerlink" title="Launch!"></a>Launch!</h2><ol>
-<li>Get your solution ready for production (plug into production data inputs, writeunit tests, etc.). 使你的解决方案准备好用于生产环境（）</li>
-<li>Write monitoring code to check your system’s live performance at regular intervalsand trigger alerts when it drops. <ul>
-<li>Beware of slow degradation too: models tend to “rot” as data evolves.</li>
-<li>Measuring performance may require a human pipeline (e.g., via a crowdsourcing service).</li>
+<h2 id="8-Launch"><a href="#8-Launch" class="headerlink" title="8. Launch!"></a>8. Launch!</h2><ol>
+<li>Get your solution ready for production (plug into production data inputs, write unit tests, etc.). 使你的解决方案准备好用于生产环境（）</li>
+<li>Write monitoring code to check your system’s live performance at regular intervalsand trigger alerts when it drops.<ul>
+<li>Beware of slow degradation too: models tend to “rot” as data evolves. 时时刻刻意识到随着数据的进入模型会逐渐变得很差</li>
+<li>Measuring performance may require a human pipeline (e.g., via a crowdsourcing service). 评估模型可能需要大量的人力（比如，通过众包服务可以解决这个问题）</li>
 <li>Also monitor your inputs’ quality (e.g., a malfunctioning sensor sending random values, or another team’s output becoming stale). This is particularly important for online learning systems. 同时监控输入数据的质量（例如，一个有故障的传感器发送随机数，或者另外一个团队的输出变得陈旧），这对于在线学习系统尤其重要</li>
 </ul>
 </li>
