@@ -7,7 +7,7 @@
     
 
     <title>
-      内存溢出与内存泄漏 | 十一城 
+      Java语言基础 | 十一城 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,17 +16,17 @@
     
     
 
-    <meta name="description" content="今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。 内存泄漏 Memory Leak 在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。  因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄">
+    <meta name="description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 关键字 static final   重写与重载 泛型 集合类 HashMap LinkedList   反射机制 深入理解面向对象思想、面向接口编程 抽象类与接口 java单一继承     java虚拟机机制 类加载机制 垃圾回收机制   java高并发 java内存模型 线程的状态 线程">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内存溢出与内存泄漏 | 十一城">
-<meta property="og:url" content="http://yoursite.com/2017/08/23/内存溢出与内存泄漏/index.html">
+<meta property="og:title" content="Java语言基础 | 十一城">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/Java语言基础/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。 内存泄漏 Memory Leak 在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。  因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄">
-<meta property="og:updated_time" content="2017-11-20T13:15:56.000Z">
+<meta property="og:description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 关键字 static final   重写与重载 泛型 集合类 HashMap LinkedList   反射机制 深入理解面向对象思想、面向接口编程 抽象类与接口 java单一继承     java虚拟机机制 类加载机制 垃圾回收机制   java高并发 java内存模型 线程的状态 线程">
+<meta property="og:updated_time" content="2017-11-20T13:25:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="内存溢出与内存泄漏 | 十一城">
-<meta name="twitter:description" content="今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。 内存泄漏 Memory Leak 在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。  因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄">
+<meta name="twitter:title" content="Java语言基础 | 十一城">
+<meta name="twitter:description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 关键字 static final   重写与重载 泛型 集合类 HashMap LinkedList   反射机制 深入理解面向对象思想、面向接口编程 抽象类与接口 java单一继承     java虚拟机机制 类加载机制 垃圾回收机制   java高并发 java内存模型 线程的状态 线程">
     
     
     
@@ -155,12 +155,12 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">内存溢出与内存泄漏</h1>
+    <h1 class="post-title">Java语言基础</h1>
 
     
 
     <div class="post-meta">
-      <time datetime="2017-08-23" class="post-meta__date date">2017-08-23</time> 
+      <time datetime="2017-08-02" class="post-meta__date date">2017-08-02</time> 
 
       <span class="post-meta__tags tags">
 
@@ -181,22 +181,57 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p>今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。</p>
-<h2 id="内存泄漏-Memory-Leak"><a href="#内存泄漏-Memory-Leak" class="headerlink" title="内存泄漏 Memory Leak"></a>内存泄漏 Memory Leak</h2><blockquote>
-<p>在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就<strong>失去了对该段内存的控制</strong>，从而造成了内存的浪费。</p>
+    <blockquote>
+<p>理解了边界所在，你才能成为程序高手。 ——《Thinking in java》</p>
 </blockquote>
-<p>因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄漏就是发生在这个区域。内存泄露是指分配出去的内存没有被回收回来，由于失去了对该内存区域的控制，因而造成了资源的浪费。Java中一般不会产生内存泄露，因为有垃圾回收器自动回收垃圾，但这也不绝对，当我们new了对象，并保存了其引用，但是后面一直没用它，而垃圾回收器又不会去回收它，这边会造成内存泄露。</p>
-<p>随着越来越多的服务器程序采用Java技术，例如JSP，Servlet， EJB等，服务器程序往往长期运行。另外，在很多嵌入式系统中，内存的总量非常有限。内存泄露问题也就变得十分关键，即使每次运行少量泄漏，长期运行之后，系统也是面临崩溃的危险。</p>
-<p>对象的释放是由GC决定和执行的。在Java中，<strong>内存的分配是由程序完成的，而内存的释放是有GC完成的，这种收支两条线的方法确实简化了程序员的工作</strong>。但同时，它也加重了JVM的工作。这也是Java程序运行速度较慢的原因之一。因为，GC为了能够正确释放对象，GC必须监控每一个对象的运行状态，包括对象的申请、引用、被引用、赋值等，GC都需要进行监控。</p>
-<h2 id="内存溢出-Out-of-Memory"><a href="#内存溢出-Out-of-Memory" class="headerlink" title="内存溢出 Out of Memory"></a>内存溢出 Out of Memory</h2><p>内存溢出是指程序所需要的内存超出了系统所能分配的内存（包括动态扩展）的上限。</p>
-<p>这在java中往往体现为OutOfMemoryError异常，通常会出现以下几种情况：</p>
-<ul>
-<li>Java堆溢出——jvm在启动的时候会以一个参数设置虚拟机的堆大小，当堆满即出现溢出。</li>
-<li>虚拟机和本地方法栈溢出</li>
-<li>方法区和运行时常量池溢出——方法区溢出也是一种常见的内存溢出异常，一个类要被垃圾回收器回收掉，判定条件是比较严苛的。在经常动态产生大量Class的应用中，需要特别注意类的回收状况。这类场景包括CGLib字节码增强、动态语言、大量JSP或者动态产生JSP文件的应用、基于OSGi的应用等                                                                                                                                  </li>
-<li>本机直接内存溢出</li>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><ul>
+<li>java语言特性<ul>
+<li>关键字<ul>
+<li>static</li>
+<li>final</li>
 </ul>
-<p>参考：<a href="https://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/" target="_blank" rel="external">IBM</a></p>
+</li>
+<li>重写与重载</li>
+<li>泛型</li>
+<li>集合类<ul>
+<li>HashMap</li>
+<li>LinkedList</li>
+</ul>
+</li>
+<li>反射机制</li>
+<li>深入理解面向对象思想、面向接口编程<ul>
+<li>抽象类与接口</li>
+<li>java单一继承</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>java虚拟机机制</strong><ul>
+<li>类加载机制</li>
+<li>垃圾回收机制</li>
+</ul>
+</li>
+<li><strong>java高并发</strong><ul>
+<li>java内存模型</li>
+<li>线程的状态</li>
+<li>线程安全</li>
+</ul>
+</li>
+<li><strong>异步编程</strong></li>
+<li>​</li>
+</ul>
+<h2 id="局部"><a href="#局部" class="headerlink" title="局部"></a>局部</h2><h3 id="泛型T"><a href="#泛型T" class="headerlink" title="泛型T"></a>泛型T</h3><p>泛型在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。泛型出现的最引人注目的一个原因是为了创造<strong>容器类</strong>。</p>
+<p>以下两个为经常在源码中看到的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;? extends T&gt; 与 &lt;? <span class="keyword">super</span> T&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>? &lt;= T</li>
+<li>? &gt;= T</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T extends Comparable&lt;T&gt;&gt;与&lt;T extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>1 类型 T 必须实现 <code>Comparable</code> 接口，并且这个接口的类型是 T。只有这样，T 的实例之间才能相互比较大小。例如，在实际调用时若使用的具体类是 Dog，那么 Dog 必须 <code>implements Comparable&lt;Dog&gt;</code></li>
+<li>2 类型 T 必须实现 <code>Comparable</code> 接口，并且这个接口的类型是 T 或 T 的任一父类。这样声明后，T 的实例之间，T 的实例和它的父类的实例之间，可以相互比较大小。例如，在实际调用时若使用的具体类是 Dog (假设 Dog 有一个父类 Animal），Dog 可以从 Animal 那里继承 <code>Comparable&lt;Animal&gt;</code> ，或者自己 <code>implements Comparable&lt;Dog&gt;</code></li>
+</ul>
 
   </section>
 

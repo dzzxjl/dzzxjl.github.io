@@ -7,7 +7,7 @@
     
 
     <title>
-      内存溢出与内存泄漏 | 十一城 
+      浅谈web前后端 | 十一城 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,17 +16,17 @@
     
     
 
-    <meta name="description" content="今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。 内存泄漏 Memory Leak 在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。  因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄">
-<meta name="keywords" content="java">
+    <meta name="description" content="从大三开始接触jsp+servlet，对于后端陆陆续续有了近两年的学习，虽然没写过太多代码，但是对于整个web处理的流程有了简单的理解，故浅谈以记之。  前端由于后端与前端的紧密性，前端不可避而不谈。我喜欢把前端想象为一个面对用户的接口，其好处在于能够在任意终端上的web浏览器上运行，浏览器上展示的这个页面实质是个response，我们后文再谈，先谈前端的关注点request,用户在web页面上的">
+<meta name="keywords" content="web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内存溢出与内存泄漏 | 十一城">
-<meta property="og:url" content="http://yoursite.com/2017/08/23/内存溢出与内存泄漏/index.html">
+<meta property="og:title" content="浅谈web前后端 | 十一城">
+<meta property="og:url" content="http://yoursite.com/2017/07/31/浅谈web前后端/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。 内存泄漏 Memory Leak 在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。  因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄">
-<meta property="og:updated_time" content="2017-11-20T13:15:56.000Z">
+<meta property="og:description" content="从大三开始接触jsp+servlet，对于后端陆陆续续有了近两年的学习，虽然没写过太多代码，但是对于整个web处理的流程有了简单的理解，故浅谈以记之。  前端由于后端与前端的紧密性，前端不可避而不谈。我喜欢把前端想象为一个面对用户的接口，其好处在于能够在任意终端上的web浏览器上运行，浏览器上展示的这个页面实质是个response，我们后文再谈，先谈前端的关注点request,用户在web页面上的">
+<meta property="og:updated_time" content="2017-11-20T13:14:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="内存溢出与内存泄漏 | 十一城">
-<meta name="twitter:description" content="今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。 内存泄漏 Memory Leak 在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，从而造成了内存的浪费。  因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄">
+<meta name="twitter:title" content="浅谈web前后端 | 十一城">
+<meta name="twitter:description" content="从大三开始接触jsp+servlet，对于后端陆陆续续有了近两年的学习，虽然没写过太多代码，但是对于整个web处理的流程有了简单的理解，故浅谈以记之。  前端由于后端与前端的紧密性，前端不可避而不谈。我喜欢把前端想象为一个面对用户的接口，其好处在于能够在任意终端上的web浏览器上运行，浏览器上展示的这个页面实质是个response，我们后文再谈，先谈前端的关注点request,用户在web页面上的">
     
     
     
@@ -155,12 +155,12 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">内存溢出与内存泄漏</h1>
+    <h1 class="post-title">浅谈web前后端</h1>
 
     
 
     <div class="post-meta">
-      <time datetime="2017-08-23" class="post-meta__date date">2017-08-23</time> 
+      <time datetime="2017-07-31" class="post-meta__date date">2017-07-31</time> 
 
       <span class="post-meta__tags tags">
 
@@ -169,7 +169,7 @@ classes that you can use:
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/java/">java</a>
+              <a class="tags-link" href="/tags/web/">web</a>
             </font>
           
 
@@ -181,23 +181,21 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p>今天我们站在JVM的角度来谈一谈内存溢出与内存泄漏的问题。</p>
-<h2 id="内存泄漏-Memory-Leak"><a href="#内存泄漏-Memory-Leak" class="headerlink" title="内存泄漏 Memory Leak"></a>内存泄漏 Memory Leak</h2><blockquote>
-<p>在计算机科学中，内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，导致在释放该段内存之前就<strong>失去了对该段内存的控制</strong>，从而造成了内存的浪费。</p>
-</blockquote>
-<p>因为java new出的所有对象均是存储在jvm运行时数据区的堆中，所以内存泄漏就是发生在这个区域。内存泄露是指分配出去的内存没有被回收回来，由于失去了对该内存区域的控制，因而造成了资源的浪费。Java中一般不会产生内存泄露，因为有垃圾回收器自动回收垃圾，但这也不绝对，当我们new了对象，并保存了其引用，但是后面一直没用它，而垃圾回收器又不会去回收它，这边会造成内存泄露。</p>
-<p>随着越来越多的服务器程序采用Java技术，例如JSP，Servlet， EJB等，服务器程序往往长期运行。另外，在很多嵌入式系统中，内存的总量非常有限。内存泄露问题也就变得十分关键，即使每次运行少量泄漏，长期运行之后，系统也是面临崩溃的危险。</p>
-<p>对象的释放是由GC决定和执行的。在Java中，<strong>内存的分配是由程序完成的，而内存的释放是有GC完成的，这种收支两条线的方法确实简化了程序员的工作</strong>。但同时，它也加重了JVM的工作。这也是Java程序运行速度较慢的原因之一。因为，GC为了能够正确释放对象，GC必须监控每一个对象的运行状态，包括对象的申请、引用、被引用、赋值等，GC都需要进行监控。</p>
-<h2 id="内存溢出-Out-of-Memory"><a href="#内存溢出-Out-of-Memory" class="headerlink" title="内存溢出 Out of Memory"></a>内存溢出 Out of Memory</h2><p>内存溢出是指程序所需要的内存超出了系统所能分配的内存（包括动态扩展）的上限。</p>
-<p>这在java中往往体现为OutOfMemoryError异常，通常会出现以下几种情况：</p>
+    <p>从大三开始接触jsp+servlet，对于后端陆陆续续有了近两年的学习，虽然没写过太多代码，但是对于整个web处理的流程有了简单的理解，故浅谈以记之。</p>
+<hr>
+<h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><p>由于后端与前端的紧密性，前端不可避而不谈。我喜欢把前端想象为一个面对用户的接口，其好处在于能够在任意终端上的web浏览器上运行，浏览器上展示的这个页面实质是个<em>response</em>，我们后文再谈，先谈前端的关注点<em>request</em>,用户在web页面上的操作将会构成产生各种行为，最典型的就是填写表单，在用户点击构成跳转行为的按钮后将会产生一个<em>request</em>,他主要包括两个方面，其一是用户的浏览器客户端消息，譬如ip地址,浏览器型号版本等，另外就是用户输入信息，他往往以get或者post的形式进行传输，这部分信息也是后台处理的基础。</p>
+<p>用户访问页面的过程：</p>
 <ul>
-<li>Java堆溢出——jvm在启动的时候会以一个参数设置虚拟机的堆大小，当堆满即出现溢出。</li>
-<li>虚拟机和本地方法栈溢出</li>
-<li>方法区和运行时常量池溢出——方法区溢出也是一种常见的内存溢出异常，一个类要被垃圾回收器回收掉，判定条件是比较严苛的。在经常动态产生大量Class的应用中，需要特别注意类的回收状况。这类场景包括CGLib字节码增强、动态语言、大量JSP或者动态产生JSP文件的应用、基于OSGi的应用等                                                                                                                                  </li>
-<li>本机直接内存溢出</li>
+<li>用户输入网址</li>
+<li>浏览器加载HTML/CSS/JS，图片资源等</li>
+<li>浏览器将结果绘制成图形</li>
+<li>用户通过鼠标，键盘等与页面交互</li>
 </ul>
-<p>参考：<a href="https://www.ibm.com/developerworks/cn/java/l-JavaMemoryLeak/" target="_blank" rel="external">IBM</a></p>
-
+<h4 id="获取用户输入"><a href="#获取用户输入" class="headerlink" title="获取用户输入"></a>获取用户输入</h4><p>用户的输入一般是以<em>Map<name:value></name:value></em>的形式通过<em>request</em>的包装传输到后端的，此时在后端，以java为例，我们只需要获取到<em>request</em>对象，然后根据<em>name</em>名便可获取到对应的value，得到value之后最终交由相应的算法进行处理。在这个地方要注意一点，用户的输入不单单是简单的表单信息，往往还会是各种富媒体文件，各类框架往往针对这点有各自的处理方式。</p>
+<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p>可以将一个网站的整体脉络理解成一棵树，网站的根即为”/“，这个根目录通常是在服务器端进行定义，注意我们树的节点往往是链接，而不是通常意义下的文件。比如<em>/user/add</em>，第二层的节点往往为我们要操作的实体对象，第三层则是动作，这点现阶段被定义为<em>Restful API</em>，具体可以参考阮一峰关于此的介绍。后端关键处理的是url与相应的服务器端处理行为之间的映射，以<em>java</em>的spring mvc框架为例，先通过user字符串映射到UserController类中，在根据字符串add映射到addUser的方法上，接下来的方法体内定义的便是对于数据的处理逻辑。</p>
+<h4 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h4><p>中文即过滤器，目前我对于它的理解也非常浅显，认为过滤器就是类似一个分类机，将不同的对象分别交付予不同的功能模块进行处理，而且这个行为往往是批量的。</p>
+<h4 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h4><p>ORM</p>
+<h4 id="Redirect"><a href="#Redirect" class="headerlink" title="Redirect"></a>Redirect</h4>
   </section>
 
   <section class="post-comments">
