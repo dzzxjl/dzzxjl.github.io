@@ -16,17 +16,17 @@
     
     
 
-    <meta name="description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 关键字 static final   重写与重载 泛型 集合类 HashMap LinkedList   反射机制 深入理解面向对象思想、面向接口编程 抽象类与接口 java单一继承     java虚拟机机制 类加载机制 垃圾回收机制   java高并发 java内存模型 线程的状态 线程">
+    <meta name="description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 数组与字符串 关键字 static final——一般比较基本的类型或防止扩展类无意间破坏原来方法的实现的类型都应该是final的，在jdk中System,String,StringBuffer等都是基本类型。   重写与重载 泛型 集合类 HashMap 冲突解决 线程不安全   Coll">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java语言基础 | 十一城">
 <meta property="og:url" content="http://yoursite.com/2017/08/02/Java语言基础/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 关键字 static final   重写与重载 泛型 集合类 HashMap LinkedList   反射机制 深入理解面向对象思想、面向接口编程 抽象类与接口 java单一继承     java虚拟机机制 类加载机制 垃圾回收机制   java高并发 java内存模型 线程的状态 线程">
-<meta property="og:updated_time" content="2017-11-20T13:25:33.000Z">
+<meta property="og:description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 数组与字符串 关键字 static final——一般比较基本的类型或防止扩展类无意间破坏原来方法的实现的类型都应该是final的，在jdk中System,String,StringBuffer等都是基本类型。   重写与重载 泛型 集合类 HashMap 冲突解决 线程不安全   Coll">
+<meta property="og:updated_time" content="2017-11-21T04:48:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java语言基础 | 十一城">
-<meta name="twitter:description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 关键字 static final   重写与重载 泛型 集合类 HashMap LinkedList   反射机制 深入理解面向对象思想、面向接口编程 抽象类与接口 java单一继承     java虚拟机机制 类加载机制 垃圾回收机制   java高并发 java内存模型 线程的状态 线程">
+<meta name="twitter:description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 数组与字符串 关键字 static final——一般比较基本的类型或防止扩展类无意间破坏原来方法的实现的类型都应该是final的，在jdk中System,String,StringBuffer等都是基本类型。   重写与重载 泛型 集合类 HashMap 冲突解决 线程不安全   Coll">
     
     
     
@@ -186,16 +186,25 @@ classes that you can use:
 </blockquote>
 <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><ul>
 <li>java语言特性<ul>
+<li>数组与字符串</li>
 <li>关键字<ul>
 <li>static</li>
-<li>final</li>
+<li>final——一般比较基本的类型或防止扩展类无意间破坏原来方法的实现的类型都应该是final的，在jdk中System,String,StringBuffer等都是基本类型。</li>
 </ul>
 </li>
 <li>重写与重载</li>
 <li>泛型</li>
 <li>集合类<ul>
-<li>HashMap</li>
+<li>HashMap<ul>
+<li>冲突解决</li>
+<li>线程不安全</li>
+</ul>
+</li>
+<li>Collection<ul>
+<li>ArrayList</li>
 <li>LinkedList</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>反射机制</li>
@@ -207,8 +216,9 @@ classes that you can use:
 </ul>
 </li>
 <li><strong>java虚拟机机制</strong><ul>
-<li>类加载机制</li>
+<li>运行时数据区</li>
 <li>垃圾回收机制</li>
+<li>类加载机制</li>
 </ul>
 </li>
 <li><strong>java高并发</strong><ul>
@@ -217,8 +227,22 @@ classes that you can use:
 <li>线程安全</li>
 </ul>
 </li>
-<li><strong>异步编程</strong></li>
-<li>​</li>
+<li><strong>异步编程</strong><ul>
+<li>NIO</li>
+</ul>
+</li>
+<li><em>Java Web</em><ul>
+<li>熟悉 <em>JSP</em> 、 <em>Servlet</em> 等原理</li>
+<li>熟悉 <em>Tomcat</em> 、 <em>Apache</em> 等 <em>web</em> 服务器工作原理 </li>
+<li>熟悉 <em>Spring(IOC/AOP)</em> 、<em>Spring MVC</em> 等开发框架</li>
+<li>熟悉 <em>Hibernate</em> 、 <em>MyBatis</em> 等 <em>ORM</em> 框架</li>
+</ul>
+</li>
+<li>分布式与流处理<ul>
+<li>了解 <em>ZooKeeper</em> 、 <em>Dubbo</em> 等分布式处理框架</li>
+<li>了解 <em>Kafka</em>、<em>RocketMQ</em> 等流处理框架 </li>
+</ul>
+</li>
 </ul>
 <h2 id="局部"><a href="#局部" class="headerlink" title="局部"></a>局部</h2><h3 id="泛型T"><a href="#泛型T" class="headerlink" title="泛型T"></a>泛型T</h3><p>泛型在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。泛型出现的最引人注目的一个原因是为了创造<strong>容器类</strong>。</p>
 <p>以下两个为经常在源码中看到的</p>
