@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="注：本文主要基于CentOS 7.0来理解操作系统，想深入理解OS，推荐阅读《鸟哥的私房菜》、《30天自制操作系统》  穷玩车，富玩表，屌丝玩电脑。  这个电脑可以理解成操作系统， 而且很不严谨地说，每个人接触的第一个电脑程序就是操作系统。 我印象中接触的第一个操作系统是windows98，那时也就七八岁，当时对98的认识就是可以打单机游戏，时间太过久远，现在能记得的只有超级马里奥了。后来，发现邻">
 <meta property="og:image" content="http://7xie74.com1.z0.glb.clouddn.com/windows_install">
-<meta property="og:updated_time" content="2017-11-21T04:37:25.000Z">
+<meta property="og:updated_time" content="2017-11-22T15:10:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dia&quot;OS&quot;i | 十一城">
 <meta name="twitter:description" content="注：本文主要基于CentOS 7.0来理解操作系统，想深入理解OS，推荐阅读《鸟哥的私房菜》、《30天自制操作系统》  穷玩车，富玩表，屌丝玩电脑。  这个电脑可以理解成操作系统， 而且很不严谨地说，每个人接触的第一个电脑程序就是操作系统。 我印象中接触的第一个操作系统是windows98，那时也就七八岁，当时对98的认识就是可以打单机游戏，时间太过久远，现在能记得的只有超级马里奥了。后来，发现邻">
@@ -191,7 +191,7 @@ classes that you can use:
 <p>就这样带着很多疑惑来到了大学，我期待着了解更多关于操作系统的知识。</p>
 <p><img src="http://7xie74.com1.z0.glb.clouddn.com/windows_install" alt="安装操作系统"></p>
 <p><em>2014年寒假期间，痴迷于系统的安装绘制的系统安装网络图</em></p>
-<p>来到大学后，我通过各种信息源去了解操作系统。此时我认识到，操作系统是处于硬件与软件的中间位置，他衔接着软硬件，意义可见一斑。对于操作系统的功能，难以一言以蔽之。可以理解成一个管家，处理着计算机所有内部大大小小的事务，有些看得见，有些看不见，终极目的就是为我们——使用者来服务。</p>
+<p>来到大学后，我通过各种信息源去了解操作系统。此时我认识到，操作系统衔接着软硬件，处于硬件与软件的中间位置，意义可见一斑。对于操作系统的功能，难以一言以蔽之。可以理解成一个管家，处理着计算机所有内部大大小小的事务，有些看得见，有些看不见，终极目的就是为我们——使用者来服务。</p>
 <p>站在学科的角度，操作系统主要功能模块有以下这些：</p>
 <ul>
 <li>文件系统</li>
@@ -199,9 +199,15 @@ classes that you can use:
 <li>进程管理<ul>
 <li>进程与线程</li>
 <li>进程间通信</li>
+<li>死锁</li>
+</ul>
+</li>
+<li>网络通信<ul>
+<li>​</li>
 </ul>
 </li>
 </ul>
+<p>在下面具体的介绍中，文件系统站在Linux文件系统与HDFS的角度，内存管理与管理站在JVM的角度，网络通信站在web数据传输的角度。</p>
 <h3 id="文件系统（File-system）"><a href="#文件系统（File-system）" class="headerlink" title="文件系统（File system）"></a>文件系统（File system）</h3><blockquote>
 <p>计算机的<strong>文件系统</strong>是一种存储和组织计算机数据的方法，它使得对其存取和查找变得容易，文件系统使用<strong>文件</strong>和<strong>树形目录</strong>的抽象逻辑概念代替了硬盘和光盘等物理设备使用数据块的概念，用户使用文件系统来保存数据不必关心数据实际保存在硬盘（或者光盘）的地址为多少的数据块上，只需要记住这个文件的所属目录和文件名。</p>
 </blockquote>
@@ -225,10 +231,8 @@ classes that you can use:
 <li>网路分隔的容忍程度（Partition tolerance）</li>
 </ul>
 <h3 id="内存管理（Memory-management）"><a href="#内存管理（Memory-management）" class="headerlink" title="内存管理（Memory management）"></a>内存管理（Memory management）</h3><p>以java内存模型为例</p>
-<h3 id="进程管理（Processing-management）"><a href="#进程管理（Processing-management）" class="headerlink" title="进程管理（Processing management）"></a>进程管理（Processing management）</h3><p>centos7使用ps命令可以查看当前系统正在执行的进程。</p>
-<p>进程定义：正在运行的程序，是系统进行资源分配的独立单位，每个进程拥有自己的一套变量。</p>
-<p>进程的意义：可以提高CPU的使用率</p>
-<p>进程与线程</p>
+<h3 id="进程管理（Processing-management）"><a href="#进程管理（Processing-management）" class="headerlink" title="进程管理（Processing management）"></a>进程管理（Processing management）</h3><h4 id="进程定义"><a href="#进程定义" class="headerlink" title="进程定义"></a>进程定义</h4><p>一个进程包括由操作系统分配的内存空间，是系统进行资源分配的独立单位，每个进程拥有自己的一套变量。其往往包括一个或多个线程。一个进程一直运行，直到所有的非守候线程都结束运行后才能结束。</p>
+<p>进程的状态</p>
 <ul>
 <li>新生（<em>new</em>）：行程新产生中。</li>
 <li>执行（<em>running</em>）：正在执行。</li>
@@ -236,7 +240,39 @@ classes that you can use:
 <li>就绪（<em>ready</em>）：排队中，等待CPU。</li>
 <li>结束（<em>terminated</em>）：完成执行。</li>
 </ul>
-<h3 id="网络通讯（Networking）"><a href="#网络通讯（Networking）" class="headerlink" title="网络通讯（Networking）"></a>网络通讯（Networking）</h3><p>以访问web为例</p>
+<h4 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h4><ul>
+<li>进程：正在运行的程序，是系统进行资源分配的独立单位。</li>
+<li>线程：进程的执行路径，调度和执行的单位，单个路径单线程，多个路径多线程。</li>
+</ul>
+<p>本质区别：每个进程拥有自己的一套变量，而线程只是共享数据。</p>
+<p>多进程的意义：提高CPU的<strong>使用率</strong></p>
+<p>多线程的意义：提高应用程序的<strong>效率</strong></p>
+<h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><ul>
+<li><p>新建状态：创建线程对象</p>
+</li>
+<li><p>待运行：线程调用start()之后，有执行的资格，没有执行权</p>
+</li>
+<li><p>运行：获得cpu的执行权（当加锁保证线程安全时会进入锁池等待获取锁，即同步阻塞）</p>
+</li>
+<li><p>阻塞： ①等待阻塞：Object的wait()方法调用后， 进入等待队列，唤醒后进入锁池，获得锁后又回到待运行状态</p>
+<p>​            ②同步阻塞：争抢cpu使用权，没抢到手，进入锁池等待获得锁</p>
+<p>​            ③其他阻塞：如sleep()，join()，时间结束后进入待运行状态</p>
+</li>
+<li><p>死亡：run，main执行结束，或因异常退出</p>
+</li>
+</ul>
+<h4 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h4><ol>
+<li>管道<br>管道一般用于两个<strong>具有亲缘关系</strong>的不同进程之间的通信。当一个进程创建一个管道，并调用fork创建自己的一个子进程后，父进程关闭读管道端，子进程关闭写管道端，这样 提供了两个进程之间数据流动的一种方式。管道是一种半双工的通信方式，数据只能单向流动。进程的亲缘关系通常是指父子进程关系。</li>
+<li>信号量（semophore）——信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种<strong>锁机制</strong>，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。<strong>不是用于交换大批数据</strong>，而用于多进程之间的<strong>同步</strong>（协调对共享存储段的存取）。</li>
+<li>消息队列（message queue）——UNIX下不同进程之间可实现共享资源的一种机制；UNIX允许不同进程将格式化的数据流以消息形式发送给任意进程。对消息队列具有操作权限的进程都可以使用msget完成对消息队列的操作控制。通过使用消息类型，进程可以按任何顺序读消息，或为消息安排优先级顺序。</li>
+<li>共享内存（shared memory）——共享内存就是<strong>映射一段能被其他进程所访问的内存</strong>，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号量，配合使用，来实现进程间的同步和通信。</li>
+</ol>
+<h4 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h4><p>centos7使用ps命令可以查看当前系统正在执行的进程。</p>
+<h3 id="网络通讯（Networking）"><a href="#网络通讯（Networking）" class="headerlink" title="网络通讯（Networking）"></a>网络通讯（Networking）</h3><ul>
+<li>TCP/IP等传输层协议</li>
+<li>Http、Https等应用层协议</li>
+<li>Socket等接口</li>
+</ul>
 <h3 id="安全机制（Security）"><a href="#安全机制（Security）" class="headerlink" title="安全机制（Security）"></a>安全机制（Security）</h3><h3 id="驱动程序（Device-drivers）"><a href="#驱动程序（Device-drivers）" class="headerlink" title="驱动程序（Device drivers）"></a>驱动程序（Device drivers）</h3><h3 id="用户界面（User-interface）"><a href="#用户界面（User-interface）" class="headerlink" title="用户界面（User interface）"></a>用户界面（User interface）</h3><p>怎么样，有没有觉得OS——Oh,So cool!</p>
 
   </section>
