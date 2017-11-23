@@ -16,18 +16,18 @@
     
     
 
-    <meta name="description" content="3000字 77号  线性规划 本文框架  介绍对偶理论  优化问题中的对偶理论 弱对偶性与强对偶性 拉格朗日对偶算法   SVM中的对偶理论的应用  线性可分SVM  SVM的损失函数（目标函数）      - 限制条件 - 对偶问题 - 算法求解步骤  线性不可分SVM  硬间隔 -&amp;gt; 软间隔 解决办法 算法求解步骤   非线性支持向量机与核函数    ​  摘要正文介绍对偶理论优化问题">
+    <meta name="description" content="3000字 77号  线性规划 本文框架  介绍对偶理论  优化问题中的对偶理论 弱对偶性与强对偶性 拉格朗日对偶算法   SVM中的对偶理论的应用  线性可分SVM  SVM的损失函数（目标函数）      - 限制条件 - 对偶问题 - 算法求解步骤  线性不可分SVM  硬间隔 -&amp;gt; 软间隔 解决办法 算法求解步骤   非线性支持向量机与核函数    ​  摘要正文介绍对偶理论为什么要">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM中对偶理论的应用 | 十一城">
 <meta property="og:url" content="http://yoursite.com/2017/11/18/SVM中对偶理论的应用/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="3000字 77号  线性规划 本文框架  介绍对偶理论  优化问题中的对偶理论 弱对偶性与强对偶性 拉格朗日对偶算法   SVM中的对偶理论的应用  线性可分SVM  SVM的损失函数（目标函数）      - 限制条件 - 对偶问题 - 算法求解步骤  线性不可分SVM  硬间隔 -&amp;gt; 软间隔 解决办法 算法求解步骤   非线性支持向量机与核函数    ​  摘要正文介绍对偶理论优化问题">
+<meta property="og:description" content="3000字 77号  线性规划 本文框架  介绍对偶理论  优化问题中的对偶理论 弱对偶性与强对偶性 拉格朗日对偶算法   SVM中的对偶理论的应用  线性可分SVM  SVM的损失函数（目标函数）      - 限制条件 - 对偶问题 - 算法求解步骤  线性不可分SVM  硬间隔 -&amp;gt; 软间隔 解决办法 算法求解步骤   非线性支持向量机与核函数    ​  摘要正文介绍对偶理论为什么要">
 <meta property="og:image" content="http://www.zhihu.com/equation?tex=L%28%5Cboldsymbol%7Bx%7D%2C%5Clambda%29">
 <meta property="og:image" content="http://www.zhihu.com/equation?tex=%5Clambda">
-<meta property="og:updated_time" content="2017-11-20T06:57:02.000Z">
+<meta property="og:updated_time" content="2017-11-23T03:04:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM中对偶理论的应用 | 十一城">
-<meta name="twitter:description" content="3000字 77号  线性规划 本文框架  介绍对偶理论  优化问题中的对偶理论 弱对偶性与强对偶性 拉格朗日对偶算法   SVM中的对偶理论的应用  线性可分SVM  SVM的损失函数（目标函数）      - 限制条件 - 对偶问题 - 算法求解步骤  线性不可分SVM  硬间隔 -&amp;gt; 软间隔 解决办法 算法求解步骤   非线性支持向量机与核函数    ​  摘要正文介绍对偶理论优化问题">
+<meta name="twitter:description" content="3000字 77号  线性规划 本文框架  介绍对偶理论  优化问题中的对偶理论 弱对偶性与强对偶性 拉格朗日对偶算法   SVM中的对偶理论的应用  线性可分SVM  SVM的损失函数（目标函数）      - 限制条件 - 对偶问题 - 算法求解步骤  线性不可分SVM  硬间隔 -&amp;gt; 软间隔 解决办法 算法求解步骤   非线性支持向量机与核函数    ​  摘要正文介绍对偶理论为什么要">
 <meta name="twitter:image" content="http://www.zhihu.com/equation?tex=L%28%5Cboldsymbol%7Bx%7D%2C%5Clambda%29">
     
     
@@ -216,7 +216,9 @@ classes that you can use:
 <ul>
 <li>​</li>
 </ul>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="介绍对偶理论"><a href="#介绍对偶理论" class="headerlink" title="介绍对偶理论"></a>介绍对偶理论</h3><h4 id="优化问题中的对偶理论"><a href="#优化问题中的对偶理论" class="headerlink" title="优化问题中的对偶理论"></a>优化问题中的对偶理论</h4><h4 id="弱对偶性与强对偶性"><a href="#弱对偶性与强对偶性" class="headerlink" title="弱对偶性与强对偶性"></a>弱对偶性与强对偶性</h4><h3 id="SVM中的对偶理论的应用"><a href="#SVM中的对偶理论的应用" class="headerlink" title="SVM中的对偶理论的应用"></a>SVM中的对偶理论的应用</h3><p>SVM的全称是Support Vector Machine，即支持向量机，于1998年由Vapnik等人提出，主要用于解决模式识别领域中的数据分类问题，属于有监督学习算法的一种。是数学规划方法在分类上的一个典型应用。</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="介绍对偶理论"><a href="#介绍对偶理论" class="headerlink" title="介绍对偶理论"></a>介绍对偶理论</h3><h4 id="为什么要考虑线性规划的对偶问题？"><a href="#为什么要考虑线性规划的对偶问题？" class="headerlink" title="为什么要考虑线性规划的对偶问题？"></a>为什么要考虑线性规划的对偶问题？</h4><p>在线性规划的对偶理论没出现之前，无法判断线性规划问题是否可解。对于判断一个线性规划问题是否有解很简单，只需要找到一个满足判断条件的解，然而判断其无解，却比较困难。有数学家找到一个<strong>跟原问题的对偶问题密切相关的问题</strong>，如果这个问题有解，原问题就没解。这样就提供了一个简单的证明原问题没解的途径。线性规划区别于其它优化问题的一个重要特点是，我们能比较容易地判断我们这问题有解还是没解。</p>
+<p>线性规划中，如果原始问题约束条件多，决策变量少，转换为对偶问题约束变少了，更好求解。</p>
+<h4 id="优化问题中的对偶理论"><a href="#优化问题中的对偶理论" class="headerlink" title="优化问题中的对偶理论"></a>优化问题中的对偶理论</h4><h4 id="弱对偶性与强对偶性"><a href="#弱对偶性与强对偶性" class="headerlink" title="弱对偶性与强对偶性"></a>弱对偶性与强对偶性</h4><h3 id="SVM中的对偶理论的应用"><a href="#SVM中的对偶理论的应用" class="headerlink" title="SVM中的对偶理论的应用"></a>SVM中的对偶理论的应用</h3><p>SVM的全称是Support Vector Machine，即支持向量机，于1998年由Vapnik等人提出，主要用于解决模式识别领域中的数据分类问题，属于有监督学习算法的一种。是数学规划方法在分类上的一个典型应用。</p>
 <h4 id="线性可分SVM"><a href="#线性可分SVM" class="headerlink" title="线性可分SVM"></a>线性可分SVM</h4><ul>
 <li><p>SVM的损失函数（目标函数），也就是你希望什么东西的什么指标达到最好</p>
 <p>一个最优化问题通常有两个最基本的因素：1）目标函数，也就是你希望什么东西的什么指标达到最好；2）优化对象，你期望通过改变哪些因素来使你的目标函数达到最优。在线性SVM算法中，目标函数显然就是那个“分类间隔”，而优化对象则是决策面。</p>
