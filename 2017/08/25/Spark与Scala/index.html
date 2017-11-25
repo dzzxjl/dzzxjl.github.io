@@ -16,16 +16,16 @@
     
     
 
-    <meta name="description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装与配置mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下">
+    <meta name="description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 Bigdata 大数据 熟悉 Hadoop 生态 理解 HDFS 原理 与 MapReduce 模型 了解 Hive（数据仓库） 、 HBase（数据库） 等工具   熟悉 Spark 生态 理解 Spark-RDD 概念，使用 scala/python 接口编写 S">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark与Scala | 十一城">
 <meta property="og:url" content="http://yoursite.com/2017/08/25/Spark与Scala/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装与配置mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下">
-<meta property="og:updated_time" content="2017-10-27T08:14:37.000Z">
+<meta property="og:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 Bigdata 大数据 熟悉 Hadoop 生态 理解 HDFS 原理 与 MapReduce 模型 了解 Hive（数据仓库） 、 HBase（数据库） 等工具   熟悉 Spark 生态 理解 Spark-RDD 概念，使用 scala/python 接口编写 S">
+<meta property="og:updated_time" content="2017-11-25T03:17:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark与Scala | 十一城">
-<meta name="twitter:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 优化scala为spark做了很多优化工作  spark相对hadoop做了很多优化 Spark的安装与配置mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下">
+<meta name="twitter:description" content="Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基  spark本身是由scala编写，运行在JVM上。 Bigdata 大数据 熟悉 Hadoop 生态 理解 HDFS 原理 与 MapReduce 模型 了解 Hive（数据仓库） 、 HBase（数据库） 等工具   熟悉 Spark 生态 理解 Spark-RDD 概念，使用 scala/python 接口编写 S">
     
     
     
@@ -179,6 +179,18 @@ classes that you can use:
 <p>Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基</p>
 </blockquote>
 <p>spark本身是由scala编写，运行在JVM上。</p>
+<h4 id="Bigdata-大数据"><a href="#Bigdata-大数据" class="headerlink" title="Bigdata 大数据"></a>Bigdata 大数据</h4><ul>
+<li>熟悉 <em>Hadoop</em> 生态<ul>
+<li>理解 <em>HDFS</em> 原理 与 <em>MapReduce</em> 模型</li>
+<li>了解 <em>Hive</em>（数据仓库） 、 <em>HBase</em>（数据库） 等工具</li>
+</ul>
+</li>
+<li><a href="http://dzzxjl.github.io/2017/08/25/Spark%E4%B8%8EScala/" target="_blank" rel="external">熟悉 <em>Spark</em> 生态</a><ul>
+<li>理解 <em>Spark</em>-<em>RDD</em> 概念，使用 <em>scala</em>/<em>python</em> 接口编写 <em>Spark</em> 程序</li>
+<li>了解 <em>Spark SQL</em> 与 <em>ML</em> 库</li>
+</ul>
+</li>
+</ul>
 <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>scala为spark做了很多优化工作  spark相对hadoop做了很多优化</p>
 <h2 id="Spark的安装与配置"><a href="#Spark的安装与配置" class="headerlink" title="Spark的安装与配置"></a>Spark的安装与配置</h2><p>mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下将下行添加至配置文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PYSPARK_PYTHON=python3</div></pre></td></tr></table></figure>
