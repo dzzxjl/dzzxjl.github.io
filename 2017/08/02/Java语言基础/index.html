@@ -23,7 +23,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/02/Java语言基础/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 数组与字符串 关键字 static final——一般比较基本的类型或防止扩展类无意间破坏原来方法的实现的类型都应该是final的，在jdk中System,String,StringBuffer等都是基本类型。   重写与重载 泛型 集合类 HashMap 冲突解决 线程不安全   Coll">
-<meta property="og:updated_time" content="2017-11-21T04:48:39.000Z">
+<meta property="og:updated_time" content="2017-11-26T13:25:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java语言基础 | 十一城">
 <meta name="twitter:description" content="理解了边界所在，你才能成为程序高手。 ——《Thinking in java》  概览 java语言特性 数组与字符串 关键字 static final——一般比较基本的类型或防止扩展类无意间破坏原来方法的实现的类型都应该是final的，在jdk中System,String,StringBuffer等都是基本类型。   重写与重载 泛型 集合类 HashMap 冲突解决 线程不安全   Coll">
@@ -207,7 +207,7 @@ classes that you can use:
 </li>
 </ul>
 </li>
-<li>反射机制</li>
+<li>反射机制与注解</li>
 <li>深入理解面向对象思想、面向接口编程<ul>
 <li>抽象类与接口</li>
 <li>java单一继承</li>
@@ -256,6 +256,32 @@ classes that you can use:
 <li>1 类型 T 必须实现 <code>Comparable</code> 接口，并且这个接口的类型是 T。只有这样，T 的实例之间才能相互比较大小。例如，在实际调用时若使用的具体类是 Dog，那么 Dog 必须 <code>implements Comparable&lt;Dog&gt;</code></li>
 <li>2 类型 T 必须实现 <code>Comparable</code> 接口，并且这个接口的类型是 T 或 T 的任一父类。这样声明后，T 的实例之间，T 的实例和它的父类的实例之间，可以相互比较大小。例如，在实际调用时若使用的具体类是 Dog (假设 Dog 有一个父类 Animal），Dog 可以从 Animal 那里继承 <code>Comparable&lt;Animal&gt;</code> ，或者自己 <code>implements Comparable&lt;Dog&gt;</code></li>
 </ul>
+<h3 id="反射与注解"><a href="#反射与注解" class="headerlink" title="反射与注解"></a>反射与注解</h3><h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><p>JAVA反射机制是在<strong>运行时</strong>，对于任意一个类，都能够知道这个类的所有属性和方法，用类的全限定名就运行时动态获得java类的class对象，然后从class对象就可以得到这个类的所有信息。</p>
+<p>包含以下几个功能：</p>
+<ul>
+<li>在运行时判断任意一个对象所属的类</li>
+<li>在运行时构造任意一个类的对象</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法</li>
+<li>在运行时调用任意一个对象的方法</li>
+</ul>
+<p>包含四个核心类：</p>
+<ul>
+<li>Class</li>
+<li>Constructor</li>
+<li>Method</li>
+<li>Field</li>
+</ul>
+<p>反射的作用：</p>
+<ul>
+<li>操作引访问权限限制的属性和方法</li>
+<li>实现自定义注解</li>
+<li>动态加载第三方jar包，解决android开发中方法不能超过65536个的问题</li>
+<li>按需加载类，节省编译个初始化apk的时间</li>
+</ul>
+<p>反射的工作原理：</p>
+<p>参考：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/21423208?utm_source=qq&amp;utm_medium=social" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/21423208?utm_source=qq&amp;utm_medium=social</a></p>
+<h4 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h4><p>Java源代码中的元数据，注解会影响源代码的行为（注解可能会被保存在字节码中），而注释不会。注解是描述Java代码的代码，它能够被编译器解析，注解处理工具在运行时也能够解析注解。首先要知道注解本身没有任何作用，但是它能够被获取，并在代码中根据注解做一些处理。</p>
 
   </section>
 
