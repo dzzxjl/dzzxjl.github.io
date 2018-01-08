@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="注：本文主要基于CentOS 7.0来理解操作系统，想深入理解OS，推荐阅读《鸟哥的私房菜——基础学习篇》、《30天自制操作系统》  穷玩车，富玩表，屌丝玩电脑。 小时候，崇拜《神奇宝贝》里的那个小智，或者说想成为一个小智那样的人。羡慕他有那么多的宠物小精灵陪伴着，还被装在了一个个GS球里面。若需要哪个帮助自己应战，潇洒地一抛。 现在的我，有时候会把一个个linux平台当做我的GS球，如cento">
 <meta property="og:image" content="http://7xie74.com1.z0.glb.clouddn.com/windows_install">
-<meta property="og:updated_time" content="2018-01-03T02:00:28.681Z">
+<meta property="og:updated_time" content="2018-01-05T06:57:57.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dia&quot;OS&quot;i | 十一城">
 <meta name="twitter:description" content="注：本文主要基于CentOS 7.0来理解操作系统，想深入理解OS，推荐阅读《鸟哥的私房菜——基础学习篇》、《30天自制操作系统》  穷玩车，富玩表，屌丝玩电脑。 小时候，崇拜《神奇宝贝》里的那个小智，或者说想成为一个小智那样的人。羡慕他有那么多的宠物小精灵陪伴着，还被装在了一个个GS球里面。若需要哪个帮助自己应战，潇洒地一抛。 现在的我，有时候会把一个个linux平台当做我的GS球，如cento">
@@ -210,8 +210,11 @@ classes that you can use:
 </li>
 </ul>
 <p>在下面具体的介绍中，文件系统站在Linux文件系统与HDFS的角度，内存管理与管理站在JVM的角度，网络通信站在web数据传输的角度。</p>
+<h3 id="内核（Kernel）"><a href="#内核（Kernel）" class="headerlink" title="内核（Kernel）"></a>内核（Kernel）</h3><p>内核主要作用是运行程序和管理硬件。</p>
+<p>内核包括几个主要部分：进程管理、内存管理、硬件设备驱动、文件系统驱动、网络管理和其他一些部分。</p>
+<p>内核最重要的部分是内存管理和进程管理。</p>
 <h3 id="文件系统（File-system）"><a href="#文件系统（File-system）" class="headerlink" title="文件系统（File system）"></a>文件系统（File system）</h3><blockquote>
-<p>计算机的<strong>文件系统</strong>是一种存储和组织计算机数据的方法，它使得对其存取和查找变得容易，文件系统使用<strong>文件</strong>和<strong>树形目录</strong>的抽象逻辑概念代替了硬盘和光盘等物理设备使用数据块的概念，用户使用文件系统来保存数据不必关心数据实际保存在硬盘（或者光盘）的地址为多少的数据块上，只需要记住这个文件的所属目录和文件名。</p>
+<p>计算机的<strong>文件系统</strong>是一种<strong>存储和组织计算机数据的方法</strong>，它使得对其存取和查找变得容易，文件系统使用<strong>文件</strong>和<strong>树形目录</strong>的抽象逻辑概念代替了硬盘和光盘等物理设备使用数据块的概念，用户使用文件系统来保存数据不必关心数据实际保存在硬盘（或者光盘）的地址为多少的数据块上，只需要记住这个文件的所属目录和文件名。</p>
 </blockquote>
 <p>文件系统是一套实现了数据的存储、分级组织、存取和获取等操作的抽象数据类型（Abstract data type）。</p>
 <ul>
@@ -232,7 +235,7 @@ classes that you can use:
 <li>可用性（Availability）</li>
 <li>网路分隔的容忍程度（Partition tolerance）</li>
 </ul>
-<h3 id="内存管理（Memory-management）"><a href="#内存管理（Memory-management）" class="headerlink" title="内存管理（Memory management）"></a>内存管理（Memory management）</h3><p>以java内存模型为例</p>
+<h4 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h4><h3 id="内存管理（Memory-management）"><a href="#内存管理（Memory-management）" class="headerlink" title="内存管理（Memory management）"></a>内存管理（Memory management）</h3><p>以java内存模型为例</p>
 <h3 id="进程管理（Processing-management）"><a href="#进程管理（Processing-management）" class="headerlink" title="进程管理（Processing management）"></a>进程管理（Processing management）</h3><h4 id="进程定义"><a href="#进程定义" class="headerlink" title="进程定义"></a>进程定义</h4><p>一个进程包括由操作系统分配的内存空间，是系统进行资源分配的独立单位，每个进程拥有自己的一套变量。其往往包括一个或多个线程。一个进程一直运行，直到所有的非守候线程都结束运行后才能结束。</p>
 <p>进程的状态</p>
 <ul>
@@ -275,7 +278,16 @@ classes that you can use:
 <li>Http、Https等应用层协议</li>
 <li>Socket等接口</li>
 </ul>
-<h3 id="安全机制（Security）"><a href="#安全机制（Security）" class="headerlink" title="安全机制（Security）"></a>安全机制（Security）</h3><h3 id="驱动程序（Device-drivers）"><a href="#驱动程序（Device-drivers）" class="headerlink" title="驱动程序（Device drivers）"></a>驱动程序（Device drivers）</h3><h3 id="用户界面（User-interface）"><a href="#用户界面（User-interface）" class="headerlink" title="用户界面（User interface）"></a>用户界面（User interface）</h3><p>怎么样，有没有觉得OS——Oh,So cool!</p>
+<h3 id="安全机制（Security）"><a href="#安全机制（Security）" class="headerlink" title="安全机制（Security）"></a>安全机制（Security）</h3><h3 id="驱动程序（Device-drivers）"><a href="#驱动程序（Device-drivers）" class="headerlink" title="驱动程序（Device drivers）"></a>驱动程序（Device drivers）</h3><h3 id="用户界面（User-interface）"><a href="#用户界面（User-interface）" class="headerlink" title="用户界面（User interface）"></a>用户界面（User interface）</h3><h3 id="使用工具"><a href="#使用工具" class="headerlink" title="使用工具"></a>使用工具</h3><p>分为三类：</p>
+<ol>
+<li>编辑器：用于编辑文件。</li>
+<li>过滤器：用于接收数据并过滤数据。</li>
+<li>交互程序：允许用户发送信息或接收来自其他用户的信息。</li>
+</ol>
+<p>Linux上的过滤器主要有ed、ex、Vi、Emacs。ed和ex是行编辑器，vi和Emacs是全屏幕编辑器。</p>
+<blockquote>
+<p>怎么样，有没有觉得OS——Oh,So cool!</p>
+</blockquote>
 
   </section>
 
