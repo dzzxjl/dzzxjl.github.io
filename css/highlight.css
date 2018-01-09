@@ -1,6 +1,6 @@
 .post pre,
 .post .highlight {
-  background: #CCFF66;
+  background: #fff785;
   padding: 1em;
   border-style: solid;
   border-color: #ddd;
@@ -19,13 +19,13 @@
 }
 .post pre,
 code {
-  border-radius: 1em;
+  border-radius: 0.2em;
 }
 .post code {
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 }
 .post code {
-  background: #CC99CC;
+  background: #bbcee9;
   padding: 0 0.3em;
 }
 .post pre code {
