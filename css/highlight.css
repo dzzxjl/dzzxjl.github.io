@@ -1,6 +1,6 @@
 .post pre,
 .post .highlight {
-  background: #2d2d2d;
+  background: #CCFF66;
   padding: 1em;
   border-style: solid;
   border-color: #ddd;
@@ -36,13 +36,17 @@
   margin: 0;
   padding: 0;
 }
+table, th, td {
+  border: 1px solid black;
+}
 .post .highlight table {
+  border: 1px solid black;
   margin: 0;
   width: auto;
 }
-.post .highlight td {
-  border: none;
-  padding: 0;
+.post .highlight th td {
+  border: 1px solid black;
+  padding: 1;
 }
 .post .highlight figcaption {
   font-size: 13px;
