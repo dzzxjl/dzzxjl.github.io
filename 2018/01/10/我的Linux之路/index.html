@@ -1,0 +1,210 @@
+<html>
+  <head>
+    <title>我的Linux之路 - dzzxjl</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  </head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <br>
+  <p>dzzxjl</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='mailto:dzzxjl@126.com'>Email</a>
+  
+    <a class='main' href='https://github.com/dzzxjl'>Github</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/09/Scrapy爬虫最佳实践/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-10</div>
+            我的Linux之路
+          </h1>
+          <blockquote>
+<p>小时候，崇拜《神奇宝贝》里的那个小智，或者说想成为一个小智那样的人。羡慕他有那么多的宠物小精灵陪伴着，还被装在了一个个GS球里面。若需要哪个帮助自己应战，潇洒地一抛。</p>
+<p>现在的我，有时候会把一个个linux平台当做我的GS球，如centos，ubuntu，arch。上面的软件与计算工具当做我的宠物，这也算从另一面实现了小时候的一个梦想。</p>
+</blockquote>
+<p><strong>Linux创建于1991年。</strong></p>
+<h2 id="Linux系统的主要用途"><a href="#Linux系统的主要用途" class="headerlink" title="Linux系统的主要用途"></a>Linux系统的主要用途</h2><ul>
+<li>服务器</li>
+<li>嵌入式硬件</li>
+<li>桌面系统——极客爱好者</li>
+</ul>
+<h2 id="常见发行版"><a href="#常见发行版" class="headerlink" title="常见发行版"></a>常见发行版</h2><h3 id="linux发行版"><a href="#linux发行版" class="headerlink" title="linux发行版"></a>linux发行版</h3><ol>
+<li>RedHat 系列（商业公司维护的发行版本）：RHEL(Redhat Enterprise Linux)、Cent OS、Fedora Core等</li>
+<li>Debian 系列（社区组织维护的发行版本）：Debian(stable, testing 和 unstable)、Ubuntu、Deepin 等</li>
+<li>Arch</li>
+</ol>
+<h3 id="RedHat-系列"><a href="#RedHat-系列" class="headerlink" title="RedHat 系列"></a>RedHat 系列</h3><ul>
+<li>常见的安装包格式 rpm 包，安装rpm包的命令是“rpm -参数”</li>
+<li>包管理工具 yum</li>
+<li>支持 tar 包</li>
+</ul>
+<h3 id="Debian系列"><a href="#Debian系列" class="headerlink" title="Debian系列"></a>Debian系列</h3><ul>
+<li>常见的安装包格式 deb 包，安装 deb 包的命令是“dpkg -参数”</li>
+<li>包管理工具 apt-get</li>
+<li>支持 tar 包</li>
+<li>dpkg/apt-get/apt-cache/apt 之間的關係</li>
+</ul>
+<h3 id="archlinux系列"><a href="#archlinux系列" class="headerlink" title="archlinux系列"></a>archlinux系列</h3><ul>
+<li>Manjaro Linux</li>
+<li>发行版自行开发的软件少（基本上只有pacman, abs和安装程序（及安装程序需要的wifi-menu等）），对上游修改少</li>
+</ul>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><ul>
+<li>/：存放系统程序，也就是At&amp;t开发的Unix程序<ul>
+<li>/bin：<strong>重要执行文件</strong>，单用户维护模式下还能够被操作的命令</li>
+<li>/sbin：root才能操作</li>
+<li>/etc：配置文件</li>
+<li>/dev：所需要的设备文件<ul>
+<li>/dev/tty</li>
+</ul>
+</li>
+<li>/lib：执行文件所需的函数库与内核所需的模块</li>
+</ul>
+<hr>
+<ul>
+<li>/usr(<strong>UNIX Software Resource</strong>)：存放Unix系统商（比如IBM和HP）开发的程序<ul>
+<li>/usr/sbin：服务器安装程序</li>
+<li>/usr/local/sbin：存放用户自己安装的程序，本机自行安装的软件所产生的系统执行文件（system binary）</li>
+</ul>
+</li>
+<li>/opt：在某些系统，用于存放第三方厂商开发的程序，所以取名为option，意为”选装”</li>
+<li>/proc：基于内存的<strong>虚拟文件系统</strong>，本身不占任何硬盘空间。用于显示内核信息</li>
+<li>/var 包含系统一般运行时要改变的数据。通常这些数据所在的目录的大小是要经常变化或扩充的<ul>
+<li>/var/lock ： 锁定文件。许多程序遵循在 /var/lock 中产生一个锁定文件的约定，以用来支持他们正在使用某个特定的设备或文件。其他程序注意到这个锁定文件时，就不会再使用这个设备或文件</li>
+</ul>
+</li>
+<li>/lost+found：这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。这个目录是使用标准的<strong>ext2/ext3</strong>文件系统格式才会产生的一个目录</li>
+<li>/mnt：挂载</li>
+<li>/media：挂载</li>
+</ul>
+</li>
+</ul>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><blockquote>
+<p>关键是会“偷”，偷了会改，改了会变，变则通矣。</p>
+</blockquote>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h3 id="管道命令"><a href="#管道命令" class="headerlink" title="管道命令"></a>管道命令</h3><h3 id="数据流重定向"><a href="#数据流重定向" class="headerlink" title="数据流重定向"></a>数据流重定向</h3><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li>service <em>*</em> start/stop</li>
+<li>du</li>
+<li>uname -a   #显示详细的内核信息</li>
+<li>tar -xzvf</li>
+<li>curl ip</li>
+<li>kill -9 pid 关闭进程 </li>
+<li>ssh root@ip  使用root账户登录指定ip的服务器</li>
+<li>whereis java 查看java安装路径——/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home</li>
+<li>lsof –i:端口号 Linux查看端口占用情况</li>
+<li>netstat -anpt | grep :5000 Linux查看端口占用情况</li>
+<li>ps -ef | grep uwsgi 查看进程情况：ps -aux | grep pid</li>
+<li>scp api.py root@IP:api.py</li>
+</ul>
+<h2 id="部分命令解析"><a href="#部分命令解析" class="headerlink" title="部分命令解析"></a>部分命令解析</h2><h3 id="service-start-stop"><a href="#service-start-stop" class="headerlink" title="service * start/stop"></a>service <em>*</em> start/stop</h3><h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><h3 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h3><ul>
+<li>gnome</li>
+<li>kde</li>
+<li>xfce</li>
+<li>lxde</li>
+</ul>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><ul>
+<li>nginx/apache</li>
+<li>​</li>
+</ul>
+<h2 id="Linux国内镜像源"><a href="#Linux国内镜像源" class="headerlink" title="Linux国内镜像源"></a>Linux国内镜像源</h2><ul>
+<li><a href="http://mirrors.aliyun.com/" target="_blank" rel="external">http://mirrors.aliyun.com/</a> 【阿里】</li>
+<li><a href="http://mirrors.aliyuncs.com/" target="_blank" rel="external">http://mirrors.aliyuncs.com/</a> 【阿里云ECS内网专用】</li>
+<li><a href="http://mirrors.163.com/" target="_blank" rel="external">http://mirrors.163.com/</a> 【网易】</li>
+<li><a href="http://mirrors.sohu.com/" target="_blank" rel="external">http://mirrors.sohu.com/</a> 【搜狐】</li>
+<li><a href="http://mirrors.ustc.edu.cn/" target="_blank" rel="external">http://mirrors.ustc.edu.cn/</a> 【中国科技大学】</li>
+<li><a href="http://mirror.bit.edu.cn/" target="_blank" rel="external">http://mirror.bit.edu.cn/</a> 【北京理工大学】</li>
+<li><a href="http://mirror.bjtu.edu.cn/" target="_blank" rel="external">http://mirror.bjtu.edu.cn/</a> 【北京交通大学】</li>
+<li><a href="http://mirror.lzu.edu.cn/" target="_blank" rel="external">http://mirror.lzu.edu.cn/</a> 【兰州大学】</li>
+<li><a href="http://ftp.sjtu.edu.cn/" target="_blank" rel="external">http://ftp.sjtu.edu.cn/</a> 【上海交通大学】</li>
+<li><a href="http://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="external">http://mirrors.tuna.tsinghua.edu.cn/</a> 【清华大学】</li>
+<li><a href="http://mirror.tju.edu.cn/" target="_blank" rel="external">http://mirror.tju.edu.cn/</a> 【天津大学】</li>
+<li><a href="http://linux.swu.edu.cn/swudownload/Distributions/" target="_blank" rel="external">http://linux.swu.edu.cn/swudownload/Distributions/</a> 【西南大学】</li>
+<li><a href="http://mirror.neu.edu.cn/" target="_blank" rel="external">http://mirror.neu.edu.cn/</a> 【东北大学】</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><p>《鸟哥的Linux私房菜——基础学习篇(第三版)》</p>
+</li>
+<li><p>《鸟哥的Linux私房菜——服务器架构篇(第三版)》</p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2012/02/a_history_of_unix_directory_structure.html" target="_blank" rel="external">Unix目录结构的来历</a></p>
+</li>
+<li><p><a href="http://linux.vbird.org" target="_blank" rel="external">鸟哥的私房菜馆</a></p>
+<p>​</p>
+</li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='mailto:dzzxjl@126.com'>Email</a>
+  
+    <a class='main' href='https://github.com/dzzxjl'>Github</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>
