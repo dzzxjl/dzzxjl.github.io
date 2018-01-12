@@ -62,7 +62,7 @@
         <section class='post'>
           <h1>
             <div class='date'>2018-01-04</div>
-            initrd与vmlinuz
+            initrd与vmlinuz data,length 
           </h1>
           <h2 id="uImage、zImage、bzImage、vlinzx区别"><a href="#uImage、zImage、bzImage、vlinzx区别" class="headerlink" title="uImage、zImage、bzImage、vlinzx区别"></a>uImage、zImage、bzImage、vlinzx区别</h2><p>在网络中，不少服务器采用的是Linux系统。为了进一步提高服务器的性能，可能需要根 据特定的硬件及需求重新编译Linux内核。编译Linux 内核，需要根据规定的步骤进行，编译内核过程中涉及到几个重要的文件。比如对于RedHat Linux，在/boot目录下有一些与Linux内核有关的文件 . 　　编译过RedHat Linux内核的人对其中的System.map、vmlinuz、initrd-2.4.7-10.img印象可能比较深刻，因为编译内核过程中涉及到这些文件的建立等操作。那么这几个文件是怎么产生的?又有什么作用呢?</p>
 <p>对于Linux内核，编译可以生成不同格式的映像文件，例如： <code>make zImage</code> <code>make uImage</code> <code>make bzImage</code> ##zImage</p>

@@ -62,7 +62,7 @@
         <section class='post'>
           <h1>
             <div class='date'>2017-08-29</div>
-            在docker上使用mysql的正确方式
+            在docker上使用mysql的正确方式 data,length 
           </h1>
           <p>今天将spring boot应用打包并部署到百度云的服务器上，遇到了一些问题，记录下来。</p>
 <p>spring boot应用需要连接到服务器上的数据库，为了方便日后迁移，我想将数据库安装在docker上，刚开始参考的是菜鸟教程，其上的步骤是正确的，只是会遇到一些问题：菜鸟上强调docker的容器和数据要分离，因此要创建相应的文件夹，主要包括conf、logs以及data，然后在运行docker run命令的时候，以-v参数进行本机host文件夹路径到容器内部相应文件夹的路径映射就可以了，但是菜鸟上面的命令是有问题的，我使用的命令如下</p>
