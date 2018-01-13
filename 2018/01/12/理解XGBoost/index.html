@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <title>理解XGBoost - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  </head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='mailto:dzzxjl@126.com'>Email</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/12/理解LightGBM/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/10/我的Linux之路/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-12</div>
+            理解XGBoost
+          </h1>
+          
+          
+          
+          <hr>
+
+
+          <h3 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h3><p>XGBoost使用的基学习器是CART</p>
+<ul>
+<li>决策规则与决策树的一样</li>
+<li>每个叶子节点上都包含了一个权重，也有人叫做分数</li>
+</ul>
+<p>以下摘自<a href="https://www.zhihu.com/question/41354392/answer/91371364" target="_blank" rel="external">机器学习算法中GBDT和XGBOOST的区别有哪些？</a></p>
+<p>首先<strong>xgboost</strong>是Gradient Boosting的一种高效系统实现，并不是一种单一算法。xgboost里面的基学习器除了用tree(gbtree)，也可用线性分类器(gblinear)。而GBDT则特指梯度提升决策树算法。<br>xgboost相对于普通gbm的实现，可能具有以下的一些优势：</p>
+<ol>
+<li>显式地将树模型的复杂度作为正则项加在优化目标</li>
+<li>公式推导里用到了二阶导数信息，而普通的GBDT只用到一阶</li>
+<li>允许使用column(feature) sampling来防止过拟合，借鉴了Random Forest的思想，sklearn里的gbm好像也有类似实现。</li>
+</ol>
+<p>4.实现了一种分裂节点寻找的近似算法，用于加速和减小内存消耗。<br>5.节点分裂算法能自动利用特征的稀疏性。<br>6.data事先排好序并以block的形式存储，利于并行计算<br>7.cache-aware, out-of-core computation<br>8.支持分布式计算可以运行在MPI，YARN上，得益于底层支持容错的分布式通信框架rabit。</p>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='mailto:dzzxjl@126.com'>Email</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>
