@@ -14,6 +14,9 @@ body {
   padding: 0;
   margin: 0; }
 
+table, th, td {
+  border: 1px solid #fff785;
+}
 #go-back-home {
   margin: 40px 0 0; }
   #go-back-home:hover {

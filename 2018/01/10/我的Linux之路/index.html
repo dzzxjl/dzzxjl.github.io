@@ -65,7 +65,7 @@
           
             <font class="categories">
             &#8226; 分类:
-            <a class="categories-link" href="/categories/1-2/">1 2</a>
+            <a class="categories-link" href="/categories/linux/">linux</a>
             </font>
           
           
@@ -81,7 +81,7 @@
 <p>小时候，崇拜《神奇宝贝》里的那个小智，或者说想成为一个小智那样的人。羡慕他有那么多的宠物小精灵陪伴着，还被装在了一个个GS球里面。若需要哪个帮助自己应战，潇洒地一抛。</p>
 <p>现在的我，有时候会把一个个linux平台当做我的GS球，如centos，ubuntu，arch。上面的软件与计算工具当做我的宠物，这也算从另一面实现了小时候的一个梦想。</p>
 </blockquote>
-<p><strong>Linux创建于1991年。</strong></p>
+<p><strong>Linux创建于1991年，<a href="https://www.kernel.org/" target="_blank" rel="external">Linux内核归档</a>。</strong></p>
 <h2 id="Linux系统的主要用途"><a href="#Linux系统的主要用途" class="headerlink" title="Linux系统的主要用途"></a>Linux系统的主要用途</h2><ul>
 <li>服务器</li>
 <li>嵌入式硬件</li>
@@ -153,8 +153,91 @@
 <li>netstat -anpt | grep :5000 Linux查看端口占用情况</li>
 <li>ps -ef | grep uwsgi 查看进程情况：ps -aux | grep pid</li>
 <li>scp api.py root@IP:api.py</li>
+<li>free 查看内存使用情况</li>
 </ul>
-<h2 id="部分命令解析"><a href="#部分命令解析" class="headerlink" title="部分命令解析"></a>部分命令解析</h2><h3 id="service-start-stop"><a href="#service-start-stop" class="headerlink" title="service * start/stop"></a>service <em>*</em> start/stop</h3><h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><h3 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h3><ul>
+<h3 id="部分命令解析"><a href="#部分命令解析" class="headerlink" title="部分命令解析"></a>部分命令解析</h3><p>service <em>*</em> start/stop</p>
+<h2 id="linux权限管理"><a href="#linux权限管理" class="headerlink" title="linux权限管理"></a>linux权限管理</h2><p>文件的权限主要针对三类对象进行定义：</p>
+<ul>
+<li>owner: 属主, u</li>
+<li>group: 属组, g</li>
+<li>other: 其他, o</li>
+</ul>
+<p>每个文件针对每类访问者都定义了三种权限：</p>
+<ul>
+<li>r: Readable</li>
+<li>w: Writable</li>
+<li>x: eXcutable</li>
+</ul>
+<p>文件：</p>
+<ul>
+<li>r: 可使用文件查看类工具获取其内容；</li>
+<li>w: 可修改其内容；</li>
+<li>x: 可以把此文件提请内核启动为一个进程；</li>
+</ul>
+<p>目录：</p>
+<ul>
+<li>r: 可以使用ls查看此目录中文件列表；</li>
+<li>w: 可在此目录中创建文件，也可删除此目录中的文件；</li>
+<li>x: 可以使用ls -l查看此目录中文件列表，可以cd进入此目录；</li>
+</ul>
+<p>权限用数字表示</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>二进制</th>
+<th>十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>—</td>
+<td>000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>–x</td>
+<td>001</td>
+<td>1</td>
+</tr>
+<tr>
+<td>-w-</td>
+<td>010</td>
+<td>2</td>
+</tr>
+<tr>
+<td>-wx</td>
+<td>011</td>
+<td>3</td>
+</tr>
+<tr>
+<td>r–</td>
+<td>100</td>
+<td>4</td>
+</tr>
+<tr>
+<td>r-x</td>
+<td>101</td>
+<td>5</td>
+</tr>
+<tr>
+<td>rw-</td>
+<td>110</td>
+<td>6</td>
+</tr>
+<tr>
+<td>rwx</td>
+<td>111</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<p>简化记忆：读(r) = 4 写(w) = 2 执行(x) = 1</p>
+<p>修改文件权限：chmod</p>
+<blockquote>
+<p>chmod [OPTION]… OCTAL-MODE FILE…</p>
+</blockquote>
+<h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><h3 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h3><ul>
 <li>gnome</li>
 <li>kde</li>
 <li>xfce</li>

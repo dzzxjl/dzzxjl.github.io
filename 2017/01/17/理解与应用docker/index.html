@@ -75,7 +75,7 @@
           <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
 <li>Go编写</li>
 <li>应用版本管理</li>
-<li>docker -&gt; 虚拟机 -&gt; 每个容器都包含了一个操作系统？</li>
+<li>docker -&gt; 虚拟机 -&gt; 每个容器container都包含了一个极简的操作系统和对应的软件</li>
 </ul>
 <p>docker的特点</p>
 <ul>
@@ -91,20 +91,34 @@
 <li>仓库（远程仓库，类似官方商店提供标准商品，也可搭建私有仓库harbor）</li>
 </ul>
 <p>从下载过程中可以看到我们之前提及的分层存储的概念，镜像是由多层存储所构成。</p>
-<h3 id="UnionFS"><a href="#UnionFS" class="headerlink" title="UnionFS"></a>UnionFS</h3><p>Docker使用一种叫做联合文件系统（union file systems，unionFS）的东西来将这些层组合为单个镜像。unionFS允许单独的文件系统中的文件和文件夹以分支的形式出现，可以被透明地覆盖，最终形成一个连续的文件系统。</p>
+<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p>我们都知道，操作系统分为内核和用户空间。对于 Linux 而言，内核启动后，会挂载 <code>root</code> 文件系统为其提供用户空间支持。而 Docker 镜像（Image），就相当于是一个 <code>root</code> 文件系统。比如官方镜像 <code>ubuntu:16.04</code> 就包含了完整的一套 Ubuntu 16.04 最小系统的 <code>root</code> 文件系统。</p>
+<p>Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。镜像不包含任何动态数据，其内容在构建之后也不会被改变。</p>
+<h3 id="分层存储UnionFS"><a href="#分层存储UnionFS" class="headerlink" title="分层存储UnionFS"></a>分层存储UnionFS</h3><p>Docker使用一种叫做联合文件系统（union file systems，unionFS）的东西来将这些层组合为单个镜像。unionFS允许单独的文件系统中的文件和文件夹以分支的形式出现，可以被透明地覆盖，最终形成一个连续的文件系统。</p>
+<p>因为镜像包含操作系统完整的 <code>root</code> 文件系统，其体积往往是庞大的，因此在 Docker 设计时，就充分利用 <a href="https://en.wikipedia.org/wiki/Union_mount" target="_blank" rel="external">Union FS</a> 的技术，将其设计为分层存储的架构。所以严格来说，镜像并非是像一个 ISO 那样的打包文件，镜像只是一个虚拟的概念，其实际体现并非由一个文件组成，而是由一组文件系统组成，或者说，由多层文件系统联合组成。</p>
+<p>镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如，删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是实际上该文件会一直跟随镜像。因此，在构建镜像的时候，需要额外小心，每一层尽量只包含该层需要添加的东西，任何额外的东西应该在该层构建结束前清理掉。</p>
+<p>分层存储的特征还使得镜像的复用、定制变的更为容易。甚至可以用之前构建好的镜像作为基础层，然后进一步添加新的层，以定制自己所需的内容，构建新的镜像。</p>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>镜像（<code>Image</code>）和容器（<code>Container</code>）的关系，就像是面向对象程序设计中的 <code>类</code> 和 <code>实例</code> 一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</p>
+<p>容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的 <a href="https://en.wikipedia.org/wiki/Linux_namespaces" target="_blank" rel="external">命名空间</a>。因此容器可以拥有自己的 <code>root</code> 文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样。这种特性使得容器封装的应用比直接在宿主运行更加安全。也因为这种隔离的特性，很多人初学 Docker 时常常会混淆容器和虚拟机。</p>
+<p>前面讲过镜像使用的是分层存储，容器也是如此。每一个容器运行时，是以镜像为基础层，在其上创建一个当前容器的存储层，我们可以称这个为容器运行时读写而准备的存储层为<strong>容器存储层</strong>。</p>
+<p>容器存储层的生存周期和容器一样，容器消亡时，容器存储层也随之消亡。因此，任何保存于容器存储层的信息都会随容器删除而丢失。</p>
+<p>按照 Docker 最佳实践的要求，容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用 <a href="https://yeasy.gitbooks.io/docker_practice/content/data_management/volume.html" target="_blank" rel="external">数据卷（Volume）</a>、或者绑定宿主目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。</p>
+<p>数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此，使用数据卷后，容器删除或者重新运行之后，数据却不会丢失。</p>
 <h3 id="docker是如何工作的"><a href="#docker是如何工作的" class="headerlink" title="docker是如何工作的"></a>docker是如何工作的</h3><p>容器包含有<strong>一个操作系统，用户添加的文件和元数据等</strong>。我们之前已经看到，每个容器都是从一个镜像创建而来，该镜像告诉Docker一个容器需要托管什么东西，容器运行时该执行什么进程，还有一系列其他的配置数据。Docker镜像是只读的，当Docker从一个镜像运行一个容器时，会在镜像之上添加一层可读写的层（使用之前提到的unionFS），然后我们的应用就可以在上边运行了。</p>
 <p>Docker系统有两个程序：<strong>docker服务端</strong>和<strong>docker客户端</strong>，其中docker服务端是一个服务进程（守护进程），管理着所有的容器。docker客户端则扮演着docker服务端的远程控制器，可以用来控制docker的服务端进程。大部分情况下，docker服务端和客户端运行在一台机器上。</p>
 <h3 id="docker与虚拟机"><a href="#docker与虚拟机" class="headerlink" title="docker与虚拟机"></a>docker与虚拟机</h3><p>Docker如此轻量的原因之一就是因为这些层。当你修改一个镜像时，比如将应用程序更新到一个新版本时，就构建了一个新的层。因此，只有这一层被添加或修改，而不是像操作虚拟机时，替换整个镜像或整个的重构一遍。现在，你无需分发整个镜像，只需要更新一下就可以了，让分发Docker镜像变得更快更简单。</p>
 <h2 id="应用docker"><a href="#应用docker" class="headerlink" title="应用docker"></a>应用docker</h2><h3 id="docker的使用场景"><a href="#docker的使用场景" class="headerlink" title="docker的使用场景"></a>docker的使用场景</h3><p><strong>私有化部署</strong>，在一些无法上网的机器上面安装使用dokcer。</p>
 <p>docker容器中不应该存放数据，还要配置将数据文件存到容器外面。容器不应该是长久性的东西，要保持容器的可抛弃性，有问题就应该rm掉，数据保存在容器外，然后直接run新的容器。参数修改是那个时候进行的。</p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>启动</p>
-<p><code>docker service docker start</code></p>
-<p><code>docker ps</code></p>
-<p><code>docker run</code></p>
-<p><code>docker rm</code></p>
-<h3 id="常用镜像"><a href="#常用镜像" class="headerlink" title="常用镜像"></a>常用镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> nginx</span></div><div class="line">docker run -p 8081:80 --name nginx_new -v /Users/dzzxjl/Desktop/BookCan:/usr/share/nginx/html  -d nginx</div><div class="line"><span class="meta">#</span><span class="bash"> 进入nginx</span></div><div class="line">docker exec -i -t a038837b9b4d bash</div><div class="line"><span class="meta">#</span><span class="bash"> 停止</span></div><div class="line">docker stop</div><div class="line"><span class="meta">#</span><span class="bash"> 移除容器</span></div><div class="line">docker rm</div></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> mysql</span></div><div class="line"><span class="meta">#</span><span class="bash"> mysql容器中数据存储位置为/var/lib/mysql/</span></div><div class="line">docker run -p 3306:3306 --name mysql_new -v /root/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql</div></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> mongodb, 启用容器</span></div><div class="line">docker run -p 27017:27017 --name mongo_new -d mongo</div><div class="line">docker start some-mongo</div><div class="line">mongo localhost:27017</div></pre></td></tr></table></figure>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p><code>service docker start</code>启动docker </p>
+<p><code>docker ps</code>列出本机正在运行的容器</p>
+<p><code>docker run</code> 启动容器，没有镜像的话自动下载 </p>
+<p><code>docker stop</code> 停止正在运行的容器</p>
+<p><code>docker start</code> 启动被<code>docker stop</code>的容器 </p>
+<p><code>docker rm</code>移除容器</p>
+<p><code>docker exec -i -t a038837b9b4d bash</code> 进入容器nginx</p>
+<h3 id="常用镜像"><a href="#常用镜像" class="headerlink" title="常用镜像"></a>常用镜像</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># wordpress</span></div><div class="line">docker run --name some-wordpress --link some-mysql:mysql -p 8080:80 -d wordpress</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> nginx</span></div><div class="line">docker run -p 8081:80 --name some-nginx -v /Users/dzzxjl/Desktop/BookCan:/usr/share/nginx/html  -d nginx</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> mysql</span></div><div class="line"><span class="meta">#</span><span class="bash"> mysql容器中数据存储位置为/var/lib/mysql/</span></div><div class="line">docker run -p 3306:3306 --name some-mysql -v /home/dzzxjl/mysql_data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> mongodb, 启用容器</span></div><div class="line">docker run -p 27017:27017 --name some-mongo -d mongo</div><div class="line">docker start some-mongo</div><div class="line">mongo localhost:27017</div></pre></td></tr></table></figure>
 <h2 id="harbor"><a href="#harbor" class="headerlink" title="harbor"></a>harbor</h2><p>harbor相当于一个docker image的仓库</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="http://blog.csdn.net/cloud_xy/article/details/52473057" target="_blank" rel="external">http://blog.csdn.net/cloud_xy/article/details/52473057</a></li>
