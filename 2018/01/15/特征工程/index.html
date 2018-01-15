@@ -1,0 +1,206 @@
+<html>
+  <head>
+    <title>特征工程 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  </head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/12/理解LightGBM/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-15</div>
+            特征工程
+          </h1>
+          
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/机器学习/">机器学习</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>Actually the sucess of all Machine Learning algorithms depends on how you present the data. ——Mohammad Pezeshki</p>
+<p>Better feature means flexibility. Better feature means simpler models. Better feature means better results.</p>
+</blockquote>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>特征是机器学习的原材料。</p>
+<table>
+<thead>
+<tr>
+<th>任务领域</th>
+<th>原始输入</th>
+<th>浅层特征</th>
+<th>中层特征</th>
+<th>高层特征</th>
+<th>训练目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语音</td>
+<td>样本</td>
+<td>频段 声音</td>
+<td>音调 音素</td>
+<td>单词</td>
+<td>语音识别</td>
+</tr>
+<tr>
+<td>图像</td>
+<td>像素</td>
+<td>线条 纹理</td>
+<td>图案 局部</td>
+<td>物体</td>
+<td>图像识别</td>
+</tr>
+<tr>
+<td>文本</td>
+<td>字母</td>
+<td>单词 词组</td>
+<td>短语 句子 段落</td>
+<td>文章</td>
+<td>语义理解</td>
+</tr>
+</tbody>
+</table>
+<h2 id="特征工程的种类"><a href="#特征工程的种类" class="headerlink" title="特征工程的种类"></a>特征工程的种类</h2><ul>
+<li><p>数值型feature</p>
+<ul>
+<li>bathrooms</li>
+<li>bedrooms</li>
+<li>price</li>
+</ul>
+</li>
+<li><p>高势集类别（High Categorical）型feature</p>
+<ul>
+<li><p>building_id</p>
+</li>
+<li><p>display_address</p>
+</li>
+<li><p>manager_id</p>
+</li>
+<li><p>street_address</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>高势集类别（High Categorical）进行经验贝叶斯转换成数值feature</strong></p>
+<p>什么是High Categorical的特征呢？一个简单的例子就是邮编，有100个城市就会有好几百个邮编，有些房子坐落在同一个邮编下面。很显然随着邮编的数量增多，如果用简单的one-hot编码显然效果不太好，因此有人就用一些统计学思想（经验贝叶斯）将这些类别数据进行一个map，得到的结果是数值数据。在这场比赛中有人分享了一篇<a href="http://link.zhihu.com/?target=http%3A//helios.mm.di.uoa.gr/%7Erouvas/ssi/sigkdd/sigkdd.vol3.1/barreca.ps" target="_blank" rel="external">paper</a>里面就提到了具体的算法。详细就不仔细讲了，用了这个encoding之后，的确效果提升了很多。那么这场比赛中哪些数据可以进行这样的encoding呢，只要满足下面几点：1. 会重复，2. 根据相同的值分组会分出超过一定数量（比如100）的组。也就是说building_id, manager_id, street_address, display_address都能进行这样的encoding，而取舍就由最后的实验来决定了。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>时间型feature<ul>
+<li>created</li>
+</ul>
+</li>
+<li>地理位置型feature<ul>
+<li>longitude</li>
+<li>latitude</li>
+</ul>
+</li>
+<li>文本feature<ul>
+<li>description</li>
+</ul>
+</li>
+<li>稀疏特征集feature<ul>
+<li>features</li>
+</ul>
+</li>
+<li>id型feature<ul>
+<li>listing_id</li>
+<li>index</li>
+</ul>
+</li>
+</ul>
+<h2 id="特征的构造与处理"><a href="#特征的构造与处理" class="headerlink" title="特征的构造与处理"></a>特征的构造与处理</h2><h3 id="标准化（Standardization）"><a href="#标准化（Standardization）" class="headerlink" title="标准化（Standardization）"></a>标准化（Standardization）</h3><p>比方说有一些数字的单位是千克，有一些数字的单位是克，这个时候需要统一单位。如果没有标准化，两个变量混在一起搞，那么肯定就会不合适。</p>
+<h3 id="归一化（Normalization）"><a href="#归一化（Normalization）" class="headerlink" title="归一化（Normalization）"></a>归一化（Normalization）</h3><p>归一化是因为在特征会在不同的尺度下有不同的表现形式，归一化会使得各个特征能够同时以恰当的方式表现。比方说某个专辑的点击播放率一般不会超过0.2，但是专辑的播放次数可能会达到几千次，所以说为了能够在模型里面得到更合适结果，需要先把一些特征在尺度上进行归一化，然后进行模型训练。</p>
+<h3 id="离散化（Discretization）"><a href="#离散化（Discretization）" class="headerlink" title="离散化（Discretization）"></a>离散化（Discretization）</h3><p>离散化是指把特征进行必要的离散处理，比方说年龄特征是一个连续的特征，但是把年龄层分成5－18岁（中小学生），19－23岁（大学生），24－29岁（工作前几年），30－40岁（成家立业），40－60岁（中年人）从某些层面来说比连续的年龄数据（比如说某人年龄是20岁1月3日之类的）更容易理解不同年龄层人的特性。典型的离散化步骤：对特征做排序－&gt; 选择合适的分割点－&gt; 作出区间的分割 －&gt;  作出区间分割－&gt; 查看是否能够达到停止条件。</p>
+<h2 id="特征选择与特征提取"><a href="#特征选择与特征提取" class="headerlink" title="特征选择与特征提取"></a>特征选择与特征提取</h2><p>首先需要说明的是，特征选择和特征提取是两个完全不同的概念。</p>
+<h3 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h3><p>特征选择是指去掉无关特征，保留相关特征的过程，也可以认为是从所有的特征中选择<strong>一个最好的特征子集</strong>。特征选择本质上可以认为是降维的过程。</p>
+<h3 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h3><p>特征提取起初是针对图像处理领域，是指<strong>将机器学习算法不能识别的原始数据转化为算法可以识别的特征</strong>的过程。比如说，文本是由一系列文字组成的，这些文字在经过分词后会形成一个词语集合，对于这些词语集合（原始数据），机器学习算法是不能直接使用的，我们需要将它们转化成机器学习算法可以识别的数值特征（固定长度的向量表示），然后再交给机器学习的算法进行操作。再比如说，图片是由一系列像素点构（原始数据）成的，这些像素点本身无法被机器学习算法直接使用，但是如果将这些像素点转化成矩阵的形式（数值特征），那么机器学习算法就可以使用了。</p>
+<p>从上面的概念可以看出，特征提取实际上是把原始数据转化为机器学习算法可以识别的数值特征的过程，不存在降维的概念，特征提取不需要理会这些特征是否是有用的；而特征选择是在提取出来的特征中选择最优的一个特征子集。</p>
+<h2 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="http://www.csuldw.com/2015/10/24/2015-10-24%20feature%20engineering/" target="_blank" rel="external">http://www.csuldw.com/2015/10/24/2015-10-24%20feature%20engineering/</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26645088" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/26645088</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>
