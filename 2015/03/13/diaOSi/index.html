@@ -124,36 +124,22 @@
 <li>网路分隔的容忍程度（Partition tolerance）</li>
 </ul>
 <h4 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h4><h3 id="内存管理（Memory-management）"><a href="#内存管理（Memory-management）" class="headerlink" title="内存管理（Memory management）"></a>内存管理（Memory management）</h3><p>以java内存模型为例</p>
-<h3 id="进程管理（Processing-management）"><a href="#进程管理（Processing-management）" class="headerlink" title="进程管理（Processing management）"></a>进程管理（Processing management）</h3><h4 id="进程定义"><a href="#进程定义" class="headerlink" title="进程定义"></a>进程定义</h4><p>一个进程包括由操作系统分配的内存空间，是系统进行资源分配的独立单位，每个进程拥有自己的一套变量。其往往包括一个或多个线程。一个进程一直运行，直到所有的非守候线程都结束运行后才能结束。</p>
-<p>进程的状态</p>
+<h3 id="进程管理（Processing-management）"><a href="#进程管理（Processing-management）" class="headerlink" title="进程管理（Processing management）"></a>进程管理（Processing management）</h3><h4 id="进程定义"><a href="#进程定义" class="headerlink" title="进程定义"></a>进程定义</h4><p>一个进程包括由<strong>操作系统分配的内存空间</strong>，是系统进行资源分配的独立单位，每个进程<strong>拥有自己的一套变量</strong>。其往往包括一个或多个线程。一个进程一直运行，直到所有的非守候线程都结束运行后才能结束。</p>
+<p>进程的五大状态</p>
 <ul>
-<li>新生（<em>new</em>）：行程新产生中。</li>
-<li>执行（<em>running</em>）：正在执行。</li>
+<li>新生（<em>new</em>）：行程新产生中</li>
+<li>执行（<em>running</em>）：正在执行</li>
 <li>等待（<em>waiting</em>）：等待某事发生，例如等待使用者输入完成。亦称“阻塞”（<em>blocked</em>）</li>
-<li>就绪（<em>ready</em>）：排队中，等待CPU。</li>
-<li>结束（<em>terminated</em>）：完成执行。</li>
+<li>就绪（<em>ready</em>）：排队中，等待CPU</li>
+<li>结束（<em>terminated</em>）：完成执行</li>
 </ul>
 <h4 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h4><ul>
-<li>进程：正在运行的程序，是系统进行资源分配的独立单位。</li>
-<li>线程：进程的执行路径，调度和执行的单位，单个路径单线程，多个路径多线程。</li>
+<li>进程：正在运行的程序，是系统进行资源分配的独立单位</li>
+<li>线程：进程的执行路径，调度和执行的单位，单个路径单线程，多个路径多线程</li>
 </ul>
 <p>本质区别：每个进程拥有自己的一套变量，而线程只是共享数据。</p>
 <p>多进程的意义：提高CPU的<strong>使用率</strong></p>
 <p>多线程的意义：提高应用程序的<strong>效率</strong></p>
-<h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><ul>
-<li><p>新建状态：创建线程对象</p>
-</li>
-<li><p>待运行：线程调用start()之后，有执行的资格，没有执行权</p>
-</li>
-<li><p>运行：获得cpu的执行权（当加锁保证线程安全时会进入锁池等待获取锁，即同步阻塞）</p>
-</li>
-<li><p>阻塞： ①等待阻塞：Object的wait()方法调用后， 进入等待队列，唤醒后进入锁池，获得锁后又回到待运行状态</p>
-<p>​            ②同步阻塞：争抢cpu使用权，没抢到手，进入锁池等待获得锁</p>
-<p>​            ③其他阻塞：如sleep()，join()，时间结束后进入待运行状态</p>
-</li>
-<li><p>死亡：run，main执行结束，或因异常退出</p>
-</li>
-</ul>
 <h4 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h4><ol>
 <li>管道<br>管道一般用于两个<strong>具有亲缘关系</strong>的不同进程之间的通信。当一个进程创建一个管道，并调用fork创建自己的一个子进程后，父进程关闭读管道端，子进程关闭写管道端，这样 提供了两个进程之间数据流动的一种方式。管道是一种半双工的通信方式，数据只能单向流动。进程的亲缘关系通常是指父子进程关系。</li>
 <li>信号量（semophore）——信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种<strong>锁机制</strong>，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。<strong>不是用于交换大批数据</strong>，而用于多进程之间的<strong>同步</strong>（协调对共享存储段的存取）。</li>

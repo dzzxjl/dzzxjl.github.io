@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <title>理解linux的service命令 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  </head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/16/java的多线程/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/15/特征工程/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-16</div>
+            理解linux的service命令
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/linux/">linux</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/linux/">linux</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>centos7换到了systemctl，还是向后兼容service的，所以我还在用service，不过需要改，以后service就消失了。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">service SCRIPT COMMAND [OPTIONS]</div><div class="line"></div><div class="line"><span class="meta">#</span><span class="bash"> 在运行时，COMMAND 和 OPTTIONS都会被完整的传递给SCRIPT。故service nginx start其实最终执行的命令是/etc/init.d/nginx start，<span class="string">"start"</span>这个操作，并不是由service来完成，service仅仅是起到一个寻找脚本位置的作用而已</span></div><div class="line"></div><div class="line">service nginx start # 启动nginx服务</div><div class="line">service nginx stop  # 停止nginx服务</div><div class="line">service nginx restart # 重启nginx服务</div><div class="line"></div><div class="line">service ssh restart # 启动ssh服务</div></pre></td></tr></table></figure>
+<p>service命令用于对<strong>系统服务</strong>进行管理，比如启动（start）、停止（stop）、重启（restart）、查看状态（status）等。相关的命令还包括chkconfig、ntsysv等，chkconfig用于查看、设置服务的运行级别，ntsysv用于直观方便的设置各个服务是否自动启动。</p>
+<p><strong>service命令本身是一个shell脚本</strong>，它在/etc/init.d/目录查找指定的服务脚本，然后调用该服务脚本来完成任务。需要注意的是，service命令和/etc/rcN.d/这个目录没有任何关系。</p>
+<p>这个命令的作用是： 运行一个sysvinit 程序或Upstart作业！，所以其是一个既支持Upstart作业，又支持sysvinit程序的命令。运行时，service首先从/etc/init.d/中去找SCRIPT，如果没找着再去/etc/init/目录下去找同名作业配置文件。然后运行这些程序/作业。</p>
+<p>参考：</p>
+<ol>
+<li><a href="http://monklof.com/post/14/" target="_blank" rel="external">http://monklof.com/post/14/</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/atom.xml'>RSS</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

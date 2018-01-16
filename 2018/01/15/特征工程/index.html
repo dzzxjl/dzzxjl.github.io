@@ -40,6 +40,12 @@
 
       <section class='paging'>
   
+    <div class='left'>
+      <a href='/2018/01/16/理解linux的service命令/'>
+        ‹
+      </a>
+    </div>
+  
   
     <div class='right'>
       <a href='/2018/01/12/理解LightGBM/'>
@@ -165,6 +171,13 @@
 <h3 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h3><p>特征选择是指去掉无关特征，保留相关特征的过程，也可以认为是从所有的特征中选择<strong>一个最好的特征子集</strong>。特征选择本质上可以认为是降维的过程。</p>
 <h3 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h3><p>特征提取起初是针对图像处理领域，是指<strong>将机器学习算法不能识别的原始数据转化为算法可以识别的特征</strong>的过程。比如说，文本是由一系列文字组成的，这些文字在经过分词后会形成一个词语集合，对于这些词语集合（原始数据），机器学习算法是不能直接使用的，我们需要将它们转化成机器学习算法可以识别的数值特征（固定长度的向量表示），然后再交给机器学习的算法进行操作。再比如说，图片是由一系列像素点构（原始数据）成的，这些像素点本身无法被机器学习算法直接使用，但是如果将这些像素点转化成矩阵的形式（数值特征），那么机器学习算法就可以使用了。</p>
 <p>从上面的概念可以看出，特征提取实际上是把原始数据转化为机器学习算法可以识别的数值特征的过程，不存在降维的概念，特征提取不需要理会这些特征是否是有用的；而特征选择是在提取出来的特征中选择最优的一个特征子集。</p>
+<h2 id="tricks"><a href="#tricks" class="headerlink" title="tricks"></a>tricks</h2><ul>
+<li>总的来讲，特征工程不一定要做很多，最重要的要根据课题/题目的背景/情景找到<strong>强特征</strong>，有些特征基本上一个顶10个，提升非常明显。要找到这些特征需要大胆假设和联想，还有不断地实验，因为不是所有感觉上有用的特征都会实际上在你用的这个模型上有用。甚至有时候试验了一个特征发现没什么用，但是过了一段时间，加了一些其他特征之后再加这个特征又变得很有用了，这是因为不同的特征配合起来也有不同的效果，所以多尝试是有好处的。</li>
+<li>如果通过新增加一个或几个feature，如果cv分数上去了，就增加这个feature，如果cv分数没有上去，就舍弃这个feature，也就是相当于贪心验证。这样做的弊处在于，如果之前被舍弃的feature和之后被舍弃的feature联合在一起才会有正面影响，就相当于你错过了两个比较好的feature。因此特征的选择和联合显得非常关键。</li>
+<li>高重要性的特征做两两结合，应该会是比较好的办法，对两两结合的特征元组，再不限思路地去多用条件概率和分组聚集。</li>
+<li>采用间隔量（interval），譬如原来的票价为实数值，划分区间后，此类属性值大大减少，这样对算法更加友好</li>
+<li><a href="https://en.wikiversity.org/wiki/Dummy_variable_(statistics" target="_blank" rel="external">哑变量（Dummy variable）</a>)</li>
+</ul>
 <h2 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="http://www.csuldw.com/2015/10/24/2015-10-24%20feature%20engineering/" target="_blank" rel="external">http://www.csuldw.com/2015/10/24/2015-10-24%20feature%20engineering/</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/26645088" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/26645088</a></li>
