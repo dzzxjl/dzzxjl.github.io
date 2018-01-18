@@ -86,25 +86,30 @@
           <blockquote>
 <ol>
 <li>第一次采坑 20170830</li>
-<li>第一次采坑 20180101</li>
+<li>第二次采坑 20180101</li>
+<li>第三次采坑 20180118</li>
 <li>未完待续…</li>
 </ol>
 </blockquote>
 <p>Arch Linux在极客圈好像一直深受好评，许多人都放弃使用mac转而采用thinkpad+archlinux的方式。今天又被几个al的桌面给吸引了，于是踩坑装archlinux。</p>
 <p>衍生版 Manjaro Linux</p>
 <p>##安装</p>
-<p>安装的过程只需要参照<a href="http://www.jianshu.com/p/98b8965b1d10" target="_blank" rel="external">简书上的这篇文章</a>就可以了，需要注意的一点是网络连接，后面会提及</p>
+<p>基本的安装的过程只需要参照<a href="http://www.jianshu.com/p/98b8965b1d10" target="_blank" rel="external">简书上的这篇文章</a>就可以了，如果是在windows电脑上想装双系统，我强烈建议你根据附录中1与2来按部就班地安装，作者记录和解释地非常详细。我需要提前告知你，arch linux的安装非常繁琐，主要是在安装过程在命令行中进行，需要输入大量的命令。但是通过其安装过程对于你理解linux系统有很大的帮助。</p>
 <h2 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h2><p>按照教程配置了网络，以为成功了，因为在光盘启动时是可以正常连接网络的，但是restart后用pacman命令下载软件包出现一连串的错误，紧接使用ping命令发现未连接，才定位到网络出现了问题，找到了如下方案解决：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">在/etc/rc.conf文件中添加：</div><div class="line">&gt;interface = eth0</div><div class="line">保存退出之后，敲入命令</div><div class="line">&gt;dhcpcd</div><div class="line">马上发现一切正常工作了</div><div class="line">使用ping命令检查网络是否正常连接</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 在/etc/rc.conf文件中添加：</div><div class="line"><span class="meta">&gt;</span>interface = eth0</div><div class="line"><span class="meta">#</span>保存退出之后，敲入命令</div><div class="line">dhcpcd</div><div class="line"><span class="meta">#</span>马上发现一切正常工作了，使用ping命令检查网络是否正常连接</div></pre></td></tr></table></figure>
 <h2 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h2><p>archlinux 启动后一直卡在 reached target graphical interface</p>
 <p>参阅网上资料「Systemd 开机流程（boot process）消息」，不是「错误消息（error message）」，只通过这个消息解决不了任何问题。这个消息提供的线索是 systemd 启动了 X window system（X11，Xorg）（通过 systemd-analyze plot &gt; boot.png 你可以直观地看到这个启动流程）。之后 X11 干了什么，它不知道，所以也没法告诉你。所以需要去 /var/log/Xorg.0.log 和 /var/log/Xorg.0.log.old 看 Xorg 哪里出了问题。这个问题属于硬件驱动版块。</p>
 <p>于是将问题定位到显卡驱动+桌面安装错误的问题上</p>
-<p>目前尚未解决…</p>
+<p>目前尚未解决…<strong>驱动问题</strong></p>
 <h2 id="Pacman"><a href="#Pacman" class="headerlink" title="Pacman"></a>Pacman</h2><p><em>pacman</em> 通过和主服务器同步软件包列表来进行系统更新。这种服务器/客户端模式可以使用一条命令就下载/安装软件包，同时安装必需的依赖包。</p>
 <p>pacman -Syu</p>
 <p>一个 <em>pacman</em> 命令就可以升级整个系统。花费的时间取决于系统有多老。这个命令会同步非本地(local)软件仓库并升级系统的软件包。</p>
 <p>pacman-key –init<br>pacman-key –populate<br>pacman-key –refresh-keys<br>pacman -Sy archlinux-keyring</p>
-<h2 id="AUR——Arch-User-Repository"><a href="#AUR——Arch-User-Repository" class="headerlink" title="AUR——Arch User Repository"></a>AUR——Arch User Repository</h2>
+<h2 id="AUR——Arch-User-Repository"><a href="#AUR——Arch-User-Repository" class="headerlink" title="AUR——Arch User Repository"></a>AUR——Arch User Repository</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="http://www.viseator.com/2017/05/17/arch_install/" target="_blank" rel="external">以官方Wiki的方式安装ArchLinux</a></li>
+<li><a href="http://www.viseator.com/2017/05/19/arch_setup/" target="_blank" rel="external">ArchLinux安装后的必须配置与图形界面安装教程</a></li>
+</ol>
+
           <br>
 <p>dzzxjl</p>
 <!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
