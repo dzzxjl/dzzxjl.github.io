@@ -83,7 +83,7 @@
           <hr>
 
 
-          <ul>
+          <h2 id="显示系统及硬件信息"><a href="#显示系统及硬件信息" class="headerlink" title="显示系统及硬件信息"></a>显示系统及硬件信息</h2><ul>
 <li>arch 显示机器的处理器架构(1)</li>
 <li>uname -m 显示机器的处理器架构(2)</li>
 <li>uname -r 显示正在使用的内核版本</li>
@@ -97,20 +97,25 @@
 <li>cat /proc/version 显示内核的版本</li>
 <li>cat /proc/net/dev 显示网络适配器及统计</li>
 <li>cat /proc/mounts 显示已加载的文件系统</li>
-<li>lspci -tv 罗列 PCI 设备</li>
+<li><code>lspci -tv</code> 罗列 PCI 设备——Peripheral Component Interconnect</li>
 <li>lsusb -tv 显示 USB 设备</li>
 <li>date 显示系统日期</li>
 <li>cal 2007 显示2007年的日历表</li>
 <li>date 041217002007.00 设置日期和时间 - 月日时分年.秒</li>
 <li>clock -w 将时间修改保存到 BIOS</li>
+</ul>
+<h2 id="开关机操作"><a href="#开关机操作" class="headerlink" title="开关机操作"></a>开关机操作</h2><ul>
 <li>shutdown -h now 关闭系统(1)</li>
 <li>init 0 关闭系统(2)</li>
 <li>telinit 0 关闭系统(3)</li>
+<li><code>poweoff</code> 立刻进行关机</li>
 <li>shutdown -h hours:minutes &amp; 按预定时间关闭系统</li>
 <li>shutdown -c 取消按预定时间关闭系统</li>
 <li>shutdown -r now 重启(1)</li>
-<li>reboot 重启(2)</li>
+<li><code>reboot</code> 重启(2)</li>
 <li>logout 注销</li>
+</ul>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><ul>
 <li>cd /home 进入 ‘/ home’ 目录’</li>
 <li>cd .. 返回上一级目录</li>
 <li>cd ../.. 返回上两级目录</li>
@@ -154,6 +159,8 @@
 <li>locate *.ps 寻找以 ‘.ps’ 结尾的文件 - 先运行 ‘updatedb’ 命令</li>
 <li>whereis halt 显示一个二进制文件、源码或man的位置</li>
 <li>which halt 显示一个二进制文件或可执行文件的完整路径</li>
+</ul>
+<h2 id="挂载文件"><a href="#挂载文件" class="headerlink" title="挂载文件"></a>挂载文件</h2><ul>
 <li>mount /dev/hda2 /mnt/hda2 挂载一个叫做hda2的盘 - 确定目录 ‘/ mnt/hda2’ 已经存在</li>
 <li>umount /dev/hda2 卸载一个叫做hda2的盘 - 先从挂载点 ‘/ mnt/hda2’ 退出</li>
 <li>fuser -km /mnt/hda2 当设备繁忙时强制卸载</li>
@@ -172,6 +179,8 @@
 <li>du -sk * | sort -rn 以容量大小为依据依次显示文件和目录的大小</li>
 <li>rpm -q -a –qf ‘%10{SIZE}t%{NAME}n’ | sort -k1,1n 以大小为依据依次显示已安装的rpm包所使用的空间 (fedora, redhat类系统)</li>
 <li>dpkg-query -W -f=’${Installed-Size;10}t${Package}n’ | sort -k1,1n 以大小为依据显示已安装的deb包所使用的空间 (ubuntu, debian类系统)</li>
+</ul>
+<h2 id="用户组与用户及权限"><a href="#用户组与用户及权限" class="headerlink" title="用户组与用户及权限"></a>用户组与用户及权限</h2><ul>
 <li>groupadd group_name 创建一个新用户组</li>
 <li>groupdel group_name 删除一个用户组</li>
 <li>groupmod -n new_group_name old_group_name 重命名一个用户组</li>
@@ -208,6 +217,8 @@
 <li>chattr +S file1 一旦应用程序对这个文件执行了写操作，使系统立刻把修改的结果写到磁盘</li>
 <li>chattr +u file1 若文件被删除，系统会允许你在以后恢复这个被删除的文件</li>
 <li>lsattr 显示特殊的属性</li>
+</ul>
+<h2 id="解压缩文件"><a href="#解压缩文件" class="headerlink" title="解压缩文件"></a>解压缩文件</h2><ul>
 <li>bunzip2 file1.bz2 解压一个叫做 ‘file1.bz2’的文件</li>
 <li>bzip2 file1 压缩一个叫做 ‘file1’ 的文件</li>
 <li>gunzip file1.gz 解压一个叫做 ‘file1.gz’的文件</li>
@@ -229,54 +240,102 @@
 <li>zip file1.zip file1 创建一个zip格式的压缩包</li>
 <li>zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包</li>
 <li>unzip file1.zip 解压一个zip格式压缩包</li>
-<li>RPM 包 - （Fedora, Redhat及类似系统）</li>
-<li>rpm -ivh package.rpm 安装一个rpm包</li>
-<li>rpm -ivh –nodeeps package.rpm 安装一个rpm包而忽略依赖关系警告</li>
-<li>rpm -U package.rpm 更新一个rpm包但不改变其配置文件</li>
-<li>rpm -F package.rpm 更新一个确定已经安装的rpm包</li>
-<li>rpm -e package_name.rpm 删除一个rpm包</li>
-<li>rpm -qa 显示系统中所有已经安装的rpm包</li>
-<li>rpm -qa | grep httpd 显示所有名称中包含 “httpd” 字样的rpm包</li>
-<li>rpm -qi package_name 获取一个已安装包的特殊信息</li>
-<li>rpm -qg “System Environment/Daemons” 显示一个组件的rpm包</li>
-<li>rpm -ql package_name 显示一个已经安装的rpm包提供的文件列表</li>
-<li>rpm -qc package_name 显示一个已经安装的rpm包提供的配置文件列表</li>
-<li>rpm -q package_name –whatrequires 显示与一个rpm包存在依赖关系的列表</li>
-<li>rpm -q package_name –whatprovides 显示一个rpm包所占的体积</li>
-<li>rpm -q package_name –scripts 显示在安装/删除期间所执行的脚本l</li>
-<li>rpm -q package_name –changelog 显示一个rpm包的修改历史</li>
-<li>rpm -qf /etc/httpd/conf/httpd.conf 确认所给的文件由哪个rpm包所提供</li>
-<li>rpm -qp package.rpm -l 显示由一个尚未安装的rpm包提供的文件列表</li>
-<li>rpm –import /media/cdrom/RPM-GPG-KEY 导入公钥数字证书</li>
-<li>rpm –checksig package.rpm 确认一个rpm包的完整性</li>
-<li>rpm -qa gpg-pubkey 确认已安装的所有rpm包的完整性</li>
-<li>rpm -V package_name 检查文件尺寸、 许可、类型、所有者、群组、MD5检查以及最后修改时间</li>
-<li>rpm -Va 检查系统中所有已安装的rpm包- 小心使用</li>
-<li>rpm -Vp package.rpm 确认一个rpm包还未安装</li>
-<li>rpm2cpio package.rpm | cpio –extract –make-directories <em>bin</em> 从一个rpm包运行可执行文件</li>
-<li>rpm -ivh /usr/src/redhat/RPMS/<code>arch</code>/package.rpm 从一个rpm源码安装一个构建好的包</li>
-<li>rpmbuild –rebuild package_name.src.rpm 从一个rpm源码构建一个 rpm 包</li>
-<li>YUM 软件包升级器 - （Fedora, RedHat及类似系统）</li>
-<li>yum install package_name 下载并安装一个rpm包</li>
-<li>yum localinstall package_name.rpm 将安装一个rpm包，使用你自己的软件仓库为你解决所有依赖关系</li>
-<li>yum update package_name.rpm 更新当前系统中所有安装的rpm包</li>
-<li>yum update package_name 更新一个rpm包</li>
-<li>yum remove package_name 删除一个rpm包</li>
-<li>yum list 列出当前系统中安装的所有包</li>
-<li>yum search package_name 在rpm仓库中搜寻软件包</li>
-<li>yum clean packages 清理rpm缓存删除下载的包</li>
-<li>yum clean headers 删除所有头文件</li>
-<li>yum clean all 删除所有缓存的包和头文件</li>
-<li>DEB 包 (Debian, Ubuntu 以及类似系统)</li>
-<li>dpkg -i package.deb 安装/更新一个 deb 包</li>
-<li>dpkg -r package_name 从系统删除一个 deb 包</li>
-<li>dpkg -l 显示系统中所有已经安装的 deb 包</li>
-<li>dpkg -l | grep httpd 显示所有名称中包含 “httpd” 字样的deb包</li>
-<li>dpkg -s package_name 获得已经安装在系统中一个特殊包的信息</li>
-<li>dpkg -L package_name 显示系统中已经安装的一个deb包所提供的文件列表</li>
-<li>dpkg –contents package.deb 显示尚未安装的一个包所提供的文件列表</li>
-<li>dpkg -S /bin/ping 确认所给的文件由哪个deb包提供</li>
-<li>APT 软件工具 (Debian, Ubuntu 以及类似系统)</li>
+</ul>
+<h2 id="RPM-包-（Fedora-Redhat及类似系统）"><a href="#RPM-包-（Fedora-Redhat及类似系统）" class="headerlink" title="RPM 包 - （Fedora, Redhat及类似系统）"></a>RPM 包 - （Fedora, Redhat及类似系统）</h2><ul>
+<li><p>rpm -ivh package.rpm 安装一个rpm包</p>
+</li>
+<li><p>rpm -ivh –nodeeps package.rpm 安装一个rpm包而忽略依赖关系警告</p>
+</li>
+<li><p>rpm -U package.rpm 更新一个rpm包但不改变其配置文件</p>
+</li>
+<li><p>rpm -F package.rpm 更新一个确定已经安装的rpm包</p>
+</li>
+<li><p>rpm -e package_name.rpm 删除一个rpm包</p>
+</li>
+<li><p>rpm -qa 显示系统中所有已经安装的rpm包</p>
+</li>
+<li><p>rpm -qa | grep httpd 显示所有名称中包含 “httpd” 字样的rpm包</p>
+</li>
+<li><p>rpm -qi package_name 获取一个已安装包的特殊信息</p>
+</li>
+<li><p>rpm -qg “System Environment/Daemons” 显示一个组件的rpm包</p>
+</li>
+<li><p>rpm -ql package_name 显示一个已经安装的rpm包提供的文件列表</p>
+</li>
+<li><p>rpm -qc package_name 显示一个已经安装的rpm包提供的配置文件列表</p>
+</li>
+<li><p>rpm -q package_name –whatrequires 显示与一个rpm包存在依赖关系的列表</p>
+</li>
+<li><p>rpm -q package_name –whatprovides 显示一个rpm包所占的体积</p>
+</li>
+<li><p>rpm -q package_name –scripts 显示在安装/删除期间所执行的脚本l</p>
+</li>
+<li><p>rpm -q package_name –changelog 显示一个rpm包的修改历史</p>
+</li>
+<li><p>rpm -qf /etc/httpd/conf/httpd.conf 确认所给的文件由哪个rpm包所提供</p>
+</li>
+<li><p>rpm -qp package.rpm -l 显示由一个尚未安装的rpm包提供的文件列表</p>
+</li>
+<li><p>rpm –import /media/cdrom/RPM-GPG-KEY 导入公钥数字证书</p>
+</li>
+<li><p>rpm –checksig package.rpm 确认一个rpm包的完整性</p>
+</li>
+<li><p>rpm -qa gpg-pubkey 确认已安装的所有rpm包的完整性</p>
+</li>
+<li><p>rpm -V package_name 检查文件尺寸、 许可、类型、所有者、群组、MD5检查以及最后修改时间</p>
+</li>
+<li><p>rpm -Va 检查系统中所有已安装的rpm包- 小心使用</p>
+</li>
+<li><p>rpm -Vp package.rpm 确认一个rpm包还未安装</p>
+</li>
+<li><p>rpm2cpio package.rpm | cpio –extract –make-directories <em>bin</em> 从一个rpm包运行可执行文件</p>
+</li>
+<li><p>rpm -ivh /usr/src/redhat/RPMS/<code>arch</code>/package.rpm 从一个rpm源码安装一个构建好的包</p>
+</li>
+<li><p>rpmbuild –rebuild package_name.src.rpm 从一个rpm源码构建一个 rpm 包</p>
+</li>
+</ul>
+<h2 id="YUM-软件包升级器-（Fedora-RedHat及类似系统）"><a href="#YUM-软件包升级器-（Fedora-RedHat及类似系统）" class="headerlink" title="YUM 软件包升级器 - （Fedora, RedHat及类似系统）"></a>YUM 软件包升级器 - （Fedora, RedHat及类似系统）</h2><ul>
+<li><p>yum install package_name 下载并安装一个rpm包</p>
+</li>
+<li><p>yum localinstall package_name.rpm 将安装一个rpm包，使用你自己的软件仓库为你解决所有依赖关系</p>
+</li>
+<li><p>yum update package_name.rpm 更新当前系统中所有安装的rpm包</p>
+</li>
+<li><p>yum update package_name 更新一个rpm包</p>
+</li>
+<li><p>yum remove package_name 删除一个rpm包</p>
+</li>
+<li><p>yum list 列出当前系统中安装的所有包</p>
+</li>
+<li><p>yum search package_name 在rpm仓库中搜寻软件包</p>
+</li>
+<li><p>yum clean packages 清理rpm缓存删除下载的包</p>
+</li>
+<li><p>yum clean headers 删除所有头文件</p>
+</li>
+<li><p>yum clean all 删除所有缓存的包和头文件</p>
+</li>
+</ul>
+<h2 id="DEB-包-Debian-Ubuntu-以及类似系统"><a href="#DEB-包-Debian-Ubuntu-以及类似系统" class="headerlink" title="DEB 包 (Debian, Ubuntu 以及类似系统)"></a>DEB 包 (Debian, Ubuntu 以及类似系统)</h2><ul>
+<li><p>dpkg -i package.deb 安装/更新一个 deb 包</p>
+</li>
+<li><p>dpkg -r package_name 从系统删除一个 deb 包</p>
+</li>
+<li><p>dpkg -l 显示系统中所有已经安装的 deb 包</p>
+</li>
+<li><p>dpkg -l | grep httpd 显示所有名称中包含 “httpd” 字样的deb包</p>
+</li>
+<li><p>dpkg -s package_name 获得已经安装在系统中一个特殊包的信息</p>
+</li>
+<li><p>dpkg -L package_name 显示系统中已经安装的一个deb包所提供的文件列表</p>
+</li>
+<li><p>dpkg –contents package.deb 显示尚未安装的一个包所提供的文件列表</p>
+</li>
+<li><p>dpkg -S /bin/ping 确认所给的文件由哪个deb包提供</p>
+</li>
+</ul>
+<h2 id="APT-软件工具-Debian-Ubuntu-以及类似系统"><a href="#APT-软件工具-Debian-Ubuntu-以及类似系统" class="headerlink" title="APT 软件工具 (Debian, Ubuntu 以及类似系统)"></a>APT 软件工具 (Debian, Ubuntu 以及类似系统)</h2><ul>
 <li>apt-get install package_name 安装/更新一个 deb 包</li>
 <li>apt-cdrom install package_name 从光盘安装/更新一个 deb 包</li>
 <li>apt-get update 升级列表中的软件包</li>
@@ -285,6 +344,8 @@
 <li>apt-get check 确认依赖的软件仓库正确</li>
 <li>apt-get clean 从下载的软件包中清理缓存</li>
 <li>apt-cache search searched-package 返回包含所要搜索字符串的软件包名称</li>
+</ul>
+<h2 id="文件内容"><a href="#文件内容" class="headerlink" title="文件内容"></a>文件内容</h2><ul>
 <li>cat file1 从第一个字节开始正向查看文件的内容</li>
 <li>tac file1 从最后一行开始反向查看一个文件的内容</li>
 <li>more file1 查看一个长文件的内容</li>
@@ -342,7 +403,9 @@
 <li>mkfs -t vfat 32 -F /dev/hda1 创建一个 FAT32 文件系统</li>
 <li>fdformat -n /dev/fd0 格式化一个软盘</li>
 <li>mkswap /dev/hda3 创建一个swap文件系统</li>
-<li>SWAP文件系统</li>
+</ul>
+<p>##SWAP文件系统 </p>
+<ul>
 <li>mkswap /dev/hda3 创建一个swap文件系统</li>
 <li>swapon /dev/hda3 启用一个新的swap文件系统</li>
 <li>swapon /dev/hda2 /dev/hdb3 启用两个swap分区</li>
@@ -372,6 +435,8 @@
 <li>cd-paranoia – “-3” 从一个CD光盘转录音轨到 wav 文件中（参数-3）</li>
 <li>cdrecord –scanbus 扫描总线以识别scsi通道</li>
 <li>dd if=/dev/hdc | md5sum 校验一个设备的md5sum编码，例如一张 CD</li>
+</ul>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><ul>
 <li>ifconfig eth0 显示一个以太网卡的配置</li>
 <li>ifup eth0 启用一个 ‘eth0’ 网络设备</li>
 <li>ifdown eth0 禁用一个 ‘eth0’ 网络设备</li>
