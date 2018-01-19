@@ -86,20 +86,6 @@
           <blockquote>
 <p>Scala现在是为聪明人创造的，以后也是为聪明人服务的。——马丁·奥德斯基</p>
 </blockquote>
-<p>spark本身是由scala编写，运行在JVM上。</p>
-<h4 id="Bigdata-大数据"><a href="#Bigdata-大数据" class="headerlink" title="Bigdata 大数据"></a>Bigdata 大数据</h4><ul>
-<li>熟悉 <em>Hadoop</em> 生态<ul>
-<li>理解 <em>HDFS</em> 原理 与 <em>MapReduce</em> 模型</li>
-<li>了解 <em>Hive</em>（数据仓库） 、 <em>HBase</em>（数据库） 等工具</li>
-</ul>
-</li>
-<li><a href="http://dzzxjl.github.io/2017/08/25/Spark%E4%B8%8EScala/" target="_blank" rel="external">熟悉 <em>Spark</em> 生态</a><ul>
-<li>理解 <em>Spark</em>-<em>RDD</em> 概念，使用 <em>scala</em>/<em>python</em> 接口编写 <em>Spark</em> 程序</li>
-<li>了解 <em>Spark SQL</em> 与 <em>ML</em> 库</li>
-</ul>
-</li>
-</ul>
-<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>scala为spark做了很多优化工作  spark相对hadoop做了很多优化</p>
 <h2 id="Spark的安装与配置"><a href="#Spark的安装与配置" class="headerlink" title="Spark的安装与配置"></a>Spark的安装与配置</h2><p>mac环境下需要注意本机自带的python2环境与安装的python3的冲突问题，Spark默认使用python环境是python2，可在Spark的配置目录下将下行添加至配置文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PYSPARK_PYTHON=python3</div></pre></td></tr></table></figure>
 <h2 id="Spark连接jupyter"><a href="#Spark连接jupyter" class="headerlink" title="Spark连接jupyter"></a>Spark连接jupyter</h2><ol>
@@ -139,12 +125,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ilovejobs@mymac:~$ cd notebooks</div><div class="line">ilovejobs@mymac:~/notebooks$ pyspark</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="为什么Spark会选择Scala？"><a href="#为什么Spark会选择Scala？" class="headerlink" title="为什么Spark会选择Scala？"></a>为什么Spark会选择Scala？</h2><ul>
-<li>API能做得优雅; 这是框架设计师第一个要考虑的问题，框架的用户是应用开发程序员，API是否优雅直接影响用户体验。</li>
-<li>能融合到Hadoop生态圈，要用JVM语言; Hadoop现在是大数据事实标准，Spark并不是要取代Hadoop，而是要完善Hadoop生态。JVM语言大部分可能会想到Java，但Java做出来的API太丑，或者想实现一个优雅的API太费劲。</li>
-<li>速度要快; Scala是静态编译的，所以和JRuby,Groovy比起来速度会快很多，非常接近Java。</li>
-</ul>
-<h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><h2 id="SparkContext"><a href="#SparkContext" class="headerlink" title="SparkContext"></a>SparkContext</h2><p>默认情况下一台电脑只能拥有一个SparkContext，特别是在使用jupyter的时候，如果一个notebook启用了SparkContext，需要遵循以下步骤，从而在新创建的notebook上在使用sc</p>
+<h2 id="SparkContext"><a href="#SparkContext" class="headerlink" title="SparkContext"></a>SparkContext</h2><p>默认情况下一台电脑只能拥有一个SparkContext，特别是在使用jupyter的时候，如果一个notebook启用了SparkContext，需要遵循以下步骤，从而在新创建的notebook上在使用sc</p>
 <ul>
 <li><p>关闭原来的SparkContext，即调用sc.stop()</p>
 </li>
@@ -159,6 +140,15 @@
 </blockquote>
 </li>
 </ul>
+<h2 id="Spark-RDD"><a href="#Spark-RDD" class="headerlink" title="Spark-RDD"></a>Spark-RDD</h2><p>pass</p>
+<h2 id="Spark-SQL"><a href="#Spark-SQL" class="headerlink" title="Spark SQL"></a>Spark SQL</h2><p>pass</p>
+<h2 id="ML"><a href="#ML" class="headerlink" title="ML"></a>ML</h2><p>pass</p>
+<h2 id="Spark与scala"><a href="#Spark与scala" class="headerlink" title="Spark与scala"></a>Spark与scala</h2><h3 id="为什么Spark会选择Scala？"><a href="#为什么Spark会选择Scala？" class="headerlink" title="为什么Spark会选择Scala？"></a>为什么Spark会选择Scala？</h3><ul>
+<li>API能做得优雅; 这是框架设计师第一个要考虑的问题，框架的用户是应用开发程序员，API是否优雅直接影响用户体验。</li>
+<li>能融合到Hadoop生态圈，要用JVM语言; Hadoop现在是大数据事实标准，Spark并不是要取代Hadoop，而是要完善Hadoop生态。JVM语言大部分可能会想到Java，但Java做出来的API太丑，或者想实现一个优雅的API太费劲。</li>
+<li>速度要快; Scala是静态编译的，所以和JRuby,Groovy比起来速度会快很多，非常接近Java。</li>
+</ul>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>scala为spark做了很多优化工作  spark相对hadoop做了很多优化</p>
 
           <br>
 <p>dzzxjl</p>
