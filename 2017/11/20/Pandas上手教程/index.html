@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Python语言基础 - 十一城</title>
+    <title>Pandas上手教程 - 十一城</title>
     <link href='/images/fav.png' rel='shortcut icon'>
 <link href='/atom.xml' rel='alternate' type='application/rss+xml'>
 <link rel="stylesheet" href="/css/style.css">
@@ -47,14 +47,14 @@
       <section class='paging'>
   
     <div class='left'>
-      <a href='/2017/11/21/数据结构/'>
+      <a href='/2017/11/20/Python语言基础/'>
         ‹
       </a>
     </div>
   
   
     <div class='right'>
-      <a href='/2017/11/20/Pandas上手教程/'>
+      <a href='/2017/11/18/神经网络中的BP算法研究/'>
         ›
       </a>
     </div>
@@ -65,7 +65,7 @@
         <section class='post'>
           <h1>
             <div class='date'>2017-11-20</div>
-            Python语言基础
+            Pandas上手教程
           </h1>
           
           
@@ -83,36 +83,41 @@
           <hr>
 
 
-          <h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><ul>
-<li><em>Python</em> 语言基础（PEP8代码规范）<ul>
-<li>理解 <em>python</em> 语言特性<ul>
-<li>可变元素与不可变元素<ul>
-<li>可变类型：列表[]、字典{}</li>
-<li>不可变类型：数字、字符串、元组()</li>
+          <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>使用pandas主要进行<strong>data manipulation</strong>。通过带有标签的列和索引，pandas 使我们可以以一种所有人都能理解的方式来处理数据。它可以让我们毫不费力地从诸如 <code>csv</code> 类型的文件中导入数据。我们可以用它快速地对数据进行复杂的转换和过滤等操作。pandas中最基本的数据结构是Series与DataFrame。</p>
+<h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><p>DataFrame是将数个Series按列合并而成的二维数据结构，每一列单独取出来是一个Series，这和SQL数据库中取出的数据是很类似的。</p>
+<h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><p>Series的<code>map()</code>可以接受一个函数或含有映射关系的字典型对象。使用map是一种实现元素级转换以及其他数据清理工作的便捷方式（DataFrame中对应的是<code>applymap()</code>，当然DataFrame还有<code>apply()</code>）。</p>
+<p>字典映射</p>
+<p>应用函数</p>
+<h2 id="惯用操作"><a href="#惯用操作" class="headerlink" title="惯用操作"></a>惯用操作</h2><ol>
+<li><code>pd.read_csv()</code> 读取数据</li>
+<li><ul>
+<li><code>df.head()</code></li>
+<li><code>df.tail()</code></li>
+<li><code>df.info</code></li>
+<li><code>df.describe()</code></li>
 </ul>
 </li>
-<li>深拷贝与浅拷贝</li>
-<li>列表生成式/生成器表达式</li>
-<li>lambda用法</li>
-<li>元类metaclass</li>
-<li>描述符</li>
-<li>协程</li>
-<li>正则</li>
+<li><code>df.info</code></li>
+<li><ul>
+<li><code>df[&#39;&#39;].value_counts()</code></li>
+<li><code>df[&#39;&#39;].unique()</code></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>简单使用 <em>scrapy</em> <strong>爬虫</strong></li>
-<li>基于 <em>Flask</em> 搭建 <em>web</em> 站点</li>
-</ul>
-<h4 id="python包镜像源"><a href="#python包镜像源" class="headerlink" title="python包镜像源"></a>python包镜像源</h4><p>在命令行中添加以上参数，可以让pip从指定的镜像源安装软件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install pythonModuleName -i https://pypi.douban.com/simple</div></pre></td></tr></table></figure>
-<p>目前收集的比较好的镜像地址有：</p>
-<p><a href="http://pypi.v2ex.com/simple/" target="_blank" rel="external">http://pypi.v2ex.com/simple/</a></p>
-<p><a href="http://pypi.douban.com/simple/" target="_blank" rel="external">http://pypi.douban.com/simple/</a></p>
-<p><a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="external">http://mirrors.aliyun.com/pypi/simple/</a></p>
-<p>Python3 package Mac下安装目录：</p>
-<p>/usr/local/lib/python3.6/site-packages</p>
+<li><code>group_by()</code></li>
+<li>``</li>
+<li>``</li>
+<li>``</li>
+<li>``</li>
+<li>``</li>
+<li>``</li>
+<li>``</li>
+<li>​</li>
+</ol>
+<h2 id="性能瓶颈"><a href="#性能瓶颈" class="headerlink" title="性能瓶颈"></a>性能瓶颈</h2><p>因为使用pandas进行数据分析时，会将所有的数据读入内存中。一般来说，用pandas处理小于100兆的数据，性能不是问题。但用pandas来处理100M至几个G的数据时，将会比较耗时，同时会导致程序因内存不足而运行失败。如果使用pandas处理规模较大的数据，请参考文末参考1。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://www.dataquest.io/blog/pandas-big-data/" target="_blank" rel="external">https://www.dataquest.io/blog/pandas-big-data/</a></li>
+<li>​</li>
+</ol>
 
           <br>
 <p>dzzxjl</p>
