@@ -88,7 +88,7 @@
 <h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><p>Series的<code>map()</code>可以接受一个函数或含有映射关系的字典型对象。使用map是一种实现元素级转换以及其他数据清理工作的便捷方式（DataFrame中对应的是<code>applymap()</code>，当然DataFrame还有<code>apply()</code>）。</p>
 <p>字典映射</p>
 <p>应用函数</p>
-<h2 id="惯用操作"><a href="#惯用操作" class="headerlink" title="惯用操作"></a>惯用操作</h2><ol>
+<h2 id="惯用操作"><a href="#惯用操作" class="headerlink" title="惯用操作"></a>惯用操作</h2><h3 id="预览数据"><a href="#预览数据" class="headerlink" title="预览数据"></a>预览数据</h3><ol>
 <li><code>pd.read_csv()</code> 读取数据</li>
 <li><ul>
 <li><code>df.head()</code></li>
@@ -103,9 +103,11 @@
 <li><code>df[&#39;&#39;].unique()</code></li>
 </ul>
 </li>
-<li><code>group_by()</code></li>
-<li>``</li>
-<li>``</li>
+<li>​</li>
+</ol>
+<h3 id="操作数据"><a href="#操作数据" class="headerlink" title="操作数据"></a>操作数据</h3><ol>
+<li><code>df[:,&#39;&#39;] = value</code> <code>df[&#39;&#39;] = value</code> 添加新的列 </li>
+<li><code>df.group_by()</code> 聚合数据</li>
 <li>``</li>
 <li>``</li>
 <li>``</li>

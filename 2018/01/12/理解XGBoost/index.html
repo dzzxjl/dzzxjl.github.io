@@ -83,7 +83,14 @@
           <hr>
 
 
-          <h3 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h3><p>XGBoost使用的基学习器是CART</p>
+          <h3 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h3><p>在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：</p>
+<ul>
+<li>General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。</li>
+<li>Booster parameters：这取决于使用哪种booster。</li>
+<li>Task parameters：控制学习的场景，例如在回归问题中会使用不同的参数控制排序。</li>
+<li>除了以上参数还可能有其它参数，在命令行中使用</li>
+</ul>
+<p>XGBoost使用的基学习器是CART</p>
 <ul>
 <li>决策规则与决策树的一样</li>
 <li>每个叶子节点上都包含了一个权重，也有人叫做分数</li>
@@ -96,6 +103,202 @@
 <li>允许使用column(feature) sampling来防止过拟合，借鉴了Random Forest的思想，sklearn里的gbm好像也有类似实现。</li>
 </ol>
 <p>4.实现了一种分裂节点寻找的近似算法，用于加速和减小内存消耗。<br>5.节点分裂算法能自动利用特征的稀疏性。<br>6.data事先排好序并以block的形式存储，利于并行计算<br>7.cache-aware, out-of-core computation<br>8.支持分布式计算可以运行在MPI，YARN上，得益于底层支持容错的分布式通信框架rabit。</p>
+<p>Xgboost和LightGBM部分参数对照：</p>
+<table>
+<thead>
+<tr>
+<th>Xgboost</th>
+<th>LightGbm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>booster(default=gbtree)</strong></td>
+<td><strong>boosting(default=gbdt)</strong></td>
+</tr>
+<tr>
+<td><strong>eta(default=0.3)</strong></td>
+<td><strong>learning_rate(default=0.1)</strong></td>
+</tr>
+<tr>
+<td><strong>max_depth(default=6)</strong></td>
+<td><strong>num_leaves(default=31)</strong></td>
+</tr>
+<tr>
+<td><strong>min_child_weight(default=1)</strong></td>
+<td><strong>min_sum_hessian_in_leaf(1e-3)</strong></td>
+</tr>
+<tr>
+<td><strong>gamma(default=0)</strong></td>
+<td><strong>min_gain_to_split(default=20)</strong></td>
+</tr>
+<tr>
+<td><strong>subsample(default=1)</strong></td>
+<td><strong>bagging_fraction(default=1.0)</strong></td>
+</tr>
+<tr>
+<td><strong>colsample_bytree(default=1)</strong></td>
+<td><strong>feature_fraction( default=1.0)</strong></td>
+</tr>
+<tr>
+<td><strong>alpha(default=0)</strong></td>
+<td><strong>lambda_l1(default=0)</strong></td>
+</tr>
+<tr>
+<td><strong>lambda(default=1)</strong></td>
+<td><strong>lambda_l2(default=0)</strong></td>
+</tr>
+<tr>
+<td><strong>objective( default=reg:linear)</strong></td>
+<td><strong>application(default=regression)</strong></td>
+</tr>
+<tr>
+<td><strong>eval_metric(default according to objective)</strong></td>
+<td><strong>metric</strong></td>
+</tr>
+<tr>
+<td><strong>nthread</strong></td>
+<td><strong>num_threads</strong></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>使用num_leaves</li>
+</ol>
+<p>因为LightGBM使用的是leaf-wise的算法，因此在调节树的复杂程度时，使用的是num_leaves而不是max_depth。</p>
+<p>大致换算关系：num_leaves = 2^(max_depth)。它的值的设置应该小于2^(max_depth)，否则可能会导致过拟合。</p>
+<ol>
+<li>对于<strong>非平衡数据集</strong>：可以param[‘is_unbalance’]=’true’</li>
+</ol>
+<ol>
+<li>Bagging参数：bagging_fraction+bagging_freq（必须同时设置）、feature_fraction。bagging_fraction可以使bagging的更快的运行出结果，feature_fraction设置在每次迭代中使用特征的比例。</li>
+<li>min_data_in_leaf：这也是一个比较重要的参数，调大它的值可以防止过拟合，它的值通常设置的比较大。</li>
+<li>max_bin:调小max_bin的值可以提高模型训练速度，调大它的值和调大num_leaves起到的效果类似。</li>
+</ol>
+<p>参数速查：</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/2_xgb/README.md#1-%E5%8E%9F%E7%94%9F%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">xgb</a></th>
+<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/1_lgb/README.md#1-%E5%8E%9F%E7%94%9F%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">lgb</a></th>
+<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/2_xgb/README.md#2-sk%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">xgb.sklearn</a></th>
+<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/1_lgb/README.md#2-sk%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">lgb.sklearn</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>booster=’gbtree’</td>
+<td>boosting=’gbdt’</td>
+<td>booster=’gbtree’</td>
+<td>boosting_type=’gbdt’</td>
+</tr>
+<tr>
+<td>objective=’binary:logistic’</td>
+<td>application=’binary’</td>
+<td>objective=’binary:logistic’</td>
+<td>objective=’binary’</td>
+</tr>
+<tr>
+<td>max_depth=7</td>
+<td>num_leaves=2**7</td>
+<td>max_depth=7</td>
+<td>num_leaves=2**7</td>
+</tr>
+<tr>
+<td>eta=0.1</td>
+<td>learning_rate=0.1</td>
+<td>learning_rate=0.1</td>
+<td>learning_rate=0.1</td>
+</tr>
+<tr>
+<td>num_boost_round=10</td>
+<td>num_boost_round=10</td>
+<td>n_estimators=10</td>
+<td>n_estimators=10</td>
+</tr>
+<tr>
+<td>gamma=0</td>
+<td>min_split_gain=0.0</td>
+<td>gamma=0</td>
+<td>min_split_gain=0.0</td>
+</tr>
+<tr>
+<td>min_child_weight=5</td>
+<td>min_child_weight=5</td>
+<td>min_child_weight=5</td>
+<td>min_child_weight=5</td>
+</tr>
+<tr>
+<td>subsample=1</td>
+<td>bagging_fraction=1</td>
+<td>subsample=1.0</td>
+<td>subsample=1.0</td>
+</tr>
+<tr>
+<td>colsample_bytree=1.0</td>
+<td>feature_fraction=1</td>
+<td>colsample_bytree=1.0</td>
+<td>colsample_bytree=1.0</td>
+</tr>
+<tr>
+<td>alpha=0</td>
+<td>lambda_l1=0</td>
+<td>reg_alpha=0.0</td>
+<td>reg_alpha=0.0</td>
+</tr>
+<tr>
+<td>lambda=1</td>
+<td>lambda_l2=0</td>
+<td>reg_lambda=1</td>
+<td>reg_lambda=0.0</td>
+</tr>
+<tr>
+<td>scale_pos_weight=1</td>
+<td>scale_pos_weight=1</td>
+<td>scale_pos_weight=1</td>
+<td>scale_pos_weight=1</td>
+</tr>
+<tr>
+<td>seed</td>
+<td>bagging_seedfeature_fraction_seed</td>
+<td>random_state=888</td>
+<td>random_state=888</td>
+</tr>
+<tr>
+<td>nthread</td>
+<td>num_threads</td>
+<td>n_jobs=4</td>
+<td>n_jobs=4</td>
+</tr>
+<tr>
+<td>evals</td>
+<td>valid_sets</td>
+<td>eval_set</td>
+<td>eval_set</td>
+</tr>
+<tr>
+<td>eval_metric</td>
+<td>metric</td>
+<td>eval_metric</td>
+<td>eval_metric</td>
+</tr>
+<tr>
+<td>early_stopping_rounds</td>
+<td>early_stopping_rounds</td>
+<td>early_stopping_rounds</td>
+<td>early_stopping_rounds</td>
+</tr>
+<tr>
+<td>verbose_eval</td>
+<td>verbose_eval</td>
+<td>verbose</td>
+<td>verbose</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="http://blog.csdn.net/weiyongle1996/article/details/78446244" target="_blank" rel="external">http://blog.csdn.net/weiyongle1996/article/details/78446244</a></li>
+</ol>
 
           <br>
 <p>dzzxjl</p>
