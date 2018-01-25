@@ -84,7 +84,7 @@
 
 
           <h2 id="显示系统及硬件信息"><a href="#显示系统及硬件信息" class="headerlink" title="显示系统及硬件信息"></a>显示系统及硬件信息</h2><ul>
-<li><code>screenfetc</code> 显示logo及系统基本信息</li>
+<li><code>screenfetch</code> 显示logo及系统基本信息</li>
 <li>arch 显示机器的处理器架构(1)</li>
 <li>uname -m 显示机器的处理器架构(2)</li>
 <li>uname -r 显示正在使用的内核版本</li>
@@ -423,8 +423,8 @@
 <li>tar cf - . | (cd /tmp/backup ; tar xf - ) 本地将一个目录复制到另一个地方，保留原有权限及链接</li>
 <li>find /home/user1 -name ‘*.txt’ | xargs cp -av –target-directory=/home/backup/ –parents 从一个目录查找并复制所有以 ‘.txt’ 结尾的文件到另一个目录</li>
 <li>find /var/log -name ‘*.log’ | tar cv –files-from=- | bzip2 &gt; log.tar.bz2 查找所有以 ‘.log’ 结尾的文件并做成一个bzip包</li>
-<li>dd if=/dev/hda of=/dev/fd0 bs=512 count=1 做一个将 MBR (Master Boot Record)内容复制到软盘的动作</li>
-<li>dd if=/dev/fd0 of=/dev/hda bs=512 count=1 从已经保存到软盘的备份中恢复MBR内容</li>
+<li><code>dd if=/dev/hda of=/dev/fd0 bs=512 count=1</code> 做一个将 MBR (Master Boot Record)内容复制到软盘的动作</li>
+<li><code>dd if=/dev/fd0 of=/dev/hda bs=512 count=1</code> 从已经保存到软盘的备份中恢复MBR内容</li>
 <li>cdrecord -v gracetime=2 dev=/dev/cdrom -eject blank=fast -force 清空一个可复写的光盘内容</li>
 <li>mkisofs /dev/cdrom &gt; cd.iso 在磁盘上创建一个光盘的iso镜像文件</li>
 <li>mkisofs /dev/cdrom | gzip &gt; cd_iso.gz 在磁盘上创建一个压缩了的光盘iso镜像文件</li>

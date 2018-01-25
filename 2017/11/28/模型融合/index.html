@@ -83,8 +83,11 @@
           <hr>
 
 
-          <p>model ensemble既可以发生在算法内部，也可以在各种模型预测后最后进行ensemble。</p>
-<p>模型融合的方法有5种：</p>
+          <blockquote>
+<p>世界因参差不同而丰富多彩。</p>
+</blockquote>
+<p>集成方法的目的是结合一些基于某些算法训练得到的基学习器来改进其泛化能力和鲁棒性(相对单个的基学习器而言)。model ensemble既可以发生在算法内部，也可以在不同种模型预测后最后进行ensemble。</p>
+<p>模型融合常见的方法有5种：</p>
 <h2 id="普通版"><a href="#普通版" class="headerlink" title="普通版"></a>普通版</h2><h3 id="Voting-投票法"><a href="#Voting-投票法" class="headerlink" title="Voting 投票法"></a>Voting 投票法</h3><ul>
 <li>hard voting 类标记</li>
 <li>soft voting 类概率</li>
@@ -93,7 +96,13 @@
 <h3 id="Averaging"><a href="#Averaging" class="headerlink" title="Averaging"></a>Averaging</h3><p>求均值——简单的加权平均</p>
 <p>对于回归问题，一个简单直接的思路是取平均。稍稍改进的方法是进行加权平均。权值可以用排序的方法确定，举个例子，比如A、B、C三种基本模型，模型效果进行排名，假设排名分别是1，2，3，那么给这三个模型赋予的权值分别是3/6、2/6、1/6</p>
 <p>这两种方法看似简单，其实后面的高级算法也可以说是基于此而产生的，Bagging或者Boosting都是一种把许多弱分类器这样融合成强分类器的思想</p>
-<h2 id="进阶版"><a href="#进阶版" class="headerlink" title="进阶版"></a>进阶版</h2><h3 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h3><p>随机森林</p>
+<h2 id="进阶版"><a href="#进阶版" class="headerlink" title="进阶版"></a>进阶版</h2><h3 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h3><h4 id="常见变体-按照样本采样方式的不同划分"><a href="#常见变体-按照样本采样方式的不同划分" class="headerlink" title="常见变体(按照样本采样方式的不同划分)"></a>常见变体(按照样本采样方式的不同划分)</h4><ul>
+<li>Pasting:直接从样本集里随机抽取的到训练样本子集</li>
+<li>Bagging:自助采样(有放回的抽样)得到训练子集</li>
+<li>Random Subspaces:列采样,按照特征进行样本子集的切分</li>
+<li>Random Patches:同时进行行采样、列采样得到样本子集</li>
+</ul>
+<p>随机森林</p>
 <p>该思想的应用有两方面：bagging和boosting<br>虽然都是有放回的抽样，但二者的区别在于：Bagging采用有放回的均匀取样，而Boosting根据错误率来取样（Boosting初始化时对每一个训练例赋相等的权重1／n，然后用该学算法对训练集训练t轮，每次训练后，对训练失败的训练例赋以较大的权重），因此Boosting的分类精度要优于Bagging。Bagging的训练集的选择是随机的，各轮训练集之间相互独立，而Boostlng的各轮训练集的选择与前面各轮的学习结果有关</p>
 <h3 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h3><p>Boosting 有三个要素：</p>
 <ul>
@@ -113,6 +122,7 @@
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://zhuanlan.zhihu.com/p/26890738" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/26890738</a></li>
 <li><a href="https://mlwave.com/kaggle-ensembling-guide/" target="_blank" rel="external">https://mlwave.com/kaggle-ensembling-guide/</a></li>
+<li><a href="http://izhaoyi.top/2017/09/23/sklearn-xgboost/" target="_blank" rel="external">http://izhaoyi.top/2017/09/23/sklearn-xgboost/</a></li>
 </ul>
 
           <br>
