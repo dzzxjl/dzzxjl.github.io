@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <title>广义线性模型 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  </head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/22/[转]"网络时代的爱迪生"Bill-Joy/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-31</div>
+            广义线性模型
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/ml/">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="logistic回归和线性回归的区别"><a href="#logistic回归和线性回归的区别" class="headerlink" title="logistic回归和线性回归的区别"></a>logistic回归和线性回归的区别</h2><h3 id="一"><a href="#一" class="headerlink" title="一"></a>一</h3><ol>
+<li>线性回归要求变量服从<strong>正态分布</strong>，logistic回归对变量分布没有要求</li>
+<li>线性回归要求因变量是连续性数值变量，而logistic回归要求因变量是分类型变量</li>
+<li>线性回归要求自变量和因变量呈线性关系，而logistic回归不要求自变量和因变量呈线性关系</li>
+<li>logistic回归是分析因变量<strong>取某个值的概率</strong>与自变量的关系，而线性回归是直接分析因变量与自变量的关系</li>
+</ol>
+<p>总之, logistic回归与<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/2362545.htm" target="_blank" rel="external">线性回归</a>实际上有很多相同之处，最大的区别就在于他们的<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/324030.htm" target="_blank" rel="external">因变量</a>不同，其他的基本都差不多，正是因为如此，这两种回归可以归于同一个家族，即广义线性模型（generalized linear model）。这一家族中的模型形式基本上都差不多，不同的就是<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/324030.htm" target="_blank" rel="external">因变量</a>不同，如果是连续的，就是多重线性回归，如果是<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/79831.htm" target="_blank" rel="external">二项分布</a>，就是logistic回归。logistic回归的<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/324030.htm" target="_blank" rel="external">因变量</a>可以是二分类的，也可以是多分类的，但是二分类的更为常用，也更加容易解释。所以实际中最为常用的就是二分类的logistic回归。</p>
+<h3 id="二"><a href="#二" class="headerlink" title="二"></a>二</h3><p>我觉得可以从两个方面来理解：</p>
+<ol>
+<li>LR是一个广义线性模型</li>
+<li>LR是最大熵在类别为2时候的特例</li>
+</ol>
+<p>然后对sigmoid变化的理解：</p>
+<ol>
+<li>sigmoid函数光滑，处处可导，导数还能用自己表示</li>
+<li>sigmoid能把数据从负无穷到正无穷压缩到0，1之间，压缩掉了长尾，扩展了核心分辨率</li>
+<li>sigmoid在有观测误差的情况下最优的保证了输入信号的信息</li>
+</ol>
+<h3 id="三"><a href="#三" class="headerlink" title="三"></a>三</h3><p>既然是问分类，那就已经有个切入点咯。</p>
+<ol>
+<li>为什么可以用回归来解决分类问题</li>
+<li>线形回归怎么推到logistic回归，为什么logistic回归比线形回归更好（0到1的值域可以表示概率，自变量接近0时因变量更敏感，<strong>odds的现实意义</strong>，尤其是在自变量中存在虚拟变量，或者多分类问题上的意义），缺点（梯度爆炸，计算量更大）</li>
+<li>怎么求解，为什么不能用OLS，要用MLE，MLE又怎么解（梯度下降，牛顿，其他优化算法）</li>
+<li>如何选择用来分类的threshold，怎么根据具体情况选择（sensitive or specific）</li>
+<li>怎么判断模型好坏，ROC和AUC是怎么来的，有什么意义</li>
+<li>generalized的模型是什么，怎么变化</li>
+<li>工具，包</li>
+<li>结合做过的项目和业务谈，或者最近流行的机器学习，深度学习，人工智能…</li>
+</ol>
+<h3 id="四"><a href="#四" class="headerlink" title="四"></a>四</h3><p>线性回归与losistic回归的区别，如何估计回归参数?</p>
+<p>直接用线性回归做分类因为考虑到了所有样本点到分类决策面的距离，所以在两类数据分布不均匀的时候将导致误差非常大；逻辑斯蒂回归回归和SVM克服了这个缺点，前者采用将所有数据采用sigmod函数进行了非线性映射，使得远离分类决策面的数据作用减弱；后者则直接去掉了远离分类决策面的数据，只考虑支持向量的影响。</p>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

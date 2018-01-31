@@ -161,7 +161,10 @@
 <li>whereis halt 显示一个二进制文件、源码或man的位置</li>
 <li>which halt 显示一个二进制文件或可执行文件的完整路径</li>
 </ul>
-<h2 id="挂载文件"><a href="#挂载文件" class="headerlink" title="挂载文件"></a>挂载文件</h2><ul>
+<h2 id="挂载文件"><a href="#挂载文件" class="headerlink" title="挂载文件"></a>挂载文件</h2><blockquote>
+<p>将文件系统与目录树结合的操作称为挂载</p>
+</blockquote>
+<ul>
 <li>mount /dev/hda2 /mnt/hda2 挂载一个叫做hda2的盘 - 确定目录 ‘/ mnt/hda2’ 已经存在</li>
 <li>umount /dev/hda2 卸载一个叫做hda2的盘 - 先从挂载点 ‘/ mnt/hda2’ 退出</li>
 <li>fuser -km /mnt/hda2 当设备繁忙时强制卸载</li>
@@ -405,8 +408,7 @@
 <li>fdformat -n /dev/fd0 格式化一个软盘</li>
 <li>mkswap /dev/hda3 创建一个swap文件系统</li>
 </ul>
-<p>##SWAP文件系统 </p>
-<ul>
+<h2 id="SWAP文件系统"><a href="#SWAP文件系统" class="headerlink" title="SWAP文件系统"></a>SWAP文件系统</h2><ul>
 <li>mkswap /dev/hda3 创建一个swap文件系统</li>
 <li>swapon /dev/hda3 启用一个新的swap文件系统</li>
 <li>swapon /dev/hda2 /dev/hdb3 启用两个swap分区</li>
@@ -464,7 +466,6 @@
 <li>host www.example.com lookup hostname to resolve name to ip address and viceversa</li>
 <li>nslookup www.example.com lookup hostname to resolve name to ip address and viceversa</li>
 <li>whois www.example.com lookup on Whois database</li>
-<li>GO TOP INDEX ^</li>
 <li>Microsoft Windows networks (SAMBA)</li>
 <li>nbtscan ip_addr netbios name resolution</li>
 <li>nmblookup -A ip_addr netbios name resolution</li>
