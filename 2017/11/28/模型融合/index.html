@@ -118,8 +118,13 @@
 <p>在算法开始的时候，为每一个样本赋上一个权重值，初始的时候，大家都是一样重要的。在每一步训练中得到的模型，会使得数据点的估计有对有错，我们就在每一步结束后，增加分错的点的权重，减少分对的点的权重，这样使得某些点如果老是被分错，那么就会被“严重关注”，也就被赋上一个很高的权重。</p>
 <p>然后等进行了N次迭代（由用户指定），将会得到N个简单的分类器（basic learner），然后我们将它们组合起来（比如说可以对它们进行加权、或者让它们进行投票等），得到一个最终的模型。</p>
 <h4 id="GB"><a href="#GB" class="headerlink" title="GB"></a>GB</h4><p>机器学习中的学习算法的目标是为了优化或者说最小化loss Function， Gradient boosting的思想是迭代生多个（M个）弱的模型，然后将每个弱模型的预测结果相加，后面的模型Fm+1(x)基于前面学习模型的Fm(x)的效果生成的</p>
-<h3 id="Stacking"><a href="#Stacking" class="headerlink" title="Stacking"></a>Stacking</h3><p>每个单独分类器的输出会作为更高层分类器的输入，更高层分类器可以判断如何更好地合并这些来自低层的输出</p>
+<h3 id="Stacking"><a href="#Stacking" class="headerlink" title="Stacking"></a>Stacking</h3><p>每个单独分类器的输出会作为更高层分类器的输入，更高层分类器可以判断如何更好地合并这些来自低层的输出。stacking另一个比较特别的是层状结构。以常见的两层stacking为例，第一层是不同的基模型(多个)，而第二层是以上一层基模型输出结果为输入数据的分类器(一个)。从某种意义上看，和神经网络的“结构相似”。为了防止过拟合，一般第二层的模型不再使用原始训练数据进行训练，而仅依赖于第一层训练器的输出结果。</p>
+<h4 id="stacking与bagging"><a href="#stacking与bagging" class="headerlink" title="stacking与bagging"></a>stacking与bagging</h4><ul>
+<li>stacking中的各个模型(基分类器)追求的是“准而不同”。stacking中的子模型一般应该是独立准确，而不同的基学习器之间有所差异。</li>
+<li>bagging中的基学习器追求的是“弱和不同”。bagging中的学习器往往是决策树，主要就是看中了决策树的不稳定性(instability)。过于准确的基学习器会使得bagging的集成失去意义。</li>
+</ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.zhihu.com/question/59769987" target="_blank" rel="external">https://www.zhihu.com/question/59769987</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/26890738" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/26890738</a></li>
 <li><a href="https://mlwave.com/kaggle-ensembling-guide/" target="_blank" rel="external">https://mlwave.com/kaggle-ensembling-guide/</a></li>
 <li><a href="http://izhaoyi.top/2017/09/23/sklearn-xgboost/" target="_blank" rel="external">http://izhaoyi.top/2017/09/23/sklearn-xgboost/</a></li>

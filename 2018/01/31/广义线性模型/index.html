@@ -83,7 +83,64 @@
           <hr>
 
 
-          <h2 id="logistic回归和线性回归的区别"><a href="#logistic回归和线性回归的区别" class="headerlink" title="logistic回归和线性回归的区别"></a>logistic回归和线性回归的区别</h2><h3 id="一"><a href="#一" class="headerlink" title="一"></a>一</h3><ol>
+          <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p><a href="https://www.cnblogs.com/muzixi/p/6642203.html" target="_blank" rel="external">广义线性模型（generalized linear model）</a></p>
+<ul>
+<li>线性回归（linear regression） -&gt; 用一条线去拟合训练数据<ul>
+<li><strong>回归模型</strong></li>
+<li>损失函数 = MSE + 无正则项</li>
+<li>损失函数解法<ul>
+<li><a href="https://www.zhihu.com/question/37031188" target="_blank" rel="external">最小二乘法（OLS）</a></li>
+</ul>
+</li>
+<li>惩罚线性模型<ul>
+<li>岭回归 Ridge<ul>
+<li>应用欧式几何的指标</li>
+<li>方差</li>
+<li>L2范数/正则化</li>
+</ul>
+</li>
+<li>套索回归 Lasso<ul>
+<li>出租车/曼哈顿距离</li>
+<li>方差</li>
+<li>L1范数/正则化</li>
+</ul>
+</li>
+<li>求解算法<ul>
+<li>最小角度回归LARS</li>
+<li>Glmnet</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>分类模型</strong><ul>
+<li>逻辑斯蒂回归（logistic regression）<ul>
+<li>logistic 误差（<strong>对数似然损失函数</strong>）</li>
+<li>损失函数（极大似然法MLE）解法<ul>
+<li>梯度下降法</li>
+<li>牛顿法</li>
+</ul>
+</li>
+<li>L2范数</li>
+</ul>
+</li>
+<li>感知机 Percetron<ul>
+<li>感知机的<code>wx+b</code>可以理解为线性回归，即感知机将<strong>线性回归的输出</strong>作为使用<strong>单位阶跃函数的输入，</strong>最终的分类结果是<strong>阶跃函数的输出</strong></li>
+<li>损失函数——<strong>误分类点到分类超平面的总距离</strong></li>
+<li>随机梯度下降</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h2><ul>
+<li><strong>优点</strong>：线性回归的理解和解释都非常直观，还能通过正则化来避免过拟合。此外，线性模型很容易通过随机梯度下降来更新数据模型。</li>
+<li><strong>缺点</strong>：线性回归在处理<strong>非线性关系</strong>时非常糟糕，在识别<strong>复杂的模式</strong>上也不够灵活，而添加正确的相互作用项或多项式又极为棘手且耗时。</li>
+<li>优点：<br>  　　1. 回归分析法在分析多因素模型时，更加简单和方便；<br>  　　2. 运用回归模型，只要采用的模型和数据相同，通过标准的统计方法可以计算出的结果，但在图和表的形式中，数据之间关系的解释往往因人而异，不同分析者画出的拟合曲线很可能也是不一样的；<br>  　　3. 回归分析可以准确地计量<strong>各个因素之间的相关程度</strong>与<strong>回归拟合程度</strong>的高低，提高预测方程式的效果；在回归分析法时，由于实际一个变量仅受单个因素的影响的情况极少，要注意模式的适合范围，所以一元回归分析法适用确实存在一个对因变量影响作用明显高于其他因素的变量是使用。多元回归分析法比较适用于实际经济问题，受多因素综合影响时使用。</li>
+<li>缺点：<br>　　有时候在回归分析中，选用<strong>何种因子</strong>和<strong>该因子采用何种表达式</strong>只是一种推测，这影响了用电因子的多样性和某些因子的不可测性，使得回归分析在某些情况下受到限制。</li>
+</ul>
+<h2 id="logistic回归和线性回归的区别"><a href="#logistic回归和线性回归的区别" class="headerlink" title="logistic回归和线性回归的区别"></a>logistic回归和线性回归的区别</h2><h3 id="一"><a href="#一" class="headerlink" title="一"></a>一</h3><ol>
 <li>线性回归要求变量服从<strong>正态分布</strong>，logistic回归对变量分布没有要求</li>
 <li>线性回归要求因变量是连续性数值变量，而logistic回归要求因变量是分类型变量</li>
 <li>线性回归要求自变量和因变量呈线性关系，而logistic回归不要求自变量和因变量呈线性关系</li>
@@ -114,6 +171,9 @@
 </ol>
 <h3 id="四"><a href="#四" class="headerlink" title="四"></a>四</h3><p>线性回归与losistic回归的区别，如何估计回归参数?</p>
 <p>直接用线性回归做分类因为考虑到了所有样本点到分类决策面的距离，所以在两类数据分布不均匀的时候将导致误差非常大；逻辑斯蒂回归回归和SVM克服了这个缺点，前者采用将所有数据采用sigmod函数进行了非线性映射，使得远离分类决策面的数据作用减弱；后者则直接去掉了远离分类决策面的数据，只考虑支持向量的影响。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://juejin.im/post/5930cc4c2f301e006bd4b2a9" target="_blank" rel="external">https://juejin.im/post/5930cc4c2f301e006bd4b2a9</a></li>
+</ol>
 
           <br>
 <p>dzzxjl</p>
