@@ -88,8 +88,11 @@
 <h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><p>Series的<code>map()</code>可以接受一个函数或含有映射关系的字典型对象。使用map是一种实现元素级转换以及其他数据清理工作的便捷方式（DataFrame中对应的是<code>applymap()</code>，当然DataFrame还有<code>apply()</code>）。</p>
 <p>字典映射</p>
 <p>应用函数</p>
-<h2 id="惯用操作"><a href="#惯用操作" class="headerlink" title="惯用操作"></a>惯用操作</h2><h3 id="预览数据"><a href="#预览数据" class="headerlink" title="预览数据"></a>预览数据</h3><ol>
-<li><code>pd.read_csv()</code> 读取数据</li>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="预览数据"><a href="#预览数据" class="headerlink" title="预览数据"></a>预览数据</h3><ol>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">from subprocess import check_output</div><div class="line">print(check_output([&quot;ls&quot;, &quot;./data&quot;]).decode(&apos;utf8&apos;))</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>pd.read_csv()</code> 读取数据</p>
+</li>
 <li><ul>
 <li><code>df.head()</code></li>
 <li><code>df.tail()</code></li>
@@ -97,13 +100,15 @@
 <li><code>df.describe()</code></li>
 </ul>
 </li>
-<li><code>df.info</code></li>
+<li><p><code>df.info</code></p>
+</li>
 <li><ul>
 <li><code>df[&#39;&#39;].value_counts()</code></li>
 <li><code>df[&#39;&#39;].unique()</code></li>
 </ul>
 </li>
-<li>​</li>
+<li><p>​</p>
+</li>
 </ol>
 <h3 id="操作数据"><a href="#操作数据" class="headerlink" title="操作数据"></a>操作数据</h3><ol>
 <li><code>df[:,&#39;&#39;] = value</code> <code>df[&#39;&#39;] = value</code> 添加新的列 </li>

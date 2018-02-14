@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <title>机器学习七——过拟合 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  </head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/02/14/机器学习八——机器学习评价指标/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/02/07/机器学习六——SVM与核函数/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-02-13</div>
+            机器学习七——过拟合
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/ml/">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="什么是拟合？"><a href="#什么是拟合？" class="headerlink" title="什么是拟合？"></a>什么是拟合？</h2><p>打个比方，如果期末考试题就是平时的作业，那我们把平时的作业都背一遍就是最好的方式，而这就是过拟合。如果期末考试不考平时作业，全是新题，那么这个时候就不能只背平时的作业，还要充分理解这门课的知识，掌握如何推理解题的技巧。所以过拟合好坏与否，完全取决于场景。如果应用场景依靠死记硬背就能搞定，那过拟合反倒是好的。实际上在我们的设计里面，很多时候我们会倾向于往过拟合靠一点，可能做新题会差一点，但是对于死记硬背的送分题会做的非常好。在拿过去预测未来的应用场景下，有的时候过拟合不一定不好，要根据实际情况来看。</p>
+<h2 id="拟合的几种情况"><a href="#拟合的几种情况" class="headerlink" title="拟合的几种情况"></a>拟合的几种情况</h2><ul>
+<li>Fitting：模型（构建的函数）与真实数据之间的贴合程度</li>
+<li>underfitting：对深度学习而言，就是训练得不够，数据不足</li>
+<li>overfitting：指模型对定型数据的拟合非常好，然而一旦在实际应用中遇到从未出现过的数据，运行效果就变得很不理想</li>
+</ul>
+<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><blockquote>
+<p><strong>L1范数</strong>：是指向量中各个元素绝对值之和，也有个美称叫“<strong>稀疏规则算子</strong>”（Lasso regularization）。那么，<strong>参数稀疏</strong> 有什么好处呢？</p>
+</blockquote>
+<p>一个关键原因在于它能实现<strong>特征的自动选择</strong>。一般来说，大部分特征 xi 和输出 yi 之间并没有多大关系。在最小化目标函数的时候考虑到这些额外的特征 xi，虽然可以获得更小的训练误差，但在预测新的样本时，这些没用的信息反而会干扰了对正确 yi 的预测。稀疏规则化算子的引入就是为了<strong>完成特征自动选择</strong>的光荣使命，它会学习地去掉这些没有信息的特征，也就是把这些特征对应的权重置为0。</p>
+<blockquote>
+<p><strong>L2范数</strong>：它有两个美称，在回归里面，有人把有它的回归叫“岭回归”（Ridge Regression），有人也叫它“权值衰减”(weight decay)。</p>
+</blockquote>
+<p>它的强大之处就是它能<strong>解决过拟合</strong>问题。我们让 L2 范数的规则项 ||w||2 最小，可以使得 w 的每个元素都很小，都接近于0，但与 L1 范数不同，它不会让它等于0，而是接近于0，这里还是有很大区别的。而越小的参数说明模型越简单，越简单的模型则越不容易产生过拟合现象。<strong>咦</strong>，你为啥说越小的参数表示的模型越简单呢？ 其实我也不知道，我也是猜，可能是因为参数小，对结果的影响就小了吧。</p>
+<blockquote>
+<p>一句话<strong>总结</strong>就是：L1 会趋向于产生少量的特征，而其他的特征都是0，而 L2 会选择更多的特征，这些特征都会接近于0。</p>
+</blockquote>
+<h2 id="Early-stoping"><a href="#Early-stoping" class="headerlink" title="Early-stoping"></a>Early-stoping</h2><p>验证集</p>
+<p>其实就是评价训练正确率、测试正确率曲线，提早结束训练</p>
+<h2 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h2><p>Dropout 是一种非常通用的解决深层神经网络中 overfitting 问题的方法, 过程极其简单, 在调试算法中效果也非常有效，对于神经网络单元，按照一定的概率将其暂时从网络中丢弃。</p>
+<p>首先设定一个 dropout ratio σ，σ 是超参数，范围设置为 (0,1)，表示在 Forward 阶段需要随机断开的连接的比例。每次 Forward 的时候都要随机的断开该比例的连接，只更新剩下的 weight。最后, 在 test/predict 的时候, 使用全部的连接, 不过, 这些 weights 全部都需要乘上 1−σ。</p>
+<h2 id="决策树剪枝"><a href="#决策树剪枝" class="headerlink" title="决策树剪枝"></a>决策树剪枝</h2><p>pass</p>
+<h2 id="SVM松弛变量"><a href="#SVM松弛变量" class="headerlink" title="SVM松弛变量"></a>SVM松弛变量</h2><p>pass</p>
+<h2 id="过拟合一定不好吗？"><a href="#过拟合一定不好吗？" class="headerlink" title="过拟合一定不好吗？"></a>过拟合一定不好吗？</h2><p>过拟合是一个讨论特别多的话题。以前，通常我们会说如果模型做的太复杂了就会过拟合，而最好的方式应该是拟合的刚刚好。但现在来看，大多数的实际场景都是在拿过去预测未来，过拟合不一定是不好的，还是要看具体场景。如果这个场景是过去见过的情况比较多，新的情况比较少的时候，过拟合反倒是好的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>​</li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
+  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

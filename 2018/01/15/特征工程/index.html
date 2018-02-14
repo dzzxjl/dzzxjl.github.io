@@ -190,8 +190,12 @@
 </ul>
 </li>
 </ul>
-<h2 id="特征的构造与处理"><a href="#特征的构造与处理" class="headerlink" title="特征的构造与处理"></a>特征的构造与处理</h2><h3 id="标准化（Standardization）"><a href="#标准化（Standardization）" class="headerlink" title="标准化（Standardization）"></a>标准化（Standardization）</h3><p>比方说有一些数字的单位是千克，有一些数字的单位是克，这个时候需要统一单位。如果没有标准化，两个变量混在一起搞，那么肯定就会不合适。</p>
+<h2 id="特征的构造与处理"><a href="#特征的构造与处理" class="headerlink" title="特征的构造与处理"></a>特征的构造与处理</h2><h3 id="标准化（Standardization）"><a href="#标准化（Standardization）" class="headerlink" title="标准化（Standardization）"></a>标准化（Standardization）</h3><p>比如说有一些数字的单位是千克，有一些数字的单位是克，这个时候需要统一单位。如果没有标准化，两个变量混在一起搞，那么肯定就会不合适。</p>
 <h3 id="归一化（Normalization）"><a href="#归一化（Normalization）" class="headerlink" title="归一化（Normalization）"></a>归一化（Normalization）</h3><p>归一化是因为在特征会在不同的尺度下有不同的表现形式，归一化会使得各个特征能够同时以恰当的方式表现。比方说某个专辑的点击播放率一般不会超过0.2，但是专辑的播放次数可能会达到几千次，所以说为了能够在模型里面得到更合适结果，需要先把一些特征在尺度上进行归一化，然后进行模型训练。</p>
+<blockquote>
+<p>标准化与归一化的区别？</p>
+<p>简单来说，标准化是依照特征矩阵的列处理数据，其通过求z-score的方法，将样本的特征值转换到同一量纲下。归一化是依照特征矩阵的行处理数据，其目的在于样本向量在点乘运算或其他核函数计算相似性时，拥有统一的标准，也就是说都转化为“单位向量”。</p>
+</blockquote>
 <h3 id="离散化（Discretization）"><a href="#离散化（Discretization）" class="headerlink" title="离散化（Discretization）"></a>离散化（Discretization）</h3><p>离散化是指把特征进行必要的离散处理，比方说年龄特征是一个连续的特征，但是把年龄层分成5－18岁（中小学生），19－23岁（大学生），24－29岁（工作前几年），30－40岁（成家立业），40－60岁（中年人）从某些层面来说比连续的年龄数据（比如说某人年龄是20岁1月3日之类的）更容易理解不同年龄层人的特性。典型的离散化步骤：对特征做排序－&gt; 选择合适的分割点－&gt; 作出区间的分割 －&gt;  作出区间分割－&gt; 查看是否能够达到停止条件。</p>
 <h2 id="交叉特征"><a href="#交叉特征" class="headerlink" title="交叉特征"></a>交叉特征</h2><p>交叉特征算是特征工程中非常重要的方法之一了，交叉特征是一种很独特的方式，它将两个或更多的类别属性组合成一个。当组合的特征要比单个特征更好时，这是一项非常有用的技术。数学上来说，是对类别特征的所有可能值进行交叉相乘。</p>
 <p>假如拥有一个特征A，A有两个可能值<code>{A1,A2}</code>。拥有一个特征B，存在<code>{B1,B2}</code>等可能值。然后，<code>A&amp;B</code>之间的交叉特征如下：<code>{(A1,B1),(A1,B2),(A2,B1),(A2,B2)}</code>，并且你可以给这些组合特征取任何名字。但是需要明白每个组合特征其实代表着A和B各自信息协同作用。</p>
@@ -205,7 +209,7 @@
 <li>如果通过新增加一个或几个feature，如果cv分数上去了，就增加这个feature，如果cv分数没有上去，就舍弃这个feature，也就是相当于贪心验证。这样做的弊处在于，如果之前被舍弃的feature和之后被舍弃的feature联合在一起才会有正面影响，就相当于你错过了两个比较好的feature。因此特征的选择和联合显得非常关键。</li>
 <li>高重要性的特征做两两结合，应该会是比较好的办法，对两两结合的特征元组，再不限思路地去多用条件概率和分组聚集。</li>
 <li>采用间隔量（interval），譬如原来的票价为实数值，划分区间后，此类属性值大大减少，这样对算法更加友好</li>
-<li><a href="https://en.wikiversity.org/wiki/Dummy_variable_(statistics" target="_blank" rel="external">哑变量（Dummy variable）</a>)</li>
+<li><a href="https://en.wikiversity.org/wiki/Dummy_variable_(statistics" target="_blank" rel="external">哑变量(Dummy variable)</a>)</li>
 </ul>
 <h2 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="http://www.csuldw.com/2015/10/24/2015-10-24%20feature%20engineering/" target="_blank" rel="external">http://www.csuldw.com/2015/10/24/2015-10-24%20feature%20engineering/</a></li>
