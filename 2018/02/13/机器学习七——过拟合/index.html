@@ -83,13 +83,41 @@
           <hr>
 
 
-          <h2 id="什么是拟合？"><a href="#什么是拟合？" class="headerlink" title="什么是拟合？"></a>什么是拟合？</h2><p>打个比方，如果期末考试题就是平时的作业，那我们把平时的作业都背一遍就是最好的方式，而这就是过拟合。如果期末考试不考平时作业，全是新题，那么这个时候就不能只背平时的作业，还要充分理解这门课的知识，掌握如何推理解题的技巧。所以过拟合好坏与否，完全取决于场景。如果应用场景依靠死记硬背就能搞定，那过拟合反倒是好的。实际上在我们的设计里面，很多时候我们会倾向于往过拟合靠一点，可能做新题会差一点，但是对于死记硬背的送分题会做的非常好。在拿过去预测未来的应用场景下，有的时候过拟合不一定不好，要根据实际情况来看。</p>
+          <blockquote>
+<p>与过拟合、欠拟合的斗争是机器学习的核心问题。</p>
+</blockquote>
+<h2 id="什么是拟合？"><a href="#什么是拟合？" class="headerlink" title="什么是拟合？"></a>什么是拟合？</h2><p>打个比方，如果期末考试题就是平时的作业，那我们把平时的作业都背一遍就是最好的方式，而这就是过拟合。如果期末考试不考平时作业，全是新题，那么这个时候就不能只背平时的作业，还要充分理解这门课的知识，掌握如何推理解题的技巧。所以过拟合好坏与否，完全取决于场景。如果应用场景依靠死记硬背就能搞定，那过拟合反倒是好的。实际上在我们的设计里面，很多时候我们会倾向于往过拟合靠一点，可能做新题会差一点，但是对于死记硬背的送分题会做的非常好。在拿过去预测未来的应用场景下，有的时候过拟合不一定不好，要根据实际情况来看。</p>
 <h2 id="拟合的几种情况"><a href="#拟合的几种情况" class="headerlink" title="拟合的几种情况"></a>拟合的几种情况</h2><ul>
-<li>Fitting：模型（构建的函数）与真实数据之间的贴合程度</li>
-<li>underfitting：对深度学习而言，就是训练得不够，数据不足</li>
-<li>overfitting：指模型对定型数据的拟合非常好，然而一旦在实际应用中遇到从未出现过的数据，运行效果就变得很不理想</li>
+<li>拟合 Fitting：模型（构建的函数）与真实数据之间的贴合程度</li>
+<li>欠拟合 underfitting：对深度学习而言，就是训练得不够，数据不足</li>
+<li>过拟合 overfitting：指在模型参数拟合过程中的问题，由于训练数据包含抽样误差，训练时，复杂的模型<strong>将抽样误差也考虑在内</strong>，将抽样误差也进行了很好的拟合。模型对定型数据的拟合非常好，然而一旦在实际应用中遇到从未出现过的数据，运行效果就变得很不理想，即在训练集上效果好，在测试集上效果差。</li>
 </ul>
-<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><blockquote>
+<p>过拟合发生的本质原因，是由于监督学习问题的不适定：在高中数学我们知道，从n个（线性无关）方程可以解n个变量，解n+1个变量就会解不出。在监督学习中，往往<strong>数据（对应了方程）远远少于模型空间（对应了变量）</strong>。因此过拟合现象的发生，可以分解成以下三点：</p>
+<ol>
+<li>有限的训练数据不能完全反映出一个模型的好坏，然而我们却<strong>不得不在这有限的数据上挑选模型</strong>，因此我们完全有可能挑选到在训练数据上表现很好而在测试数据上表现很差的模型，因为我们完全无法知道模型在测试数据上的表现。</li>
+<li>如果模型空间很大，也就是有很多很多模型可以给我们挑选，那么挑到对的模型的机会就会很小。</li>
+<li>与此同时，如果我们要在训练数据上表现良好，最为直接的方法就是要在足够大的模型空间中挑选模型，否则如果模型空间很小，就不存在能够拟合数据很好的模型。</li>
+</ol>
+<p>另外值得一提的是，不少人会用“模型复杂度”替代上面我讲的“模型空间”。这其实是一回事，但“模型复杂度”往往容易给人一个误解，认为是一个模型本身长得复杂。例如5次多项式就要比2次多项式复杂，这是错的。因此我更愿意用“模型空间”，强调“复杂度”是候选模型的“数量”，而不是模型本事的“长相”。</p>
+<h2 id="防止过拟合"><a href="#防止过拟合" class="headerlink" title="防止过拟合"></a>防止过拟合</h2><p>具体的做法与模型有关，总的思路是让模型做一些与被拟合数据无关的事。例如对于决策树模型，让树不要太长；对于线性模型，加入正则项让向量不要太长；boosting用短一点的树和early stop、神经网络模型的early stop、drop out等让网络不要拟合太好等等。但是并不是控制了候选模型的数量，泛化能力就会好，而是对训练数据的拟合程度不变的情况下，减少候选模型数量。然而这两者往往矛盾，候选模型少了，对训练数据的拟合也会变差。</p>
+<ul>
+<li>simpler model structure</li>
+<li>regularization</li>
+<li>data augmentation</li>
+<li>dropout</li>
+<li>Bootstrap/Bagging</li>
+<li>ensemble</li>
+<li>early stopping</li>
+<li>utilize invariance</li>
+<li>Bayesian</li>
+</ul>
+<h3 id="获取更多数据"><a href="#获取更多数据" class="headerlink" title="获取更多数据"></a>获取更多数据</h3><p>这是解决过拟合最有效的方法，只要给足够多的数据，让模型「看见」尽可能多的「例外情况」，它就会不断修正自己，从而得到更好的结果。</p>
+<ul>
+<li>从数据源头获取更多数据：这个是容易想到的，例如物体分类，我就再多拍几张照片好了；但是，在很多情况下，大幅增加数据本身就不容易；另外，我们不清楚获取多少数据才算够；</li>
+<li>根据当前数据集估计<strong>数据分布</strong>参数，使用该分布产生更多数据：这个一般不用，因为估计分布参数的过程也会代入抽样误差。</li>
+<li>数据增强：通过一定规则扩充数据。如在物体分类问题里，物体在图像中的位置、姿态、尺度，整体图片明暗度等都不会影响分类结果。我们就可以通过图像平移、翻转、缩放、切割等手段将数据库成倍扩充；</li>
+</ul>
+<h3 id="正则化——限制权值"><a href="#正则化——限制权值" class="headerlink" title="正则化——限制权值"></a>正则化——限制权值</h3><blockquote>
 <p><strong>L1范数</strong>：是指向量中各个元素绝对值之和，也有个美称叫“<strong>稀疏规则算子</strong>”（Lasso regularization）。那么，<strong>参数稀疏</strong> 有什么好处呢？</p>
 </blockquote>
 <p>一个关键原因在于它能实现<strong>特征的自动选择</strong>。一般来说，大部分特征 xi 和输出 yi 之间并没有多大关系。在最小化目标函数的时候考虑到这些额外的特征 xi，虽然可以获得更小的训练误差，但在预测新的样本时，这些没用的信息反而会干扰了对正确 yi 的预测。稀疏规则化算子的引入就是为了<strong>完成特征自动选择</strong>的光荣使命，它会学习地去掉这些没有信息的特征，也就是把这些特征对应的权重置为0。</p>
@@ -100,15 +128,20 @@
 <blockquote>
 <p>一句话<strong>总结</strong>就是：L1 会趋向于产生少量的特征，而其他的特征都是0，而 L2 会选择更多的特征，这些特征都会接近于0。</p>
 </blockquote>
-<h2 id="Early-stoping"><a href="#Early-stoping" class="headerlink" title="Early-stoping"></a>Early-stoping</h2><p>验证集</p>
+<h3 id="Early-stoping——从训练时间角度"><a href="#Early-stoping——从训练时间角度" class="headerlink" title="Early-stoping——从训练时间角度"></a>Early-stoping——从训练时间角度</h3><blockquote>
+<p>In machine learning, early stopping is a form of <em>regularization</em> used to <em>avoid overfitting</em> when training a learner with an <em>iterative method</em>, such as gradient descent. —wikipedia</p>
+</blockquote>
+<p>验证集</p>
 <p>其实就是评价训练正确率、测试正确率曲线，提早结束训练</p>
-<h2 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h2><p>Dropout 是一种非常通用的解决深层神经网络中 overfitting 问题的方法, 过程极其简单, 在调试算法中效果也非常有效，对于神经网络单元，按照一定的概率将其暂时从网络中丢弃。</p>
+<p>具体的做法是选择一部分样本作为验证集，在迭代拟合训练集的过程中，如果模型在验证集里错误率不再下降，就停止训练，也就是说控制迭代的轮数（树的个数）。</p>
+<h3 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h3><p>Dropout 是一种非常通用的解决深层神经网络中 overfitting 问题的方法, 过程极其简单, 在调试算法中效果也非常有效，对于神经网络单元，按照一定的概率将其暂时从网络中丢弃。</p>
 <p>首先设定一个 dropout ratio σ，σ 是超参数，范围设置为 (0,1)，表示在 Forward 阶段需要随机断开的连接的比例。每次 Forward 的时候都要随机的断开该比例的连接，只更新剩下的 weight。最后, 在 test/predict 的时候, 使用全部的连接, 不过, 这些 weights 全部都需要乘上 1−σ。</p>
-<h2 id="决策树剪枝"><a href="#决策树剪枝" class="headerlink" title="决策树剪枝"></a>决策树剪枝</h2><p>pass</p>
-<h2 id="SVM松弛变量"><a href="#SVM松弛变量" class="headerlink" title="SVM松弛变量"></a>SVM松弛变量</h2><p>pass</p>
+<h3 id="决策树剪枝——从结构-Architecture-角度"><a href="#决策树剪枝——从结构-Architecture-角度" class="headerlink" title="决策树剪枝——从结构 Architecture 角度"></a>决策树剪枝——从结构 Architecture 角度</h3><p>pass</p>
+<h3 id="SVM松弛变量"><a href="#SVM松弛变量" class="headerlink" title="SVM松弛变量"></a>SVM松弛变量</h3><p>pass</p>
 <h2 id="过拟合一定不好吗？"><a href="#过拟合一定不好吗？" class="headerlink" title="过拟合一定不好吗？"></a>过拟合一定不好吗？</h2><p>过拟合是一个讨论特别多的话题。以前，通常我们会说如果模型做的太复杂了就会过拟合，而最好的方式应该是拟合的刚刚好。但现在来看，大多数的实际场景都是在拿过去预测未来，过拟合不一定是不好的，还是要看具体场景。如果这个场景是过去见过的情况比较多，新的情况比较少的时候，过拟合反倒是好的。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li>​</li>
+<li><a href="https://www.zhihu.com/question/59201590/answer/163996540" target="_blank" rel="external">https://www.zhihu.com/question/59201590/answer/163996540</a></li>
+<li><a href="https://www.zhihu.com/question/59201590" target="_blank" rel="external">https://www.zhihu.com/question/59201590</a></li>
 </ol>
 
           <br>

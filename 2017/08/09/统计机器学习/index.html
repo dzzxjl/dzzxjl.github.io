@@ -204,7 +204,7 @@
 <li>信息熵 -&gt; 条件熵、信息增益、信息增益比</li>
 <li><em>CART</em>、<em>ID3</em> 、<em>C4.5</em> </li>
 <li><em>Bagging</em> -&gt; 随机森林</li>
-<li><em>Boosting</em> -&gt; GB -&gt; <em>GBDT</em> 梯度提升决策树 -&gt; XGBoost</li>
+<li><em>Boosting</em> -&gt; GB -&gt; <em>GBDT</em> 梯度提升决策树 -&gt; (CART)-&gt; XGBoost</li>
 </ul>
 </li>
 </ul>
@@ -213,13 +213,15 @@
 <li><em>Bayes</em></li>
 <li><em>MaxEnt</em> 最大熵模型</li>
 <li><em>HMM</em> 隐马尔科夫模型</li>
-<li><em>CRF</em> 条件随机场 -&gt; 在分词、词性标注和命名实体识别等序列标注任务中取得了很好的效果</li>
+<li>MEMM -&gt; <em>CRF</em> 条件随机场 -&gt; 在分词、词性标注和命名实体识别等序列标注任务中取得了很好的效果</li>
 </ul>
 </li>
 </ul>
-<h3 id="无监督学习概览"><a href="#无监督学习概览" class="headerlink" title="无监督学习概览"></a>无监督学习概览</h3><p>不告诉你结果或标准答案，让你从已知的数据中找到哪些特征</p>
+<h3 id="无监督学习概览"><a href="#无监督学习概览" class="headerlink" title="无监督学习概览"></a>无监督学习概览</h3><p>不告诉你结果或标准答案，让你从已知的数据中找到一些特征。</p>
 <ul>
 <li><p><strong>聚类分析</strong></p>
+<ul>
+<li><p>基本聚类 </p>
 <ul>
 <li><p><strong>k-means</strong></p>
 <p>相似度：</p>
@@ -230,11 +232,19 @@
 </li>
 <li><p>Birch聚类</p>
 </li>
-<li><p>密度聚类<strong>DBSCAN</strong></p>
+</ul>
+</li>
+<li><p>密度聚类</p>
+<ul>
+<li><strong>DBSCAN</strong></li>
+</ul>
 </li>
 <li><p>层次聚类</p>
 </li>
-<li><p>CFSFDP算法——2014年Science</p>
+<li><p>CFSFDP算法</p>
+<ul>
+<li>2014年Science</li>
+</ul>
 </li>
 </ul>
 </li>
@@ -247,104 +257,20 @@
 <li>FP-Tree——2000年Jiawei Han等人提出了基于FP树生成频繁项集的FP-growth算法</li>
 </ul>
 </li>
+<li><p>异常检测</p>
+</li>
 </ul>
 <h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><p>半监督学习的概念</p>
-<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><ul>
-<li><p>拟合Fitting：模型（构建的函数）与真实数据之间的贴合程度</p>
-<ul>
-<li><p>欠拟合overfitting：对深度学习而言，就是训练得不够，数据不足</p>
-</li>
-<li><p>过拟合underfitting：过拟合是指模型对定型数据的拟合非常好，然而一旦在实际应用中遇到从未出现过的数据，运行效果就变得很不理想</p>
-<p><a href="https://www.zhihu.com/question/26898675" target="_blank" rel="external">如何解决过拟合的问题？</a></p>
-<ul>
-<li><p>增加训练数据量</p>
-</li>
-<li><p>采用dropout -&gt; 为了使某些神经元值为0，减少相互依赖，可以看成是一种正则化</p>
-<p>dropout 是一种非常非常通用的解决深层神经网络中 overfitting 问题的方法, 过程极其简单, 在调试算法中效果也非常有效，对于神经网络单元，按照一定的概率将其暂时从网络中丢弃。</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>目标函数</p>
-<ul>
-<li><p>经验风险 -&gt; 为了是学习算法匹配测试样本</p>
-<ul>
-<li>方差代价函数（Mean Squared Error）</li>
-<li><p>交叉熵代价函数</p>
-<ul>
-<li>binary_crossentropy</li>
-<li>cross-entropy cost function</li>
-</ul>
-</li>
-<li><p>结构风险 -&gt; 为了防止过拟合</p>
-<p><a href="https://www.zhihu.com/question/37096933" target="_blank" rel="external">范数</a>：</p>
-<ul>
-<li>L1</li>
-<li>L2</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>损失函数</p>
-<p>对于目标函数来说在有约束条件下的最小化</p>
-</li>
-</ul>
-</li>
-<li><p>样本的数量</p>
-<ul>
-<li>batchsize 批大小。在深度学习中，一般采用SGD训练，即每次训练在训练集中取batchsize个样本训练<ul>
-<li>数字越小时，此时就相当于来了一个样本，然后做一次更新，训练过程越接近随机梯度下降sgd</li>
-<li>数字越大时，训练越接近梯度下降，即每一次参数更新都要用到全部样本数据</li>
-</ul>
-</li>
-<li>iteration1个iteration等于使用batchsize个样本训练一次</li>
-<li>epoch1个epoch等于使用训练集中的全部样本训练一次</li>
-</ul>
-</li>
-<li><p>残差</p>
-<p>实际观察值与估计值（<a href="https://baike.baidu.com/item/%E6%8B%9F%E5%90%88%E5%80%BC" target="_blank" rel="external">拟合值</a>）之间的差。残差的思想都是去掉相同的主体部分，从而<strong>突出微小的变化</strong>，类似差分放大器。“残差”蕴含了有关模型基本假设的重要信息。如果回归模型正确的话， 我们可以将残差看作<strong>误差的观测值</strong>。</p>
-<p>应用：</p>
-<ul>
-<li>GBDT</li>
-<li>RNN</li>
-</ul>
-</li>
-<li><p>参数与超参数</p>
-<ul>
-<li>参数</li>
-<li>超参数</li>
-</ul>
-</li>
-<li><p>处理类别不平衡问题（《机器学习》P66）</p>
-<ul>
-<li>分层抽样技术（stratifid sampling）</li>
-<li>反类样例进行“欠采样”（undersampling）</li>
-<li>正类样例“过采样”（oversampling）</li>
-<li>加入“阈值移动”（threshold-moving）</li>
-</ul>
-</li>
-<li><p>关于拟合问题的几点思考</p>
-<ul>
-<li>最小二乘法</li>
-<li>泰勒展开式</li>
-<li>傅里叶</li>
-</ul>
-</li>
-<li><p>tricks</p>
-</li>
-<li><p>​</p>
-</li>
-</ul>
-<h2 id="类库"><a href="#类库" class="headerlink" title="类库"></a>类库</h2><ul>
-<li><em>NumPy</em>、<em>Pandas</em>、<em>Scipy</em>、<em>sklearn</em> 等科学计算库</li>
-<li><em>matplotlib</em> 和 <em>seaborn</em> 进行数据可视化</li>
-<li><em>keras</em> 、 <em>pytorch</em> 等前端框架编写深度学习程序</li>
+<h3 id="降维模型"><a href="#降维模型" class="headerlink" title="降维模型"></a>降维模型</h3><ul>
+<li>PCA</li>
+<li>LDA(Linear Discriminant Analysis)</li>
+<li>SVD</li>
+<li>LLE</li>
 </ul>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
 <li>李航《统计学习方法》</li>
 <li>周志华《机器学习》</li>
-<li>宗成庆《统计自然语言处理》</li>
+<li>《深度学习》</li>
 </ul>
 
           <br>
