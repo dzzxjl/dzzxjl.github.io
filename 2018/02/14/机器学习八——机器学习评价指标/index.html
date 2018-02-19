@@ -126,7 +126,13 @@
 </blockquote>
 <p><code>R = TP / (TP + FN)</code></p>
 <p><strong>召回率</strong>是针对我们原来的<strong>样本</strong>而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)。</p>
+<p>举个例子，丰田公司的“召回门”事件，当时在全球召回850万辆车，但是这里面真正有问题的车有多少呢？可以理解为丰田公司为了提高“召回率”，下了血本，那也是没有办法的，回到题目，在样本不平衡的情况下提高召回率，只能‘’误杀‘’大部分，就是降低P，这里有一个平衡P和R的一个指标F1，就是两者的调和均值，但是像上面的例子就不需要了，目标就是提高R。</p>
 <p>大白话就是“正例里你的预测覆盖了多少”</p>
+<blockquote>
+<p>如何提高机器学习算法的召回率？</p>
+<p>先说网上看到的这个汇总回答，就是针对样本失衡的分类学习的，个人认为其中比较可行简单的方案是<br>1，扩大数据量，然后直接把多数类样本随机删除，直到跟少数类样本的量一致。因为扩大了样本量，所以即便删除掉很多样本，也能保证少数累样本的数量够用<br>2，把分类问题当成单类模式识别or异常值识别问题。如果失衡问题特别严重，那么换个角度不做二类分类了，就直接当成异常值识别了<br>汇总回答的地址是 <a href="https://link.zhihu.com/?target=http%3A//blog.csdn.net/heyongluoyao8/article/details/49408131" target="_blank" rel="external">在分类中如何处理训练集中不平衡问题</a></p>
+<p>我之前处理这个问题的时候也用过过抽样和欠抽样（SMOTE），但效果也不好。反倒是直接调整分类算法中对两类样本的权重效果会好些。不过代价也是损失precision。内容地址如下权当是看个例子好了 <a href="https://link.zhihu.com/?target=http%3A//www.douban.com/note/343363386/" target="_blank" rel="external">回顾一下毕业论文中的问题</a></p>
+</blockquote>
 <h2 id="F1-Measure"><a href="#F1-Measure" class="headerlink" title="F1-Measure"></a>F1-Measure</h2><blockquote>
 <p>Weighted average of precision and recall. </p>
 </blockquote>
@@ -178,6 +184,7 @@
 <li><a href="http://bookshadow.com/weblog/2014/06/10/precision-recall-f-measure/" target="_blank" rel="external">http://bookshadow.com/weblog/2014/06/10/precision-recall-f-measure/</a></li>
 <li><a href="https://www.zhihu.com/question/19645541" target="_blank" rel="external">https://www.zhihu.com/question/19645541</a></li>
 <li><a href="https://blog.argcv.com/articles/1036.c" target="_blank" rel="external">https://blog.argcv.com/articles/1036.c</a></li>
+<li><a href="https://www.zhihu.com/question/39819838" target="_blank" rel="external">https://www.zhihu.com/question/39819838</a></li>
 </ol>
 
           <br>

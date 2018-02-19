@@ -115,11 +115,12 @@
 <li>出租车/曼哈顿距离</li>
 <li>方差</li>
 <li>L1范数/正则化</li>
+<li>求解算法<ul>
+<li>坐标下降法</li>
+<li>最小角度回归 LARS</li>
+<li>Glmnet</li>
 </ul>
 </li>
-<li>求解算法<ul>
-<li>最小角度回归LARS</li>
-<li>Glmnet</li>
 </ul>
 </li>
 </ul>
@@ -197,10 +198,11 @@
 <li>并行化的LR</li>
 </ol>
 </blockquote>
-<ul>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
 <li><strong>优点</strong>：输出结果会有很好的概率解释，而算法也能通过正则化以避免过拟合。逻辑模型很容易通过随机梯度下降来更新数据模型。</li>
 <li><strong>缺点</strong>：逻辑回归在面对多元或非线性决策边界时性能较差。</li>
 </ul>
+<h3 id="应用经验"><a href="#应用经验" class="headerlink" title="应用经验"></a>应用经验</h3><p>如果连续变量，注意做SCALING，缩放单位即标准化。<strong>LR对样本分布敏感</strong>，所以要注意样本的平衡性（y=1不能太少）样本量足的情况下采用下采样，不足的情况用上采样。</p>
 <h2 id="logistic回归和线性回归的区别"><a href="#logistic回归和线性回归的区别" class="headerlink" title="logistic回归和线性回归的区别"></a>logistic回归和线性回归的区别</h2><ol>
 <li>线性回归要求变量服从<strong>正态分布</strong>，logistic回归对变量分布没有要求</li>
 <li>线性回归要求因变量是连续性数值变量，而logistic回归要求因变量是分类型变量</li>
