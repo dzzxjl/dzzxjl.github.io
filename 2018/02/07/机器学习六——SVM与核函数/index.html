@@ -93,20 +93,41 @@
 <p>SVR是支持向量回归(support vector regression)的英文缩写，是支持向量机(SVM)的重要的应用分支。</p>
 <h2 id="软间隔SVM"><a href="#软间隔SVM" class="headerlink" title="软间隔SVM"></a>软间隔SVM</h2><p>pass</p>
 <h2 id="SMO"><a href="#SMO" class="headerlink" title="SMO"></a>SMO</h2><p>pass</p>
-<h2 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h2><p>核函数主要是将线性不可分的数据映射到高位空间再进行分类</p>
+<h2 id="核函数与核方法"><a href="#核函数与核方法" class="headerlink" title="核函数与核方法"></a>核函数与核方法</h2><p>核函数主要是将线性不可分的数据映射到高位空间再进行线性分类</p>
 <p>核函数的种类：</p>
 <ul>
+<li>线性核函数</li>
 <li>多项式函数</li>
 <li>高斯核函数<ul>
 <li>高斯核是用的最多的核函数，对训练数据分类效果最好</li>
 <li>高斯核的缺点：容易过拟合，需要更多的样本、泛化能力弱</li>
 </ul>
 </li>
+<li>Sigmoid核</li>
 </ul>
-<h2 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h2><p><strong>优点</strong>：支持向量机能对非线性决策边界建模，又有许多可选的核函数。在面对过拟合时，支持向量机有着极强的稳健性，尤其是在高维空间中。</p>
+<p>方法：</p>
+<ul>
+<li>第一，如果样本数量小于特征数，那么就没必要选择非线性核，简单的使用线性核就可以了；</li>
+<li>第二，如果样本数量大于特征数目，这时可以使用非线性核，将样本映射到更高维度，一般可以得到更好的结果；</li>
+<li>第三，如果样本数目和特征数目相等，该情况可以使用非线性核，原理和第二种一样。</li>
+</ul>
+<p>对于第一种情况，也可以先对数据进行降维，然后使用非线性核，这也是一种方法。</p>
+<blockquote>
+<p>联想线性方程组</p>
+</blockquote>
+<h2 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h2><p><strong>优点</strong>：支持向量机能对非线性决策边界建模，又有许多可选的核函数。</p>
+<ul>
+<li>在面对过拟合时，支持向量机有着极强的稳健性，尤其是在高维空间中。</li>
+<li>可以解决高维问题，即大型特征空间；</li>
+<li>能够处理非线性特征的相互作用；</li>
+<li>无需依赖整个数据；</li>
+<li>可以提高泛化能力；</li>
+</ul>
 <p><strong>缺点</strong>：</p>
 <ul>
-<li>支持向量机是内存密集型算法，选择正确的核函数就需要相当的技巧，<strong>不太适用较大的数据集</strong>。</li>
+<li>支持向量机是内存密集型算法，当观测样本很多时，效率并不是很高，<strong>不太适用较大的数据集</strong>；</li>
+<li>选择正确的核函数就需要相当的技巧，对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
+<li>对缺失数据敏感；</li>
 <li>在当前的业界应用中，<strong>随机森林的表现往往要优于支持向量机</strong>。</li>
 </ul>
 <h2 id="SVM的应用"><a href="#SVM的应用" class="headerlink" title="SVM的应用"></a>SVM的应用</h2><p>或许我们已经听到过，SVM 在很多诸如文本分类，图像分类，生物序列分析和生物数据挖掘，手写字符识别等领域有很多的应用，但或许你并没强烈的意识到，SVM可以成功应用的领域远远超出现在已经在开发应用了的领域。</p>
@@ -122,6 +143,7 @@
 <li><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650731669&amp;idx=1&amp;sn=b31a361017e0c6b9ecb2270fe3c01cbf&amp;chksm=871b30ebb06cb9fdd51d6ae57fa7e3375bcff98a649ecff8a1ba9f485ae8cd5f63876bb20cf6&amp;mpshare=1&amp;scene=23&amp;srcid=1008EaBplXTYgkkch7WXBnDW#rd" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650731669&amp;idx=1&amp;sn=b31a361017e0c6b9ecb2270fe3c01cbf&amp;chksm=871b30ebb06cb9fdd51d6ae57fa7e3375bcff98a649ecff8a1ba9f485ae8cd5f63876bb20cf6&amp;mpshare=1&amp;scene=23&amp;srcid=1008EaBplXTYgkkch7WXBnDW#rd</a></li>
 <li><a href="https://juejin.im/post/5930cc4c2f301e006bd4b2a9" target="_blank" rel="external">https://juejin.im/post/5930cc4c2f301e006bd4b2a9</a></li>
 <li><a href="https://www.zhihu.com/question/21704547/answer/20293255" target="_blank" rel="external">https://www.zhihu.com/question/21704547/answer/20293255</a></li>
+<li><a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/" target="_blank" rel="external">http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/</a></li>
 </ol>
 
           <br>
