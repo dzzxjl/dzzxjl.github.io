@@ -1,97 +1,390 @@
-<html>
-  <head>
-    <title>机器学习一——广义线性模型 - 十一城</title>
-    <link href='/images/fav.png' rel='shortcut icon'>
-<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/highlight.css">
-<link rel="stylesheet" href="/css/responsive.css">
-<script src="/js/jquery.js"></script>
-<script src="/js/basics.js"></script>
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<!DOCTYPE html>
 
 
-  </head>
-  <body>
-    <header>
-  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
-  <br>
-  <p>十一城</p>
-  <p>跬步千里，小流江海。</p>
-</header>
 
-    <div id='container'>
-      <div class='block'>
+
+<html class="theme-next gemini" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
   
-    <a class='main' href='/'>Home</a>
+
+
+
+
   
-    <a class='main' href='/categories/java'>Java</a>
+  <meta name="keywords" content="ml," />
+
+
+<meta name="description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
+<meta name="keywords" content="ml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习一——广义线性模型">
+<meta property="og:url" content="http://yoursite.com/2018/01/31/机器学习一——广义线性模型/index.html">
+<meta property="og:site_name" content="十一城">
+<meta property="og:description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
+<meta property="og:updated_time" content="2018-03-01T14:05:19.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习一——广义线性模型">
+<meta name="twitter:description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/31/机器学习一——广义线性模型/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>机器学习一——广义线性模型 | 十一城</title>
   
-    <a class='main' href='/categories/python'>Python</a>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
   
-    <a class='main' href='/categories/linux'>Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    
   
-    <a class='main' href='/thoughts'>Thoughts</a>
-  
-    <a class='main' href='/bookcan'>BookCan</a>
-  
-    <a class='main' href='/links'>Links</a>
-  
-    <a class='main' href='/about'>About</a>
-  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">十一城</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">跬步千里，小流江海。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-      <section class='paging'>
+<nav class="site-nav">
   
-    <div class='left'>
-      <a href='/2018/01/31/Differences-Between-OLS-and-MLE/'>
-        ‹
-      </a>
-    </div>
-  
-  
-    <div class='right'>
-      <a href='/2018/01/22/[转]"网络时代的爱迪生"Bill-Joy/'>
-        ›
-      </a>
-    </div>
-  
-</section>
 
-      <div class='content'>
-        <section class='post'>
-          <h1>
-            <div class='date'>2018-01-31</div>
-            机器学习一——广义线性模型
-          </h1>
-          
-          
-            <font class="categories">
-            &#8226; 分类:
-            <a class="categories-link" href="/categories/ml/">ml</a>
-            </font>
-          
-          
-             &#8226; 标签:
-            <font class="tags">
-              <a class="tags-link" href="/tags/ml/">ml</a>
-            </font>
-          
-          <hr>
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-bookcan">
+          <a href="/bookcan/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-book"></i> <br />bookcan</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-link"></i> <br />links</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
 
 
-          <blockquote>
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/31/机器学习一——广义线性模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dzzxjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十一城">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习一——广义线性模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-31T15:05:40+08:00">2018-01-31</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ml/" itemprop="url" rel="index"><span itemprop="name">ml</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
 <p>线性回归是建立在<strong>高斯分布</strong>的假设上，Logistic 回归是建立在<strong>伯努利分布</strong>的假设上。如果不能<strong>从概率的角度</strong>理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将<strong>其它的分布</strong>也包纳进来，提取这些分布模型的<strong>共同点</strong>，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。</p>
 </blockquote>
 <h2 id="广义线性模型（generalized-linear-model）综述"><a href="#广义线性模型（generalized-linear-model）综述" class="headerlink" title="广义线性模型（generalized linear model）综述"></a><a href="https://www.cnblogs.com/muzixi/p/6642203.html" target="_blank" rel="external">广义线性模型（generalized linear model）</a>综述</h2><blockquote>
 <p>使用广义线性模型的步骤：</p>
 <ol>
-<li>分析数据集，确定<strong>概率分布类型</strong></li>
-<li>把概率写成<strong>指数分布簇</strong>的形式，并找到对应的 <code>T(y)</code>、<code>η</code>、<code>E(y;x)</code> 等</li>
-<li>写出<code>log</code>最大似然函数，不同的分布所使用的<strong>连接函数</strong>不一样，并找到使该似然函数最大化的参数值</li>
+<li>分析数据集，确定<strong>概率分布类型</strong>，如高斯分布、伯努利分布等</li>
+<li>把概率$P(y;\eta)$写成<strong>指数分布簇$exp()$</strong>的形式，并找到对应的 $T(y)$、$\eta$、$E(y;x)$ 等</li>
+<li>写出$log$最大似然函数，不同的分布所使用的<strong>连接函数</strong>不一样，并找到使该似然函数最大化的参数值</li>
 </ol>
 </blockquote>
 <ul>
@@ -138,7 +431,7 @@
 </ul>
 </li>
 <li>感知机 Percetron<ul>
-<li>感知机的<code>wx+b</code>可以理解为线性回归，即感知机将<strong>线性回归的输出</strong>作为使用<strong>单位阶跃函数的输入，</strong>最终的分类结果是<strong>阶跃函数的输出</strong></li>
+<li>感知机的$wx+b$可以理解为线性回归，即感知机将<strong>线性回归的输出</strong>作为使用<strong>单位阶跃函数的输入，</strong>最终的分类结果是<strong>阶跃函数的输出</strong></li>
 <li>损失函数——<strong>误分类点到分类超平面的总距离</strong></li>
 <li>随机梯度下降</li>
 </ul>
@@ -146,8 +439,13 @@
 </ul>
 </li>
 </ul>
-<h2 id="指数分布簇"><a href="#指数分布簇" class="headerlink" title="指数分布簇"></a>指数分布簇</h2><p>pass</p>
-<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p><strong>当给定参数 θ 和 x 时，目标值 y 也服从正态分布</strong>，这里 y 服从的是均值为 θTx 的正态分布，当我们训练得到参数 θ 后，那么对于不同的 x 值，y 服从的就是不同均值的正态分布。</p>
+<h2 id="指数分布簇"><a href="#指数分布簇" class="headerlink" title="指数分布簇"></a>指数分布簇</h2><p>当一个分布能写成以下形式时，我们就说它属于指数分布簇。<br>$$<br>p(y;\eta)=b(y)exp(\eta^TT(y)-a(\eta))<br>$$<br>其中$\eta$是分布的自然参数，$T(y)$是充分统计量，$a(\eta)$被称为log partition function，$exp(—a(\eta))$起着归一化的作用，保证分布$p(y;\eta)$积分从y到1。</p>
+<p>参考：</p>
+<ol>
+<li><a href="http://www.cnblogs.com/NaughtyBaby/p/5294547.html" target="_blank" rel="external">http://www.cnblogs.com/NaughtyBaby/p/5294547.html</a></li>
+<li><a href="http://www.cnblogs.com/NaughtyBaby/p/5300831.html" target="_blank" rel="external">http://www.cnblogs.com/NaughtyBaby/p/5300831.html</a></li>
+</ol>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p><strong>当给定参数$θ$和$x$时，目标值$y$也服从正态分布</strong>，这里 y 服从的是均值为$θ^Tx$的正态分布，当我们训练得到参数$θ$后，那么对于不同的$\theta$值，$y$服从的就是不同均值的正态分布。</p>
 <ul>
 <li><strong>优点</strong>：线性回归的理解和解释都非常直观，还能通过正则化来避免过拟合。此外，线性模型很容易通过随机梯度下降来更新数据模型。</li>
 <li><strong>缺点</strong>：线性回归在处理<strong>非线性关系</strong>时非常糟糕，在识别<strong>复杂模式</strong>上也不够灵活，而添加正确的相互作用项或多项式又极为棘手且耗时。</li>
@@ -173,11 +471,12 @@
 <li>缺点：逻辑回归在面对多元或非线性决策边界时性能较差。</li>
 </ul>
 <h3 id="应用经验"><a href="#应用经验" class="headerlink" title="应用经验"></a>应用经验</h3><p>如果连续变量，注意做SCALING，缩放单位即标准化。<strong>LR对样本分布敏感</strong>，所以要注意样本的平衡性（y=1不能太少）样本量足的情况下采用下采样，不足的情况用上采样。选择0.5作为阈值是一个一般的做法，实际应用时特定的情况可以选择不同阈值，如果对正例的判别精确率要求高，可以选择阈值大一些，对正例的召回要求高，则可以选择阈值小一些。</p>
+<h3 id="LR并行化"><a href="#LR并行化" class="headerlink" title="LR并行化"></a>LR并行化</h3><p>并行LR实际上就是在求解损失函数最优解的过程中，针对<strong>寻找损失函数下降方向</strong>中的梯度方向计算作了并行化处理，而在利用梯度确定下降方向的过程中也可以采用并行化（如L-BFGS中的两步循环法求牛顿方向）。</p>
 <h3 id="logistic回归和线性回归的区别"><a href="#logistic回归和线性回归的区别" class="headerlink" title="logistic回归和线性回归的区别"></a>logistic回归和线性回归的区别</h3><ol>
 <li>线性回归要求变量服从<strong>正态分布</strong>，logistic回归对变量分布没有要求</li>
 <li>线性回归要求因变量是连续性数值变量，而logistic回归要求因变量是分类型变量</li>
 <li>线性回归要求自变量和因变量呈线性关系，而logistic回归不要求自变量和因变量呈线性关系</li>
-<li>logistic回归是分析因变量<strong>取某个值的概率</strong>与自变量的关系，而线性回归是直接分析因变量与自变量的关系</li>
+<li>logistic回归是分析因变量<strong>取某个值的概率与自变量的关系</strong>，而线性回归是直接分析因变量与自变量的关系</li>
 </ol>
 <p>总之, logistic回归与<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/2362545.htm" target="_blank" rel="external">线性回归</a>实际上有很多相同之处，最大的区别就在于他们的<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/324030.htm" target="_blank" rel="external">因变量</a>不同，其他的基本都差不多，正是因为如此，这两种回归可以归于同一个家族，即广义线性模型（generalized linear model）。这一家族中的模型形式基本上都差不多，不同的就是<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/324030.htm" target="_blank" rel="external">因变量</a>不同，如果是连续的，就是多重线性回归，如果是<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/79831.htm" target="_blank" rel="external">二项分布</a>，就是logistic回归。logistic回归的<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/324030.htm" target="_blank" rel="external">因变量</a>可以是二分类的，也可以是多分类的，但是二分类的更为常用，也更加容易解释。所以实际中最为常用的就是二分类的logistic回归。</p>
 <ol>
@@ -223,43 +522,416 @@
 <li><a href="https://tech.meituan.com/intro_to_logistic_regression.html" target="_blank" rel="external">https://tech.meituan.com/intro_to_logistic_regression.html</a></li>
 </ol>
 
-          <br>
-<p>dzzxjl</p>
-<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
-
-        </section>
-      </div>
       
-      <div class='block'>
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ml/" rel="tag"># ml</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/[转]"网络时代的爱迪生"Bill-Joy/" rel="next" title="转-网络时代的爱迪生-Bill-Joy">
+                <i class="fa fa-chevron-left"></i> 转-网络时代的爱迪生-Bill-Joy
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/31/Differences-Between-OLS-and-MLE/" rel="prev" title="Differences-Between-OLS-and-MLE">
+                Differences-Between-OLS-and-MLE <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
   
-    <a class='main' href='/'>Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
   
-    <a class='main' href='/categories/linux'>Linux</a>
+
+
+
+        </div>
+        
+          
   
-    <a class='main' href='/categories/ml'>ML</a>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dzzxjl</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#广义线性模型（generalized-linear-model）综述"><span class="nav-number">1.</span> <span class="nav-text">广义线性模型（generalized linear model）综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数分布簇"><span class="nav-number">2.</span> <span class="nav-text">指数分布簇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归"><span class="nav-number">3.</span> <span class="nav-text">线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归-logistic-regression"><span class="nav-number">4.</span> <span class="nav-text">逻辑斯蒂回归 logistic regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">4.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">4.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用经验"><span class="nav-number">4.3.</span> <span class="nav-text">应用经验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LR并行化"><span class="nav-number">4.4.</span> <span class="nav-text">LR并行化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logistic回归和线性回归的区别"><span class="nav-number">4.5.</span> <span class="nav-text">logistic回归和线性回归的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑斯特回归为什么要对特征进行离散化？"><span class="nav-number">4.6.</span> <span class="nav-text">逻辑斯特回归为什么要对特征进行离散化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么可以用回归来解决分类问题？"><span class="nav-number">4.7.</span> <span class="nav-text">为什么可以用回归来解决分类问题？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR与MaxEnt"><span class="nav-number">5.</span> <span class="nav-text">LR与MaxEnt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
+
   
-    <a class='main' href='/thoughts'>Thoughts</a>
-  
-    <a class='main' href='/bookcan'>BookCan</a>
-  
-    <a class='main' href='/links'>Links</a>
-  
-    <a class='main' href='/about'>About</a>
+
   
 </div>
 
-    </div>
-    <footer>
-  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
-  <br>
-  <br>
-  <!--<img src='/images/scribble2.png' alt='scribble' />-->
-</footer>
 
-  </body>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
 </html>
