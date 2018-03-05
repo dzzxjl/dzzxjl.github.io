@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/02/07/机器学习六——SVM与核函数/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="这个算法的历史已经有五十出头，适应于各种其它问题比如回归、离群值分析和排序等  基础SVM的核心是结构风险最小化。 SVM（支持向量机）是一个有监督的学习模型，通常用来进行模式识别、分类以及回归分析。是数学规划方法在分类上的一个典型应用。 SVM学习问题可以表示为凸优化问题，因此可以利用已知的有效算法发现目标函数的全局最小值。而其他分类方法（如基于规则的分类器和人工神经网络）都采用一种基于贪心学">
-<meta property="og:updated_time" content="2018-03-03T02:00:31.291Z">
+<meta property="og:updated_time" content="2018-03-03T09:09:01.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习六——SVM与核函数">
 <meta name="twitter:description" content="这个算法的历史已经有五十出头，适应于各种其它问题比如回归、离群值分析和排序等  基础SVM的核心是结构风险最小化。 SVM（支持向量机）是一个有监督的学习模型，通常用来进行模式识别、分类以及回归分析。是数学规划方法在分类上的一个典型应用。 SVM学习问题可以表示为凸优化问题，因此可以利用已知的有效算法发现目标函数的全局最小值。而其他分类方法（如基于规则的分类器和人工神经网络）都采用一种基于贪心学">
@@ -134,6 +134,16 @@
 
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c74812f514823dcc232a43bf4fa01aee";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -236,19 +246,25 @@
         
         <li class="menu-item menu-item-bookcan">
           <a href="/bookcan/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-book"></i> <br />bookcan</a>
+            <i class="menu-item-icon fa fa-fw fa-book"></i> <br />BookCan</a>
         </li>
       
         
         <li class="menu-item menu-item-links">
           <a href="/links/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-link"></i> <br />links</a>
+            <i class="menu-item-icon fa fa-fw fa-link"></i> <br />Links</a>
         </li>
       
         
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Commonweal 404</a>
         </li>
       
 
@@ -394,9 +410,9 @@
 <p>SVM（支持向量机）是一个有监督的学习模型，通常用来进行模式识别、分类以及回归分析。是数学规划方法在分类上的一个典型应用。</p>
 <p>SVM学习问题可以表示为凸优化问题，因此可以利用已知的有效算法发现目标函数的全局最小值。而其他分类方法（如基于规则的分类器和人工神经网络）都采用一种基于贪心学习的策略来搜索假设空间，这种方法一般只能获得局部最优解。</p>
 <p>主要体现在最优化问题的处理上，包括MaxEnt、SVM等算法都利用了对偶理论来解决最优化问题。</p>
-<p>a) 可以解决样本有限情况下的机器学习问题， 目标是得到现有情况下的最优解；b) 算法最后转化为 二次型寻优问题，得到全局最优解，可以避免神经网络结构选择和局部极值问题；c) 算法将实际问题通过 非线性变换到高维特征空间，在高维空间中构造线性 判别函数解决非线性问题，可以提高泛化性能；d) 通 过对二类问题的推广，可以解决多类分类问题。</p>
-<p>SVR是支持向量回归(support vector regression)的英文缩写，是支持向量机(SVM)的重要的应用分支。</p>
+<p>a) 可以解决样本有限情况下的机器学习问题， 目标是得到现有情况下的最优解；b) 算法最后转化为 二次型寻优问题，得到全局最优解，可以避免神经网络结构选择和局部极值问题；c) 算法将实际问题通过 非线性变换到高维特征空间，在高维空间中构造线性 判别函数解决非线性问题，可以提高泛化性能；d) 通过对二类问题的推广，可以解决多类分类问题。</p>
 <h2 id="拉格朗日对偶"><a href="#拉格朗日对偶" class="headerlink" title="拉格朗日对偶"></a>拉格朗日对偶</h2><p>拉格朗日对偶事实上把SVM从依赖d个维度转变到依赖N个数据点。考虑到在最后计算时只有支持向量SV才有意义，所以这个计算量事实上比N小得多。</p>
+<h2 id="线性可分SVM算法数学建模"><a href="#线性可分SVM算法数学建模" class="headerlink" title="线性可分SVM算法数学建模"></a>线性可分SVM算法数学建模</h2><p>一个最优化问题通常有两个最基本的因素：1）目标函数，也就是你希望什么东西的什么指标达到最好；2）优化对象，你期望通过改变哪些因素来使你的目标函数达到最优。在线性SVM算法中，目标函数显然就是那个“分类间隔”，而优化对象则是决策面。最终可得到如下的最优化模型。<br>$$<br>\min_{w,b}\frac12\Vert w\Vert<br>$$</p>
 <h2 id="软间隔SVM"><a href="#软间隔SVM" class="headerlink" title="软间隔SVM"></a>软间隔SVM</h2><p>pass</p>
 <h2 id="核函数与核方法"><a href="#核函数与核方法" class="headerlink" title="核函数与核方法"></a>核函数与核方法</h2><p>核函数是内积，而不是映射，但其定义了映射。</p>
 <p>其主要是将线性不可分的数据<strong>映射</strong>到高位空间再进行线性分类，他是映射到新的特征空间后的内积运算，因为最终核函数的结果表达式中只需要内积的形式，</p>
@@ -445,7 +461,7 @@
 <li>在当前的业界应用中，<strong>随机森林的表现往往要优于支持向量机</strong>。</li>
 </ul>
 <h2 id="SMO"><a href="#SMO" class="headerlink" title="SMO"></a>SMO</h2><p>pass</p>
-<h2 id="SVR"><a href="#SVR" class="headerlink" title="SVR"></a>SVR</h2><p>Pass</p>
+<h2 id="SVR"><a href="#SVR" class="headerlink" title="SVR"></a>SVR</h2><p>SVR是支持向量回归(support vector regression)的英文缩写，是支持向量机(SVM)的重要的应用分支。</p>
 <h2 id="One-class-SVM"><a href="#One-class-SVM" class="headerlink" title="One class SVM"></a>One class SVM</h2><p>pass</p>
 <h2 id="SVM的应用"><a href="#SVM的应用" class="headerlink" title="SVM的应用"></a>SVM的应用</h2><p>SVM在很多诸如文本分类，图像分类（手写字符识别），生物序列分析和生物数据挖掘等领域有很多的应用，而且SVM可以成功应用的领域远远超出现在已经在开发应用了的领域。</p>
 <p>然而工业界中特征的多样性导致很少去使用 svm ，其中一个重要原因，因为 svm 本质上是属于一个几何模型，这个模型需要去定义 instance 之间的 kernel 或者 similarity （对于linear svm 来说，这个similarity 就是内积）。这其实和我们在之前说过的问题是相似的，我们无法预先设定一个很好的similarity。这样的数学模型使得 svm 更适合去处理 “同性质”的特征，例如图像特征提取中的 lbp 。而从不同 channel 中来的 feature 则更适合 tree-based model, 这些模型对数据的 distributation 通常并不敏感。</p>
@@ -463,6 +479,12 @@
 <li><a href="https://www.zhihu.com/question/21704547/answer/20293255" target="_blank" rel="external">https://www.zhihu.com/question/21704547/answer/20293255</a></li>
 <li><a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/" target="_blank" rel="external">http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/</a></li>
 </ol>
+<p>$$<br>\sum_i y_i \alpha_i = 0<br>$$</p>
+<p>$$<br>(x_i,y_i), \quad x \in R^d, y \in {-1,1}.<br>$$</p>
+<p>$$<br>g(x) = \text{sign}(\phi(w) \cdot \phi(x) + b)<br>$$</p>
+<p>$$<br>\phi^*(w) = \arg \min_{\phi(w)} \frac{1}{2} \norm{\phi(w)}^2, \<br>\text{such that} \quad y_i (\phi(w) \cdot \phi(x_i) + b) \ge 1.<br>$$</p>
+<p>$$<br>L(\phi(w),b,\alpha) = \frac{1}{2}||\phi(w)||^2 - \sum_i \alpha_i (y_i (\phi(w) \cdot \phi(x_i) + b) - 1).<br>$$</p>
+<p>$$<br>\pd{L(\phi(w),b,\alpha)}{\phi(w)} = \phi(w) - \sum_i y_i \alpha_i \phi(x_i) = 0,\<br>\pd{L(\phi(w),b,\alpha)}{b} = \sum_i y_i \alpha_i = 0.<br>$$</p>
 
       
     </div>
@@ -632,7 +654,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -668,7 +692,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉格朗日对偶"><span class="nav-number">2.</span> <span class="nav-text">拉格朗日对偶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软间隔SVM"><span class="nav-number">3.</span> <span class="nav-text">软间隔SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核函数与核方法"><span class="nav-number">4.</span> <span class="nav-text">核函数与核方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核函数的种类"><span class="nav-number">4.1.</span> <span class="nav-text">核函数的种类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点与缺点"><span class="nav-number">5.</span> <span class="nav-text">优点与缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMO"><span class="nav-number">6.</span> <span class="nav-text">SMO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVR"><span class="nav-number">7.</span> <span class="nav-text">SVR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#One-class-SVM"><span class="nav-number">8.</span> <span class="nav-text">One class SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVM的应用"><span class="nav-number">9.</span> <span class="nav-text">SVM的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">10.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉格朗日对偶"><span class="nav-number">2.</span> <span class="nav-text">拉格朗日对偶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性可分SVM算法数学建模"><span class="nav-number">3.</span> <span class="nav-text">线性可分SVM算法数学建模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软间隔SVM"><span class="nav-number">4.</span> <span class="nav-text">软间隔SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核函数与核方法"><span class="nav-number">5.</span> <span class="nav-text">核函数与核方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核函数的种类"><span class="nav-number">5.1.</span> <span class="nav-text">核函数的种类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点与缺点"><span class="nav-number">6.</span> <span class="nav-text">优点与缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMO"><span class="nav-number">7.</span> <span class="nav-text">SMO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVR"><span class="nav-number">8.</span> <span class="nav-text">SVR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#One-class-SVM"><span class="nav-number">9.</span> <span class="nav-text">One class SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVM的应用"><span class="nav-number">10.</span> <span class="nav-text">SVM的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">11.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -968,6 +992,29 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
