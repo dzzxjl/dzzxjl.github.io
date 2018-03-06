@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/31/机器学习一——广义线性模型/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
-<meta property="og:updated_time" content="2018-03-01T14:05:19.211Z">
+<meta property="og:updated_time" content="2018-03-06T11:53:12.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习一——广义线性模型">
 <meta name="twitter:description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
@@ -412,8 +412,13 @@
 <li>线性回归（linear regression） -&gt; 用一条线去拟合训练数据<ul>
 <li><strong>回归模型</strong></li>
 <li>损失函数 = MSE + 无正则项</li>
-<li>损失函数解法<ul>
+<li>损失函数<ul>
 <li><a href="https://www.zhihu.com/question/37031188" target="_blank" rel="external">最小二乘法（OLS）</a></li>
+<li>LAD线性回归——最小绝对偏差(Least Absolute Deviation, LAD)回归模型<ul>
+<li>分位数回归</li>
+</ul>
+</li>
+<li>Huber回归</li>
 </ul>
 </li>
 <li>惩罚线性模型<ul>
@@ -466,15 +471,26 @@
 <li><a href="http://www.cnblogs.com/NaughtyBaby/p/5294547.html" target="_blank" rel="external">http://www.cnblogs.com/NaughtyBaby/p/5294547.html</a></li>
 <li><a href="http://www.cnblogs.com/NaughtyBaby/p/5300831.html" target="_blank" rel="external">http://www.cnblogs.com/NaughtyBaby/p/5300831.html</a></li>
 </ol>
-<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p><strong>当给定参数$θ$和$x$时，目标值$y$也服从正态分布</strong>，这里 y 服从的是均值为$θ^Tx$的正态分布，当我们训练得到参数$θ$后，那么对于不同的$\theta$值，$y$服从的就是不同均值的正态分布。</p>
-<ul>
-<li><strong>优点</strong>：线性回归的理解和解释都非常直观，还能通过正则化来避免过拟合。此外，线性模型很容易通过随机梯度下降来更新数据模型。</li>
-<li><strong>缺点</strong>：线性回归在处理<strong>非线性关系</strong>时非常糟糕，在识别<strong>复杂模式</strong>上也不够灵活，而添加正确的相互作用项或多项式又极为棘手且耗时。</li>
-<li>优点：<pre><code>     　　1. 回归分析法在分析多因素模型时，更加简单和方便；
-     　　2. 运用回归模型，只要采用的模型和数据相同，通过标准的统计方法可以计算出的结果，但在图和表的形式中，数据之间关系的解释往往因人而异，不同分析者画出的拟合曲线很可能也是不一样的；
-     　　3. 回归分析可以准确地计量**各个因素之间的相关程度**与**回归拟合程度**的高低，提高预测方程式的效果；在回归分析法时，由于实际一个变量仅受单个因素的影响的情况极少，要注意模式的适合范围，所以一元回归分析法适用确实存在一个对因变量影响作用明显高于其他因素的变量是使用。多元回归分析法比较适用于实际经济问题，受多因素综合影响时使用。
-</code></pre></li>
-<li>缺点：<br>  有时候在回归分析中，选用<strong>何种因子</strong>和<strong>该因子采用何种表达式</strong>只是一种推测，这影响了用电因子的多样性和某些因子的不可测性，使得回归分析在某些情况下受到限制。</li>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><h3 id="前提假设LINE"><a href="#前提假设LINE" class="headerlink" title="前提假设LINE"></a>前提假设LINE</h3><ol>
+<li>Linearity 线性——因变量和每个自变量都是线性关系</li>
+<li>Indpendence 独立性——对于所有的观测值，它们的<strong>误差项</strong>相互之间是独立的</li>
+<li>Normality 正态性——误差项服从正态分布</li>
+<li>Equal-variance 等方差——所有的误差项具有同样方差</li>
+</ol>
+<p><strong>当给定参数$θ$和$x$时，目标值$y$也服从正态分布</strong>，这里 y 服从的是均值为$θ^Tx$的正态分布，当我们训练得到参数$θ$后，那么对于不同的$\theta$值，$y$服从的就是不同均值的正态分布。</p>
+<h3 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h3><ul>
+<li>优点<ul>
+<li>线性回归的理解和解释都非常直观，还能通过正则化来避免过拟合。此外，线性模型很容易通过随机梯度下降来更新数据模型。</li>
+<li>回归分析法在分析多因素模型时，更加简单和方便；</li>
+<li>运用回归模型，只要采用的模型和数据相同，通过标准的统计方法可以计算出的结果，但在图和表的形式中，数据之间关系的解释往往因人而异，不同分析者画出的拟合曲线很可能也是不一样的；</li>
+<li>回归分析可以准确地计量<strong>各个因素之间的相关程度</strong>与<strong>回归拟合程度</strong>的高低，提高预测方程式的效果；在回归分析法时，由于实际一个变量仅受单个因素的影响的情况极少，要注意模式的适合范围，所以一元回归分析法适用确实存在一个对因变量影响作用明显高于其他因素的变量是使用。多元回归分析法比较适用于实际经济问题，受多因素综合影响时使用。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>线性回归在处理<strong>非线性关系</strong>时非常糟糕，在识别<strong>复杂模式</strong>上也不够灵活，而添加正确的相互作用项或多项式又极为棘手且耗时。</li>
+<li>有时候在回归分析中，选用<strong>何种因子</strong>和<strong>该因子采用何种表达式</strong>只是一种推测，这影响了用电因子的多样性和某些因子的不可测性，使得回归分析在某些情况下受到限制。</li>
+</ul>
+</li>
 </ul>
 <h2 id="逻辑斯蒂回归-logistic-regression"><a href="#逻辑斯蒂回归-logistic-regression" class="headerlink" title="逻辑斯蒂回归 logistic regression"></a>逻辑斯蒂回归 logistic regression</h2><p>逻辑斯蒂回归（Logistic Regression）是机器学习中的一种分类模型，由于算法的简单和高效，在实际中应用非常广泛。重点需要关注逻辑回归算法的<strong>数学模型</strong>和<strong>参数求解</strong>方法。</p>
 <p>常见问题：</p>
@@ -751,7 +767,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#广义线性模型（generalized-linear-model）综述"><span class="nav-number">1.</span> <span class="nav-text">广义线性模型（generalized linear model）综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数分布簇"><span class="nav-number">2.</span> <span class="nav-text">指数分布簇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归"><span class="nav-number">3.</span> <span class="nav-text">线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归-logistic-regression"><span class="nav-number">4.</span> <span class="nav-text">逻辑斯蒂回归 logistic regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">4.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">4.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用经验"><span class="nav-number">4.3.</span> <span class="nav-text">应用经验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LR并行化"><span class="nav-number">4.4.</span> <span class="nav-text">LR并行化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logistic回归和线性回归的区别"><span class="nav-number">4.5.</span> <span class="nav-text">logistic回归和线性回归的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑斯特回归为什么要对特征进行离散化？"><span class="nav-number">4.6.</span> <span class="nav-text">逻辑斯特回归为什么要对特征进行离散化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么可以用回归来解决分类问题？"><span class="nav-number">4.7.</span> <span class="nav-text">为什么可以用回归来解决分类问题？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR与MaxEnt"><span class="nav-number">5.</span> <span class="nav-text">LR与MaxEnt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#广义线性模型（generalized-linear-model）综述"><span class="nav-number">1.</span> <span class="nav-text">广义线性模型（generalized linear model）综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数分布簇"><span class="nav-number">2.</span> <span class="nav-text">指数分布簇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归"><span class="nav-number">3.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前提假设LINE"><span class="nav-number">3.1.</span> <span class="nav-text">前提假设LINE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点与缺点"><span class="nav-number">3.2.</span> <span class="nav-text">优点与缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归-logistic-regression"><span class="nav-number">4.</span> <span class="nav-text">逻辑斯蒂回归 logistic regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">4.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">4.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用经验"><span class="nav-number">4.3.</span> <span class="nav-text">应用经验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LR并行化"><span class="nav-number">4.4.</span> <span class="nav-text">LR并行化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logistic回归和线性回归的区别"><span class="nav-number">4.5.</span> <span class="nav-text">logistic回归和线性回归的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑斯特回归为什么要对特征进行离散化？"><span class="nav-number">4.6.</span> <span class="nav-text">逻辑斯特回归为什么要对特征进行离散化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么可以用回归来解决分类问题？"><span class="nav-number">4.7.</span> <span class="nav-text">为什么可以用回归来解决分类问题？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR与MaxEnt"><span class="nav-number">5.</span> <span class="nav-text">LR与MaxEnt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1051,6 +1067,29 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 

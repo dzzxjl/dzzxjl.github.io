@@ -101,17 +101,17 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="XGBoost在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：  General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。 Booster parameters：这取">
+<meta name="description" content="基础在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：  General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。 Booster parameters：这取决于使用哪">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解XGBoost">
 <meta property="og:url" content="http://yoursite.com/2018/01/12/理解XGBoost/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="XGBoost在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：  General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。 Booster parameters：这取">
-<meta property="og:updated_time" content="2018-02-16T10:09:09.318Z">
+<meta property="og:description" content="基础在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：  General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。 Booster parameters：这取决于使用哪">
+<meta property="og:updated_time" content="2018-03-06T11:47:15.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解XGBoost">
-<meta name="twitter:description" content="XGBoost在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：  General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。 Booster parameters：这取">
+<meta name="twitter:description" content="基础在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：  General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。 Booster parameters：这取决于使用哪">
 
 
 
@@ -397,7 +397,7 @@
       
 
       
-        <h3 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h3><p>在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：</p>
+        <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：</p>
 <ul>
 <li>General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。</li>
 <li>Booster parameters：这取决于使用哪种booster。</li>
@@ -409,8 +409,7 @@
 <li>决策规则与决策树的一样</li>
 <li>每个叶子节点上都包含了一个权重，也有人叫做分数</li>
 </ul>
-<p>以下摘自<a href="https://www.zhihu.com/question/41354392/answer/91371364" target="_blank" rel="external">机器学习算法中GBDT和XGBOOST的区别有哪些？</a></p>
-<p>首先<strong>xgboost</strong>是Gradient Boosting的一种高效系统实现，并不是一种单一算法。xgboost里面的基学习器除了用tree(gbtree)，也可用线性分类器(gblinear)。而GBDT则特指梯度提升决策树算法。xgboost相对于普通gbm的实现，可能具有以下的一些优势：</p>
+<h2 id="机器学习算法中GBDT和XGBOOST的区别有哪些？"><a href="#机器学习算法中GBDT和XGBOOST的区别有哪些？" class="headerlink" title="机器学习算法中GBDT和XGBOOST的区别有哪些？"></a><a href="https://www.zhihu.com/question/41354392/answer/91371364" target="_blank" rel="external">机器学习算法中GBDT和XGBOOST的区别有哪些？</a></h2><p>首先<strong>xgboost</strong>是Gradient Boosting的一种高效系统实现，并不是一种单一算法。xgboost里面的基学习器除了用tree(gbtree)，也可用线性分类器(gblinear)。而GBDT则特指梯度提升决策树算法。xgboost相对于普通gbm的实现，可能具有以下的一些优势：</p>
 <ol>
 <li>显式地将<strong>树模型的复杂度</strong>作为正则项加在优化目标</li>
 <li>公式推导里用到了<strong>二阶导数</strong>信息，而普通的GBDT只用到一阶</li>
@@ -614,10 +613,14 @@
 </tbody>
 </table>
 <h2 id="参数详解Parameters"><a href="#参数详解Parameters" class="headerlink" title="参数详解Parameters"></a>参数详解Parameters</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">max_depth : int</div><div class="line">Maximum tree depth for base learners.</div><div class="line"></div><div class="line">learning_rate : float #learning_rate ＝ 0.1 或更小，越小就需要多加入弱学习器</div><div class="line">Boosting learning rate (xgb’s “eta”)</div><div class="line">n_estimators : int</div><div class="line">Number of boosted trees to fit.</div><div class="line">silent : boolean</div><div class="line">Whether to print messages while running boosting.</div><div class="line">objective : string or callable</div><div class="line">Specify the learning task and the corresponding learning objective or a custom objective function to be used (see note below).</div><div class="line">booster: string</div><div class="line">Specify which booster to use: gbtree, gblinear or dart.</div><div class="line">nthread : int</div><div class="line">Number of parallel threads used to run xgboost. (Deprecated, please use n_jobs)</div><div class="line">n_jobs : int</div><div class="line">Number of parallel threads used to run xgboost. (replaces nthread)</div><div class="line">gamma : float</div><div class="line">Minimum loss reduction required to make a further partition on a leaf node of the tree.</div><div class="line">min_child_weight : int</div><div class="line">Minimum sum of instance weight(hessian) needed in a child.</div><div class="line">max_delta_step : int</div><div class="line">Maximum delta step we allow each tree’s weight estimation to be.</div><div class="line">subsample : float</div><div class="line">Subsample ratio of the training instance.</div><div class="line">colsample_bytree : float</div><div class="line">Subsample ratio of columns when constructing each tree.</div><div class="line">colsample_bylevel : float</div><div class="line">Subsample ratio of columns for each split, in each level.</div><div class="line">reg_alpha : float (xgb’s alpha)</div><div class="line">L1 regularization term on weights</div><div class="line">reg_lambda : float (xgb’s lambda)</div><div class="line">L2 regularization term on weights</div><div class="line">scale_pos_weight : float</div><div class="line">Balancing of positive and negative weights.</div><div class="line">base_score:</div><div class="line">The initial prediction score of all instances, global bias.</div><div class="line">seed : int</div><div class="line">Random number seed. (Deprecated, please use random_state)</div><div class="line">random_state : int</div><div class="line">Random number seed. (replaces seed)</div><div class="line">missing : float, optional</div><div class="line">Value in the input which needs to be present as a missing value. If None, defaults to np.nan.</div></pre></td></tr></table></figure>
+<h2 id="XGBoost还需要做特征工程吗？"><a href="#XGBoost还需要做特征工程吗？" class="headerlink" title="XGBoost还需要做特征工程吗？"></a>XGBoost还需要做特征工程吗？</h2><p>特征工程是个很广的概念，包括特征筛选、特征变换、特征合成、特征提取等等。对于xgboost，它能够很好地做到特征选择，所以这一点不用我们去操心太多。至于特征变换（离散化、归一化、标准化、取log等等），我们也不需要做太多，因为xgboost是基于决策树，决策树自然能够解决这些。相比较来说，线性模型则需要做离散化或者取log处理。因为<strong>xgboost（树类模型）不依赖于线性假设</strong>。但是对于分类特征，xgboost需要对其进行独热编码，否则无法训练模型。xgboost也可以免于一部分特征合成的工作，比如线性回归中的交互项a:b，在树类模型中都可以自动完成。但是对于加法a+b，减法a-b，除法a-b这类合成的特征，则需要手动完成。</p>
+<p>绝大部分模型都无法自动完成的一步就是特征提取。很多nlp的问题或者图象的问题，没有现成的特征，你需要自己去提取这些特征，这些是我们需要人工完成的。</p>
+<p>综上来说，xgboost的确比线性模型要省去很多特征工程的步骤。但是特征工程依然是非常必要的。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="http://blog.csdn.net/weiyongle1996/article/details/78446244" target="_blank" rel="external">http://blog.csdn.net/weiyongle1996/article/details/78446244</a></li>
 <li><a href="https://www.jianshu.com/p/8346d4f80ab0" target="_blank" rel="external">https://www.jianshu.com/p/8346d4f80ab0</a></li>
 <li><a href="http://chuan92.com/2016/03/19/xgboost-and-gbdt" target="_blank" rel="external">http://chuan92.com/2016/03/19/xgboost-and-gbdt</a></li>
+<li><a href="http://sofasofa.io/forum_main_post.php?postid=1001161" target="_blank" rel="external">http://sofasofa.io/forum_main_post.php?postid=1001161</a></li>
 </ol>
 
       
@@ -828,7 +831,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#XGBoost"><span class="nav-number">1.</span> <span class="nav-text">XGBoost</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xgboost和LightGBM部分参数对照"><span class="nav-number"></span> <span class="nav-text">Xgboost和LightGBM部分参数对照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数详解Parameters"><span class="nav-number"></span> <span class="nav-text">参数详解Parameters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number"></span> <span class="nav-text">参考</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习算法中GBDT和XGBOOST的区别有哪些？"><span class="nav-number">2.</span> <span class="nav-text">机器学习算法中GBDT和XGBOOST的区别有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xgboost和LightGBM部分参数对照"><span class="nav-number">3.</span> <span class="nav-text">Xgboost和LightGBM部分参数对照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数详解Parameters"><span class="nav-number">4.</span> <span class="nav-text">参数详解Parameters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XGBoost还需要做特征工程吗？"><span class="nav-number">5.</span> <span class="nav-text">XGBoost还需要做特征工程吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

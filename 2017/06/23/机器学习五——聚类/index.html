@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/23/机器学习五——聚类/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="Clustering定义聚类属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。 聚类与分类 聚类分析中的“类”（cluster）和分类的“类”（class）是不同的，对cluster更加准确的翻译应该是“簇”。聚类的任务是把所有的实例分配到若干的簇，使得同一个簇的实例聚集在一个簇中心的周围，它们之间距离的比较近；而不同簇实例之间的距离比较远。对">
-<meta property="og:updated_time" content="2018-02-18T03:57:08.127Z">
+<meta property="og:updated_time" content="2018-03-06T11:03:35.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习五——聚类">
 <meta name="twitter:description" content="Clustering定义聚类属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。 聚类与分类 聚类分析中的“类”（cluster）和分类的“类”（class）是不同的，对cluster更加准确的翻译应该是“簇”。聚类的任务是把所有的实例分配到若干的簇，使得同一个簇的实例聚集在一个簇中心的周围，它们之间距离的比较近；而不同簇实例之间的距离比较远。对">
@@ -420,6 +420,12 @@
 </li>
 </ul>
 <h2 id="k-means"><a href="#k-means" class="headerlink" title="k-means"></a>k-means</h2><p>样本点满足高斯分布</p>
+<h3 id="如何选择k值？"><a href="#如何选择k值？" class="headerlink" title="如何选择k值？"></a>如何选择k值？</h3><ul>
+<li>按需选择</li>
+<li>观察法</li>
+<li>手肘法</li>
+<li>Gap Statistics方法</li>
+</ul>
 <h2 id="DBSCAN"><a href="#DBSCAN" class="headerlink" title="DBSCAN"></a>DBSCAN</h2><p>pass</p>
 <h2 id="CFSFDP"><a href="#CFSFDP" class="headerlink" title="CFSFDP"></a>CFSFDP</h2><p>Clustering by fast search and find of density peaks—密度中心聚类算法</p>
 <p>“Clustering by fast search and find of density peaks”是在2014年《Science》期刊上发表的一篇论文，这篇文章提出一种新型的基于密度的聚类算法。<strong>这个新聚类算法的核心思想在于对聚类中心的刻画上</strong>。</p>
@@ -443,6 +449,7 @@
 <li><a href="http://people.sissa.it/~laio/Research/Res_clustering.php" target="_blank" rel="external">http://people.sissa.it/~laio/Research/Res_clustering.php</a></li>
 <li><a href="http://www.cnblogs.com/peghoty/p/3945653.html" target="_blank" rel="external">http://www.cnblogs.com/peghoty/p/3945653.html</a></li>
 <li><a href="http://www.cnblogs.com/taokongcn/p/4034348.html" target="_blank" rel="external">http://www.cnblogs.com/taokongcn/p/4034348.html</a></li>
+<li><a href="http://sofasofa.io/forum_main_post.php?postid=1000282#" target="_blank" rel="external">http://sofasofa.io/forum_main_post.php?postid=1000282#</a></li>
 </ol>
 
       
@@ -653,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clustering"><span class="nav-number">1.</span> <span class="nav-text">Clustering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚类与分类"><span class="nav-number">1.2.</span> <span class="nav-text">聚类与分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clustering-Algorithms分类"><span class="nav-number">1.3.</span> <span class="nav-text">Clustering Algorithms分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means"><span class="nav-number">2.</span> <span class="nav-text">k-means</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DBSCAN"><span class="nav-number">3.</span> <span class="nav-text">DBSCAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CFSFDP"><span class="nav-number">4.</span> <span class="nav-text">CFSFDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法优点"><span class="nav-number">4.1.</span> <span class="nav-text">算法优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法缺点"><span class="nav-number">4.2.</span> <span class="nav-text">算法缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚类算法应用的领域"><span class="nav-number">5.</span> <span class="nav-text">聚类算法应用的领域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clustering"><span class="nav-number">1.</span> <span class="nav-text">Clustering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚类与分类"><span class="nav-number">1.2.</span> <span class="nav-text">聚类与分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clustering-Algorithms分类"><span class="nav-number">1.3.</span> <span class="nav-text">Clustering Algorithms分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means"><span class="nav-number">2.</span> <span class="nav-text">k-means</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何选择k值？"><span class="nav-number">2.1.</span> <span class="nav-text">如何选择k值？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DBSCAN"><span class="nav-number">3.</span> <span class="nav-text">DBSCAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CFSFDP"><span class="nav-number">4.</span> <span class="nav-text">CFSFDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法优点"><span class="nav-number">4.1.</span> <span class="nav-text">算法优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法缺点"><span class="nav-number">4.2.</span> <span class="nav-text">算法缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚类算法应用的领域"><span class="nav-number">5.</span> <span class="nav-text">聚类算法应用的领域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
