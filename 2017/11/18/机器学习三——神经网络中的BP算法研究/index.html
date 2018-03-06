@@ -101,17 +101,17 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="BP算法基础机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下问题均属于非线性规划中的无约束优化问题。 目标函数目标函数 = 经验风险 + 结构风险 经验损失是为了是学习算法匹配测试样本，结构风险（范数）是为了防止过拟合 损失函数对于目标函数来说在有约束条件下的最小化就是损失函数（loss functio">
+<meta name="description" content="阅读本文前，建议可以看一下SofaSofa的这篇文章，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！  BP算法基础机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下问题均属于非线性规划中的无约束优化问题。 目标函数目标函数 = 经验风险 + 结构风险 经验损失是为">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习三——神经网络中的BP算法研究">
 <meta property="og:url" content="http://yoursite.com/2017/11/18/机器学习三——神经网络中的BP算法研究/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="BP算法基础机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下问题均属于非线性规划中的无约束优化问题。 目标函数目标函数 = 经验风险 + 结构风险 经验损失是为了是学习算法匹配测试样本，结构风险（范数）是为了防止过拟合 损失函数对于目标函数来说在有约束条件下的最小化就是损失函数（loss functio">
-<meta property="og:updated_time" content="2018-02-07T09:15:26.652Z">
+<meta property="og:description" content="阅读本文前，建议可以看一下SofaSofa的这篇文章，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！  BP算法基础机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下问题均属于非线性规划中的无约束优化问题。 目标函数目标函数 = 经验风险 + 结构风险 经验损失是为">
+<meta property="og:updated_time" content="2018-03-06T03:30:43.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习三——神经网络中的BP算法研究">
-<meta name="twitter:description" content="BP算法基础机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下问题均属于非线性规划中的无约束优化问题。 目标函数目标函数 = 经验风险 + 结构风险 经验损失是为了是学习算法匹配测试样本，结构风险（范数）是为了防止过拟合 损失函数对于目标函数来说在有约束条件下的最小化就是损失函数（loss functio">
+<meta name="twitter:description" content="阅读本文前，建议可以看一下SofaSofa的这篇文章，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！  BP算法基础机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下问题均属于非线性规划中的无约束优化问题。 目标函数目标函数 = 经验风险 + 结构风险 经验损失是为">
 
 
 
@@ -261,12 +261,6 @@
             <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
         </li>
       
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Commonweal 404</a>
-        </li>
-      
 
       
     </ul>
@@ -403,7 +397,10 @@
       
 
       
-        <h2 id="BP算法基础"><a href="#BP算法基础" class="headerlink" title="BP算法基础"></a>BP算法基础</h2><p>机器学习之所以包含“学习”二字，是因为机器学习算法会尝试<strong>优化</strong>一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下问题均属于非线性规划中的无约束优化问题。</p>
+        <blockquote>
+<p>阅读本文前，建议可以看一下<a href="http://sofasofa.io/tutorials/python_gradient_descent/index.php" target="_blank" rel="external">SofaSofa的这篇文章</a>，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！</p>
+</blockquote>
+<h2 id="BP算法基础"><a href="#BP算法基础" class="headerlink" title="BP算法基础"></a>BP算法基础</h2><p>机器学习之所以包含“学习”二字，是因为机器学习算法会尝试<strong>优化</strong>一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下问题均属于非线性规划中的无约束优化问题。</p>
 <h3 id="目标函数"><a href="#目标函数" class="headerlink" title="目标函数"></a>目标函数</h3><p>目标函数 = 经验风险 + 结构风险</p>
 <p>经验损失是为了是学习算法匹配测试样本，结构风险（范数）是为了防止过拟合</p>
 <h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>对于目标函数来说在有约束条件下的最小化就是损失函数（loss function）</p>
@@ -438,7 +435,21 @@
 <li>拟牛顿法（BFGS -&gt; L-BFGS）</li>
 <li>坐标下降法</li>
 </ul>
-<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><h3 id="GD"><a href="#GD" class="headerlink" title="GD"></a>GD</h3><p>而梯度下降法是从初始点的领域开始判断，在局部进行最速下降方向，然后步步逼近极值；所以往往会导致梯度下降法比牛顿法迭代的次数更多。</p>
+<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><blockquote>
+<ul>
+<li>样本的数量<ul>
+<li>batchsize 批大小。在深度学习中，一般采用SGD训练，即每次训练在训练集中取batchsize个样本训练<ul>
+<li>数字越小时，此时就相当于来了一个样本，然后做一次更新，训练过程越接近随机梯度下降sgd</li>
+<li>数字越大时，训练越接近梯度下降，即每一次参数更新都要用到全部样本数据</li>
+</ul>
+</li>
+<li>iteration1个iteration等于使用batchsize个样本训练一次</li>
+<li>epoch1个epoch等于使用训练集中的全部样本训练一次</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="GD"><a href="#GD" class="headerlink" title="GD"></a>GD</h3><p>而梯度下降法是从初始点的领域开始判断，在局部进行最速下降方向，然后步步逼近极值；所以往往会导致梯度下降法比牛顿法迭代的次数更多。</p>
 <h4 id="BGD"><a href="#BGD" class="headerlink" title="BGD"></a>BGD</h4><p>批量梯度下降和随机梯度下降的区别在于批量的话每次更新参数要用到每个样本（从对每个样本求和可以看到），而随机的话只用一个。</p>
 <h4 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h4><p>随机梯度下降（是梯度下降的batch版本，batch_size=1），在SGD中，每次迭代可以只用<strong>一个</strong>训练数据来更新参数。此时更新的算法，只用到了一个样本。其实具象的理解下，就是来了一条训练数据，算下此时根据模型算出的值和实际值的差距，如果差距大，那么参数更新的幅度大，反之则小。当训练数据过大时，用GD可能造成内存不够用，那么就可以用SGD了，SGD其实可以算作是一种online-learning。另外SGD收敛会比GD快，但是对于代价函数求最小值还是GD做的比较好，不过SGD也够用了。</p>
 <h4 id="Adam算法"><a href="#Adam算法" class="headerlink" title="Adam算法"></a>Adam算法</h4><h4 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h4><p>该优化算法与普通的sgd算法差别就在于采取了累积平方梯度，<strong>简单来讲，设置全局学习率之后，每次通过，全局学习率逐参数的除以历史梯度平方和的平方根，使得每个参数的学习率不同</strong></p>
@@ -569,7 +580,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -621,7 +632,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

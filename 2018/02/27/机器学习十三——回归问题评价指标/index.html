@@ -101,17 +101,17 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="MAE(Mean Absolute Error) 平均绝对误差  $(f_i-y_i)$ $\sum_{i=0}^n i^2$ MSE(Mean Square Error) 平均平方差/均方误差是回归任务最常用的性能度量。  RMSE(Root Mean Square Error) 方均根差  RMSLE">
+<meta name="description" content="损失函数与评价函数之间的关系损失函数与评价函数的概念应该差不多，因为损失函数一般用来衡量预测结果与真是结果之间的误差，其实最终我们在进行评价时，进行的也是这个操作。 常见指标如果一共有$n$个样本，即其真实标签为$y_i$，通过模型预测的结果为$f_i$，则 MAE(Mean Absolute Error) 平均绝对误差$$\frac{1}{n}\sum_{i=1}^{n}|f_i-y_i|$$M">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习十三——回归问题评价指标">
 <meta property="og:url" content="http://yoursite.com/2018/02/27/机器学习十三——回归问题评价指标/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="MAE(Mean Absolute Error) 平均绝对误差  $(f_i-y_i)$ $\sum_{i=0}^n i^2$ MSE(Mean Square Error) 平均平方差/均方误差是回归任务最常用的性能度量。  RMSE(Root Mean Square Error) 方均根差  RMSLE">
-<meta property="og:updated_time" content="2018-02-28T11:24:32.532Z">
+<meta property="og:description" content="损失函数与评价函数之间的关系损失函数与评价函数的概念应该差不多，因为损失函数一般用来衡量预测结果与真是结果之间的误差，其实最终我们在进行评价时，进行的也是这个操作。 常见指标如果一共有$n$个样本，即其真实标签为$y_i$，通过模型预测的结果为$f_i$，则 MAE(Mean Absolute Error) 平均绝对误差$$\frac{1}{n}\sum_{i=1}^{n}|f_i-y_i|$$M">
+<meta property="og:updated_time" content="2018-03-05T04:49:52.250Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习十三——回归问题评价指标">
-<meta name="twitter:description" content="MAE(Mean Absolute Error) 平均绝对误差  $(f_i-y_i)$ $\sum_{i=0}^n i^2$ MSE(Mean Square Error) 平均平方差/均方误差是回归任务最常用的性能度量。  RMSE(Root Mean Square Error) 方均根差  RMSLE">
+<meta name="twitter:description" content="损失函数与评价函数之间的关系损失函数与评价函数的概念应该差不多，因为损失函数一般用来衡量预测结果与真是结果之间的误差，其实最终我们在进行评价时，进行的也是这个操作。 常见指标如果一共有$n$个样本，即其真实标签为$y_i$，通过模型预测的结果为$f_i$，则 MAE(Mean Absolute Error) 平均绝对误差$$\frac{1}{n}\sum_{i=1}^{n}|f_i-y_i|$$M">
 
 
 
@@ -261,12 +261,6 @@
             <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
         </li>
       
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Commonweal 404</a>
-        </li>
-      
 
       
     </ul>
@@ -403,12 +397,14 @@
       
 
       
-        <p>MAE(Mean Absolute Error) 平均绝对误差 </p>
-<p>$(f_i-y_i)$</p>
-<p>$\sum_{i=0}^n i^2$</p>
-<p>MSE(Mean Square Error) 平均平方差/均方误差是回归任务最常用的性能度量。 </p>
-<p>RMSE<a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation" target="_blank" rel="external">(Root Mean Square Error)</a> 方均根差 </p>
+        <h2 id="损失函数与评价函数之间的关系"><a href="#损失函数与评价函数之间的关系" class="headerlink" title="损失函数与评价函数之间的关系"></a>损失函数与评价函数之间的关系</h2><p>损失函数与评价函数的概念应该差不多，因为损失函数一般用来衡量预测结果与真是结果之间的误差，其实最终我们在进行评价时，进行的也是这个操作。</p>
+<h2 id="常见指标"><a href="#常见指标" class="headerlink" title="常见指标"></a>常见指标</h2><p>如果一共有$n$个样本，即其真实标签为$y_i$，通过模型预测的结果为$f_i$，则</p>
+<p>MAE(Mean Absolute Error) 平均绝对误差<br>$$<br>\frac{1}{n}\sum_{i=1}^{n}|f_i-y_i|<br>$$<br>MSE(Mean Square Error) 均方根差<br>$$</p>
+<p>$$</p>
+<p>RMSE<a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation" target="_blank" rel="external">(Root Mean Square Error)</a>  根均方根差<br>$$</p>
+<p>$$</p>
 <p>RMSLE</p>
+<p>R平方</p>
 
       
     </div>
@@ -503,8 +499,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -519,7 +524,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -571,7 +576,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -597,6 +604,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数与评价函数之间的关系"><span class="nav-number">1.</span> <span class="nav-text">损失函数与评价函数之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见指标"><span class="nav-number">2.</span> <span class="nav-text">常见指标</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

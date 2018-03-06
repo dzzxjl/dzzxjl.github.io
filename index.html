@@ -257,12 +257,6 @@
             <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
         </li>
       
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404/" rel="section">
-            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Commonweal 404</a>
-        </li>
-      
 
       
     </ul>
@@ -288,6 +282,165 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/机器学习十四——参数与超参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dzzxjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十一城">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/06/机器学习十四——参数与超参数/" itemprop="url">机器学习十四——参数与超参数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-06T11:28:45+08:00">2018-03-06</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ml/" itemprop="url" rel="index"><span itemprop="name">ml</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/06/机器学习十四——参数与超参数/" class="leancloud_visitors" data-flag-title="机器学习十四——参数与超参数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          参数 parameter——模型训练机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程，比如假设你要做一个多项式回归分析的模型，比如$f(x)=w_1x_1+w_2x_
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/06/机器学习十四——参数与超参数/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -403,9 +556,13 @@
       
         
           
-          http://www.csuldw.com/2016/08/19/2016-08-19-probability-distributions/
+          关于概率的几个概念举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。
+$P(堵车)$为先验概率——（出门前根据有种要堵车的感觉，这也是先验的意思）
+$P(堵车|车祸)$是后验概率——（发生车祸了，这下估计要堵车）
 
-          
+为了很好的说明这个问题，在这里举一个例子：
+玩英雄联盟占到中国总人口的
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/02/28/概率统计一——概率分布/#more" rel="contents">
@@ -563,12 +720,9 @@
       
         
           
-          MAE(Mean Absolute Error) 平均绝对误差 
-$(f_i-y_i)$
-$\sum_{i=0}^n i^2$
-MSE(Mean Square Error) 平均平方差/均方误差是回归任务最常用的性能度量。 
-RMSE(Root Mean Square Error) 方均根差 
-RM
+          损失函数与评价函数之间的关系损失函数与评价函数的概念应该差不多，因为损失函数一般用来衡量预测结果与真是结果之间的误差，其实最终我们在进行评价时，进行的也是这个操作。
+常见指标如果一共有$n$个样本，即其真实标签为$y_i$，通过模型预测的结果为$f_i$，则
+MAE(Mean Absolute Er
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1069,9 +1223,11 @@ RM
       
         
           
-          PDApass
-LDASVD
-          
+          PCA与SVD的关系PCA与SVD不是一个回事，但是本质上是一样的。
+PCA的理论基础是SVD。
+PCA可以看作是截断SVD，因为我们只选取了权重大（解释性大）的前$k$个主成分而舍弃其他成分。
+PCA-Principal components analysis-1901在多元统计分析中，主成分分析
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/02/18/机器学习十一——降维/#more" rel="contents">
@@ -1612,166 +1768,6 @@ A
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/14/机器学习八——分类问题评价指标/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dzzxjl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="十一城">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/14/机器学习八——分类问题评价指标/" itemprop="url">机器学习八——分类问题评价指标</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-14T13:22:02+08:00">2018-02-14</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ml/" itemprop="url" rel="index"><span itemprop="name">ml</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/02/14/机器学习八——分类问题评价指标/" class="leancloud_visitors" data-flag-title="机器学习八——分类问题评价指标">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Views&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          机器学习(ML)，自然语言处理(NLP)，信息检索(IR)等领域，评估(Evaluation)是一个必要的工作，而其评价指标往往有如下几点：准确率(Accuracy)，精确率(Precision)，召回率(Recall)和F1-Measure。
-他们存在的场景通常是在测试(Testing)或验证(V
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/14/机器学习八——分类问题评价指标/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1819,7 +1815,7 @@ A
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1871,7 +1867,9 @@ A
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -2190,9 +2188,9 @@ A
       
     
       
-        
-      
     
+      
+        
       
     
       
