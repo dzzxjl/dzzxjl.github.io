@@ -101,24 +101,24 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="基础在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：  General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。 Booster parameters：这取决于使用哪">
+<meta name="description" content="阅读本文前，建议可以看一下SofaSofa的这篇文章，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！  机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下均属于非线性规划中的无约束优化问题的求解方法。 梯度 对于最优化问题的求解 梯度提升决策树方法簇  概览 梯度下">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
-<meta property="og:title" content="理解XGBoost">
-<meta property="og:url" content="http://yoursite.com/2018/01/12/理解XGBoost/index.html">
+<meta property="og:title" content="最优化方法">
+<meta property="og:url" content="http://yoursite.com/2017/11/22/机器学习十六——最优化算法/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="基础在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：  General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。 Booster parameters：这取决于使用哪">
-<meta property="og:updated_time" content="2018-03-06T11:47:15.982Z">
+<meta property="og:description" content="阅读本文前，建议可以看一下SofaSofa的这篇文章，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！  机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下均属于非线性规划中的无约束优化问题的求解方法。 梯度 对于最优化问题的求解 梯度提升决策树方法簇  概览 梯度下">
+<meta property="og:updated_time" content="2018-03-08T13:06:41.563Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="理解XGBoost">
-<meta name="twitter:description" content="基础在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：  General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。 Booster parameters：这取决于使用哪">
+<meta name="twitter:title" content="最优化方法">
+<meta name="twitter:description" content="阅读本文前，建议可以看一下SofaSofa的这篇文章，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！  机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下均属于非线性规划中的无约束优化问题的求解方法。 梯度 对于最优化问题的求解 梯度提升决策树方法簇  概览 梯度下">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/12/理解XGBoost/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/22/机器学习十六——最优化算法/"/>
 
 
 
@@ -127,7 +127,7 @@
     sidebar: "",
   };
 </script>
-  <title>理解XGBoost | 十一城</title>
+  <title>最优化方法 | 十一城</title>
   
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/理解XGBoost/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/22/机器学习十六——最优化算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="dzzxjl">
@@ -319,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">理解XGBoost</h1>
+          <h1 class="post-title" itemprop="name headline">最优化方法</h1>
         
 
         <div class="post-meta">
@@ -331,7 +331,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-12T14:13:25+08:00">2018-01-12</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-22T14:55:42+08:00">2017-11-22</time>
             
 
             
@@ -366,7 +366,7 @@
 
           
           
-             <span id="/2018/01/12/理解XGBoost/" class="leancloud_visitors" data-flag-title="理解XGBoost">
+             <span id="/2017/11/22/机器学习十六——最优化算法/" class="leancloud_visitors" data-flag-title="最优化方法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -397,230 +397,66 @@
       
 
       
-        <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>在运行XGboost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：</p>
-<ul>
-<li>General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。</li>
-<li>Booster parameters：这取决于使用哪种booster。</li>
-<li>Task parameters：控制学习的场景，例如在回归问题中会使用不同的参数控制排序。</li>
-<li>除了以上参数还可能有其它参数，在命令行中使用</li>
+        <blockquote>
+<p>阅读本文前，建议可以看一下<a href="http://sofasofa.io/tutorials/python_gradient_descent/index.php" target="_blank" rel="external">SofaSofa的这篇文章</a>，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！</p>
+</blockquote>
+<p>机器学习之所以包含“学习”二字，是因为机器学习算法会尝试<strong>优化</strong>一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下均属于非线性规划中的无约束优化问题的求解方法。</p>
+<h2 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a><a href="https://zhuanlan.zhihu.com/p/24913912" target="_blank" rel="external">梯度</a></h2><ul>
+<li>对于最优化问题的求解</li>
+<li>梯度提升决策树方法簇</li>
 </ul>
-<p>XGBoost使用的基学习器是CART</p>
-<ul>
-<li>决策规则与决策树的一样</li>
-<li>每个叶子节点上都包含了一个权重，也有人叫做分数</li>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><ul>
+<li>梯度下降法 Gradient Descent<ul>
+<li>SGD(stochastic)<ul>
+<li>梯度优化算法<ul>
+<li>Momentum</li>
+<li><a href="https://zhuanlan.zhihu.com/p/29920135" target="_blank" rel="external">Adagrad</a> -&gt;每次通过，全局学习率逐参数的除以历史梯度平方和的平方根，使得每个参数的学习率不同</li>
+<li>Adam</li>
 </ul>
-<h2 id="机器学习算法中GBDT和XGBOOST的区别有哪些？"><a href="#机器学习算法中GBDT和XGBOOST的区别有哪些？" class="headerlink" title="机器学习算法中GBDT和XGBOOST的区别有哪些？"></a><a href="https://www.zhihu.com/question/41354392/answer/91371364" target="_blank" rel="external">机器学习算法中GBDT和XGBOOST的区别有哪些？</a></h2><p>首先<strong>xgboost</strong>是Gradient Boosting的一种高效系统实现，并不是一种单一算法。xgboost里面的基学习器除了用tree(gbtree)，也可用线性分类器(gblinear)。而GBDT则特指梯度提升决策树算法。xgboost相对于普通gbm的实现，可能具有以下的一些优势：</p>
+</li>
+</ul>
+</li>
+<li>BGD(batch)</li>
+<li>Mini-Batch GD</li>
+</ul>
+</li>
+<li><del>牛顿法</del>（因为Hesse矩阵的计算量很大，一般不使用）</li>
+<li>拟牛顿法（BFGS -&gt; L-BFGS）</li>
+<li>坐标下降法</li>
+</ul>
+<blockquote>
+<ul>
+<li>样本的数量<ul>
+<li>batchsize 批大小。在深度学习中，一般采用SGD训练，即每次训练在训练集中取batchsize个样本训练<ul>
+<li>数字越小时，此时就相当于来了一个样本，然后做一次更新，训练过程越接近随机梯度下降sgd</li>
+<li>数字越大时，训练越接近梯度下降，即每一次参数更新都要用到全部样本数据</li>
+</ul>
+</li>
+<li>iteration1个iteration等于使用batchsize个样本训练一次</li>
+<li>epoch1个epoch等于使用训练集中的全部样本训练一次</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="GD"><a href="#GD" class="headerlink" title="GD"></a>GD</h2><p>而梯度下降法是从初始点的领域开始判断，在局部进行最速下降方向，然后步步逼近极值；所以往往会导致梯度下降法比牛顿法迭代的次数更多。</p>
+<h3 id="BGD"><a href="#BGD" class="headerlink" title="BGD"></a>BGD</h3><p>批量梯度下降和随机梯度下降的区别在于批量的话每次更新参数要用到每个样本（从对每个样本求和可以看到），而随机的话只用一个。</p>
+<h3 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h3><p>随机梯度下降（是梯度下降的batch版本，batch_size=1），在SGD中，每次迭代可以只用<strong>一个</strong>训练数据来更新参数。此时更新的算法，只用到了一个样本。其实具象的理解下，就是来了一条训练数据，算下此时根据模型算出的值和实际值的差距，如果差距大，那么参数更新的幅度大，反之则小。当训练数据过大时，用GD可能造成内存不够用，那么就可以用SGD了，SGD其实可以算作是一种online-learning。另外SGD收敛会比GD快，但是对于代价函数求最小值还是GD做的比较好，不过SGD也够用了。</p>
+<h4 id="SGD-with-Momentum"><a href="#SGD-with-Momentum" class="headerlink" title="SGD with Momentum"></a>SGD with Momentum</h4><p>其实SAG就是SGD with momentum（带动量的随机梯度下降）的姊妹版本。SAG是对过去k次的梯度求均值。</p>
+<p>SGD with momentum是对<strong>过去所有的梯度</strong>求加权平均（权重成指数衰减）。</p>
+<h3 id="Adam算法"><a href="#Adam算法" class="headerlink" title="Adam算法"></a>Adam算法</h3><h4 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h4><p>该优化算法与普通的sgd算法差别就在于采取了累积平方梯度，<strong>简单来讲，设置全局学习率之后，每次通过，全局学习率逐参数的除以历史梯度平方和的平方根，使得每个参数的学习率不同</strong>。</p>
+<h4 id="RMSProp——AdaGrad的改进"><a href="#RMSProp——AdaGrad的改进" class="headerlink" title="RMSProp——AdaGrad的改进"></a>RMSProp——AdaGrad的改进</h4><p>可以看出RMSProp优化算法和AdaGrad算法唯一的不同，就在于累积平方梯度的求法不同。<strong>RMSProp算法不是像AdaGrad算法那样暴力直接的累加平方梯度，而是加了一个衰减系数来控制历史信息的获取多少。</strong></p>
 <ol>
-<li>显式地将<strong>树模型的复杂度</strong>作为正则项加在优化目标</li>
-<li>公式推导里用到了<strong>二阶导数</strong>信息，而普通的GBDT只用到一阶</li>
-<li>允许使用column(feature) sampling来防止过拟合，借鉴了Random Forest的思想，sklearn里的gbm好像也有类似实现</li>
-<li>实现了一种分裂节点寻找的近似算法，用于加速和减小内存消耗</li>
-<li>节点分裂算法能自动利用特征的稀疏性</li>
-<li>data事先排好序并以block的形式存储，利于并行计算</li>
-<li>cache-aware, out-of-core computation</li>
-<li>支持分布式计算可以运行在MPI，YARN上，得益于底层支持容错的分布式通信框架rabit。</li>
+<li>RMSProp是AdaGrad算法的改进。鉴于神经网络都是非凸条件下的，RMSProp在非凸条件下结果更好，改变梯度累积为指数衰减的移动平均以丢弃遥远的过去历史。</li>
+<li>经验上，RMSProp被证明有效且实用的深度学习网络优化算法。与AdaGrad相比，RMSProp增加了<strong>一个衰减系数</strong>来控制历史信息的获取多少。</li>
 </ol>
-<h2 id="Xgboost和LightGBM部分参数对照"><a href="#Xgboost和LightGBM部分参数对照" class="headerlink" title="Xgboost和LightGBM部分参数对照"></a>Xgboost和LightGBM部分参数对照</h2><table>
-<thead>
-<tr>
-<th>Xgboost</th>
-<th>LightGbm</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>booster(default=gbtree)</strong></td>
-<td><strong>boosting(default=gbdt)</strong></td>
-</tr>
-<tr>
-<td><strong>eta(default=0.3)</strong></td>
-<td><strong>learning_rate(default=0.1)</strong></td>
-</tr>
-<tr>
-<td><strong>max_depth(default=6)</strong></td>
-<td><strong>num_leaves(default=31)</strong></td>
-</tr>
-<tr>
-<td><strong>min_child_weight(default=1)</strong></td>
-<td><strong>min_sum_hessian_in_leaf(1e-3)</strong></td>
-</tr>
-<tr>
-<td><strong>gamma(default=0)</strong></td>
-<td><strong>min_gain_to_split(default=20)</strong></td>
-</tr>
-<tr>
-<td><strong>subsample(default=1)</strong></td>
-<td><strong>bagging_fraction(default=1.0)</strong></td>
-</tr>
-<tr>
-<td><strong>colsample_bytree(default=1)</strong></td>
-<td><strong>feature_fraction( default=1.0)</strong></td>
-</tr>
-<tr>
-<td><strong>alpha(default=0)</strong></td>
-<td><strong>lambda_l1(default=0)</strong></td>
-</tr>
-<tr>
-<td><strong>lambda(default=1)</strong></td>
-<td><strong>lambda_l2(default=0)</strong></td>
-</tr>
-<tr>
-<td><strong>objective( default=reg:linear)</strong></td>
-<td><strong>application(default=regression)</strong></td>
-</tr>
-<tr>
-<td><strong>eval_metric(default according to objective)</strong></td>
-<td><strong>metric</strong></td>
-</tr>
-<tr>
-<td><strong>nthread</strong></td>
-<td><strong>num_threads</strong></td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>使用num_leaves</li>
-</ol>
-<p>因为LightGBM使用的是leaf-wise的算法，因此在调节树的复杂程度时，使用的是num_leaves而不是max_depth。</p>
-<p>大致换算关系：num_leaves = 2^(max_depth)。它的值的设置应该小于2^(max_depth)，否则可能会导致过拟合。</p>
-<ol>
-<li>对于<strong>非平衡数据集</strong>：可以param[‘is_unbalance’]=’true’</li>
-</ol>
-<ol>
-<li>Bagging参数：bagging_fraction+bagging_freq（必须同时设置）、feature_fraction。bagging_fraction可以使bagging的更快的运行出结果，feature_fraction设置在每次迭代中使用特征的比例。</li>
-<li>min_data_in_leaf：这也是一个比较重要的参数，调大它的值可以防止过拟合，它的值通常设置的比较大。</li>
-<li>max_bin:调小max_bin的值可以提高模型训练速度，调大它的值和调大num_leaves起到的效果类似。</li>
-</ol>
-<p>参数速查：</p>
-<table>
-<thead>
-<tr>
-<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/2_xgb/README.md#1-%E5%8E%9F%E7%94%9F%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">xgb</a></th>
-<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/1_lgb/README.md#1-%E5%8E%9F%E7%94%9F%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">lgb</a></th>
-<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/2_xgb/README.md#2-sk%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">xgb.sklearn</a></th>
-<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/1_lgb/README.md#2-sk%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">lgb.sklearn</a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>booster=’gbtree’</td>
-<td>boosting=’gbdt’</td>
-<td>booster=’gbtree’</td>
-<td>boosting_type=’gbdt’</td>
-</tr>
-<tr>
-<td>objective=’binary:logistic’</td>
-<td>application=’binary’</td>
-<td>objective=’binary:logistic’</td>
-<td>objective=’binary’</td>
-</tr>
-<tr>
-<td>max_depth=7</td>
-<td>num_leaves=2**7</td>
-<td>max_depth=7</td>
-<td>num_leaves=2**7</td>
-</tr>
-<tr>
-<td>eta=0.1</td>
-<td>learning_rate=0.1</td>
-<td>learning_rate=0.1</td>
-<td>learning_rate=0.1</td>
-</tr>
-<tr>
-<td>num_boost_round=10</td>
-<td>num_boost_round=10</td>
-<td>n_estimators=10</td>
-<td>n_estimators=10</td>
-</tr>
-<tr>
-<td>gamma=0</td>
-<td>min_split_gain=0.0</td>
-<td>gamma=0</td>
-<td>min_split_gain=0.0</td>
-</tr>
-<tr>
-<td>min_child_weight=5</td>
-<td>min_child_weight=5</td>
-<td>min_child_weight=5</td>
-<td>min_child_weight=5</td>
-</tr>
-<tr>
-<td>subsample=1</td>
-<td>bagging_fraction=1</td>
-<td>subsample=1.0</td>
-<td>subsample=1.0</td>
-</tr>
-<tr>
-<td>colsample_bytree=1.0</td>
-<td>feature_fraction=1</td>
-<td>colsample_bytree=1.0</td>
-<td>colsample_bytree=1.0</td>
-</tr>
-<tr>
-<td>alpha=0</td>
-<td>lambda_l1=0</td>
-<td>reg_alpha=0.0</td>
-<td>reg_alpha=0.0</td>
-</tr>
-<tr>
-<td>lambda=1</td>
-<td>lambda_l2=0</td>
-<td>reg_lambda=1</td>
-<td>reg_lambda=0.0</td>
-</tr>
-<tr>
-<td>scale_pos_weight=1</td>
-<td>scale_pos_weight=1</td>
-<td>scale_pos_weight=1</td>
-<td>scale_pos_weight=1</td>
-</tr>
-<tr>
-<td>seed</td>
-<td>bagging_seedfeature_fraction_seed</td>
-<td>random_state=888</td>
-<td>random_state=888</td>
-</tr>
-<tr>
-<td>nthread</td>
-<td>num_threads</td>
-<td>n_jobs=4</td>
-<td>n_jobs=4</td>
-</tr>
-<tr>
-<td>evals</td>
-<td>valid_sets</td>
-<td>eval_set</td>
-<td>eval_set</td>
-</tr>
-<tr>
-<td>eval_metric</td>
-<td>metric</td>
-<td>eval_metric</td>
-<td>eval_metric</td>
-</tr>
-<tr>
-<td>early_stopping_rounds</td>
-<td>early_stopping_rounds</td>
-<td>early_stopping_rounds</td>
-<td>early_stopping_rounds</td>
-</tr>
-<tr>
-<td>verbose_eval</td>
-<td>verbose_eval</td>
-<td>verbose</td>
-<td>verbose</td>
-</tr>
-</tbody>
-</table>
-<h2 id="参数详解Parameters"><a href="#参数详解Parameters" class="headerlink" title="参数详解Parameters"></a>参数详解Parameters</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">max_depth : int</div><div class="line">Maximum tree depth for base learners.</div><div class="line"></div><div class="line">learning_rate : float #learning_rate ＝ 0.1 或更小，越小就需要多加入弱学习器</div><div class="line">Boosting learning rate (xgb’s “eta”)</div><div class="line">n_estimators : int</div><div class="line">Number of boosted trees to fit.</div><div class="line">silent : boolean</div><div class="line">Whether to print messages while running boosting.</div><div class="line">objective : string or callable</div><div class="line">Specify the learning task and the corresponding learning objective or a custom objective function to be used (see note below).</div><div class="line">booster: string</div><div class="line">Specify which booster to use: gbtree, gblinear or dart.</div><div class="line">nthread : int</div><div class="line">Number of parallel threads used to run xgboost. (Deprecated, please use n_jobs)</div><div class="line">n_jobs : int</div><div class="line">Number of parallel threads used to run xgboost. (replaces nthread)</div><div class="line">gamma : float</div><div class="line">Minimum loss reduction required to make a further partition on a leaf node of the tree.</div><div class="line">min_child_weight : int</div><div class="line">Minimum sum of instance weight(hessian) needed in a child.</div><div class="line">max_delta_step : int</div><div class="line">Maximum delta step we allow each tree’s weight estimation to be.</div><div class="line">subsample : float</div><div class="line">Subsample ratio of the training instance.</div><div class="line">colsample_bytree : float</div><div class="line">Subsample ratio of columns when constructing each tree.</div><div class="line">colsample_bylevel : float</div><div class="line">Subsample ratio of columns for each split, in each level.</div><div class="line">reg_alpha : float (xgb’s alpha)</div><div class="line">L1 regularization term on weights</div><div class="line">reg_lambda : float (xgb’s lambda)</div><div class="line">L2 regularization term on weights</div><div class="line">scale_pos_weight : float</div><div class="line">Balancing of positive and negative weights.</div><div class="line">base_score:</div><div class="line">The initial prediction score of all instances, global bias.</div><div class="line">seed : int</div><div class="line">Random number seed. (Deprecated, please use random_state)</div><div class="line">random_state : int</div><div class="line">Random number seed. (replaces seed)</div><div class="line">missing : float, optional</div><div class="line">Value in the input which needs to be present as a missing value. If None, defaults to np.nan.</div></pre></td></tr></table></figure>
-<h2 id="XGBoost还需要做特征工程吗？"><a href="#XGBoost还需要做特征工程吗？" class="headerlink" title="XGBoost还需要做特征工程吗？"></a>XGBoost还需要做特征工程吗？</h2><p>特征工程是个很广的概念，包括特征筛选、特征变换、特征合成、特征提取等等。对于xgboost，它能够很好地做到特征选择，所以这一点不用我们去操心太多。至于特征变换（离散化、归一化、标准化、取log等等），我们也不需要做太多，因为xgboost是基于决策树，决策树自然能够解决这些。相比较来说，线性模型则需要做离散化或者取log处理。因为<strong>xgboost（树类模型）不依赖于线性假设</strong>。但是对于分类特征，xgboost需要对其进行独热编码，否则无法训练模型。xgboost也可以免于一部分特征合成的工作，比如线性回归中的交互项a:b，在树类模型中都可以自动完成。但是对于加法a+b，减法a-b，除法a-b这类合成的特征，则需要手动完成。</p>
-<p>绝大部分模型都无法自动完成的一步就是特征提取。很多nlp的问题或者图象的问题，没有现成的特征，你需要自己去提取这些特征，这些是我们需要人工完成的。</p>
-<p>综上来说，xgboost的确比线性模型要省去很多特征工程的步骤。但是特征工程依然是非常必要的。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="http://blog.csdn.net/weiyongle1996/article/details/78446244" target="_blank" rel="external">http://blog.csdn.net/weiyongle1996/article/details/78446244</a></li>
-<li><a href="https://www.jianshu.com/p/8346d4f80ab0" target="_blank" rel="external">https://www.jianshu.com/p/8346d4f80ab0</a></li>
-<li><a href="http://chuan92.com/2016/03/19/xgboost-and-gbdt" target="_blank" rel="external">http://chuan92.com/2016/03/19/xgboost-and-gbdt</a></li>
-<li><a href="http://sofasofa.io/forum_main_post.php?postid=1001161" target="_blank" rel="external">http://sofasofa.io/forum_main_post.php?postid=1001161</a></li>
+<h3 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h3><p>在二阶导数的作用下，从函数的凹凸性出发，直接搜索怎样到达极值点。</p>
+<p>牛顿迭代与梯度下降法的不同之处在于多了一项二阶导数。这个二阶导数对算法的影响有两个方面，方向和大小。方向，二阶导数的几何含义是曲率，也就是迭代的时候是考虑到梯度下降的方向的。大小，每次迭代的步长是和陡度成反比的，越陡步长越小，平坦的时候步长越大。</p>
+<h3 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h3><p>L-BFGS</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ol>
+<li><a href="https://www.zhihu.com/question/19723347" target="_blank" rel="external">https://www.zhihu.com/question/19723347</a></li>
+<li><a href="https://www.zhihu.com/question/46441403" target="_blank" rel="external">https://www.zhihu.com/question/46441403</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/25703402" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/25703402</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/29895933" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/29895933</a></li>
 </ol>
 
       
@@ -655,8 +491,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/10/我的Linux之路/" rel="next" title="我的Linux之路">
-                <i class="fa fa-chevron-left"></i> 我的Linux之路
+              <a href="/2017/11/21/更好地学习/" rel="next" title="更好地学习">
+                <i class="fa fa-chevron-left"></i> 更好地学习
               </a>
             
           </div>
@@ -665,8 +501,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/12/理解LightGBM/" rel="prev" title="理解LightGBM">
-                理解LightGBM <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/28/机器学习二——决策树/" rel="prev" title="机器学习二——决策树">
+                机器学习二——决策树 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -741,7 +577,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">86</span>
+                    <span class="site-state-item-count">89</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -762,7 +598,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -831,7 +669,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习算法中GBDT和XGBOOST的区别有哪些？"><span class="nav-number">2.</span> <span class="nav-text">机器学习算法中GBDT和XGBOOST的区别有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xgboost和LightGBM部分参数对照"><span class="nav-number">3.</span> <span class="nav-text">Xgboost和LightGBM部分参数对照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数详解Parameters"><span class="nav-number">4.</span> <span class="nav-text">参数详解Parameters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XGBoost还需要做特征工程吗？"><span class="nav-number">5.</span> <span class="nav-text">XGBoost还需要做特征工程吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度"><span class="nav-number">1.</span> <span class="nav-text">梯度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">2.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GD"><span class="nav-number">3.</span> <span class="nav-text">GD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BGD"><span class="nav-number">3.1.</span> <span class="nav-text">BGD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SGD"><span class="nav-number">3.2.</span> <span class="nav-text">SGD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SGD-with-Momentum"><span class="nav-number">3.2.1.</span> <span class="nav-text">SGD with Momentum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam算法"><span class="nav-number">3.3.</span> <span class="nav-text">Adam算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AdaGrad"><span class="nav-number">3.3.1.</span> <span class="nav-text">AdaGrad</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RMSProp——AdaGrad的改进"><span class="nav-number">3.3.2.</span> <span class="nav-text">RMSProp——AdaGrad的改进</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#牛顿法"><span class="nav-number">3.4.</span> <span class="nav-text">牛顿法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拟牛顿法"><span class="nav-number">3.5.</span> <span class="nav-text">拟牛顿法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">4.</span> <span class="nav-text">引用</span></a></li></ol></div>
             
 
           </div>

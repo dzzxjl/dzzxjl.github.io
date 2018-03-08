@@ -101,24 +101,24 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="Light GBM">
+<meta name="description" content="机器学习理论在国外发展的时候，我们正在上山下乡。  什么是机器学习？定义机器学习指的是计算机通过统计学算法，对大量的历史数据进行学习从而生成经验模型，利用经验模型指导业务。机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。机器学习的本质不是去学习一个函数来正确预测所有的样本，而是希望函数预测的误差在可以控制">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
-<meta property="og:title" content="理解LightGBM">
-<meta property="og:url" content="http://yoursite.com/2018/01/12/理解LightGBM/index.html">
+<meta property="og:title" content="统计机器学习">
+<meta property="og:url" content="http://yoursite.com/2017/08/09/机器学习零——统计机器学习/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="Light GBM">
-<meta property="og:updated_time" content="2018-01-17T06:54:12.749Z">
+<meta property="og:description" content="机器学习理论在国外发展的时候，我们正在上山下乡。  什么是机器学习？定义机器学习指的是计算机通过统计学算法，对大量的历史数据进行学习从而生成经验模型，利用经验模型指导业务。机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。机器学习的本质不是去学习一个函数来正确预测所有的样本，而是希望函数预测的误差在可以控制">
+<meta property="og:updated_time" content="2018-02-18T03:39:16.948Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="理解LightGBM">
-<meta name="twitter:description" content="Light GBM">
+<meta name="twitter:title" content="统计机器学习">
+<meta name="twitter:description" content="机器学习理论在国外发展的时候，我们正在上山下乡。  什么是机器学习？定义机器学习指的是计算机通过统计学算法，对大量的历史数据进行学习从而生成经验模型，利用经验模型指导业务。机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。机器学习的本质不是去学习一个函数来正确预测所有的样本，而是希望函数预测的误差在可以控制">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/12/理解LightGBM/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/09/机器学习零——统计机器学习/"/>
 
 
 
@@ -127,7 +127,7 @@
     sidebar: "",
   };
 </script>
-  <title>理解LightGBM | 十一城</title>
+  <title>统计机器学习 | 十一城</title>
   
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/理解LightGBM/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/09/机器学习零——统计机器学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="dzzxjl">
@@ -319,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">理解LightGBM</h1>
+          <h1 class="post-title" itemprop="name headline">统计机器学习</h1>
         
 
         <div class="post-meta">
@@ -331,7 +331,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-12T14:32:53+08:00">2018-01-12</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-09T11:03:31+08:00">2017-08-09</time>
             
 
             
@@ -366,7 +366,7 @@
 
           
           
-             <span id="/2018/01/12/理解LightGBM/" class="leancloud_visitors" data-flag-title="理解LightGBM">
+             <span id="/2017/08/09/机器学习零——统计机器学习/" class="leancloud_visitors" data-flag-title="统计机器学习">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -397,7 +397,196 @@
       
 
       
-        <h3 id="Light-GBM"><a href="#Light-GBM" class="headerlink" title="Light GBM"></a>Light GBM</h3>
+        <blockquote>
+<p>机器学习理论在国外发展的时候，我们正在上山下乡。</p>
+</blockquote>
+<h2 id="什么是机器学习？"><a href="#什么是机器学习？" class="headerlink" title="什么是机器学习？"></a>什么是机器学习？</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>机器学习指的是计算机通过<strong>统计学算法</strong>，对大量的历史数据进行学习从而生成经验模型，利用经验模型<strong>指导业务</strong>。机器学习之所以包含“学习”二字，是因为机器学习算法会尝试<strong>优化</strong>一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。机器学习的本质不是去学习一个函数来正确预测所有的样本，而是希望函数预测的<strong>误差在可以控制的范围之内</strong>。</p>
+<ul>
+<li>输入：训练数据集  + 基础算法</li>
+<li>输出：预测（回归、分类）模型</li>
+</ul>
+<p><a href="http://demo.caffe.berkeleyvision.org/" target="_blank" rel="external">SAMPLE</a></p>
+<h3 id="挖掘目标"><a href="#挖掘目标" class="headerlink" title="挖掘目标"></a>挖掘目标</h3><p>例如挖掘流、时序和序列数据以及挖掘时间空间、多媒体（音频speech、<strong>图像image</strong>、视频video等）、<strong>文本</strong>、Web数据处理</p>
+<h2 id="机器学习分类"><a href="#机器学习分类" class="headerlink" title="机器学习分类"></a>机器学习分类</h2><h3 id="有监督学习概览"><a href="#有监督学习概览" class="headerlink" title="有监督学习概览"></a>有监督学习概览</h3><p>我们已经知道预测所应该得出的正确答案，训练集能起到监督和指导的作用，在模型预测错误时予以纠正，从而优化模型（分类模型/预测模型），常见模型包括</p>
+<ul>
+<li>判别模型，如KNN、感知机、决策树、逻辑斯蒂回归模型、MaxEnt、svm、提升方法和crf</li>
+<li>生成模型，朴素贝叶斯和HMM等</li>
+</ul>
+<hr>
+<ul>
+<li>基于统计的机器学习算法<ul>
+<li>评价指标<ul>
+<li>准确率 <em>accuracy</em></li>
+<li>精确率 <em>precision</em></li>
+<li>召回率 <em>recall</em></li>
+<li>F-score</li>
+<li><strong>AUC</strong>/ROC</li>
+</ul>
+</li>
+<li><a href="https://www.cnblogs.com/muzixi/p/6642203.html" target="_blank" rel="external">广义线性模型（generalized linear model）</a><ul>
+<li>线性回归（linear regression） -&gt; 用一条线去拟合训练数据<ul>
+<li><strong>回归模型</strong></li>
+<li>损失函数 = MSE + 无正则项</li>
+<li>损失函数解法<ul>
+<li><a href="https://www.zhihu.com/question/37031188" target="_blank" rel="external">最小二乘法（OLS）</a></li>
+</ul>
+</li>
+<li>惩罚线性模型<ul>
+<li>岭回归 Ridge<ul>
+<li>应用欧式几何的指标</li>
+<li>方差</li>
+<li>L2范数/正则化</li>
+</ul>
+</li>
+<li>套索回归 Lasso<ul>
+<li>出租车/曼哈顿距离</li>
+<li>方差</li>
+<li>L1范数/正则化</li>
+</ul>
+</li>
+<li>求解算法<ul>
+<li>最小角度回归LARS</li>
+<li>Glmnet</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>逻辑斯蒂回归（logistic regression）<ul>
+<li><strong>分类模型</strong></li>
+<li>logistic 误差（<strong>对数似然损失函数</strong>）</li>
+<li>损失函数（极大似然法MLE）解法<ul>
+<li>梯度下降法</li>
+<li>牛顿法</li>
+</ul>
+</li>
+<li>L2范数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Multi-Layer Percetron<ul>
+<li><strong>线性分类模型</strong> -&gt; 二分类问题</li>
+<li>感知机的（wx+b）可以理解为线性回归，即感知机将<strong>线性回归的输出</strong>作为使用<strong>单位阶跃函数的输入，</strong>最终的分类结果是<strong>阶跃函数的输出</strong></li>
+<li><strong>误分类点到分类超平面的总距离</strong></li>
+<li>反向传播</li>
+</ul>
+</li>
+<li>Neural Network<ul>
+<li>全连接前馈神经网络 -&gt; 多层感知机网络</li>
+<li>带有卷积和池化层的网络 -&gt; <em>CNN</em></li>
+<li>循环神经网络RNN -&gt; LSTM</li>
+<li><em>GAN</em><ul>
+<li>DCGAN</li>
+</ul>
+</li>
+<li><em>BP</em> 算法<ul>
+<li>GD<ul>
+<li><em>BGD(batch)</em></li>
+<li><em>Mini-Batch GD</em></li>
+<li><em>SGD(stochastic)</em><ul>
+<li><a href="http://blog.csdn.net/shenziheng1/article/details/69792696" target="_blank" rel="external">梯度优化算法</a><ul>
+<li><em>Momentum</em></li>
+<li><a href="https://zhuanlan.zhihu.com/p/29920135" target="_blank" rel="external">Adagrad</a> -&gt;每次通过，全局学习率逐参数的除以历史梯度平方和的平方根，使得每个参数的学习率不同</li>
+<li><em>Adam</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><del>牛顿法</del>（因为Hesse矩阵的计算量很大，一般不使用）</li>
+<li>拟牛顿法（BFGS -&gt; L-BFGS）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>SVM</em><ul>
+<li>SVM（支持向量机）是一个有监督的学习模型，通常用来进行模式识别、分类以及回归分析。SVM（支撑向量机）是数学规划方法在分类上的一个典型应用。SVM学习问题可以表示为凸优化问题，因此可以利用已知的有效算法发现目标函数的全局最小值。而其他分类方法（如基于规则的分类器和人工神经网络）都采用一种基于贪心学习的策略来搜索假设空间，这种方法一般只能获得局部最优解。</li>
+<li>小数据集做分类</li>
+<li>线性<strong>可分</strong>支持向量机学习算法<ul>
+<li>最大间隔法 -&gt; 学习的对偶算法</li>
+</ul>
+</li>
+<li>硬间隔与软间隔</li>
+<li>线性支持向量机</li>
+<li><em>SVR(support vector regression)</em></li>
+</ul>
+</li>
+<li>决策树<ul>
+<li>信息熵 -&gt; 条件熵、信息增益、信息增益比</li>
+<li><em>CART</em>、<em>ID3</em> 、<em>C4.5</em> </li>
+<li><em>Bagging</em> -&gt; 随机森林</li>
+<li><em>Boosting</em> -&gt; GB -&gt; <em>GBDT</em> 梯度提升决策树 -&gt; (CART)-&gt; XGBoost</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基于概率模型的学习算法<ul>
+<li><em>Bayes</em></li>
+<li><em>MaxEnt</em> 最大熵模型</li>
+<li><em>HMM</em> 隐马尔科夫模型</li>
+<li>MEMM -&gt; <em>CRF</em> 条件随机场 -&gt; 在分词、词性标注和命名实体识别等序列标注任务中取得了很好的效果</li>
+</ul>
+</li>
+</ul>
+<h3 id="无监督学习概览"><a href="#无监督学习概览" class="headerlink" title="无监督学习概览"></a>无监督学习概览</h3><p>不告诉你结果或标准答案，让你从已知的数据中找到一些特征。</p>
+<ul>
+<li><p><strong>聚类分析</strong></p>
+<ul>
+<li><p>基本聚类 </p>
+<ul>
+<li><p><strong>k-means</strong></p>
+<p>相似度：</p>
+<ul>
+<li>余弦距离</li>
+<li>欧氏距离</li>
+</ul>
+</li>
+<li><p>Birch聚类</p>
+</li>
+</ul>
+</li>
+<li><p>密度聚类</p>
+<ul>
+<li><strong>DBSCAN</strong></li>
+</ul>
+</li>
+<li><p>层次聚类</p>
+</li>
+<li><p>CFSFDP算法</p>
+<ul>
+<li>2014年Science</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>关联规则挖掘</p>
+<ul>
+<li>Apriori——挖掘布尔关联规则的频繁项集的算法<ul>
+<li>缺点：需要多次扫描事务数据库</li>
+</ul>
+</li>
+<li>FP-Tree——2000年Jiawei Han等人提出了基于FP树生成频繁项集的FP-growth算法</li>
+</ul>
+</li>
+<li><p>异常检测</p>
+</li>
+</ul>
+<h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><p>半监督学习的概念</p>
+<h3 id="降维模型"><a href="#降维模型" class="headerlink" title="降维模型"></a>降维模型</h3><ul>
+<li>PCA</li>
+<li>LDA(Linear Discriminant Analysis)</li>
+<li>SVD(singular value decomposition)</li>
+<li>LLE</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li>李航《统计学习方法》</li>
+<li>周志华《机器学习》</li>
+<li>《深度学习》</li>
+</ul>
+
       
     </div>
 
@@ -430,8 +619,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/12/理解XGBoost/" rel="next" title="理解XGBoost">
-                <i class="fa fa-chevron-left"></i> 理解XGBoost
+              <a href="/2017/08/02/java语言基础/" rel="next" title="java语言基础">
+                <i class="fa fa-chevron-left"></i> java语言基础
               </a>
             
           </div>
@@ -440,8 +629,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/15/特征工程/" rel="prev" title="特征工程">
-                特征工程 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/18/BookCan书罐/" rel="prev" title="BookCan书罐">
+                BookCan书罐 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -516,7 +705,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">86</span>
+                    <span class="site-state-item-count">89</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -537,7 +726,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -606,7 +797,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Light-GBM"><span class="nav-number">1.</span> <span class="nav-text">Light GBM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是机器学习？"><span class="nav-number">1.</span> <span class="nav-text">什么是机器学习？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挖掘目标"><span class="nav-number">1.2.</span> <span class="nav-text">挖掘目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习分类"><span class="nav-number">2.</span> <span class="nav-text">机器学习分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有监督学习概览"><span class="nav-number">2.1.</span> <span class="nav-text">有监督学习概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无监督学习概览"><span class="nav-number">2.2.</span> <span class="nav-text">无监督学习概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#半监督学习"><span class="nav-number">2.3.</span> <span class="nav-text">半监督学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#降维模型"><span class="nav-number">2.4.</span> <span class="nav-text">降维模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">3.</span> <span class="nav-text">引用</span></a></li></ol></div>
             
 
           </div>

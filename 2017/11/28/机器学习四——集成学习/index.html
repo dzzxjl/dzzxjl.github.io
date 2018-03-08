@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/28/机器学习四——集成学习/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="世界因参差不同而丰富多彩。  集成学习，也称为模型融合。 集成方法的目的是结合一些基于某些算法训练得到的基学习器来改进其泛化能力和鲁棒性(相对单个的基学习器而言)。model ensemble既可以发生在算法内部，也可以在不同种模型预测后最后进行ensemble。 模型融合常见的方法有5种： 普通版Voting 投票法 hard voting 类标记 soft voting 类概率  模型融合其">
-<meta property="og:updated_time" content="2018-03-06T08:15:12.737Z">
+<meta property="og:updated_time" content="2018-03-08T02:46:06.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习四——集成学习">
 <meta name="twitter:description" content="世界因参差不同而丰富多彩。  集成学习，也称为模型融合。 集成方法的目的是结合一些基于某些算法训练得到的基学习器来改进其泛化能力和鲁棒性(相对单个的基学习器而言)。model ensemble既可以发生在算法内部，也可以在不同种模型预测后最后进行ensemble。 模型融合常见的方法有5种： 普通版Voting 投票法 hard voting 类标记 soft voting 类概率  模型融合其">
@@ -426,19 +426,21 @@
 <li>Random Patches:同时进行行采样、列采样得到样本子集</li>
 </ul>
 <h4 id="典型代表——随机森林"><a href="#典型代表——随机森林" class="headerlink" title="典型代表——随机森林"></a>典型代表——随机森林</h4><p>该思想的应用有两方面：bagging和boosting<br>虽然都是有放回的抽样，但二者的区别在于：Bagging采用有放回的均匀取样，而Boosting根据错误率来取样（Boosting初始化时对每一个训练例赋相等的权重1／n，然后用该学算法对训练集训练t轮，每次训练后，对训练失败的训练例赋以较大的权重），因此Boosting的分类精度要优于Bagging。Bagging的训练集的选择是随机的，各轮训练集之间相互独立，而Boostlng的各轮训练集的选择与前面各轮的学习结果有关</p>
-<h3 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h3><p>Boosting 有三个要素：</p>
-<ul>
-<li>A loss function to be optimized：<br>例如分类问题中用 cross entropy，回归问题用 mean squared error。</li>
-<li>A weak learner to make predictions：<br>例如决策树。</li>
-<li>An additive model：<br>将多个弱学习器累加起来组成强学习器，进而使目标损失函数达到极小。</li>
-</ul>
+<h3 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h3><p>所谓Boosting，就是将弱分离器$f_i(x)$组合起来形成强分类器$F(x)$的一种方法。Boosting 有三个要素：</p>
+<ol>
+<li>A loss function to be optimized：例如分类问题中用 cross entropy，回归问题用 mean squared error。</li>
+<li>A weak learner to make predictions：例如决策树。</li>
+<li>An additive model：将多个弱学习器累加起来组成强学习器，进而使目标损失函数达到极小。</li>
+</ol>
+<p>目前比较流行的boosting方案有两种：</p>
 <ul>
 <li>AdaBoost（传统）</li>
 <li>Gradient Boosting Decision Tree 梯度提升决策树（弱学习器限定了只能使用CART回归树模型） -&gt; XGBoost</li>
 </ul>
 <h4 id="Adaboost"><a href="#Adaboost" class="headerlink" title="Adaboost"></a>Adaboost</h4><p>是一种传统的Boost方法，利用前一轮迭代弱学习器的误差率$\epsilon$来更新训练集的权重，一轮轮地迭代下去。在算法开始的时候，为每一个样本赋上一个权重值，初始的时候，大家都是一样重要的。在每一步训练中得到的模型，会使得数据点的估计有对有错，我们就在每一步结束后，增加分错的点的权重，减少分对的点的权重，这样使得某些点如果老是被分错，那么就会被“严重关注”，也就被赋上一个很高的权重。然后等进行了N次迭代（由用户指定），将会得到N个简单的分类器（basic learner），然后我们将它们组合起来（比如说可以对它们进行加权、或者让它们进行投票等），得到一个最终的模型。</p>
-<p>每棵树的权重是$\alpha=\frac12\log\frac{1-\epsilon}\epsilon$，其中$\epsilon$是这个棵树的misclassification rate。如果$\epsilon=0.5$，那么它的权重$\alpha=0$。一颗树表现越好（$\epsilon$越小），权重越大。如果$\epsilon=0$，那么权重就是无穷大。因为boosting是把weak learner强化的过程，我们一般认为weak learner准确率应该大于$0.5$，也就是$\epsilon&lt;0.5$，所以这种情况下αα始终是大于零的。</p>
-<h4 id="Gradient-Boost"><a href="#Gradient-Boost" class="headerlink" title="Gradient Boost"></a>Gradient Boost</h4><p>机器学习中的学习算法的目标是为了优化或者说最小化loss Function， Gradient boosting的思想是迭代生多个（M个）弱的模型，然后将每个弱模型的预测结果相加，后面的模型Fm+1(x)基于前面学习模型的Fm(x)的效果生成的</p>
+<p>每棵树的权重是$\alpha=\frac12\log\frac{1-\epsilon}\epsilon$，其中$\epsilon$是这个棵树的misclassification rate。如果$\epsilon=0.5$，那么它的权重$\alpha=0$。一颗树表现越好（$\epsilon$越小），权重越大。如果$\epsilon=0$，那么权重就是无穷大。因为boosting是把weak learner强化的过程，我们一般认为weak learner准确率应该大于$0.5$，也就是$\epsilon&lt;0.5$，所以这种情况下$\alpha$始终是大于零的。</p>
+<h4 id="Gradient-boosting"><a href="#Gradient-boosting" class="headerlink" title="Gradient boosting"></a>Gradient boosting</h4><p>机器学习中的学习算法的目标是为了优化或者说最小化loss Function， Gradient boosting的思想是迭代生多个（$m$个）弱的模型，然后将每个弱模型的预测结果相加，第$m$个模型$F<em>m()$基于前面学习模型的$F</em>{m-1}(x)$的效果生成的。</p>
+<p>Gradient boosting就是通过加入新的弱学习器，来努力纠正前面所有弱学习器的残差，最终这样多个学习器相加在一起用来进行最终预测，准确率就会比单独的一个要高。之所以称为 Gradient，是因为在添加新模型时使用了梯度下降算法来最小化的损失。</p>
 <h3 id="Stacking-学习法"><a href="#Stacking-学习法" class="headerlink" title="Stacking 学习法"></a>Stacking 学习法</h3><p>每个单独分类器的输出会作为更高层分类器的输入，更高层分类器可以判断如何更好地合并这些来自低层的输出。stacking另一个比较特别的是层状结构。以常见的两层stacking为例，第一层是不同的基模型(多个)，而第二层是以上一层基模型输出结果为输入数据的分类器(一个)。从某种意义上看，和神经网络的“结构相似”。为了防止过拟合，一般第二层的模型不再使用原始训练数据进行训练，而仅依赖于第一层训练器的输出结果。</p>
 <h4 id="stacking与bagging"><a href="#stacking与bagging" class="headerlink" title="stacking与bagging"></a>stacking与bagging</h4><ul>
 <li>stacking中的各个模型(基分类器)追求的是“准而不同”。stacking中的子模型一般应该是独立准确，而不同的基学习器之间有所差异。</li>
@@ -450,6 +452,7 @@
 <li><a href="https://mlwave.com/kaggle-ensembling-guide/" target="_blank" rel="external">https://mlwave.com/kaggle-ensembling-guide/</a></li>
 <li><a href="http://izhaoyi.top/2017/09/23/sklearn-xgboost/" target="_blank" rel="external">http://izhaoyi.top/2017/09/23/sklearn-xgboost/</a></li>
 <li><a href="http://sofasofa.io/forum_main_post.php?postid=1000707" target="_blank" rel="external">http://sofasofa.io/forum_main_post.php?postid=1000707</a></li>
+<li><a href="https://www.jianshu.com/p/7e0e2d66b3d4" target="_blank" rel="external">https://www.jianshu.com/p/7e0e2d66b3d4</a></li>
 </ul>
 
       
@@ -570,7 +573,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">86</span>
+                    <span class="site-state-item-count">89</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -591,7 +594,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -660,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#普通版"><span class="nav-number">1.</span> <span class="nav-text">普通版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Voting-投票法"><span class="nav-number">1.1.</span> <span class="nav-text">Voting 投票法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Averaging"><span class="nav-number">1.2.</span> <span class="nav-text">Averaging</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶版"><span class="nav-number">2.</span> <span class="nav-text">进阶版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bagging"><span class="nav-number">2.1.</span> <span class="nav-text">Bagging</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见变体"><span class="nav-number">2.1.1.</span> <span class="nav-text">常见变体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#典型代表——随机森林"><span class="nav-number">2.1.2.</span> <span class="nav-text">典型代表——随机森林</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boosting"><span class="nav-number">2.2.</span> <span class="nav-text">Boosting</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Adaboost"><span class="nav-number">2.2.1.</span> <span class="nav-text">Adaboost</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gradient-Boost"><span class="nav-number">2.2.2.</span> <span class="nav-text">Gradient Boost</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stacking-学习法"><span class="nav-number">2.3.</span> <span class="nav-text">Stacking 学习法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#stacking与bagging"><span class="nav-number">2.3.1.</span> <span class="nav-text">stacking与bagging</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#普通版"><span class="nav-number">1.</span> <span class="nav-text">普通版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Voting-投票法"><span class="nav-number">1.1.</span> <span class="nav-text">Voting 投票法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Averaging"><span class="nav-number">1.2.</span> <span class="nav-text">Averaging</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶版"><span class="nav-number">2.</span> <span class="nav-text">进阶版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bagging"><span class="nav-number">2.1.</span> <span class="nav-text">Bagging</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见变体"><span class="nav-number">2.1.1.</span> <span class="nav-text">常见变体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#典型代表——随机森林"><span class="nav-number">2.1.2.</span> <span class="nav-text">典型代表——随机森林</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boosting"><span class="nav-number">2.2.</span> <span class="nav-text">Boosting</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Adaboost"><span class="nav-number">2.2.1.</span> <span class="nav-text">Adaboost</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gradient-boosting"><span class="nav-number">2.2.2.</span> <span class="nav-text">Gradient boosting</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stacking-学习法"><span class="nav-number">2.3.</span> <span class="nav-text">Stacking 学习法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#stacking与bagging"><span class="nav-number">2.3.1.</span> <span class="nav-text">stacking与bagging</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

@@ -108,10 +108,12 @@
 <meta property="og:url" content="http://yoursite.com/2018/02/14/机器学习九——机器学习中的函数/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="目标函数如果有人说他们在用一种机器学习算法，那么只要问两个问题就能大致了解这种算法的价值：  目标函数是什么？ 怎样将误差最小化？  一种方法是构建一个算法框架，通过与输入值相乘来预测输入的性质。不同的输出/预测结果是输入值与算法的乘积。 初始的预测通常错误较大，如果您有和输入值相关的实际基准标签，就可以将预测结果与基准标签进行对比，衡量误差的大小，然后依据误差来调整算法。如神经网络，它们会不断衡">
-<meta property="og:updated_time" content="2018-03-05T03:01:27.150Z">
+<meta property="og:image" content="http://p59abxhmx.bkt.clouddn.com/Surrogate-Loss-Function.png">
+<meta property="og:updated_time" content="2018-03-08T05:17:23.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习九——机器学习中的函数">
 <meta name="twitter:description" content="目标函数如果有人说他们在用一种机器学习算法，那么只要问两个问题就能大致了解这种算法的价值：  目标函数是什么？ 怎样将误差最小化？  一种方法是构建一个算法框架，通过与输入值相乘来预测输入的性质。不同的输出/预测结果是输入值与算法的乘积。 初始的预测通常错误较大，如果您有和输入值相关的实际基准标签，就可以将预测结果与基准标签进行对比，衡量误差的大小，然后依据误差来调整算法。如神经网络，它们会不断衡">
+<meta name="twitter:image" content="http://p59abxhmx.bkt.clouddn.com/Surrogate-Loss-Function.png">
 
 
 
@@ -404,25 +406,31 @@
 </ol>
 <p>一种方法是构建一个算法框架，通过与输入值相乘来预测输入的性质。不同的输出/预测结果是输入值与算法的乘积。</p>
 <p>初始的预测通常错误较大，如果您有和输入值相关的实际基准标签，就可以将预测结果与基准标签进行对比，衡量误差的大小，然后依据误差来调整算法。如神经网络，它们会不断衡量误差、调整自身的参数，直至误差无法继续缩小。</p>
-<p>目标函数一般出现最优化问题公式的第一行上，即他是我们对问题的一个抽象的数学表达，是优化的目标。一般包括经验风险和结构风险。</p>
+<p>目标函数一般出现最优化问题公式的第一行上，即他是我们对问题的一个抽象的数学表达，是优化的目标。一般包括<strong>经验风险</strong>和<strong>结构风险</strong>。经验风险是为了是学习算法匹配测试样本，结构风险（范数）是为了防止过拟合。</p>
 <h3 id="经验风险"><a href="#经验风险" class="headerlink" title="经验风险"></a>经验风险</h3><p>为了是学习算法匹配测试样本，一般用损失函数做此项。</p>
+<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p>当我们通过以往的数据得到模型后，然后将数据输入这个模型得到的值与真实值之间会产生误差，我们求解误差总和的过程就是代价函数。损失函数、代价函数、成本函数cost function、误差函数基本是一个概念。</p>
+<p><img src="http://p59abxhmx.bkt.clouddn.com/Surrogate-Loss-Function.png" alt="Surrogate-Loss-Function"></p>
 <ul>
+<li>零一损失函数 $l(y,\hat{y})=\sum_{i=1}^m\chi(y_i\neq\hat{y_i})$——因为零一是不连续的，所以需要代理</li>
+<li>代理损失函数 surrogate loss function<ul>
 <li>方差代价函数（Mean Squared Error）<ul>
 <li>回归问题</li>
+<li>明显可以看出浅蓝色不是好的代理，所以优化MSE并不能优化模型的准确度</li>
 </ul>
 </li>
-<li>Logistc loss function 也叫做交叉熵代价函数<ul>
-<li>binary_crossentropy 二分类</li>
+<li>交叉熵代价函数<ul>
+<li>binary_crossentropy 二分类——也叫做Logistc loss function</li>
 <li>cross-entropy cost function 多分类</li>
 </ul>
 </li>
 <li>Hinge loss</li>
 </ul>
+</li>
+</ul>
 <h3 id="结构风险"><a href="#结构风险" class="headerlink" title="结构风险"></a>结构风险</h3><p>为了防止过拟合，最简单的是使用正则化中的<a href="https://www.zhihu.com/question/37096933" target="_blank" rel="external">范数</a>，如L1、L2来表示。</p>
-<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>当我们通过以往的数据得到模型后，然后将数据输入这个模型得到的值与真实值之间会产生误差，我们求解误差总和的过程就是代价函数。</p>
-<p>损失函数、代价函数、成本函数cost function、误差函数基本是一个概念</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="https://www.zhihu.com/question/52398145" target="_blank" rel="external">https://www.zhihu.com/question/52398145</a></li>
+<li><a href="http://sofasofa.io/forum_main_post.php?postid=1000605" target="_blank" rel="external">http://sofasofa.io/forum_main_post.php?postid=1000605</a></li>
 </ol>
 
       
@@ -543,7 +551,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">86</span>
+                    <span class="site-state-item-count">89</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -564,7 +572,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -633,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标函数"><span class="nav-number">1.</span> <span class="nav-text">目标函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#经验风险"><span class="nav-number">1.1.</span> <span class="nav-text">经验风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构风险"><span class="nav-number">1.2.</span> <span class="nav-text">结构风险</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数"><span class="nav-number">2.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标函数"><span class="nav-number">1.</span> <span class="nav-text">目标函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#经验风险"><span class="nav-number">1.1.</span> <span class="nav-text">经验风险</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#损失函数"><span class="nav-number">1.1.1.</span> <span class="nav-text">损失函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构风险"><span class="nav-number">1.2.</span> <span class="nav-text">结构风险</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -933,6 +943,29 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
