@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/28/机器学习二——决策树/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="决策树决策树由Leo Breiman（1928-2005）提出。 决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是树结构的创建过程就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候选取最优特征的算法，他的主要目的就是要选取一个特征能够将分开的数据集尽量的规整，也就是尽可能的纯。最大的原则就是: 将无序的数据变得更加有序。">
-<meta property="og:updated_time" content="2018-03-01T07:39:08.100Z">
+<meta property="og:updated_time" content="2018-03-12T08:40:01.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习二——决策树">
 <meta name="twitter:description" content="决策树决策树由Leo Breiman（1928-2005）提出。 决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是树结构的创建过程就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候选取最优特征的算法，他的主要目的就是要选取一个特征能够将分开的数据集尽量的规整，也就是尽可能的纯。最大的原则就是: 将无序的数据变得更加有序。">
@@ -250,6 +250,12 @@
         </li>
       
         
+        <li class="menu-item menu-item-thoughts">
+          <a href="/thoughts/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Thoughts</a>
+        </li>
+      
+        
         <li class="menu-item menu-item-links">
           <a href="/links/" rel="section">
             <i class="menu-item-icon fa fa-fw fa-link"></i> <br />Links</a>
@@ -381,6 +387,34 @@
           
 
           
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article&#58;</span>
+                
+                <span title="Symbols count in article">2.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">0:03</span>
+              
+            </div>
+          
 
           
 
@@ -446,17 +480,6 @@
 <li>大多数情况下，RF模型的精度略低于GBDT模型的精度</li>
 <li>适合决策边界是矩形的，不适合对角线型的</li>
 </ol>
-<h3 id="GBDT-MART"><a href="#GBDT-MART" class="headerlink" title="GBDT(MART)"></a>GBDT(MART)</h3><p><a href="https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&amp;utm_medium=social" target="_blank" rel="external">https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&amp;utm_medium=social</a></p>
-<p>加法模型（即基函数的线性组合）与前向分布算法</p>
-<p>GBDT(Gradient Boosting Decision Tree)又叫 MART(Multiple Additive Regression Tree)，是一种<strong>迭代</strong>的决策树算法，该算法由多棵决策树组成，所有树的结论<strong>累加</strong>起来做最终答案。它在被提出之初就和SVM一起被认为是<strong>泛化能力较强</strong>的算法。</p>
-<p>GBDT中的树是回归树（不是分类树），GBDT用来做回归预测，调整后也可以用于分类。</p>
-<p>GBDT的思想使其具有天然优势可以发现多种有区分性的特征以及特征组合。业界中，Facebook使用其来自动发现有效的特征、特征组合，来作为LR模型中的特征，以提高 CTR预估（Click-Through Rate Prediction）的准确性；GBDT在淘宝的搜索及预测业务上也发挥了重要作用。</p>
-<p>这不是boosting吧？Adaboost可不是这么定义的。</p>
-<p>这是boosting，但不是Adaboost。<strong>GBDT</strong>不是<strong>Adaboost Decistion Tree</strong>。就像提到决策树大家会想起C4.5，提到boost多数人也会想到Adaboost。Adaboost是另一种boost方法，它按分类对错，分配不同的<strong>weight</strong>，计算cost function时使用这些weight，从而让“错分的样本权重越来越大，使它们更被重视”。Bootstrap也有类似思想，它在每一步迭代时不改变模型本身，也不计算残差，而是从N个instance训练集中按一定概率重新抽取N个instance出来（单个instance可以被重复sample），对着这N个新的instance再训练一轮。由于数据集变了迭代模型训练结果也不一样，而一个instance被前面分错的越厉害，它的概率就被设的越高，这样就能同样达到逐步关注被分错的instance，逐步完善的效果。Adaboost的方法被实践证明是一种很好的<strong>防止过拟合</strong>的方法，但至于为什么则至今没从理论上被证明。GBDT也可以在使用残差的同时引入Bootstrap re-sampling，GBDT多数实现版本中也增加的这个选项，但是否一定使用则有不同看法。re-sampling一个缺点是它的随机性，即同样的数据集合训练两遍结果是不一样的，也就是模型不可稳定复现，这对评估是很大挑战，比如很难说一个模型变好是因为你选用了更好的feature，还是由于这次sample的随机因素。</p>
-<h4 id="DART"><a href="#DART" class="headerlink" title="DART"></a>DART</h4><blockquote>
-<p>DART divergesfrom MART at two places. First, when computing the gradient that the next tree will fit, only a random subset of the existing ensemble is considered. The second place at which DART diverges from MART is when adding the new tree to the ensemble where DART performs a normalization step.</p>
-</blockquote>
-<p>简单说就是每次新加一棵树，这棵树要拟合的并不是之前全部树ensemble后的残差，而是随机抽取的一些树ensemble；同时新加的树结果要规范化一下。</p>
 <h3 id="随机森林与GBDT"><a href="#随机森林与GBDT" class="headerlink" title="随机森林与GBDT"></a>随机森林与GBDT</h3><p>GBDT和随机森林的相同点：</p>
 <ol>
 <li>都是由多棵树组成 </li>
@@ -602,7 +625,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">91</span>
+                    <span class="site-state-item-count">95</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -625,7 +648,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -660,7 +685,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -696,7 +723,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树"><span class="nav-number">1.</span> <span class="nav-text">决策树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点与缺点"><span class="nav-number">2.</span> <span class="nav-text">优点与缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息熵"><span class="nav-number">3.1.</span> <span class="nav-text">信息熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益"><span class="nav-number">3.2.</span> <span class="nav-text">信息增益</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益比"><span class="nav-number">3.3.</span> <span class="nav-text">信息增益比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见算法"><span class="nav-number">4.</span> <span class="nav-text">常见算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CART-1984"><span class="nav-number">4.1.</span> <span class="nav-text">CART 1984</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ID3-1986"><span class="nav-number">4.2.</span> <span class="nav-text">ID3 1986</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C4-5-1993——分类决策树"><span class="nav-number">4.3.</span> <span class="nav-text">C4.5 1993——分类决策树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#衍生"><span class="nav-number">5.</span> <span class="nav-text">衍生</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#随机森林-2009"><span class="nav-number">5.1.</span> <span class="nav-text">随机森林 2009</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GBDT-MART"><span class="nav-number">5.2.</span> <span class="nav-text">GBDT(MART)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DART"><span class="nav-number">5.2.1.</span> <span class="nav-text">DART</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机森林与GBDT"><span class="nav-number">5.3.</span> <span class="nav-text">随机森林与GBDT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树"><span class="nav-number">1.</span> <span class="nav-text">决策树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点与缺点"><span class="nav-number">2.</span> <span class="nav-text">优点与缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息熵"><span class="nav-number">3.1.</span> <span class="nav-text">信息熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益"><span class="nav-number">3.2.</span> <span class="nav-text">信息增益</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益比"><span class="nav-number">3.3.</span> <span class="nav-text">信息增益比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见算法"><span class="nav-number">4.</span> <span class="nav-text">常见算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CART-1984"><span class="nav-number">4.1.</span> <span class="nav-text">CART 1984</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ID3-1986"><span class="nav-number">4.2.</span> <span class="nav-text">ID3 1986</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C4-5-1993——分类决策树"><span class="nav-number">4.3.</span> <span class="nav-text">C4.5 1993——分类决策树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#衍生"><span class="nav-number">5.</span> <span class="nav-text">衍生</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#随机森林-2009"><span class="nav-number">5.1.</span> <span class="nav-text">随机森林 2009</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机森林与GBDT"><span class="nav-number">5.2.</span> <span class="nav-text">随机森林与GBDT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -723,7 +750,21 @@
   <span class="author" itemprop="copyrightHolder">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">213k</span>
+  
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">3:33</span>
   
 </div>
 

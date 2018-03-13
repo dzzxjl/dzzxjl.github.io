@@ -250,6 +250,12 @@
         </li>
       
         
+        <li class="menu-item menu-item-thoughts">
+          <a href="/thoughts/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Thoughts</a>
+        </li>
+      
+        
         <li class="menu-item menu-item-links">
           <a href="/links/" rel="section">
             <i class="menu-item-icon fa fa-fw fa-link"></i> <br />Links</a>
@@ -381,6 +387,34 @@
           
 
           
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article&#58;</span>
+                
+                <span title="Symbols count in article">1.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">0:02</span>
+              
+            </div>
+          
 
           
 
@@ -410,7 +444,7 @@
 <p>##安装</p>
 <p>基本的安装的过程只需要参照<a href="http://www.jianshu.com/p/98b8965b1d10" target="_blank" rel="external">简书上的这篇文章</a>就可以了，如果是在windows电脑上想装双系统，我强烈建议你根据附录中1与2来按部就班地安装，作者记录和解释地非常详细。我需要提前告知你，arch linux的安装非常繁琐，主要是在安装过程在命令行中进行，需要输入大量的命令。但是通过其安装过程对于你理解linux系统有很大的帮助。</p>
 <h2 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h2><p>按照教程配置了网络，以为成功了，因为在光盘启动时是可以正常连接网络的，但是restart后用pacman命令下载软件包出现一连串的错误，紧接使用ping命令发现未连接，才定位到网络出现了问题，找到了如下方案解决：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> 在/etc/rc.conf文件中添加：</span></div><div class="line"><span class="meta">&gt;</span><span class="bash">interface = eth0</span></div><div class="line"><span class="meta">#</span><span class="bash">保存退出之后，敲入命令</span></div><div class="line">dhcpcd</div><div class="line"><span class="meta">#</span><span class="bash">马上发现一切正常工作了，使用ping命令检查网络是否正常连接</span></div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 在/etc/rc.conf文件中添加：</div><div class="line"><span class="meta">&gt;</span>interface = eth0</div><div class="line"><span class="meta">#</span>保存退出之后，敲入命令</div><div class="line">dhcpcd</div><div class="line"><span class="meta">#</span>马上发现一切正常工作了，使用ping命令检查网络是否正常连接</div></pre></td></tr></table></figure>
 <h2 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h2><p>archlinux 启动后一直卡在 reached target graphical interface</p>
 <p>参阅网上资料「Systemd 开机流程（boot process）消息」，不是「错误消息（error message）」，只通过这个消息解决不了任何问题。这个消息提供的线索是 systemd 启动了 X window system（X11，Xorg）（通过 systemd-analyze plot &gt; boot.png 你可以直观地看到这个启动流程）。之后 X11 干了什么，它不知道，所以也没法告诉你。所以需要去 /var/log/Xorg.0.log 和 /var/log/Xorg.0.log.old 看 Xorg 哪里出了问题。这个问题属于硬件驱动版块。</p>
 <p>于是将问题定位到显卡驱动+桌面安装错误的问题上</p>
@@ -549,7 +583,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">91</span>
+                    <span class="site-state-item-count">95</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -572,7 +606,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -607,7 +643,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -670,7 +708,21 @@
   <span class="author" itemprop="copyrightHolder">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">213k</span>
+  
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">3:33</span>
   
 </div>
 

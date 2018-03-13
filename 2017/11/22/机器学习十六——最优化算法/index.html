@@ -101,17 +101,17 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="阅读本文前，建议可以看一下SofaSofa的这篇文章，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！  机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下均属于非线性规划中的无约束优化问题的求解方法。 梯度 对于最优化问题的求解 梯度提升决策树方法簇  概览 梯度下">
+<meta name="description" content="最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？ 答：  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最优化方法">
 <meta property="og:url" content="http://yoursite.com/2017/11/22/机器学习十六——最优化算法/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="阅读本文前，建议可以看一下SofaSofa的这篇文章，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！  机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下均属于非线性规划中的无约束优化问题的求解方法。 梯度 对于最优化问题的求解 梯度提升决策树方法簇  概览 梯度下">
-<meta property="og:updated_time" content="2018-03-08T13:06:41.563Z">
+<meta property="og:description" content="最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？ 答：  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。">
+<meta property="og:updated_time" content="2018-03-13T07:20:25.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最优化方法">
-<meta name="twitter:description" content="阅读本文前，建议可以看一下SofaSofa的这篇文章，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！  机器学习之所以包含“学习”二字，是因为机器学习算法会尝试优化一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下均属于非线性规划中的无约束优化问题的求解方法。 梯度 对于最优化问题的求解 梯度提升决策树方法簇  概览 梯度下">
+<meta name="twitter:description" content="最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？ 答：  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。">
 
 
 
@@ -250,6 +250,12 @@
         </li>
       
         
+        <li class="menu-item menu-item-thoughts">
+          <a href="/thoughts/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Thoughts</a>
+        </li>
+      
+        
         <li class="menu-item menu-item-links">
           <a href="/links/" rel="section">
             <i class="menu-item-icon fa fa-fw fa-link"></i> <br />Links</a>
@@ -381,6 +387,34 @@
           
 
           
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article&#58;</span>
+                
+                <span title="Symbols count in article">2.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">0:02</span>
+              
+            </div>
+          
 
           
 
@@ -398,6 +432,16 @@
 
       
         <blockquote>
+<p>最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？</p>
+<p>答：</p>
+<ol>
+<li>首先很多时候我们无法确定数据集是否确定有极值点，找到解析解</li>
+<li>其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。</li>
+<li>求导数=0的解并不是一件容易的事情，而且有些情况下即便能够求解，其时间复杂度也远远大于迭代寻优的方法。</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
 <p>阅读本文前，建议可以看一下<a href="http://sofasofa.io/tutorials/python_gradient_descent/index.php" target="_blank" rel="external">SofaSofa的这篇文章</a>，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！</p>
 </blockquote>
 <p>机器学习之所以包含“学习”二字，是因为机器学习算法会尝试<strong>优化</strong>一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下均属于非线性规划中的无约束优化问题的求解方法。</p>
@@ -577,7 +621,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">91</span>
+                    <span class="site-state-item-count">95</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -600,7 +644,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -635,7 +681,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -698,7 +746,21 @@
   <span class="author" itemprop="copyrightHolder">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">213k</span>
+  
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">3:33</span>
   
 </div>
 

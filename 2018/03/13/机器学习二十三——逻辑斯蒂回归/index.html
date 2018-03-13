@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="ml," />
+
+
+<meta name="description" content="逻辑斯蒂回归 logistic regression逻辑斯蒂回归（Logistic Regression）是机器学习中的一种分类模型，由于算法的简单和高效，在实际中应用非常广泛。重点需要关注逻辑回归算法的数学模型和参数求解方法。 常见问题：  LR原理 LR的求解数学推导  LR的正则化  为什么LR能比线性回归好？  LR与MaxEnt的关系  并行化的LR  基础逻辑回归本质上是一个线性模型，">
+<meta name="keywords" content="ml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习二十三——逻辑斯蒂回归">
+<meta property="og:url" content="http://yoursite.com/2018/03/13/机器学习二十三——逻辑斯蒂回归/index.html">
+<meta property="og:site_name" content="十一城">
+<meta property="og:description" content="逻辑斯蒂回归 logistic regression逻辑斯蒂回归（Logistic Regression）是机器学习中的一种分类模型，由于算法的简单和高效，在实际中应用非常广泛。重点需要关注逻辑回归算法的数学模型和参数求解方法。 常见问题：  LR原理 LR的求解数学推导  LR的正则化  为什么LR能比线性回归好？  LR与MaxEnt的关系  并行化的LR  基础逻辑回归本质上是一个线性模型，">
+<meta property="og:updated_time" content="2018-03-13T07:52:50.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习二十三——逻辑斯蒂回归">
+<meta name="twitter:description" content="逻辑斯蒂回归 logistic regression逻辑斯蒂回归（Logistic Regression）是机器学习中的一种分类模型，由于算法的简单和高效，在实际中应用非常广泛。重点需要关注逻辑回归算法的数学模型和参数求解方法。 常见问题：  LR原理 LR的求解数学推导  LR的正则化  为什么LR能比线性回归好？  LR与MaxEnt的关系  并行化的LR  基础逻辑回归本质上是一个线性模型，">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/13/机器学习二十三——逻辑斯蒂回归/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>机器学习二十三——逻辑斯蒂回归 | 十一城</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c74812f514823dcc232a43bf4fa01aee";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">十一城</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">跬步千里，小流江海。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-bookcan">
+          <a href="/bookcan/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-book"></i> <br />BookCan</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-thoughts">
+          <a href="/thoughts/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Thoughts</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-link"></i> <br />Links</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/机器学习二十三——逻辑斯蒂回归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dzzxjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十一城">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习二十三——逻辑斯蒂回归</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T15:38:44+08:00">2018-03-13</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ml/" itemprop="url" rel="index"><span itemprop="name">ml</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/13/机器学习二十三——逻辑斯蒂回归/" class="leancloud_visitors" data-flag-title="机器学习二十三——逻辑斯蒂回归">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article&#58;</span>
+                
+                <span title="Symbols count in article">2.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">0:02</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="逻辑斯蒂回归-logistic-regression"><a href="#逻辑斯蒂回归-logistic-regression" class="headerlink" title="逻辑斯蒂回归 logistic regression"></a>逻辑斯蒂回归 logistic regression</h2><p>逻辑斯蒂回归（Logistic Regression）是机器学习中的一种分类模型，由于算法的简单和高效，在实际中应用非常广泛。重点需要关注逻辑回归算法的<strong>数学模型</strong>和<strong>参数求解</strong>方法。</p>
+<p>常见问题：</p>
+<ol>
+<li>LR原理</li>
+<li>LR的求解数学推导 </li>
+<li>LR的正则化 </li>
+<li>为什么LR能比线性回归好？ </li>
+<li>LR与MaxEnt的关系 </li>
+<li>并行化的LR</li>
+</ol>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>逻辑回归本质上是一个线性模型，但是，这不意味着只有线性可分的数据能通过LR求解，实际上，我们可以通过特征变换的方式把低维空间转换到高维空间，而在低维空间不可分的数据，到高维空间中线性可分的几率会高一些。</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li>优点：输出结果会有很好的概率解释，而算法也能通过正则化以避免过拟合。逻辑模型很容易通过随机梯度下降来更新数据模型。</li>
+<li>缺点：逻辑回归在面对多元或非线性决策边界时性能较差。</li>
+</ul>
+<h3 id="应用经验"><a href="#应用经验" class="headerlink" title="应用经验"></a>应用经验</h3><p>如果连续变量，注意做SCALING，缩放单位即标准化。<strong>LR对样本分布敏感</strong>，所以要注意样本的平衡性（y=1不能太少）样本量足的情况下采用下采样，不足的情况用上采样。选择0.5作为阈值是一个一般的做法，实际应用时特定的情况可以选择不同阈值，如果对正例的判别精确率要求高，可以选择阈值大一些，对正例的召回要求高，则可以选择阈值小一些。</p>
+<h3 id="LR并行化"><a href="#LR并行化" class="headerlink" title="LR并行化"></a>LR并行化</h3><p>并行LR实际上就是在求解损失函数最优解的过程中，针对<strong>寻找损失函数下降方向</strong>中的梯度方向计算作了并行化处理，而在利用梯度确定下降方向的过程中也可以采用并行化（如L-BFGS中的两步循环法求牛顿方向）。</p>
+<h3 id="logistic回归和线性回归的区别"><a href="#logistic回归和线性回归的区别" class="headerlink" title="logistic回归和线性回归的区别"></a>logistic回归和线性回归的区别</h3><ol>
+<li>线性回归要求变量服从<strong>正态分布</strong>，logistic回归对变量分布没有要求</li>
+<li>线性回归要求因变量是连续性数值变量，而logistic回归要求因变量是分类型变量</li>
+<li>线性回归要求自变量和因变量呈线性关系，而logistic回归不要求自变量和因变量呈线性关系</li>
+<li>logistic回归是分析因变量<strong>取某个值的概率与自变量的关系</strong>，而线性回归是直接分析因变量与自变量的关系</li>
+</ol>
+<p>总之, logistic回归与<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/2362545.htm" target="_blank" rel="external">线性回归</a>实际上有很多相同之处，最大的区别就在于他们的<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/324030.htm" target="_blank" rel="external">因变量</a>不同，其他的基本都差不多，正是因为如此，这两种回归可以归于同一个家族，即广义线性模型（generalized linear model）。这一家族中的模型形式基本上都差不多，不同的就是<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/324030.htm" target="_blank" rel="external">因变量</a>不同，如果是连续的，就是多重线性回归，如果是<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/79831.htm" target="_blank" rel="external">二项分布</a>，就是logistic回归。logistic回归的<a href="http://link.zhihu.com/?target=http%3A//baike.baidu.com/view/324030.htm" target="_blank" rel="external">因变量</a>可以是二分类的，也可以是多分类的，但是二分类的更为常用，也更加容易解释。所以实际中最为常用的就是二分类的logistic回归。</p>
+<ol>
+<li>线形回归怎么推到logistic回归，为什么logistic回归比线形回归更好（0到1的值域可以表示概率，自变量接近0时因变量更敏感，<strong>odds的现实意义</strong>，尤其是在自变量中存在虚拟变量，或者多分类问题上的意义），缺点（梯度爆炸，计算量更大）</li>
+<li>怎么求解，为什么不能用OLS，要用MLE，MLE又怎么解（梯度下降，牛顿，其他优化算法）</li>
+<li>如何选择用来分类的threshold，怎么根据具体情况选择（sensitive or specific）</li>
+<li>怎么判断模型好坏，ROC和AUC是怎么来的，有什么意义</li>
+</ol>
+<hr>
+<p>线性回归与losistic回归的区别，如何估计回归参数?</p>
+<p>直接用线性回归做分类因为考虑到了所有样本点到分类决策面的距离，所以在两类数据分布不均匀的时候将导致误差非常大；逻辑斯蒂回归回归和SVM克服了这个缺点，前者采用将所有数据采用sigmod函数进行了非线性映射，使得远离分类决策面的数据作用减弱；后者则直接去掉了远离分类决策面的数据，只考虑支持向量的影响。</p>
+<h3 id="逻辑斯特回归为什么要对特征进行离散化？"><a href="#逻辑斯特回归为什么要对特征进行离散化？" class="headerlink" title="逻辑斯特回归为什么要对特征进行离散化？"></a>逻辑斯特回归为什么要对特征进行离散化？</h3><p>在工业界，很少直接将连续值作为逻辑回归模型的特征输入，而是将连续特征离散化为一系列 0、1 特征交给逻辑回归模型，这样做的优势有以下几点:</p>
+<ol>
+<li><p>离散特征的增加和减少都很容易，易于模型的快速迭代;</p>
+</li>
+<li><p>稀疏向量内积乘法运算速度快，计算结果方便存储，容易扩展;</p>
+</li>
+<li><p>离散化后的特征对异常数据有很强的鲁棒性:比如一个特征是年龄&gt;30 是 1，否则 0。如果特征没有离散化，一个异常数据“年龄 300 岁”会给模型造成很大的干扰;</p>
+</li>
+<li><p>逻辑回归属于广义线性模型，表达能力受限;单变量离散化为 N 个后，每个变量有单独的权重，相当于为模型引入了非线性，能够提升模型表达能力，加大拟合;</p>
+</li>
+<li><p>离散化后可以进行特征交叉，由 M+N 个变量变为 M*N 个变量，进一步引入非线性，提升表达能力;</p>
+</li>
+<li><p>特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20-30 作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间是门学问;</p>
+</li>
+<li><p>特征离散化以后，起到了简化了逻辑回归模型的作用，降低了模型过拟合的风险。</p>
+<p>​</p>
+</li>
+</ol>
+<p>李沐曾经说过:模型是使用离散特征还是连续特征，其实是一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡。既可以离散化用线性模型，也可以用连续特征加深度学习。就看是喜欢折腾特征还是折腾模型了。通常来说，前者容易，而且可以 n 个人一起并行做，有成功经验;后者目前看很赞，能走多远还须拭目以待。</p>
+<h3 id="为什么可以用回归来解决分类问题？"><a href="#为什么可以用回归来解决分类问题？" class="headerlink" title="为什么可以用回归来解决分类问题？"></a>为什么可以用回归来解决分类问题？</h3><p>然后对sigmoid变化的理解：</p>
+<ol>
+<li>sigmoid函数光滑，处处可导，导数还能用自己表示</li>
+<li>sigmoid能把数据从负无穷到正无穷压缩到0，1之间，压缩掉了长尾，扩展了核心分辨率</li>
+<li>sigmoid在有观测误差的情况下最优的保证了输入信号的信息</li>
+</ol>
+<h2 id="LR与MaxEnt"><a href="#LR与MaxEnt" class="headerlink" title="LR与MaxEnt"></a>LR与MaxEnt</h2><p>LR是最大熵在类别为2时候的特例</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ml/" rel="tag"># ml</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/12/机器学习二十二——详解GBDT/" rel="next" title="机器学习二十二——详解GBDT">
+                <i class="fa fa-chevron-left"></i> 机器学习二十二——详解GBDT
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dzzxjl</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">95</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归-logistic-regression"><span class="nav-number">1.</span> <span class="nav-text">逻辑斯蒂回归 logistic regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">1.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">1.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用经验"><span class="nav-number">1.3.</span> <span class="nav-text">应用经验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LR并行化"><span class="nav-number">1.4.</span> <span class="nav-text">LR并行化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#logistic回归和线性回归的区别"><span class="nav-number">1.5.</span> <span class="nav-text">logistic回归和线性回归的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑斯特回归为什么要对特征进行离散化？"><span class="nav-number">1.6.</span> <span class="nav-text">逻辑斯特回归为什么要对特征进行离散化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么可以用回归来解决分类问题？"><span class="nav-number">1.7.</span> <span class="nav-text">为什么可以用回归来解决分类问题？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR与MaxEnt"><span class="nav-number">2.</span> <span class="nav-text">LR与MaxEnt</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">213k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">3:33</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("RnDYKdRSzyRf5KCqnetcUDEc-gzGzoHsz", "rCNa8khX5fiAHFw6nd6ikpL9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

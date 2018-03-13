@@ -101,17 +101,17 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="参数 parameter——模型训练机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程，比如假设你要做一个多项式回归分析的模型，比如$f(x)=w_1x_1+w_2x_2+w_3x_3$，那么模型训练的过程中其实就是在学习对应的$w$的值，这里的$w$就是参数。 超参">
+<meta name="description" content="参数 parameter——模型训练机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程。假设你要做一个多项式回归分析的模型，比如$f(x)=w_1x_1+w_2x_2+w_3x_3$，那么模型训练的过程中其实就是在学习对应的$w$的值，这里的$w$就是参数。 超参数">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习十四——参数与超参数">
 <meta property="og:url" content="http://yoursite.com/2018/03/06/机器学习十四——参数与超参数/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="参数 parameter——模型训练机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程，比如假设你要做一个多项式回归分析的模型，比如$f(x)=w_1x_1+w_2x_2+w_3x_3$，那么模型训练的过程中其实就是在学习对应的$w$的值，这里的$w$就是参数。 超参">
-<meta property="og:updated_time" content="2018-03-06T11:00:30.087Z">
+<meta property="og:description" content="参数 parameter——模型训练机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程。假设你要做一个多项式回归分析的模型，比如$f(x)=w_1x_1+w_2x_2+w_3x_3$，那么模型训练的过程中其实就是在学习对应的$w$的值，这里的$w$就是参数。 超参数">
+<meta property="og:updated_time" content="2018-03-13T01:28:28.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习十四——参数与超参数">
-<meta name="twitter:description" content="参数 parameter——模型训练机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程，比如假设你要做一个多项式回归分析的模型，比如$f(x)=w_1x_1+w_2x_2+w_3x_3$，那么模型训练的过程中其实就是在学习对应的$w$的值，这里的$w$就是参数。 超参">
+<meta name="twitter:description" content="参数 parameter——模型训练机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程。假设你要做一个多项式回归分析的模型，比如$f(x)=w_1x_1+w_2x_2+w_3x_3$，那么模型训练的过程中其实就是在学习对应的$w$的值，这里的$w$就是参数。 超参数">
 
 
 
@@ -250,6 +250,12 @@
         </li>
       
         
+        <li class="menu-item menu-item-thoughts">
+          <a href="/thoughts/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Thoughts</a>
+        </li>
+      
+        
         <li class="menu-item menu-item-links">
           <a href="/links/" rel="section">
             <i class="menu-item-icon fa fa-fw fa-link"></i> <br />Links</a>
@@ -381,6 +387,34 @@
           
 
           
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article&#58;</span>
+                
+                <span title="Symbols count in article">632</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">0:01</span>
+              
+            </div>
+          
 
           
 
@@ -397,7 +431,7 @@
       
 
       
-        <h2 id="参数-parameter——模型训练"><a href="#参数-parameter——模型训练" class="headerlink" title="参数 parameter——模型训练"></a>参数 parameter——模型训练</h2><p>机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程，比如假设你要做一个多项式回归分析的模型，比如$f(x)=w_1x_1+w_2x_2+w_3x_3$，那么模型训练的过程中其实就是在学习对应的$w$的值，这里的$w$就是参数。</p>
+        <h2 id="参数-parameter——模型训练"><a href="#参数-parameter——模型训练" class="headerlink" title="参数 parameter——模型训练"></a>参数 parameter——模型训练</h2><p>机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程。假设你要做一个多项式回归分析的模型，比如$f(x)=w_1x_1+w_2x_2+w_3x_3$，那么模型训练的过程中其实就是在学习对应的$w$的值，这里的$w$就是参数。</p>
 <h2 id="超参数-hyperparameter——模型选择"><a href="#超参数-hyperparameter——模型选择" class="headerlink" title="超参数 hyperparameter——模型选择"></a>超参数 hyperparameter——模型选择</h2><p><strong>理解超参数时一定要和验证集挂钩。</strong></p>
 <p>模型超参数是模型外部的配置，其值不能从数据估计得到。</p>
 <p>具体特征有：</p>
@@ -410,7 +444,8 @@
 <p>怎样得到它的最优值：对于给定的问题，我们无法知道模型超参数的最优值。但我们可以使用经验法则来探寻其最优值，或复制用于其他问题的值，也可以通过反复试验的方法。</p>
 <p>模型超参数的一些例子包括：</p>
 <ul>
-<li>训练神经网络的学习率<em>（不知隐藏层数和隐藏层节点数算吗？）</em></li>
+<li>神经网络的结构（隐藏层的数量，每个隐藏层上节点的数量）</li>
+<li>训练神经网络的学习率</li>
 <li>SVM的C和sigma超参数</li>
 <li>KNN中的k</li>
 <li>树模型中的深度、叶子数</li>
@@ -538,7 +573,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">91</span>
+                    <span class="site-state-item-count">95</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -561,7 +596,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -596,7 +633,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -659,7 +698,21 @@
   <span class="author" itemprop="copyrightHolder">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">213k</span>
+  
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">3:33</span>
   
 </div>
 
