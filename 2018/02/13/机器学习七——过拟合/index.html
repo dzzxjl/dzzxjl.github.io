@@ -108,10 +108,13 @@
 <meta property="og:url" content="http://yoursite.com/2018/02/13/机器学习七——过拟合/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="与过拟合、欠拟合的斗争是机器学习的核心问题。  什么是拟合？先打个比方，“不知道大家在学车的时候教练教倒库和侧方停车的时候有没有教一串口诀：类似于在车窗的XX框切XX杆的时候打满，切XX的时候回正等等，这个口诀可以顺利让你通过科目二，然而换个车或者换个场地，你就发现并没有卵用… 我们说这只是overfit了某个车和某个场地（训练数据），在新的测试集（新车新场地）上的泛化性能为0。” 再打个比方，">
-<meta property="og:updated_time" content="2018-03-05T13:42:46.198Z">
+<meta property="og:image" content="http://p59abxhmx.bkt.clouddn.com/underfit&overfit.png">
+<meta property="og:image" content="http://p59abxhmx.bkt.clouddn.com/L1&L2.png">
+<meta property="og:updated_time" content="2018-03-15T05:00:46.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习七——过拟合">
 <meta name="twitter:description" content="与过拟合、欠拟合的斗争是机器学习的核心问题。  什么是拟合？先打个比方，“不知道大家在学车的时候教练教倒库和侧方停车的时候有没有教一串口诀：类似于在车窗的XX框切XX杆的时候打满，切XX的时候回正等等，这个口诀可以顺利让你通过科目二，然而换个车或者换个场地，你就发现并没有卵用… 我们说这只是overfit了某个车和某个场地（训练数据），在新的测试集（新车新场地）上的泛化性能为0。” 再打个比方，">
+<meta name="twitter:image" content="http://p59abxhmx.bkt.clouddn.com/underfit&overfit.png">
 
 
 
@@ -397,7 +400,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article&#58;</span>
                 
-                <span title="Symbols count in article">3.9k</span>
+                <span title="Symbols count in article">4.9k</span>
               
 
               
@@ -411,7 +414,7 @@
                 
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
-                <span title="Reading time">0:04</span>
+                <span title="Reading time">0:05</span>
               
             </div>
           
@@ -437,6 +440,9 @@
 <h2 id="什么是拟合？"><a href="#什么是拟合？" class="headerlink" title="什么是拟合？"></a>什么是拟合？</h2><p>先打个比方，“不知道大家在学车的时候教练教倒库和侧方停车的时候有没有教一串口诀：类似于在车窗的XX框切XX杆的时候打满，切XX的时候回正等等，这个口诀可以顺利让你通过科目二，然而换个车或者换个场地，你就发现并没有卵用… 我们说这只是overfit了某个车和某个场地（训练数据），在新的测试集（新车新场地）上的泛化性能为0。”</p>
 <p>再打个比方，“如果期末考试题就是平时的作业，那我们把平时的作业都背一遍就是最好的方式，而这就是过拟合。如果期末考试不考平时作业，全是新题，那么这个时候就不能只背平时的作业，还要充分理解这门课的知识，掌握如何推理解题的技巧。所以过拟合好坏与否，完全取决于场景。”</p>
 <p>如果应用场景依靠死记硬背就能搞定，那过拟合反倒是好的。实际上在我们的设计里面，很多时候我们会倾向于往过拟合靠一点，可能做新题会差一点，但是对于死记硬背的送分题会做的非常好。在拿过去预测未来的应用场景下，有的时候过拟合不一定不好，要根据实际情况来看。</p>
+<p>上面是直观的认识，我们以“用CART拟合$y=sin(x)$”来举例，如下图所示</p>
+<p><img src="http://p59abxhmx.bkt.clouddn.com/underfit&amp;overfit.png" alt="underfit&amp;overfit"></p>
+<p>我们将CART的<code>max_depth</code>分别设置为1，2，5，10，从图中可以发现最大深度为1，2时欠拟合，最大深度为10时，对于数据拟合得太好，以至于将噪音数据都考虑进去了，导致其最终的模型过于复杂，当决策树深度为5时，最为折中（trade-off）。</p>
 <h2 id="拟合的几种情况"><a href="#拟合的几种情况" class="headerlink" title="拟合的几种情况"></a>拟合的几种情况</h2><ul>
 <li>拟合 Fitting：模型（构建的函数）与真实数据之间的贴合程度</li>
 <li>欠拟合 underfitting：就是训练得不够，数据不足，训练数据无法代表数据整体的分布情况</li>
@@ -467,20 +473,21 @@
 <li>根据当前数据集估计<strong>数据分布</strong>参数，使用该分布产生更多数据：这个一般不用，因为估计分布参数的过程也会代入抽样误差。</li>
 <li>数据增强：通过一定规则扩充数据。如在物体分类问题里，物体在图像中的位置、姿态、尺度，整体图片明暗度等都不会影响分类结果。我们就可以通过图像平移、翻转、缩放、切割等手段将数据库成倍扩充；</li>
 </ul>
-<h3 id="正则化——限制权值"><a href="#正则化——限制权值" class="headerlink" title="正则化——限制权值"></a>正则化——限制权值</h3><h4 id="正则化时为什么能防止过拟合？"><a href="#正则化时为什么能防止过拟合？" class="headerlink" title="正则化时为什么能防止过拟合？"></a>正则化时为什么能防止过拟合？</h4><p>过拟合表现在训练数据上的误差非常小，而在测试数据上误差反而增大。其原因一般是模型过于复杂，过分得去拟合数据的噪声. 正则化则是对模型参数添加先验，使得模型复杂度较小，对于噪声的输入扰动相对较小。  </p>
-<p>正则化时，相当于是给模型参数<code>w</code>添加了一个协方差为<code>1/lambda</code>的零均值<code>高斯分布先验</code>。对于<code>lambda = 0</code>，也就是不添加正则化约束，则相当于参数的高斯先验分布有着无穷大的协方差，那么这个先验约束则会非常弱，模型为了拟合所有的训练数据，<code>w</code>可以变得任意大不稳定。<code>lambda</code>越大，表明先验的高斯协方差越小，模型约稳定，相对的variance(方差)也越小。</p>
+<h3 id="正则化——限制权值"><a href="#正则化——限制权值" class="headerlink" title="正则化——限制权值"></a>正则化——限制权值</h3><h4 id="正则化时为什么能防止过拟合？"><a href="#正则化时为什么能防止过拟合？" class="headerlink" title="正则化时为什么能防止过拟合？"></a>正则化时为什么能防止过拟合？</h4><p>过拟合表现在训练数据上的误差非常小，而在测试数据上误差反而增大。其原因一般是模型过于复杂，过分得去拟合数据的噪声。正则化则是<strong>对模型参数添加先验</strong>，使得模型复杂度较小，对于噪声的输入扰动相对较小。  </p>
+<p><img src="http://p59abxhmx.bkt.clouddn.com/L1&amp;L2.png" alt="L1&amp;L2"></p>
+<p><em>图片引自wepon大神ppt</em></p>
 <h4 id="L0-norm"><a href="#L0-norm" class="headerlink" title="L0-norm"></a>L0-norm</h4><p>其实稀疏的根本还是在于L0-norm也就是直接统计参数不为0的个数作为规则项，但实际上不好执行于是引入了L1-norm。</p>
 <h4 id="L1-norm"><a href="#L1-norm" class="headerlink" title="L1-norm"></a>L1-norm</h4><p>L1-norm本质上是假设参数先验是服从Laplace分布的。</p>
 <blockquote>
-<p><strong>L1范数</strong>：是指向量中各个元素绝对值之和，也有个美称叫“<strong>稀疏规则算子</strong>”（Lasso regularization）。那么，<strong>参数稀疏</strong> 有什么好处呢？</p>
+<p>L1范数：是指向量中各个元素绝对值之和，也有个美称叫“<strong>稀疏规则算子</strong>”（Lasso regularization）。那么，<strong>参数稀疏</strong>有什么好处呢？</p>
 </blockquote>
-<p>一个关键原因在于它能实现<strong>特征的自动选择</strong>。一般来说，大部分特征 xi 和输出 yi 之间并没有多大关系。在最小化目标函数的时候考虑到这些额外的特征 xi，虽然可以获得更小的训练误差，但在预测新的样本时，这些没用的信息反而会干扰了对正确 yi 的预测。稀疏规则化算子的引入就是为了<strong>完成特征自动选择</strong>的光荣使命，它会学习地去掉这些没有信息的特征，也就是把这些特征对应的权重置为0。</p>
-<p>L1-norm的求解比较困难，可以用<strong>坐标下降法</strong>或是<strong>*最小角回归法</strong>求解。</p>
-<h4 id="L2-norm"><a href="#L2-norm" class="headerlink" title="L2-norm"></a>L2-norm</h4><p>L2-norm本质上是假设参数先验位Gaussian分布的。</p>
+<p>一个关键原因在于它能实现<strong>特征的自动选择</strong>。一般来说，大部分特征$x^i$和输出$y$之间并没有多大关系。在最小化目标函数的时候考虑到这些额外的特征$x^i$，虽然可以获得更小的训练误差，但在预测新的样本时，这些没用的信息反而会<strong>干扰</strong>了对正确$y$的预测。稀疏规则化算子的引入就是为了<strong>完成特征自动选择</strong>的光荣使命，它会学习地去掉这些没有信息的特征，也就是把这些特征对应的权重置为0。</p>
+<p>L1-norm的求解比较困难，可以用<strong>坐标下降法</strong>或是<strong>最小角度回归法</strong>求解。</p>
+<h4 id="L2-norm"><a href="#L2-norm" class="headerlink" title="L2-norm"></a>L2-norm</h4><p>L2-norm本质上是假设参数先验为Gaussian分布。L2正则化时，相当于是给模型参数$w$添加了一个协方差为$\frac1\lambda$的零均值高斯分布先验。对于$\lambda=0$，也就是不添加正则化约束，则相当于参数的高斯先验分布有着无穷大的协方差，那么这个先验约束则会非常弱，模型为了拟合所有的训练数据，$w$可以变得任意大不稳定。$\lambda$越大，表明先验的高斯协方差越小，模型约稳定，相对的variance(方差)也越小。</p>
 <blockquote>
 <p><strong>L2范数</strong>：它有两个美称，在回归里面，有人把有它的回归叫“岭回归”（Ridge Regression），有人也叫它“权值衰减”(weight decay)。</p>
 </blockquote>
-<p>它的强大之处就是它能<strong>解决过拟合</strong>问题。我们让 L2 范数的规则项 ||w||2 最小，可以使得 w 的每个元素都很小，都接近于0，但与 L1 范数不同，它不会让它等于0，而是接近于0，这里还是有很大区别的。而越小的参数说明模型越简单，越简单的模型则越不容易产生过拟合现象。<strong>咦</strong>，你为啥说越小的参数表示的模型越简单呢？ 其实我也不知道，我也是猜，可能是因为参数小，对结果的影响就小了吧。</p>
+<p>它的强大之处就是它能<strong>解决过拟合</strong>问题。我们让L2范数的规则项$||w||^2$最小，可以使得$w$的每个元素都很小，都接近于0，但与L1范数不同，它不会让它等于0，而是接近于0，这里还是有很大区别的。而越小的参数说明模型越简单，越简单的模型则越不容易产生过拟合现象。<strong>为啥说越小的参数表示的模型越简单呢？</strong> <em>其实我也不知道，我也是猜，可能是因为参数小，对结果的影响就小了吧。</em></p>
 <blockquote>
 <p>一句话<strong>总结</strong>就是：L1正则化是截断效应，会趋向于产生少量的特征，而其他的特征都是0（实现稀疏，把不相关的特征的系数变成0）；L2正则化是缩放效应，使最后得到的参数很小，L2 会选择更多的特征，这些特征都会接近于0。</p>
 </blockquote>
@@ -492,13 +499,24 @@
 <p>具体的做法是选择一部分样本作为验证集，在迭代拟合训练集的过程中，如果模型在验证集里错误率不再下降，就停止训练，也就是说控制迭代的轮数（树的个数）。</p>
 <h3 id="dropout——可以看成是一种正则化"><a href="#dropout——可以看成是一种正则化" class="headerlink" title="dropout——可以看成是一种正则化"></a>dropout——可以看成是一种正则化</h3><p>Dropout 是一种非常通用的解决深层神经网络中 overfitting 问题的方法, 过程极其简单, 在调试算法中效果也非常有效，对于神经网络单元，按照一定的概率将其暂时从网络中丢弃。</p>
 <p>首先设定一个 dropout ratio $σ$，$σ$是超参数，范围设置为 (0,1)，表示在 Forward 阶段需要随机断开的连接的比例。每次 Forward 的时候都要随机的断开该比例的连接，只更新剩下的 weight。最后, 在 test/predict 的时候, 使用全部的连接, 不过, 这些 weights 全部都需要乘上 $1−σ$。</p>
-<h3 id="决策树剪枝——从结构-Architecture-角度"><a href="#决策树剪枝——从结构-Architecture-角度" class="headerlink" title="决策树剪枝——从结构 Architecture 角度"></a>决策树剪枝——从结构 Architecture 角度</h3><p>pass</p>
+<h3 id="决策树剪枝——从结构-Architecture-角度"><a href="#决策树剪枝——从结构-Architecture-角度" class="headerlink" title="决策树剪枝——从结构 Architecture 角度"></a>决策树剪枝——从结构 Architecture 角度</h3><p>算法生成的决策树非常详细并且庞大，每个属性都被详细地加以考虑，决策树的树叶节点所覆盖的训练样本都是“纯”的。因此用这个决策树来对训练样本进行分类的话，你会发现对于训练样本而言，这个树表现完好，误差率极低且能够正确得对训练样本集中的样本进行分类。训练样本中的错误数据也会被决策树学习，成为决策树的部分，但是对于测试数据的表现就没有想象的那么好，或者极差，这就是所谓的过拟合(Overfitting)问题。Quinlan教授试验，在数据集中，过拟合的决策树的错误率比经过简化的决策树的错误率要高。</p>
+<h4 id="怎么剪枝？"><a href="#怎么剪枝？" class="headerlink" title="怎么剪枝？"></a>怎么剪枝？</h4><p>现在问题就在于，如何(HOW)在原生的过拟合决策树的基础上，生成简化版的决策树？可以通过剪枝的方法来简化过拟合的决策树。</p>
+<p>剪枝可以分为两种</p>
+<ul>
+<li><p>预剪枝(Pre-Pruning)</p>
+</li>
+<li><p>后剪枝(Post-Pruning)</p>
+</li>
+</ul>
+<p>下面我们来详细学习下这两种方法：</p>
+<p>PrePrune：预剪枝，及早的停止树增长，方法可以参考见上面树停止增长的方法。<br>PostPrune：后剪枝，在已生成过拟合决策树上进行剪枝，可以得到简化版的剪枝决策树。<br>其实剪枝的准则是如何确定决策树的规模，可以参考的剪枝思路有以下几个：<br>1：使用训练集合(Training Set）和验证集合(Validation Set)，来评估剪枝方法在修剪结点上的效用<br>2：使用所有的训练集合进行训练，但是用统计测试来估计修剪特定结点是否会改善训练集合外的数据的评估性能，如使用Chi-Square（Quinlan，1986）测试来进一步扩展结点是否能改善整个分类数据的性能，还是仅仅改善了当前训练集合数据上的性能。<br>3：使用明确的标准来衡量训练样例和决策树的复杂度，当编码长度最小时，停止树增长，如MDL(Minimum Description Length)准则。</p>
 <h3 id="SVM松弛变量"><a href="#SVM松弛变量" class="headerlink" title="SVM松弛变量"></a>SVM松弛变量</h3><p>pass 是解决拟合问题吗？只是为了容错性</p>
 <h2 id="过拟合一定不好吗？"><a href="#过拟合一定不好吗？" class="headerlink" title="过拟合一定不好吗？"></a>过拟合一定不好吗？</h2><p>过拟合是一个讨论特别多的话题。以前，通常我们会说如果模型做的太复杂了就会过拟合，而最好的方式应该是拟合的刚刚好。但现在来看，大多数的实际场景都是在拿过去预测未来，过拟合不一定是不好的，还是要看具体场景。如果这个场景是过去见过的情况比较多，新的情况比较少的时候，过拟合反倒是好的。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="https://www.zhihu.com/question/59201590/answer/163996540" target="_blank" rel="external">https://www.zhihu.com/question/59201590/answer/163996540</a></li>
 <li><a href="https://www.zhihu.com/question/59201590" target="_blank" rel="external">https://www.zhihu.com/question/59201590</a></li>
 <li><a href="https://www.zhihu.com/question/26898675" target="_blank" rel="external">如何解决过拟合的问题？</a></li>
+<li><a href="http://blog.csdn.net/u011067360/article/details/24871801" target="_blank" rel="external">http://blog.csdn.net/u011067360/article/details/24871801</a></li>
 </ol>
 
       
@@ -717,7 +735,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是拟合？"><span class="nav-number">1.</span> <span class="nav-text">什么是拟合？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拟合的几种情况"><span class="nav-number">2.</span> <span class="nav-text">拟合的几种情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防止过拟合"><span class="nav-number">3.</span> <span class="nav-text">防止过拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取更多数据，增加训练数据量"><span class="nav-number">3.1.</span> <span class="nav-text">获取更多数据，增加训练数据量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化——限制权值"><span class="nav-number">3.2.</span> <span class="nav-text">正则化——限制权值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#正则化时为什么能防止过拟合？"><span class="nav-number">3.2.1.</span> <span class="nav-text">正则化时为什么能防止过拟合？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L0-norm"><span class="nav-number">3.2.2.</span> <span class="nav-text">L0-norm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L1-norm"><span class="nav-number">3.2.3.</span> <span class="nav-text">L1-norm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L2-norm"><span class="nav-number">3.2.4.</span> <span class="nav-text">L2-norm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Early-stoping——从训练时间角度"><span class="nav-number">3.3.</span> <span class="nav-text">Early-stoping——从训练时间角度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dropout——可以看成是一种正则化"><span class="nav-number">3.4.</span> <span class="nav-text">dropout——可以看成是一种正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树剪枝——从结构-Architecture-角度"><span class="nav-number">3.5.</span> <span class="nav-text">决策树剪枝——从结构 Architecture 角度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM松弛变量"><span class="nav-number">3.6.</span> <span class="nav-text">SVM松弛变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过拟合一定不好吗？"><span class="nav-number">4.</span> <span class="nav-text">过拟合一定不好吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是拟合？"><span class="nav-number">1.</span> <span class="nav-text">什么是拟合？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拟合的几种情况"><span class="nav-number">2.</span> <span class="nav-text">拟合的几种情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防止过拟合"><span class="nav-number">3.</span> <span class="nav-text">防止过拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取更多数据，增加训练数据量"><span class="nav-number">3.1.</span> <span class="nav-text">获取更多数据，增加训练数据量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化——限制权值"><span class="nav-number">3.2.</span> <span class="nav-text">正则化——限制权值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#正则化时为什么能防止过拟合？"><span class="nav-number">3.2.1.</span> <span class="nav-text">正则化时为什么能防止过拟合？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L0-norm"><span class="nav-number">3.2.2.</span> <span class="nav-text">L0-norm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L1-norm"><span class="nav-number">3.2.3.</span> <span class="nav-text">L1-norm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L2-norm"><span class="nav-number">3.2.4.</span> <span class="nav-text">L2-norm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Early-stoping——从训练时间角度"><span class="nav-number">3.3.</span> <span class="nav-text">Early-stoping——从训练时间角度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dropout——可以看成是一种正则化"><span class="nav-number">3.4.</span> <span class="nav-text">dropout——可以看成是一种正则化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树剪枝——从结构-Architecture-角度"><span class="nav-number">3.5.</span> <span class="nav-text">决策树剪枝——从结构 Architecture 角度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#怎么剪枝？"><span class="nav-number">3.5.1.</span> <span class="nav-text">怎么剪枝？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM松弛变量"><span class="nav-number">3.6.</span> <span class="nav-text">SVM松弛变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过拟合一定不好吗？"><span class="nav-number">4.</span> <span class="nav-text">过拟合一定不好吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -749,7 +767,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">213k</span>
+    <span title="Symbols count total">216k</span>
   
 
   
@@ -758,7 +776,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">3:33</span>
+    <span title="Reading time total">3:36</span>
   
 </div>
 
@@ -1031,6 +1049,29 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 

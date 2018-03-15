@@ -101,17 +101,17 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="关于概率的几个概念举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。 $P(堵车)$为先验概率——（出门前根据有种要堵车的感觉，这也是先验的意思） $P(堵车|车祸)$是后验概率——（发生车祸了，这下估计要堵车）  为了很好的说明这个问题，在这里举一个例子： 玩英雄联盟占到中国总人口的60%，不玩英雄联盟的人数占到40%： 为了便于数学叙述，这里我们用变量X来表示取值情况，根据概率的">
+<meta name="description" content="其实很多机器学习模型本身都是对数据分布有一定的假设的，在这个假设前提之下去进行理论研究有助于我们关注主要矛盾，忽律次要矛盾。但是在工程当中，很多时候我们对数据的分布其实是不了解的，贸然对数据进行假设容易造成模型无法无法拟合真实的分布。  关于概率的几个概念举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。 $P(堵车)$为先验概率——（出门前根据有种要堵车的感觉，这也是先验的意思）">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="概率统计一——概率分布">
 <meta property="og:url" content="http://yoursite.com/2018/02/28/概率统计一——概率分布/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="关于概率的几个概念举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。 $P(堵车)$为先验概率——（出门前根据有种要堵车的感觉，这也是先验的意思） $P(堵车|车祸)$是后验概率——（发生车祸了，这下估计要堵车）  为了很好的说明这个问题，在这里举一个例子： 玩英雄联盟占到中国总人口的60%，不玩英雄联盟的人数占到40%： 为了便于数学叙述，这里我们用变量X来表示取值情况，根据概率的">
-<meta property="og:updated_time" content="2018-03-06T02:01:31.813Z">
+<meta property="og:description" content="其实很多机器学习模型本身都是对数据分布有一定的假设的，在这个假设前提之下去进行理论研究有助于我们关注主要矛盾，忽律次要矛盾。但是在工程当中，很多时候我们对数据的分布其实是不了解的，贸然对数据进行假设容易造成模型无法无法拟合真实的分布。  关于概率的几个概念举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。 $P(堵车)$为先验概率——（出门前根据有种要堵车的感觉，这也是先验的意思）">
+<meta property="og:updated_time" content="2018-03-15T04:40:14.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概率统计一——概率分布">
-<meta name="twitter:description" content="关于概率的几个概念举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。 $P(堵车)$为先验概率——（出门前根据有种要堵车的感觉，这也是先验的意思） $P(堵车|车祸)$是后验概率——（发生车祸了，这下估计要堵车）  为了很好的说明这个问题，在这里举一个例子： 玩英雄联盟占到中国总人口的60%，不玩英雄联盟的人数占到40%： 为了便于数学叙述，这里我们用变量X来表示取值情况，根据概率的">
+<meta name="twitter:description" content="其实很多机器学习模型本身都是对数据分布有一定的假设的，在这个假设前提之下去进行理论研究有助于我们关注主要矛盾，忽律次要矛盾。但是在工程当中，很多时候我们对数据的分布其实是不了解的，贸然对数据进行假设容易造成模型无法无法拟合真实的分布。  关于概率的几个概念举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。 $P(堵车)$为先验概率——（出门前根据有种要堵车的感觉，这也是先验的意思）">
 
 
 
@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article&#58;</span>
                 
-                <span title="Symbols count in article">1k</span>
+                <span title="Symbols count in article">1.1k</span>
               
 
               
@@ -431,7 +431,10 @@
       
 
       
-        <h2 id="关于概率的几个概念"><a href="#关于概率的几个概念" class="headerlink" title="关于概率的几个概念"></a>关于概率的几个概念</h2><p>举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。</p>
+        <blockquote>
+<p>其实很多机器学习模型本身都是对数据分布有一定的假设的，在这个假设前提之下去进行理论研究有助于我们关注主要矛盾，忽律次要矛盾。但是在工程当中，很多时候我们对数据的分布其实是不了解的，贸然对数据进行假设容易造成模型无法无法拟合真实的分布。</p>
+</blockquote>
+<h2 id="关于概率的几个概念"><a href="#关于概率的几个概念" class="headerlink" title="关于概率的几个概念"></a>关于概率的几个概念</h2><p>举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。</p>
 <p>$P(堵车)$为先验概率——（出门前根据有种要堵车的感觉，这也是先验的意思）</p>
 <p>$P(堵车|车祸)$是后验概率——（发生车祸了，这下估计要堵车）</p>
 <hr>
@@ -704,7 +707,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">213k</span>
+    <span title="Symbols count total">216k</span>
   
 
   
@@ -713,7 +716,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">3:33</span>
+    <span title="Reading time total">3:36</span>
   
 </div>
 
@@ -986,6 +989,29 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 

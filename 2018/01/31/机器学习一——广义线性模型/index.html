@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/31/机器学习一——广义线性模型/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
-<meta property="og:updated_time" content="2018-03-13T07:52:40.982Z">
+<meta property="og:updated_time" content="2018-03-14T13:58:27.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习一——广义线性模型">
 <meta name="twitter:description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article&#58;</span>
                 
-                <span title="Symbols count in article">2.1k</span>
+                <span title="Symbols count in article">2.2k</span>
               
 
               
@@ -447,7 +447,7 @@
 <li><strong>回归模型</strong></li>
 <li>损失函数 = MSE + 无正则项</li>
 <li>损失函数<ul>
-<li><a href="https://www.zhihu.com/question/37031188" target="_blank" rel="external">最小二乘法（OLS）</a></li>
+<li><a href="https://www.zhihu.com/question/37031188" target="_blank" rel="external">最小二乘法（OLS）</a>——误差平方</li>
 <li>LAD线性回归——最小绝对偏差(Least Absolute Deviation, LAD)回归模型<ul>
 <li>分位数回归</li>
 </ul>
@@ -467,9 +467,9 @@
 <li>出租车/曼哈顿距离</li>
 <li>方差</li>
 <li>L1范数/正则化</li>
-<li>求解算法<ul>
+<li>求解算法——L1-norm的求解比较困难，可以用<strong>坐标下降法</strong>或是<strong>最小角度回归法</strong>求解<ul>
 <li>坐标下降法</li>
-<li>最小角度回归 LARS</li>
+<li>最小角度回归法 LARS</li>
 <li>Glmnet</li>
 </ul>
 </li>
@@ -512,6 +512,7 @@
 <li>Equal-variance 等方差——所有的误差项具有同样方差</li>
 </ol>
 <p><strong>当给定参数$θ$和$x$时，目标值$y$也服从正态分布</strong>，这里 y 服从的是均值为$θ^Tx$的正态分布，当我们训练得到参数$θ$后，那么对于不同的$\theta$值，$y$服从的就是不同均值的正态分布。</p>
+<h3 id="基函数"><a href="#基函数" class="headerlink" title="基函数"></a>基函数</h3><p>pass</p>
 <h3 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h3><ul>
 <li>优点<ul>
 <li>线性回归的理解和解释都非常直观，还能通过正则化来避免过拟合。此外，线性模型很容易通过随机梯度下降来更新数据模型。</li>
@@ -750,7 +751,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#广义线性模型（generalized-linear-model）综述"><span class="nav-number">1.</span> <span class="nav-text">广义线性模型（generalized linear model）综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数分布簇"><span class="nav-number">2.</span> <span class="nav-text">指数分布簇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归"><span class="nav-number">3.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前提假设—LINE"><span class="nav-number">3.1.</span> <span class="nav-text">前提假设—LINE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点与缺点"><span class="nav-number">3.2.</span> <span class="nav-text">优点与缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#广义线性模型（generalized-linear-model）综述"><span class="nav-number">1.</span> <span class="nav-text">广义线性模型（generalized linear model）综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数分布簇"><span class="nav-number">2.</span> <span class="nav-text">指数分布簇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归"><span class="nav-number">3.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前提假设—LINE"><span class="nav-number">3.1.</span> <span class="nav-text">前提假设—LINE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基函数"><span class="nav-number">3.2.</span> <span class="nav-text">基函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点与缺点"><span class="nav-number">3.3.</span> <span class="nav-text">优点与缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -782,7 +783,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">213k</span>
+    <span title="Symbols count total">216k</span>
   
 
   
@@ -791,7 +792,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">3:33</span>
+    <span title="Reading time total">3:36</span>
   
 </div>
 
