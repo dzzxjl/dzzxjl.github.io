@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="ml," />
+
+
+<meta name="description" content="最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？ 答：  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。">
+<meta name="keywords" content="ml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最优化方法">
+<meta property="og:url" content="http://yoursite.com/2017/11/22/机器学习-学科-最优化算法/index.html">
+<meta property="og:site_name" content="十一城">
+<meta property="og:description" content="最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？ 答：  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。">
+<meta property="og:updated_time" content="2018-03-13T07:20:25.108Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最优化方法">
+<meta name="twitter:description" content="最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？ 答：  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/22/机器学习-学科-最优化算法/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>最优化方法 | 十一城</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c74812f514823dcc232a43bf4fa01aee";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">十一城</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">跬步千里，小流江海。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-bookcan">
+          <a href="/bookcan/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-book"></i> <br />BookCan</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-thoughts">
+          <a href="/thoughts/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Thoughts</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-link"></i> <br />Links</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/22/机器学习-学科-最优化算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dzzxjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十一城">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">最优化方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-22T14:55:42+08:00">2017-11-22</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ml/" itemprop="url" rel="index"><span itemprop="name">ml</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/22/机器学习-学科-最优化算法/" class="leancloud_visitors" data-flag-title="最优化方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article&#58;</span>
+                
+                <span title="Symbols count in article">2.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">0:02</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？</p>
+<p>答：</p>
+<ol>
+<li>首先很多时候我们无法确定数据集是否确定有极值点，找到解析解</li>
+<li>其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。</li>
+<li>求导数=0的解并不是一件容易的事情，而且有些情况下即便能够求解，其时间复杂度也远远大于迭代寻优的方法。</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>阅读本文前，建议可以看一下<a href="http://sofasofa.io/tutorials/python_gradient_descent/index.php" target="_blank" rel="external">SofaSofa的这篇文章</a>，关于GD、SGD、Mini-batch SGD有个直观的认识，这篇文章讲的非常生动！</p>
+</blockquote>
+<p>机器学习之所以包含“学习”二字，是因为机器学习算法会尝试<strong>优化</strong>一项特定的指标：它们一般会努力将预测的误差最小化，或者说将预测正确的概率最大化。以下均属于非线性规划中的无约束优化问题的求解方法。</p>
+<h2 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a><a href="https://zhuanlan.zhihu.com/p/24913912" target="_blank" rel="external">梯度</a></h2><ul>
+<li>对于最优化问题的求解</li>
+<li>梯度提升决策树方法簇</li>
+</ul>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><ul>
+<li>梯度下降法 Gradient Descent<ul>
+<li>SGD(stochastic)<ul>
+<li>梯度优化算法<ul>
+<li>Momentum</li>
+<li><a href="https://zhuanlan.zhihu.com/p/29920135" target="_blank" rel="external">Adagrad</a> -&gt;每次通过，全局学习率逐参数的除以历史梯度平方和的平方根，使得每个参数的学习率不同</li>
+<li>Adam</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BGD(batch)</li>
+<li>Mini-Batch GD</li>
+</ul>
+</li>
+<li><del>牛顿法</del>（因为Hesse矩阵的计算量很大，一般不使用）</li>
+<li>拟牛顿法（BFGS -&gt; L-BFGS）</li>
+<li>坐标下降法</li>
+</ul>
+<blockquote>
+<ul>
+<li>样本的数量<ul>
+<li>batchsize 批大小。在深度学习中，一般采用SGD训练，即每次训练在训练集中取batchsize个样本训练<ul>
+<li>数字越小时，此时就相当于来了一个样本，然后做一次更新，训练过程越接近随机梯度下降sgd</li>
+<li>数字越大时，训练越接近梯度下降，即每一次参数更新都要用到全部样本数据</li>
+</ul>
+</li>
+<li>iteration1个iteration等于使用batchsize个样本训练一次</li>
+<li>epoch1个epoch等于使用训练集中的全部样本训练一次</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="GD"><a href="#GD" class="headerlink" title="GD"></a>GD</h2><p>而梯度下降法是从初始点的领域开始判断，在局部进行最速下降方向，然后步步逼近极值；所以往往会导致梯度下降法比牛顿法迭代的次数更多。</p>
+<h3 id="BGD"><a href="#BGD" class="headerlink" title="BGD"></a>BGD</h3><p>批量梯度下降和随机梯度下降的区别在于批量的话每次更新参数要用到每个样本（从对每个样本求和可以看到），而随机的话只用一个。</p>
+<h3 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h3><p>随机梯度下降（是梯度下降的batch版本，batch_size=1），在SGD中，每次迭代可以只用<strong>一个</strong>训练数据来更新参数。此时更新的算法，只用到了一个样本。其实具象的理解下，就是来了一条训练数据，算下此时根据模型算出的值和实际值的差距，如果差距大，那么参数更新的幅度大，反之则小。当训练数据过大时，用GD可能造成内存不够用，那么就可以用SGD了，SGD其实可以算作是一种online-learning。另外SGD收敛会比GD快，但是对于代价函数求最小值还是GD做的比较好，不过SGD也够用了。</p>
+<h4 id="SGD-with-Momentum"><a href="#SGD-with-Momentum" class="headerlink" title="SGD with Momentum"></a>SGD with Momentum</h4><p>其实SAG就是SGD with momentum（带动量的随机梯度下降）的姊妹版本。SAG是对过去k次的梯度求均值。</p>
+<p>SGD with momentum是对<strong>过去所有的梯度</strong>求加权平均（权重成指数衰减）。</p>
+<h3 id="Adam算法"><a href="#Adam算法" class="headerlink" title="Adam算法"></a>Adam算法</h3><h4 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h4><p>该优化算法与普通的sgd算法差别就在于采取了累积平方梯度，<strong>简单来讲，设置全局学习率之后，每次通过，全局学习率逐参数的除以历史梯度平方和的平方根，使得每个参数的学习率不同</strong>。</p>
+<h4 id="RMSProp——AdaGrad的改进"><a href="#RMSProp——AdaGrad的改进" class="headerlink" title="RMSProp——AdaGrad的改进"></a>RMSProp——AdaGrad的改进</h4><p>可以看出RMSProp优化算法和AdaGrad算法唯一的不同，就在于累积平方梯度的求法不同。<strong>RMSProp算法不是像AdaGrad算法那样暴力直接的累加平方梯度，而是加了一个衰减系数来控制历史信息的获取多少。</strong></p>
+<ol>
+<li>RMSProp是AdaGrad算法的改进。鉴于神经网络都是非凸条件下的，RMSProp在非凸条件下结果更好，改变梯度累积为指数衰减的移动平均以丢弃遥远的过去历史。</li>
+<li>经验上，RMSProp被证明有效且实用的深度学习网络优化算法。与AdaGrad相比，RMSProp增加了<strong>一个衰减系数</strong>来控制历史信息的获取多少。</li>
+</ol>
+<h3 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h3><p>在二阶导数的作用下，从函数的凹凸性出发，直接搜索怎样到达极值点。</p>
+<p>牛顿迭代与梯度下降法的不同之处在于多了一项二阶导数。这个二阶导数对算法的影响有两个方面，方向和大小。方向，二阶导数的几何含义是曲率，也就是迭代的时候是考虑到梯度下降的方向的。大小，每次迭代的步长是和陡度成反比的，越陡步长越小，平坦的时候步长越大。</p>
+<h3 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h3><p>L-BFGS</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ol>
+<li><a href="https://www.zhihu.com/question/19723347" target="_blank" rel="external">https://www.zhihu.com/question/19723347</a></li>
+<li><a href="https://www.zhihu.com/question/46441403" target="_blank" rel="external">https://www.zhihu.com/question/46441403</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/25703402" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/25703402</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/29895933" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/29895933</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ml/" rel="tag"># ml</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/21/更好地学习/" rel="next" title="更好地学习">
+                <i class="fa fa-chevron-left"></i> 更好地学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/28/机器学习-决策树-基础/" rel="prev" title="机器学习二——决策树">
+                机器学习二——决策树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dzzxjl</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度"><span class="nav-number">1.</span> <span class="nav-text">梯度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">2.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GD"><span class="nav-number">3.</span> <span class="nav-text">GD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BGD"><span class="nav-number">3.1.</span> <span class="nav-text">BGD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SGD"><span class="nav-number">3.2.</span> <span class="nav-text">SGD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SGD-with-Momentum"><span class="nav-number">3.2.1.</span> <span class="nav-text">SGD with Momentum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam算法"><span class="nav-number">3.3.</span> <span class="nav-text">Adam算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AdaGrad"><span class="nav-number">3.3.1.</span> <span class="nav-text">AdaGrad</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RMSProp——AdaGrad的改进"><span class="nav-number">3.3.2.</span> <span class="nav-text">RMSProp——AdaGrad的改进</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#牛顿法"><span class="nav-number">3.4.</span> <span class="nav-text">牛顿法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拟牛顿法"><span class="nav-number">3.5.</span> <span class="nav-text">拟牛顿法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">4.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">223k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">3:43</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("RnDYKdRSzyRf5KCqnetcUDEc-gzGzoHsz", "rCNa8khX5fiAHFw6nd6ikpL9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/23/机器学习五——聚类/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="Clustering定义聚类属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。 聚类与分类 聚类分析中的“类”（cluster）和分类的“类”（class）是不同的，对cluster更加准确的翻译应该是“簇”。聚类的任务是把所有的实例分配到若干的簇，使得同一个簇的实例聚集在一个簇中心的周围，它们之间距离的比较近；而不同簇实例之间的距离比较远。对">
-<meta property="og:updated_time" content="2018-03-06T11:03:35.445Z">
+<meta property="og:updated_time" content="2018-03-18T08:13:35.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习五——聚类">
 <meta name="twitter:description" content="Clustering定义聚类属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。 聚类与分类 聚类分析中的“类”（cluster）和分类的“类”（class）是不同的，对cluster更加准确的翻译应该是“簇”。聚类的任务是把所有的实例分配到若干的簇，使得同一个簇的实例聚集在一个簇中心的周围，它们之间距离的比较近；而不同簇实例之间的距离比较远。对">
@@ -460,7 +460,12 @@
 <li>手肘法</li>
 <li>Gap Statistics方法</li>
 </ul>
-<h2 id="DBSCAN"><a href="#DBSCAN" class="headerlink" title="DBSCAN"></a>DBSCAN</h2><p>pass</p>
+<h2 id="DBSCAN"><a href="#DBSCAN" class="headerlink" title="DBSCAN"></a>DBSCAN</h2><p>两个阈值的选择</p>
+<ul>
+<li>EPS</li>
+<li>MINPTS</li>
+<li>​</li>
+</ul>
 <h2 id="CFSFDP"><a href="#CFSFDP" class="headerlink" title="CFSFDP"></a>CFSFDP</h2><p>Clustering by fast search and find of density peaks—密度中心聚类算法</p>
 <p>“Clustering by fast search and find of density peaks”是在2014年《Science》期刊上发表的一篇论文，这篇文章提出一种新型的基于密度的聚类算法。<strong>这个新聚类算法的核心思想在于对聚类中心的刻画上</strong>。</p>
 <h3 id="算法优点"><a href="#算法优点" class="headerlink" title="算法优点"></a>算法优点</h3><ul>
@@ -604,7 +609,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">95</span>
+                    <span class="site-state-item-count">97</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -666,7 +671,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -734,7 +741,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">216k</span>
+    <span title="Symbols count total">223k</span>
   
 
   
@@ -743,7 +750,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">3:36</span>
+    <span title="Reading time total">3:43</span>
   
 </div>
 
@@ -1016,6 +1023,29 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 

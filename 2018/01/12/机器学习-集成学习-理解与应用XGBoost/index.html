@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="ml," />
+
+
+<meta name="description" content="XGBoost–eXtreme Gradient Boosting 发展历程XGBoost是从决策树一步步发展而来的。  决策树 ⟶ 对样本重抽样，然后多个树平均 ⟶ Tree bagging Tree bagging ⟶ 再同时对特征进行随机挑选 ⟶ 随机森林 随机森林 ⟶ 对随机森林中的树进行加权平均，而非简单平均 ⟶ Boosing (Adaboost, GradientBoost) boo">
+<meta name="keywords" content="ml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解XGBoost">
+<meta property="og:url" content="http://yoursite.com/2018/01/12/机器学习-集成学习-理解与应用XGBoost/index.html">
+<meta property="og:site_name" content="十一城">
+<meta property="og:description" content="XGBoost–eXtreme Gradient Boosting 发展历程XGBoost是从决策树一步步发展而来的。  决策树 ⟶ 对样本重抽样，然后多个树平均 ⟶ Tree bagging Tree bagging ⟶ 再同时对特征进行随机挑选 ⟶ 随机森林 随机森林 ⟶ 对随机森林中的树进行加权平均，而非简单平均 ⟶ Boosing (Adaboost, GradientBoost) boo">
+<meta property="og:updated_time" content="2018-03-09T09:10:34.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解XGBoost">
+<meta name="twitter:description" content="XGBoost–eXtreme Gradient Boosting 发展历程XGBoost是从决策树一步步发展而来的。  决策树 ⟶ 对样本重抽样，然后多个树平均 ⟶ Tree bagging Tree bagging ⟶ 再同时对特征进行随机挑选 ⟶ 随机森林 随机森林 ⟶ 对随机森林中的树进行加权平均，而非简单平均 ⟶ Boosing (Adaboost, GradientBoost) boo">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/12/机器学习-集成学习-理解与应用XGBoost/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>理解XGBoost | 十一城</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c74812f514823dcc232a43bf4fa01aee";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">十一城</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">跬步千里，小流江海。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-bookcan">
+          <a href="/bookcan/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-book"></i> <br />BookCan</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-thoughts">
+          <a href="/thoughts/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Thoughts</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-link"></i> <br />Links</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/机器学习-集成学习-理解与应用XGBoost/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dzzxjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十一城">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">理解XGBoost</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-12T14:13:25+08:00">2018-01-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ml/" itemprop="url" rel="index"><span itemprop="name">ml</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/12/机器学习-集成学习-理解与应用XGBoost/" class="leancloud_visitors" data-flag-title="理解XGBoost">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article&#58;</span>
+                
+                <span title="Symbols count in article">7.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">0:07</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>XGBoost–eXtreme Gradient Boosting</p>
+<h2 id="发展历程"><a href="#发展历程" class="headerlink" title="发展历程"></a>发展历程</h2><p>XGBoost是从决策树一步步发展而来的。</p>
+<ol>
+<li>决策树 ⟶ 对样本重抽样，然后多个树平均 ⟶ Tree bagging</li>
+<li>Tree bagging ⟶ 再同时对<strong>特征</strong>进行随机挑选 ⟶ 随机森林</li>
+<li>随机森林 ⟶ 对随机森林中的树进行<strong>加权平均</strong>，而非简单平均 ⟶ Boosing (Adaboost, GradientBoost)</li>
+<li>boosting ⟶ 对boosting中的树进行正则化 ⟶ XGBoosting</li>
+</ol>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>在运行XGBoost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：</p>
+<ul>
+<li>General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。</li>
+<li>Booster parameters：这取决于使用哪种booster。</li>
+<li>Task parameters：控制学习的场景，例如在回归问题中会使用不同的参数控制排序。</li>
+<li>除了以上参数还可能有其它参数，在命令行中使用</li>
+</ul>
+<p>XGBoost使用的基学习器是CART</p>
+<ul>
+<li>决策规则与决策树的一样</li>
+<li>每个叶子节点上都包含了一个权重，也有人叫做分数</li>
+</ul>
+<h2 id="二阶泰勒展开"><a href="#二阶泰勒展开" class="headerlink" title="二阶泰勒展开"></a>二阶泰勒展开</h2><p>pass</p>
+<h2 id="决策树的复杂度"><a href="#决策树的复杂度" class="headerlink" title="决策树的复杂度"></a>决策树的复杂度</h2><h2 id="Shrinkage与列抽样"><a href="#Shrinkage与列抽样" class="headerlink" title="Shrinkage与列抽样"></a>Shrinkage与列抽样</h2><ul>
+<li>Shrinkage（缩减），相当于学习速率（xgboost中的eta）。xgboost在进行完一次迭代后，会将叶子节点的权重乘上该系数，主要是为了削弱每棵树的影响，让后面有更大的学习空间。实际应用中，一般把eta设置得小一点，然后迭代次数设置得大一点。（补充：传统GBDT的实现也有学习速率）</li>
+<li>列抽样（column subsampling）。xgboost借鉴了随机森林的做法，支持列抽样，不仅能降低过拟合，还能减少计算，这也是xgboost异于传统gbdt的一个特性。</li>
+</ul>
+<h2 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h2><p>对缺失值的处理。对于特征的值有缺失的样本，xgboost可以自动学习出它的分裂方向。</p>
+<ul>
+<li>XGBoost内置处理缺失值的规则。</li>
+<li>用户需要提供一个和其它样本不同的值，然后把它作为一个参数传进去，以此来作为缺失值的取值。<strong>XGBoost在不同节点遇到缺失值时采用不同的处理方法</strong>，并且会学习未来遇到缺失值时的处理方法。</li>
+</ul>
+<h2 id="近似直方图算法"><a href="#近似直方图算法" class="headerlink" title="近似直方图算法"></a>近似直方图算法</h2><p>可并行的近似直方图算法。树节点在进行分裂时，我们需要计算<strong>每个特征的每个分割点对应的增益</strong>，即用<strong>贪心法</strong>枚举所有可能的分割点。当数据无法一次载入内存或者在分布式情况下，贪心算法效率就会变得很低，所以xgboost还提出了一种可并行的近似直方图算法，用于高效地生成候选的分割点。</p>
+<h2 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h2><ul>
+<li>XGBoost允许在每一轮boosting迭代中使用交叉验证。因此，可以方便地获得最优boosting迭代次数。</li>
+</ul>
+<p>GridSearchCV</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> xgboost <span class="keyword">import</span> XGBClassifier</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</div><div class="line">xgb_model = XGBClassifier(n_estimators=<span class="number">1</span>)</div><div class="line">parameters = &#123;<span class="string">'learning_rate'</span>: [<span class="number">0.01</span>, <span class="number">0.02</span>, <span class="number">0.03</span>], <span class="string">'max_depth'</span>: [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]&#125;</div><div class="line">clf = GridSearchCV(xgb_model, parameters, scoring=<span class="string">'roc_auc'</span>)</div><div class="line">clf.fit(data, target)</div></pre></td></tr></table></figure>
+<h2 id="并行化"><a href="#并行化" class="headerlink" title="并行化"></a>并行化</h2><p>xgboost工具支持并行。</p>
+<p>boosting不是一种串行的结构吗？怎么并行的？注意xgboost的并行不是tree粒度的并行，xgboost也是一次迭代完才能进行下一次迭代的（第t次迭代的代价函数里包含了前面t-1次迭代的预测值）。xgboost的并行是在<strong>特征粒度上</strong>的。我们知道，决策树的学习<strong>最耗时的一个步骤就是对特征的值进行排序（因为要确定最佳分割点）</strong>，xgboost在训练之前，<strong>预先对数据进行了排序</strong>，然后保存为<strong>block结构</strong>，后面的迭代中重复地使用这个结构，大大减小计算量。这个block结构也使得并行成为了可能，在进行节点的分裂时，需要计算每个特征的增益，最终选增益最大的那个特征去做分裂，那么各个特征的增益计算就可以开多线程进行。</p>
+<h2 id="机器学习算法中GBDT和XGBOOST的区别有哪些？"><a href="#机器学习算法中GBDT和XGBOOST的区别有哪些？" class="headerlink" title="机器学习算法中GBDT和XGBOOST的区别有哪些？"></a><a href="https://www.zhihu.com/question/41354392/answer/91371364" target="_blank" rel="external">机器学习算法中GBDT和XGBOOST的区别有哪些？</a></h2><p>首先<strong>XGBoost</strong>是Gradient Boosting的一种高效系统实现，并不是一种单一算法。XGBoost里面的基学习器除了用tree(gbtree)，也可用线性分类器(gblinear)。而GBDT则特指梯度提升决策树算法。XGBoost相对于普通gbm的实现，可能具有以下的一些优势：</p>
+<ol>
+<li>显式地将<strong>树模型的复杂度</strong>作为正则项加在优化目标</li>
+<li>公式推导里用到了<strong>二阶导数</strong>信息，而普通的GBDT只用到一阶</li>
+<li>允许使用column(feature) sampling来防止过拟合，借鉴了Random Forest的思想，sklearn里的gbm好像也有类似实现</li>
+<li>实现了一种分裂节点寻找的近似算法，用于加速和减小内存消耗</li>
+<li>节点分裂算法能自动利用特征的稀疏性</li>
+<li>data事先排好序并以block的形式存储，利于并行计算</li>
+<li>cache-aware, out-of-core computation</li>
+<li>支持分布式计算可以运行在MPI，YARN上，得益于底层支持容错的分布式通信框架rabit。</li>
+</ol>
+<h2 id="LR-XGBoost"><a href="#LR-XGBoost" class="headerlink" title="LR+XGBoost"></a>LR+XGBoost</h2><p>pass</p>
+<h2 id="Xgboost和LightGBM部分参数对照"><a href="#Xgboost和LightGBM部分参数对照" class="headerlink" title="Xgboost和LightGBM部分参数对照"></a>Xgboost和LightGBM部分参数对照</h2><table>
+<thead>
+<tr>
+<th>Xgboost</th>
+<th>LightGbm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>booster(default=gbtree)</strong></td>
+<td><strong>boosting(default=gbdt)</strong></td>
+</tr>
+<tr>
+<td><strong>eta(default=0.3)</strong></td>
+<td><strong>learning_rate(default=0.1)</strong></td>
+</tr>
+<tr>
+<td><strong>max_depth(default=6)</strong></td>
+<td><strong>num_leaves(default=31)</strong></td>
+</tr>
+<tr>
+<td><strong>min_child_weight(default=1)</strong></td>
+<td><strong>min_sum_hessian_in_leaf(1e-3)</strong></td>
+</tr>
+<tr>
+<td><strong>gamma(default=0)</strong></td>
+<td><strong>min_gain_to_split(default=20)</strong></td>
+</tr>
+<tr>
+<td><strong>subsample(default=1)</strong></td>
+<td><strong>bagging_fraction(default=1.0)</strong></td>
+</tr>
+<tr>
+<td><strong>colsample_bytree(default=1)</strong></td>
+<td><strong>feature_fraction( default=1.0)</strong></td>
+</tr>
+<tr>
+<td><strong>alpha(default=0)</strong></td>
+<td><strong>lambda_l1(default=0)</strong></td>
+</tr>
+<tr>
+<td><strong>lambda(default=1)</strong></td>
+<td><strong>lambda_l2(default=0)</strong></td>
+</tr>
+<tr>
+<td><strong>objective( default=reg:linear)</strong></td>
+<td><strong>application(default=regression)</strong></td>
+</tr>
+<tr>
+<td><strong>eval_metric(default according to objective)</strong></td>
+<td><strong>metric</strong></td>
+</tr>
+<tr>
+<td><strong>nthread</strong></td>
+<td><strong>num_threads</strong></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>使用num_leaves</li>
+</ol>
+<p>因为LightGBM使用的是leaf-wise的算法，因此在调节树的复杂程度时，使用的是num_leaves而不是max_depth。</p>
+<p>大致换算关系：num_leaves = 2^(max_depth)。它的值的设置应该小于2^(max_depth)，否则可能会导致过拟合。</p>
+<ol>
+<li>对于<strong>非平衡数据集</strong>：可以param[‘is_unbalance’]=’true’</li>
+</ol>
+<ol>
+<li>Bagging参数：bagging_fraction+bagging_freq（必须同时设置）、feature_fraction。bagging_fraction可以使bagging的更快的运行出结果，feature_fraction设置在每次迭代中使用特征的比例。</li>
+<li>min_data_in_leaf：这也是一个比较重要的参数，调大它的值可以防止过拟合，它的值通常设置的比较大。</li>
+<li>max_bin:调小max_bin的值可以提高模型训练速度，调大它的值和调大num_leaves起到的效果类似。</li>
+</ol>
+<p>参数速查：</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/2_xgb/README.md#1-%E5%8E%9F%E7%94%9F%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">xgb</a></th>
+<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/1_lgb/README.md#1-%E5%8E%9F%E7%94%9F%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">lgb</a></th>
+<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/2_xgb/README.md#2-sk%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">xgb.sklearn</a></th>
+<th><a href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/1_lgb/README.md#2-sk%E6%8E%A5%E5%8F%A3" target="_blank" rel="external">lgb.sklearn</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>booster=’gbtree’</td>
+<td>boosting=’gbdt’</td>
+<td>booster=’gbtree’</td>
+<td>boosting_type=’gbdt’</td>
+</tr>
+<tr>
+<td>objective=’binary:logistic’</td>
+<td>application=’binary’</td>
+<td>objective=’binary:logistic’</td>
+<td>objective=’binary’</td>
+</tr>
+<tr>
+<td>max_depth=7</td>
+<td>num_leaves=2**7</td>
+<td>max_depth=7</td>
+<td>num_leaves=2**7</td>
+</tr>
+<tr>
+<td>eta=0.1</td>
+<td>learning_rate=0.1</td>
+<td>learning_rate=0.1</td>
+<td>learning_rate=0.1</td>
+</tr>
+<tr>
+<td>num_boost_round=10</td>
+<td>num_boost_round=10</td>
+<td>n_estimators=10</td>
+<td>n_estimators=10</td>
+</tr>
+<tr>
+<td>gamma=0</td>
+<td>min_split_gain=0.0</td>
+<td>gamma=0</td>
+<td>min_split_gain=0.0</td>
+</tr>
+<tr>
+<td>min_child_weight=5</td>
+<td>min_child_weight=5</td>
+<td>min_child_weight=5</td>
+<td>min_child_weight=5</td>
+</tr>
+<tr>
+<td>subsample=1</td>
+<td>bagging_fraction=1</td>
+<td>subsample=1.0</td>
+<td>subsample=1.0</td>
+</tr>
+<tr>
+<td>colsample_bytree=1.0</td>
+<td>feature_fraction=1</td>
+<td>colsample_bytree=1.0</td>
+<td>colsample_bytree=1.0</td>
+</tr>
+<tr>
+<td>alpha=0</td>
+<td>lambda_l1=0</td>
+<td>reg_alpha=0.0</td>
+<td>reg_alpha=0.0</td>
+</tr>
+<tr>
+<td>lambda=1</td>
+<td>lambda_l2=0</td>
+<td>reg_lambda=1</td>
+<td>reg_lambda=0.0</td>
+</tr>
+<tr>
+<td>scale_pos_weight=1</td>
+<td>scale_pos_weight=1</td>
+<td>scale_pos_weight=1</td>
+<td>scale_pos_weight=1</td>
+</tr>
+<tr>
+<td>seed</td>
+<td>bagging_seedfeature_fraction_seed</td>
+<td>random_state=888</td>
+<td>random_state=888</td>
+</tr>
+<tr>
+<td>nthread</td>
+<td>num_threads</td>
+<td>n_jobs=4</td>
+<td>n_jobs=4</td>
+</tr>
+<tr>
+<td>evals</td>
+<td>valid_sets</td>
+<td>eval_set</td>
+<td>eval_set</td>
+</tr>
+<tr>
+<td>eval_metric</td>
+<td>metric</td>
+<td>eval_metric</td>
+<td>eval_metric</td>
+</tr>
+<tr>
+<td>early_stopping_rounds</td>
+<td>early_stopping_rounds</td>
+<td>early_stopping_rounds</td>
+<td>early_stopping_rounds</td>
+</tr>
+<tr>
+<td>verbose_eval</td>
+<td>verbose_eval</td>
+<td>verbose</td>
+<td>verbose</td>
+</tr>
+</tbody>
+</table>
+<h2 id="XGBoost还需要做特征工程吗？"><a href="#XGBoost还需要做特征工程吗？" class="headerlink" title="XGBoost还需要做特征工程吗？"></a>XGBoost还需要做特征工程吗？</h2><p>特征工程是个很广的概念，包括特征筛选、特征变换、特征合成、特征提取等等。对于XGBoost，它能够很好地做到特征选择，所以这一点不用我们去操心太多。至于特征变换（离散化、归一化、标准化、取log等等），我们也不需要做太多，因为XGBoost是基于决策树，决策树自然能够解决这些。相比较来说，线性模型则需要做离散化或者取log处理。因为<strong>XGBoost（树类模型）不依赖于线性假设</strong>。但是对于分类特征，XGBoost需要对其进行独热编码，否则无法训练模型。XGBoost也可以免于一部分特征合成的工作，比如线性回归中的交互项a:b，在树类模型中都可以自动完成。但是对于加法a+b，减法a-b，除法a-b这类合成的特征，则需要手动完成。</p>
+<p>绝大部分模型都无法自动完成的一步就是特征提取。很多nlp的问题或者图象的问题，没有现成的特征，你需要自己去提取这些特征，这些是我们需要人工完成的。</p>
+<p>综上来说，XGBoost的确比线性模型要省去很多特征工程的步骤。但是特征工程依然是非常必要的。</p>
+<h2 id="附录——参数"><a href="#附录——参数" class="headerlink" title="附录——参数"></a>附录——参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">max_depth : int</div><div class="line">Maximum tree depth for base learners.</div><div class="line"></div><div class="line">learning_rate : float #learning_rate ＝ 0.1 或更小，越小就需要多加入弱学习器</div><div class="line">Boosting learning rate (xgb’s “eta”)</div><div class="line">n_estimators : int</div><div class="line">Number of boosted trees to fit.</div><div class="line">silent : boolean</div><div class="line">Whether to print messages while running boosting.</div><div class="line">objective : string or callable</div><div class="line">Specify the learning task and the corresponding learning objective or a custom objective function to be used (see note below).</div><div class="line">booster: string</div><div class="line">Specify which booster to use: gbtree, gblinear or dart.</div><div class="line">nthread : int</div><div class="line">Number of parallel threads used to run XGBoost. (Deprecated, please use n_jobs)</div><div class="line">n_jobs : int</div><div class="line">Number of parallel threads used to run XGBoost. (replaces nthread)</div><div class="line">gamma : float</div><div class="line">Minimum loss reduction required to make a further partition on a leaf node of the tree.</div><div class="line">min_child_weight : int</div><div class="line">Minimum sum of instance weight(hessian) needed in a child.</div><div class="line">max_delta_step : int</div><div class="line">Maximum delta step we allow each tree’s weight estimation to be.</div><div class="line">subsample : float</div><div class="line">Subsample ratio of the training instance.</div><div class="line">colsample_bytree : float</div><div class="line">Subsample ratio of columns when constructing each tree.</div><div class="line">colsample_bylevel : float</div><div class="line">Subsample ratio of columns for each split, in each level.</div><div class="line">reg_alpha : float (xgb’s alpha)</div><div class="line">L1 regularization term on weights</div><div class="line">reg_lambda : float (xgb’s lambda)</div><div class="line">L2 regularization term on weights</div><div class="line">scale_pos_weight : float</div><div class="line">Balancing of positive and negative weights.</div><div class="line">base_score:</div><div class="line">The initial prediction score of all instances, global bias.</div><div class="line">seed : int</div><div class="line">Random number seed. (Deprecated, please use random_state)</div><div class="line">random_state : int</div><div class="line">Random number seed. (replaces seed)</div><div class="line">missing : float, optional</div><div class="line">Value in the input which needs to be present as a missing value. If None, defaults to np.nan.</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="http://wepon.me/2016/05/07/XGBoost%E6%B5%85%E5%85%A5%E6%B5%85%E5%87%BA/" target="_blank" rel="external">http://wepon.me/2016/05/07/XGBoost%E6%B5%85%E5%85%A5%E6%B5%85%E5%87%BA/</a></li>
+<li><a href="http://blog.csdn.net/weiyongle1996/article/details/78446244" target="_blank" rel="external">http://blog.csdn.net/weiyongle1996/article/details/78446244</a></li>
+<li><a href="https://www.jianshu.com/p/8346d4f80ab0" target="_blank" rel="external">https://www.jianshu.com/p/8346d4f80ab0</a></li>
+<li><a href="http://chuan92.com/2016/03/19/XGBoost-and-gbdt" target="_blank" rel="external">http://chuan92.com/2016/03/19/XGBoost-and-gbdt</a></li>
+<li><a href="http://sofasofa.io/forum_main_post.php?postid=1001161" target="_blank" rel="external">http://sofasofa.io/forum_main_post.php?postid=1001161</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ml/" rel="tag"># ml</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/10/我的Linux之路/" rel="next" title="我的Linux之路">
+                <i class="fa fa-chevron-left"></i> 我的Linux之路
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/12/机器学习-集成学习-理解与应用LightGBM/" rel="prev" title="理解LightGBM">
+                理解LightGBM <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dzzxjl</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#发展历程"><span class="nav-number">1.</span> <span class="nav-text">发展历程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">2.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二阶泰勒展开"><span class="nav-number">3.</span> <span class="nav-text">二阶泰勒展开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树的复杂度"><span class="nav-number">4.</span> <span class="nav-text">决策树的复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shrinkage与列抽样"><span class="nav-number">5.</span> <span class="nav-text">Shrinkage与列抽样</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失值处理"><span class="nav-number">6.</span> <span class="nav-text">缺失值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#近似直方图算法"><span class="nav-number">7.</span> <span class="nav-text">近似直方图算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉验证"><span class="nav-number">8.</span> <span class="nav-text">交叉验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行化"><span class="nav-number">9.</span> <span class="nav-text">并行化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习算法中GBDT和XGBOOST的区别有哪些？"><span class="nav-number">10.</span> <span class="nav-text">机器学习算法中GBDT和XGBOOST的区别有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR-XGBoost"><span class="nav-number">11.</span> <span class="nav-text">LR+XGBoost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xgboost和LightGBM部分参数对照"><span class="nav-number">12.</span> <span class="nav-text">Xgboost和LightGBM部分参数对照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XGBoost还需要做特征工程吗？"><span class="nav-number">13.</span> <span class="nav-text">XGBoost还需要做特征工程吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录——参数"><span class="nav-number">14.</span> <span class="nav-text">附录——参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">15.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">223k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">3:43</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("RnDYKdRSzyRf5KCqnetcUDEc-gzGzoHsz", "rCNa8khX5fiAHFw6nd6ikpL9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

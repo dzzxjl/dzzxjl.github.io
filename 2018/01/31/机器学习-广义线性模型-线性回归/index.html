@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="ml," />
+
+
+<meta name="description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
+<meta name="keywords" content="ml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习一——广义线性模型">
+<meta property="og:url" content="http://yoursite.com/2018/01/31/机器学习-广义线性模型-线性回归/index.html">
+<meta property="og:site_name" content="十一城">
+<meta property="og:description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
+<meta property="og:updated_time" content="2018-03-16T06:28:47.069Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习一——广义线性模型">
+<meta name="twitter:description" content="线性回归是建立在高斯分布的假设上，Logistic 回归是建立在伯努利分布的假设上。如果不能从概率的角度理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将其它的分布也包纳进来，提取这些分布模型的共同点，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/31/机器学习-广义线性模型-线性回归/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>机器学习一——广义线性模型 | 十一城</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c74812f514823dcc232a43bf4fa01aee";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">十一城</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">跬步千里，小流江海。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-bookcan">
+          <a href="/bookcan/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-book"></i> <br />BookCan</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-thoughts">
+          <a href="/thoughts/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />Thoughts</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-link"></i> <br />Links</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/31/机器学习-广义线性模型-线性回归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dzzxjl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="十一城">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习一——广义线性模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-31T15:05:40+08:00">2018-01-31</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ml/" itemprop="url" rel="index"><span itemprop="name">ml</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/31/机器学习-广义线性模型-线性回归/" class="leancloud_visitors" data-flag-title="机器学习一——广义线性模型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Views&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article&#58;</span>
+                
+                <span title="Symbols count in article">2.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">0:02</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>线性回归是建立在<strong>高斯分布</strong>的假设上，Logistic 回归是建立在<strong>伯努利分布</strong>的假设上。如果不能<strong>从概率的角度</strong>理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将<strong>其它的分布</strong>也包纳进来，提取这些分布模型的<strong>共同点</strong>，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。</p>
+</blockquote>
+<h2 id="广义线性模型（generalized-linear-model）综述"><a href="#广义线性模型（generalized-linear-model）综述" class="headerlink" title="广义线性模型（generalized linear model）综述"></a><a href="https://www.cnblogs.com/muzixi/p/6642203.html" target="_blank" rel="external">广义线性模型（generalized linear model）</a>综述</h2><blockquote>
+<p>使用广义线性模型的步骤：</p>
+<ol>
+<li>分析数据集，确定<strong>概率分布类型</strong>，如高斯分布、伯努利分布等</li>
+<li>把概率$P(y;\eta)$写成<strong>指数分布簇$exp()$</strong>的形式，并找到对应的 $T(y)$、$\eta$、$E(y;x)$ 等</li>
+<li>写出$log$最大似然函数，不同的分布所使用的<strong>连接函数</strong>不一样，并找到使该似然函数最大化的参数值</li>
+</ol>
+</blockquote>
+<ul>
+<li>线性回归（linear regression） -&gt; 用一条线去拟合训练数据<ul>
+<li><strong>回归模型</strong></li>
+<li>损失函数 = MSE + 无正则项</li>
+<li>损失函数<ul>
+<li><a href="https://www.zhihu.com/question/37031188" target="_blank" rel="external">最小二乘法（OLS）</a>——误差平方</li>
+<li>LAD线性回归——最小绝对偏差(Least Absolute Deviation, LAD)回归模型<ul>
+<li>分位数回归</li>
+</ul>
+</li>
+<li>Huber回归</li>
+</ul>
+</li>
+<li>惩罚线性模型<ul>
+<li>前向逐步回归</li>
+<li>岭回归 Ridge<ul>
+<li>应用欧式几何的指标</li>
+<li>方差</li>
+<li>L2范数/正则化</li>
+</ul>
+</li>
+<li>套索回归 Lasso<ul>
+<li>出租车/曼哈顿距离</li>
+<li>方差</li>
+<li>L1范数/正则化</li>
+<li>求解算法——L1-norm的求解比较困难，可以用<strong>坐标下降法</strong>或是<strong>最小角度回归法</strong>求解<ul>
+<li>坐标下降法</li>
+<li>最小角度回归法 LARS</li>
+<li>Glmnet</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Elastic Net</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>分类模型</strong><ul>
+<li>逻辑斯蒂回归（logistic regression）<ul>
+<li>logistic 误差（<strong>对数似然损失函数</strong>）</li>
+<li>损失函数（极大似然法MLE）解法<ul>
+<li>梯度下降法</li>
+<li>牛顿法</li>
+</ul>
+</li>
+<li>L2范数</li>
+</ul>
+</li>
+<li>感知机 Percetron<ul>
+<li>感知机的$wx+b$可以理解为线性回归，即感知机将<strong>线性回归的输出</strong>作为使用<strong>单位阶跃函数的输入，</strong>最终的分类结果是<strong>阶跃函数的输出</strong></li>
+<li>损失函数——<strong>误分类点到分类超平面的总距离</strong></li>
+<li>随机梯度下降</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="指数分布簇"><a href="#指数分布簇" class="headerlink" title="指数分布簇"></a>指数分布簇</h2><p>当一个分布能写成以下形式时，我们就说它属于指数分布簇。<br>$$<br>p(y;\eta)=b(y)exp(\eta^TT(y)-a(\eta))<br>$$<br>其中$\eta$是分布的自然参数，$T(y)$是充分统计量，$a(\eta)$被称为log partition function，$exp(—a(\eta))$起着归一化的作用，保证分布$p(y;\eta)$积分从y到1。</p>
+<p>参考：</p>
+<ol>
+<li><a href="http://www.cnblogs.com/NaughtyBaby/p/5294547.html" target="_blank" rel="external">http://www.cnblogs.com/NaughtyBaby/p/5294547.html</a></li>
+<li><a href="http://www.cnblogs.com/NaughtyBaby/p/5300831.html" target="_blank" rel="external">http://www.cnblogs.com/NaughtyBaby/p/5300831.html</a></li>
+</ol>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><h3 id="前提假设—LINE"><a href="#前提假设—LINE" class="headerlink" title="前提假设—LINE"></a>前提假设—LINE</h3><ol>
+<li>Linearity 线性——因变量和每个自变量都是线性关系</li>
+<li>Indpendence 独立性——对于所有的观测值，它们的<strong>误差项</strong>相互之间是独立的</li>
+<li>Normality 正态性——误差项服从正态分布</li>
+<li>Equal-variance 等方差——所有的误差项具有同样方差</li>
+</ol>
+<p><strong>当给定参数$θ$和$x$时，目标值$y$也服从正态分布</strong>，这里 y 服从的是均值为$θ^Tx$的正态分布，当我们训练得到参数$θ$后，那么对于不同的$\theta$值，$y$服从的就是不同均值的正态分布。</p>
+<h3 id="基函数"><a href="#基函数" class="headerlink" title="基函数"></a>基函数</h3><p>pass</p>
+<h3 id="求解方法"><a href="#求解方法" class="headerlink" title="求解方法"></a>求解方法</h3><ul>
+<li>a directed closed-form equation</li>
+<li>an iterative optimization approach</li>
+</ul>
+<h3 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h3><ul>
+<li>优点<ul>
+<li>线性回归的理解和解释都非常直观，还能通过正则化来避免过拟合。此外，线性模型很容易通过随机梯度下降来更新数据模型。</li>
+<li>回归分析法在分析多因素模型时，更加简单和方便；</li>
+<li>运用回归模型，只要采用的模型和数据相同，通过标准的统计方法可以计算出的结果，但在图和表的形式中，数据之间关系的解释往往因人而异，不同分析者画出的拟合曲线很可能也是不一样的；</li>
+<li>回归分析可以准确地计量<strong>各个因素之间的相关程度</strong>与<strong>回归拟合程度</strong>的高低，提高预测方程式的效果；在回归分析法时，由于实际一个变量仅受单个因素的影响的情况极少，要注意模式的适合范围，所以一元回归分析法适用确实存在一个对因变量影响作用明显高于其他因素的变量是使用。多元回归分析法比较适用于实际经济问题，受多因素综合影响时使用。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>线性回归在处理<strong>非线性关系</strong>时非常糟糕，在识别<strong>复杂模式</strong>上也不够灵活，而添加正确的相互作用项或多项式又极为棘手且耗时。</li>
+<li>有时候在回归分析中，选用<strong>何种因子</strong>和<strong>该因子采用何种表达式</strong>只是一种推测，这影响了用电因子的多样性和某些因子的不可测性，使得回归分析在某些情况下受到限制。</li>
+</ul>
+</li>
+</ul>
+<h2 id="多项式回归"><a href="#多项式回归" class="headerlink" title="多项式回归"></a>多项式回归</h2><p>也是为了解决线性不可分的问题啊</p>
+<p>是否就是核函数啊？？？！！！！</p>
+<p>基函数</p>
+<h2 id="岭回归与套索回归"><a href="#岭回归与套索回归" class="headerlink" title="岭回归与套索回归"></a>岭回归与套索回归</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://juejin.im/post/5930cc4c2f301e006bd4b2a9" target="_blank" rel="external">https://juejin.im/post/5930cc4c2f301e006bd4b2a9</a></li>
+<li><a href="http://blog.csdn.net/cyh_24/article/details/50359055" target="_blank" rel="external">http://blog.csdn.net/cyh_24/article/details/50359055</a></li>
+<li><a href="http://www.cnblogs.com/NaughtyBaby/p/5300831.html" target="_blank" rel="external">http://www.cnblogs.com/NaughtyBaby/p/5300831.html</a></li>
+<li><a href="https://www.zhihu.com/question/31989952" target="_blank" rel="external">https://www.zhihu.com/question/31989952</a></li>
+<li><a href="https://tech.meituan.com/intro_to_logistic_regression.html" target="_blank" rel="external">https://tech.meituan.com/intro_to_logistic_regression.html</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ml/" rel="tag"># ml</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/转-网络时代的爱迪生-Bill-Joy/" rel="next" title="转-网络时代的爱迪生-Bill-Joy">
+                <i class="fa fa-chevron-left"></i> 转-网络时代的爱迪生-Bill-Joy
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/31/Differences-Between-OLS-and-MLE/" rel="prev" title="Differences-Between-OLS-and-MLE">
+                Differences-Between-OLS-and-MLE <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dzzxjl</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#广义线性模型（generalized-linear-model）综述"><span class="nav-number">1.</span> <span class="nav-text">广义线性模型（generalized linear model）综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指数分布簇"><span class="nav-number">2.</span> <span class="nav-text">指数分布簇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归"><span class="nav-number">3.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前提假设—LINE"><span class="nav-number">3.1.</span> <span class="nav-text">前提假设—LINE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基函数"><span class="nav-number">3.2.</span> <span class="nav-text">基函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求解方法"><span class="nav-number">3.3.</span> <span class="nav-text">求解方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点与缺点"><span class="nav-number">3.4.</span> <span class="nav-text">优点与缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多项式回归"><span class="nav-number">4.</span> <span class="nav-text">多项式回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#岭回归与套索回归"><span class="nav-number">5.</span> <span class="nav-text">岭回归与套索回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">223k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">3:43</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.0.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("RnDYKdRSzyRf5KCqnetcUDEc-gzGzoHsz", "rCNa8khX5fiAHFw6nd6ikpL9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

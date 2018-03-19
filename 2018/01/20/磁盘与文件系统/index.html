@@ -101,17 +101,17 @@
   <meta name="keywords" content="linux," />
 
 
-<meta name="description" content="1. 磁盘（Disk）温习下英语 磁头（head） 磁道就是一个圈（track） 柱面就是多个磁道号相同的圈组成的（cylinder） 扇区（sector） 圆盘（platter）  1.1 概念计算机的外部存储器中也采用了类似磁带的装置，比较常用的一种叫磁盘，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。 1.2 扇区（Sector）扇区为最小的物理存">
+<meta name="description" content="磁盘（Disk） 温习下英语  磁头（head） 磁道就是一个圈（track） 柱面就是多个磁道号相同的圈组成的（cylinder） 扇区（sector） 圆盘（platter）   计算机的外部存储器中也采用了类似磁带的装置，比较常用的一种叫磁盘，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。 扇区（Sector）扇区为最小的物理存储单位，每个扇区为5">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="磁盘与文件系统">
 <meta property="og:url" content="http://yoursite.com/2018/01/20/磁盘与文件系统/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="1. 磁盘（Disk）温习下英语 磁头（head） 磁道就是一个圈（track） 柱面就是多个磁道号相同的圈组成的（cylinder） 扇区（sector） 圆盘（platter）  1.1 概念计算机的外部存储器中也采用了类似磁带的装置，比较常用的一种叫磁盘，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。 1.2 扇区（Sector）扇区为最小的物理存">
-<meta property="og:updated_time" content="2018-01-20T07:38:52.117Z">
+<meta property="og:description" content="磁盘（Disk） 温习下英语  磁头（head） 磁道就是一个圈（track） 柱面就是多个磁道号相同的圈组成的（cylinder） 扇区（sector） 圆盘（platter）   计算机的外部存储器中也采用了类似磁带的装置，比较常用的一种叫磁盘，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。 扇区（Sector）扇区为最小的物理存储单位，每个扇区为5">
+<meta property="og:updated_time" content="2018-03-19T11:02:31.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="磁盘与文件系统">
-<meta name="twitter:description" content="1. 磁盘（Disk）温习下英语 磁头（head） 磁道就是一个圈（track） 柱面就是多个磁道号相同的圈组成的（cylinder） 扇区（sector） 圆盘（platter）  1.1 概念计算机的外部存储器中也采用了类似磁带的装置，比较常用的一种叫磁盘，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。 1.2 扇区（Sector）扇区为最小的物理存">
+<meta name="twitter:description" content="磁盘（Disk） 温习下英语  磁头（head） 磁道就是一个圈（track） 柱面就是多个磁道号相同的圈组成的（cylinder） 扇区（sector） 圆盘（platter）   计算机的外部存储器中也采用了类似磁带的装置，比较常用的一种叫磁盘，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。 扇区（Sector）扇区为最小的物理存储单位，每个扇区为5">
 
 
 
@@ -431,34 +431,40 @@
       
 
       
-        <h2 id="1-磁盘（Disk）"><a href="#1-磁盘（Disk）" class="headerlink" title="1. 磁盘（Disk）"></a>1. 磁盘（Disk）</h2><h2 id="温习下英语"><a href="#温习下英语" class="headerlink" title="温习下英语"></a>温习下英语</h2><ul>
+        <h2 id="磁盘（Disk）"><a href="#磁盘（Disk）" class="headerlink" title="磁盘（Disk）"></a>磁盘（Disk）</h2><blockquote>
+<p>温习下英语</p>
+<ul>
 <li>磁头（head）</li>
 <li>磁道就是一个圈（track）</li>
 <li>柱面就是多个磁道号相同的圈组成的（cylinder）</li>
 <li>扇区（sector）</li>
 <li>圆盘（platter）</li>
 </ul>
-<h3 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h3><p>计算机的外部存储器中也采用了类似磁带的装置，比较常用的一种叫磁盘，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。</p>
-<h3 id="1-2-扇区（Sector）"><a href="#1-2-扇区（Sector）" class="headerlink" title="1.2 扇区（Sector）"></a>1.2 扇区（Sector）</h3><p>扇区为最小的物理存储单位，每个扇区为512bytes。</p>
+</blockquote>
+<p>计算机的外部存储器中也采用了类似磁带的装置，比较常用的一种叫磁盘，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。</p>
+<h3 id="扇区（Sector）"><a href="#扇区（Sector）" class="headerlink" title="扇区（Sector）"></a>扇区（Sector）</h3><p>扇区为最小的物理存储单位，每个扇区为512bytes。</p>
 <p>横向组合形成了柱面</p>
 <p>纵向组合形成了扇面</p>
-<h3 id="1-3-柱面"><a href="#1-3-柱面" class="headerlink" title="1.3 柱面"></a>1.3 柱面</h3><p>将扇区组成组成一个圆，就是柱面。柱面是分区的最小单位。</p>
-<h2 id="简单说一下"><a href="#简单说一下" class="headerlink" title="简单说一下"></a>简单说一下</h2><p>磁盘由N个盘片构成，每个盘片一般有两面，一面一个磁头，两面都可以存储数据</p>
+<h3 id="柱面"><a href="#柱面" class="headerlink" title="柱面"></a>柱面</h3><p>将扇区组成组成一个圆，就是柱面。柱面是分区的最小单位。</p>
+<blockquote>
+<p>简单说一下</p>
+<p>磁盘由N个盘片构成，每个盘片一般有两面，一面一个磁头，两面都可以存储数据</p>
 <p>磁道号相同的组成一个柱面，柱面是硬盘分区时候最小单位。</p>
 <p>sector 扇区 磁道按512Byte分成若干扇区，计算机对硬盘读写，是按扇区为最小单位。<br>而一般文件系统中的BLOCK为KB，通常为4KB.（现在有的硬盘每个扇区有4K了）</p>
 <p>可以这么说：即使读一个字节，也必须把这512字节全部读入内存</p>
-<h3 id="1-4-疑惑"><a href="#1-4-疑惑" class="headerlink" title="1.4 疑惑"></a>1.4 疑惑</h3><p>今天我也在查这个问题，为避免后来人误解，特将<a href="https://link.zhihu.com/?target=http%3A//blog.sina.com.cn/hcling97" target="_blank" rel="external">hcling97的博客</a>引用：</p>
+</blockquote>
+<h3 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a>疑惑</h3><p>今天我也在查这个问题，为避免后来人误解，特将<a href="https://link.zhihu.com/?target=http%3A//blog.sina.com.cn/hcling97" target="_blank" rel="external">hcling97的博客</a>引用：</p>
 <p>硬盘性能调优，说道：Outer tracks contain more linear storage area.</p>
 <p>我的概念里面每个磁道的扇区数都是相等的啊，因为硬盘要控制角速度相等，单位时间里面磁臂掠过的扇区数应该是相等的。以前课本都是这么讲的啊，说是外圈的存储密度要低于内圈的，但是外圈磁道包含的磁介质要明显多于内圈的，难道废弃不用？书上是这么解释的，说是空闲的空间填充了控制信号，不用的空间填写了gap，算空白区域。这就更纳闷了，第一点调优的书上说外圈的存储密度要高于内圈的，另一点是：For a given rotational speed, read more data per second on outer tracks.转速相同，外圈怎么可能多读东西呢？扇区数一样，每扇区512字节，数据大小也是一样。支持这个的有效证明是fdisk -l，一看，明明有一个“每磁道扇区数”的数值在概要说明的部分摆着呢。</p>
-<p>​    包括百度百科和网上搜到的信息来看，都跟老板教科书观点相同，每磁道扇区数相同。那调优的书上教导我们“外圈的读取速度快，要将频繁访问的分区部署在磁盘的外侧柱面上”，这不见鬼了么？再翻IBM的调优的书，明明白白写着“当今大多数硬盘驱动器的盘片在外侧磁道上封装的扇区数要多于内侧磁道”，又找了找，原来磁盘的寻址技术改变了，为了减少浪费，真的是外侧磁道的扇区数多而内测磁道的扇区数少，现在每磁道扇区数自是一个换算平均值。这也是为什么机械硬盘在测试处理大量数据的吞吐率不断下降的原因，因为处理到内圈的数据时要多次移动移动机械臂，产生更多的延时。</p>
-<p>​    其实想想也是，磁盘的存储密度不断增加，外圈的长度要大大长于内圈的长度，如果每磁道扇区数相等，那么整个磁盘上有大量面积的存储单元会被浪费。就像一个扇子的表面，我们只用了以内周长为边的一个矩形面积，剩下的都浪费，这是不可能的，工业界也是绝对不会允许这种事情存在的。</p>
-<p>​    那道理就明白了，我们看到的fdisk里面的柱面的显示结果也是经过换算的结果，不是真正写道分区表里面的结果！</p>
+<p>包括百度百科和网上搜到的信息来看，都跟老板教科书观点相同，每磁道扇区数相同。那调优的书上教导我们“外圈的读取速度快，要将频繁访问的分区部署在磁盘的外侧柱面上”，这不见鬼了么？再翻IBM的调优的书，明明白白写着“当今大多数硬盘驱动器的盘片在外侧磁道上封装的扇区数要多于内侧磁道”，又找了找，原来磁盘的寻址技术改变了，为了减少浪费，真的是外侧磁道的扇区数多而内测磁道的扇区数少，现在每磁道扇区数自是一个换算平均值。这也是为什么机械硬盘在测试处理大量数据的吞吐率不断下降的原因，因为处理到内圈的数据时要多次移动移动机械臂，产生更多的延时。</p>
+<p>其实想想也是，磁盘的存储密度不断增加，外圈的长度要大大长于内圈的长度，如果每磁道扇区数相等，那么整个磁盘上有大量面积的存储单元会被浪费。就像一个扇子的表面，我们只用了以内周长为边的一个矩形面积，剩下的都浪费，这是不可能的，工业界也是绝对不会允许这种事情存在的。</p>
+<p>那道理就明白了，我们看到的fdisk里面的柱面的显示结果也是经过换算的结果，不是真正写道分区表里面的结果！</p>
 <p>磁盘的记录方式有两种</p>
 <ul>
 <li>旧式——非分区记录方式（不同磁道扇区数相同）</li>
 <li>新式——分区记录方式（不同磁道扇区数不同）</li>
 </ul>
-<h2 id="2-文件系统（File-system）"><a href="#2-文件系统（File-system）" class="headerlink" title="2. 文件系统（File system）"></a>2. 文件系统（File system）</h2><blockquote>
+<h2 id="文件系统（File-system）"><a href="#文件系统（File-system）" class="headerlink" title="文件系统（File system）"></a>文件系统（File system）</h2><blockquote>
 <p>计算机的<strong>文件系统</strong>是一种<strong>存储和组织计算机数据的方法</strong>，它使得对其存取和查找变得容易，文件系统使用<strong>文件</strong>和<strong>树形目录</strong>的抽象逻辑概念代替了硬盘和光盘等物理设备使用数据块的概念，用户使用文件系统来保存数据不必关心数据实际保存在硬盘（或者光盘）的地址为多少的数据块上，只需要记住这个文件的所属目录和文件名。</p>
 </blockquote>
 <p>文件系统是一套实现了数据的存储、分级组织、存取和获取等操作的抽象数据类型（Abstract data type）。</p>
@@ -493,7 +499,7 @@
 <li>网路分隔的容忍程度（Partition tolerance）</li>
 </ul>
 <h3 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h3><p>记录文件的属性，一个文件占用一个inode，同时记录此文件的数据所在的block号码</p>
-<h2 id="3-MasterBootRecord"><a href="#3-MasterBootRecord" class="headerlink" title="3. MasterBootRecord"></a>3. MasterBootRecord</h2><p>在第一个扇区 512bytes =  mbr446bytes + 分区表64bytes</p>
+<h2 id="MasterBootRecord"><a href="#MasterBootRecord" class="headerlink" title="MasterBootRecord"></a>MasterBootRecord</h2><p>在第一个扇区 512bytes =  mbr446bytes + 分区表64bytes</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="https://segmentfault.com/a/1190000007392163" target="_blank" rel="external">https://segmentfault.com/a/1190000007392163</a></li>
 <li><a href="https://www.zhihu.com/question/20537787" target="_blank" rel="external">https://www.zhihu.com/question/20537787</a></li>
@@ -617,7 +623,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">95</span>
+                    <span class="site-state-item-count">97</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -679,7 +685,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -715,7 +723,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-磁盘（Disk）"><span class="nav-number">1.</span> <span class="nav-text">1. 磁盘（Disk）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#温习下英语"><span class="nav-number">2.</span> <span class="nav-text">温习下英语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-概念"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-扇区（Sector）"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 扇区（Sector）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-柱面"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 柱面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单说一下"><span class="nav-number">3.</span> <span class="nav-text">简单说一下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-疑惑"><span class="nav-number">3.1.</span> <span class="nav-text">1.4 疑惑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-文件系统（File-system）"><span class="nav-number">4.</span> <span class="nav-text">2. 文件系统（File system）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#inode"><span class="nav-number">4.1.</span> <span class="nav-text">inode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-MasterBootRecord"><span class="nav-number">5.</span> <span class="nav-text">3. MasterBootRecord</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘（Disk）"><span class="nav-number">1.</span> <span class="nav-text">磁盘（Disk）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扇区（Sector）"><span class="nav-number">1.1.</span> <span class="nav-text">扇区（Sector）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#柱面"><span class="nav-number">1.2.</span> <span class="nav-text">柱面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#疑惑"><span class="nav-number">1.3.</span> <span class="nav-text">疑惑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统（File-system）"><span class="nav-number">2.</span> <span class="nav-text">文件系统（File system）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#inode"><span class="nav-number">2.1.</span> <span class="nav-text">inode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MasterBootRecord"><span class="nav-number">3.</span> <span class="nav-text">MasterBootRecord</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -747,7 +755,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">216k</span>
+    <span title="Symbols count total">223k</span>
   
 
   
@@ -756,7 +764,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">3:36</span>
+    <span title="Reading time total">3:43</span>
   
 </div>
 
@@ -1029,6 +1037,29 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
