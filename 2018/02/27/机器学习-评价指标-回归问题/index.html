@@ -104,13 +104,13 @@
 <meta name="description" content="损失函数与评价函数之间的关系损失函数与评价函数的概念应该差不多，因为损失函数一般用来衡量预测结果与真是结果之间的误差，其实最终我们在进行评价时，进行的也是这个操作。 常见指标如果一共有$n$个样本，即其真实标签为$y_i$，通过模型预测的结果为$f_i$，则 MAE(Mean Absolute Error) 平均绝对误差$$\frac{1}{n}\sum_{i=1}^{n}|f_i-y_i|$$M">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习十三——回归问题评价指标">
+<meta property="og:title" content="机器学习-评价指标-回归问题">
 <meta property="og:url" content="http://yoursite.com/2018/02/27/机器学习-评价指标-回归问题/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="损失函数与评价函数之间的关系损失函数与评价函数的概念应该差不多，因为损失函数一般用来衡量预测结果与真是结果之间的误差，其实最终我们在进行评价时，进行的也是这个操作。 常见指标如果一共有$n$个样本，即其真实标签为$y_i$，通过模型预测的结果为$f_i$，则 MAE(Mean Absolute Error) 平均绝对误差$$\frac{1}{n}\sum_{i=1}^{n}|f_i-y_i|$$M">
-<meta property="og:updated_time" content="2018-03-05T04:49:52.250Z">
+<meta property="og:updated_time" content="2018-03-27T12:37:54.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习十三——回归问题评价指标">
+<meta name="twitter:title" content="机器学习-评价指标-回归问题">
 <meta name="twitter:description" content="损失函数与评价函数之间的关系损失函数与评价函数的概念应该差不多，因为损失函数一般用来衡量预测结果与真是结果之间的误差，其实最终我们在进行评价时，进行的也是这个操作。 常见指标如果一共有$n$个样本，即其真实标签为$y_i$，通过模型预测的结果为$f_i$，则 MAE(Mean Absolute Error) 平均绝对误差$$\frac{1}{n}\sum_{i=1}^{n}|f_i-y_i|$$M">
 
 
@@ -127,7 +127,7 @@
     sidebar: "",
   };
 </script>
-  <title>机器学习十三——回归问题评价指标 | 十一城</title>
+  <title>机器学习-评价指标-回归问题 | 十一城</title>
   
 
 
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">机器学习十三——回归问题评价指标</h1>
+          <h1 class="post-title" itemprop="name headline">机器学习-评价指标-回归问题</h1>
         
 
         <div class="post-meta">
@@ -372,7 +372,7 @@
 
           
           
-             <span id="/2018/02/27/机器学习-评价指标-回归问题/" class="leancloud_visitors" data-flag-title="机器学习十三——回归问题评价指标">
+             <span id="/2018/02/27/机器学习-评价指标-回归问题/" class="leancloud_visitors" data-flag-title="机器学习-评价指标-回归问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article&#58;</span>
                 
-                <span title="Symbols count in article">283</span>
+                <span title="Symbols count in article">375</span>
               
 
               
@@ -438,6 +438,7 @@
 <p>RMSE<a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation" target="_blank" rel="external">(Root Mean Square Error)</a>  根均方根差<br>$$</p>
 <p>$$</p>
 <p>RMSLE</p>
+<p>Fortunately the evaluation metric is RMSLE and not RMSE . Outliers will cause less trouble.</p>
 <p>R平方</p>
 
       
@@ -472,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/26/机器学习-什锦-样本不均衡问题/" rel="next" title="机器学习十二——样本不均衡问题">
-                <i class="fa fa-chevron-left"></i> 机器学习十二——样本不均衡问题
+              <a href="/2018/02/26/机器学习-什锦-样本不均衡问题/" rel="next" title="机器学习-什锦-样本不均衡问题">
+                <i class="fa fa-chevron-left"></i> 机器学习-什锦-样本不均衡问题
               </a>
             
           </div>
@@ -558,7 +559,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">99</span>
+                    <span class="site-state-item-count">100</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -626,7 +627,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -694,7 +701,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">226k</span>
+    <span title="Symbols count total">238k</span>
   
 
   
@@ -703,7 +710,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">3:46</span>
+    <span title="Reading time total">3:58</span>
   
 </div>
 

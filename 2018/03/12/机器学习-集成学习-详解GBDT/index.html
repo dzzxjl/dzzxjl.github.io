@@ -104,13 +104,13 @@
 <meta name="description" content="作者注：本来GBDT这一块，最开始我写在决策树那篇文章中，但是随着对GBDT的一步步深入了解，发现GBDT的核心思想并不体现在决策树，就像XGBoost上，虽然他论文中基学习器使用的是决策树，但是也提供了线性模型的学习器，作者一开始也没有领悟到几乎所有的教材上都是把GBDT安排在集成学习处的原因在何？。GBDT中关于决策树最主要的部分就是CART，这点读者可以参照讲述CART的文章，本文关注的重">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习二十二——详解GBDT">
+<meta property="og:title" content="机器学习-集成学习-详解GBDT">
 <meta property="og:url" content="http://yoursite.com/2018/03/12/机器学习-集成学习-详解GBDT/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="作者注：本来GBDT这一块，最开始我写在决策树那篇文章中，但是随着对GBDT的一步步深入了解，发现GBDT的核心思想并不体现在决策树，就像XGBoost上，虽然他论文中基学习器使用的是决策树，但是也提供了线性模型的学习器，作者一开始也没有领悟到几乎所有的教材上都是把GBDT安排在集成学习处的原因在何？。GBDT中关于决策树最主要的部分就是CART，这点读者可以参照讲述CART的文章，本文关注的重">
-<meta property="og:updated_time" content="2018-03-15T13:28:05.551Z">
+<meta property="og:updated_time" content="2018-03-27T12:37:08.681Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习二十二——详解GBDT">
+<meta name="twitter:title" content="机器学习-集成学习-详解GBDT">
 <meta name="twitter:description" content="作者注：本来GBDT这一块，最开始我写在决策树那篇文章中，但是随着对GBDT的一步步深入了解，发现GBDT的核心思想并不体现在决策树，就像XGBoost上，虽然他论文中基学习器使用的是决策树，但是也提供了线性模型的学习器，作者一开始也没有领悟到几乎所有的教材上都是把GBDT安排在集成学习处的原因在何？。GBDT中关于决策树最主要的部分就是CART，这点读者可以参照讲述CART的文章，本文关注的重">
 
 
@@ -127,7 +127,7 @@
     sidebar: "",
   };
 </script>
-  <title>机器学习二十二——详解GBDT | 十一城</title>
+  <title>机器学习-集成学习-详解GBDT | 十一城</title>
   
 
 
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">机器学习二十二——详解GBDT</h1>
+          <h1 class="post-title" itemprop="name headline">机器学习-集成学习-详解GBDT</h1>
         
 
         <div class="post-meta">
@@ -372,7 +372,7 @@
 
           
           
-             <span id="/2018/03/12/机器学习-集成学习-详解GBDT/" class="leancloud_visitors" data-flag-title="机器学习二十二——详解GBDT">
+             <span id="/2018/03/12/机器学习-集成学习-详解GBDT/" class="leancloud_visitors" data-flag-title="机器学习-集成学习-详解GBDT">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -511,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/09/机器学习-决策树-如何处理缺失值/" rel="next" title="机器学习二十一——决策树如何处理缺失值">
-                <i class="fa fa-chevron-left"></i> 机器学习二十一——决策树如何处理缺失值
+              <a href="/2018/03/09/机器学习-决策树-如何处理缺失值/" rel="next" title="机器学习-决策树-如何处理缺失值">
+                <i class="fa fa-chevron-left"></i> 机器学习-决策树-如何处理缺失值
               </a>
             
           </div>
@@ -521,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/13/机器学习-广义线性模型-逻辑斯蒂回归/" rel="prev" title="机器学习二十三——逻辑斯蒂回归">
-                机器学习二十三——逻辑斯蒂回归 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/13/机器学习-广义线性模型-逻辑斯蒂回归/" rel="prev" title="机器学习-广义线性模型-逻辑斯蒂回归">
+                机器学习-广义线性模型-逻辑斯蒂回归 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -597,7 +597,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">99</span>
+                    <span class="site-state-item-count">100</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -665,7 +665,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -733,7 +739,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">226k</span>
+    <span title="Symbols count total">238k</span>
   
 
   
@@ -742,7 +748,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">3:46</span>
+    <span title="Reading time total">3:58</span>
   
 </div>
 
