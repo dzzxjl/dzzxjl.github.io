@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/20/数据分析-pandas上手教程/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="基础使用pandas主要进行data manipulation。通过带有标签的列和索引，pandas 使我们可以以一种所有人都能理解的方式来处理数据。它可以让我们毫不费力地从诸如 csv 类型的文件中导入数据。我们可以用它快速地对数据进行复杂的转换和过滤等操作。 pandas中最基本的数据结构是Series与DataFrame。  pandas 讲究整体操作，想对里面的一些数据进行一些批量操作的时">
-<meta property="og:updated_time" content="2018-04-03T05:54:10.366Z">
+<meta property="og:updated_time" content="2018-04-04T12:35:02.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分析-pandas上手教程">
 <meta name="twitter:description" content="基础使用pandas主要进行data manipulation。通过带有标签的列和索引，pandas 使我们可以以一种所有人都能理解的方式来处理数据。它可以让我们毫不费力地从诸如 csv 类型的文件中导入数据。我们可以用它快速地对数据进行复杂的转换和过滤等操作。 pandas中最基本的数据结构是Series与DataFrame。  pandas 讲究整体操作，想对里面的一些数据进行一些批量操作的时">
@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article&#58;</span>
                 
-                <span title="Symbols count in article">4k</span>
+                <span title="Symbols count in article">3.9k</span>
               
 
               
@@ -435,6 +435,14 @@
 <p>pandas中最基本的数据结构是Series与DataFrame。</p>
 <blockquote>
 <p>pandas 讲究整体操作，想对里面的一些数据进行一些批量操作的时候，挨个用纯 Python 的方法，挨个遍历。这样简单是足够简单，但很不 pandasic。那有没有更为简单一些的办法呢？</p>
+</blockquote>
+<h2 id="关键缩写和包导入"><a href="#关键缩写和包导入" class="headerlink" title="关键缩写和包导入"></a>关键缩写和包导入</h2><p>在这个速查手册中，我们使用如下缩写：</p>
+<blockquote>
+<p>df：任意的Pandas DataFrame对象<br>s：任意的Pandas Series对象</p>
+</blockquote>
+<p>同时我们需要做如下的引入：</p>
+<blockquote>
+<p>import pandas as pd<br>import numpy as np</p>
 </blockquote>
 <h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><p>DataFrame是将数个Series按列合并而成的二维数据结构，每一列单独取出来是一个Series，这和SQL数据库中取出的数据是很类似的。</p>
 <h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><p>Series 有个 <code>map</code> 方法，就是把函数映射到里面每个单元上，对单元进行操作。</p>
@@ -474,22 +482,7 @@
 <li>等</li>
 </ol>
 </li>
-<li>``</li>
-<li>``</li>
-<li>``</li>
-<li>``</li>
-<li>``</li>
-<li>​</li>
 </ol>
-<hr>
-<h2 id="关键缩写和包导入"><a href="#关键缩写和包导入" class="headerlink" title="关键缩写和包导入"></a>关键缩写和包导入</h2><p>在这个速查手册中，我们使用如下缩写：</p>
-<blockquote>
-<p>df：任意的Pandas DataFrame对象<br>s：任意的Pandas Series对象</p>
-</blockquote>
-<p>同时我们需要做如下的引入：</p>
-<blockquote>
-<p>import pandas as pd<br>import numpy as np</p>
-</blockquote>
 <h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><ul>
 <li>pd.read_csv(filename)：从CSV文件导入数据</li>
 <li>pd.read_table(filename)：从限定分隔符的文本文件导入数据</li>
@@ -500,11 +493,20 @@
 <li>pd.read_clipboard()：从你的粘贴板获取内容，并传给read_table()</li>
 <li>pd.DataFrame(dict)：从字典对象导入数据，Key是列名，Value是数据</li>
 </ul>
-<h2 id="导出数据"><a href="#导出数据" class="headerlink" title="导出数据"></a>导出数据</h2><ul>
-<li>df.to_csv(filename)：导出数据到CSV文件</li>
-<li>df.to_excel(filename)：导出数据到Excel文件</li>
-<li>df.to_sql(table_name, connection_object)：导出数据到SQL表</li>
-<li>df.to_json(filename)：以Json格式导出数据到文本文件</li>
+<h2 id="数据合并"><a href="#数据合并" class="headerlink" title="数据合并"></a>数据合并</h2><ul>
+<li>df1.append(df2)：将df2中的行添加到df1的尾部</li>
+<li>df.concat([df1, df2],axis=1)：将df2中的列添加到df1的尾部</li>
+<li>df1.join(df2,on=col1,how=’inner’)：对df1的列和df2的列执行SQL形式的join</li>
+</ul>
+<h2 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h2><ul>
+<li>df.describe()：查看数据值列的汇总统计</li>
+<li>df.mean()：返回所有列的均值</li>
+<li>df.corr()：返回列与列之间的相关系数</li>
+<li>df.count()：返回每一列中的非空值的个数</li>
+<li>df.max()：返回每一列的最大值</li>
+<li>df.min()：返回每一列的最小值</li>
+<li>df.median()：返回每一列的中位数</li>
+<li>df.std()：返回每一列的标准差</li>
 </ul>
 <h2 id="创建测试对象"><a href="#创建测试对象" class="headerlink" title="创建测试对象"></a>创建测试对象</h2><ul>
 <li>pd.DataFrame(np.random.rand(20,5))：创建20行5列的随机数组成的DataFrame对象</li>
@@ -557,20 +559,11 @@
 <li>data.apply(np.mean)：对DataFrame中的每一列应用函数np.mean</li>
 <li>data.apply(np.max,axis=1)：对DataFrame中的每一行应用函数np.max</li>
 </ul>
-<h2 id="数据合并"><a href="#数据合并" class="headerlink" title="数据合并"></a>数据合并</h2><ul>
-<li>df1.append(df2)：将df2中的行添加到df1的尾部</li>
-<li>df.concat([df1, df2],axis=1)：将df2中的列添加到df1的尾部</li>
-<li>df1.join(df2,on=col1,how=’inner’)：对df1的列和df2的列执行SQL形式的join</li>
-</ul>
-<h2 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h2><ul>
-<li>df.describe()：查看数据值列的汇总统计</li>
-<li>df.mean()：返回所有列的均值</li>
-<li>df.corr()：返回列与列之间的相关系数</li>
-<li>df.count()：返回每一列中的非空值的个数</li>
-<li>df.max()：返回每一列的最大值</li>
-<li>df.min()：返回每一列的最小值</li>
-<li>df.median()：返回每一列的中位数</li>
-<li>df.std()：返回每一列的标准差</li>
+<h2 id="导出数据"><a href="#导出数据" class="headerlink" title="导出数据"></a>导出数据</h2><ul>
+<li>df.to_csv(filename)：导出数据到CSV文件</li>
+<li>df.to_excel(filename)：导出数据到Excel文件</li>
+<li>df.to_sql(table_name, connection_object)：导出数据到SQL表</li>
+<li>df.to_json(filename)：以Json格式导出数据到文本文件</li>
 </ul>
 <h2 id="性能瓶颈"><a href="#性能瓶颈" class="headerlink" title="性能瓶颈"></a>性能瓶颈</h2><p>因为使用pandas进行数据分析时，会将所有的数据读入内存中。一般来说，用pandas处理小于100M的数据，性能不是问题。但用pandas来处理100M至几个G的数据时，将会比较耗时，同时会导致程序因内存不足而运行失败。如果使用pandas处理规模较大的数据，请参考文末参考1。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
@@ -808,7 +801,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame"><span class="nav-number">2.</span> <span class="nav-text">DataFrame</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Series"><span class="nav-number">3.</span> <span class="nav-text">Series</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">4.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预览数据"><span class="nav-number">4.1.</span> <span class="nav-text">预览数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作数据"><span class="nav-number">4.2.</span> <span class="nav-text">操作数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键缩写和包导入"><span class="nav-number">5.</span> <span class="nav-text">关键缩写和包导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">6.</span> <span class="nav-text">导入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导出数据"><span class="nav-number">7.</span> <span class="nav-text">导出数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建测试对象"><span class="nav-number">8.</span> <span class="nav-text">创建测试对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看、检查数据"><span class="nav-number">9.</span> <span class="nav-text">查看、检查数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据选取"><span class="nav-number">10.</span> <span class="nav-text">数据选取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据清理"><span class="nav-number">11.</span> <span class="nav-text">数据清理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据处理：Filter、Sort和GroupBy"><span class="nav-number">12.</span> <span class="nav-text">数据处理：Filter、Sort和GroupBy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据合并"><span class="nav-number">13.</span> <span class="nav-text">数据合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据统计"><span class="nav-number">14.</span> <span class="nav-text">数据统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能瓶颈"><span class="nav-number">15.</span> <span class="nav-text">性能瓶颈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">16.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键缩写和包导入"><span class="nav-number">2.</span> <span class="nav-text">关键缩写和包导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame"><span class="nav-number">3.</span> <span class="nav-text">DataFrame</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Series"><span class="nav-number">4.</span> <span class="nav-text">Series</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">5.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预览数据"><span class="nav-number">5.1.</span> <span class="nav-text">预览数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作数据"><span class="nav-number">5.2.</span> <span class="nav-text">操作数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">6.</span> <span class="nav-text">导入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据合并"><span class="nav-number">7.</span> <span class="nav-text">数据合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据统计"><span class="nav-number">8.</span> <span class="nav-text">数据统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建测试对象"><span class="nav-number">9.</span> <span class="nav-text">创建测试对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看、检查数据"><span class="nav-number">10.</span> <span class="nav-text">查看、检查数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据选取"><span class="nav-number">11.</span> <span class="nav-text">数据选取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据清理"><span class="nav-number">12.</span> <span class="nav-text">数据清理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据处理：Filter、Sort和GroupBy"><span class="nav-number">13.</span> <span class="nav-text">数据处理：Filter、Sort和GroupBy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导出数据"><span class="nav-number">14.</span> <span class="nav-text">导出数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能瓶颈"><span class="nav-number">15.</span> <span class="nav-text">性能瓶颈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">16.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
