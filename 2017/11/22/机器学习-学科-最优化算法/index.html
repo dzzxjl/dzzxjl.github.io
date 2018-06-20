@@ -101,17 +101,17 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？ 答：  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。">
+<meta name="description" content="最优化问题（如LR中的最大似然估计MLE求解）就是求一个极值点，是不是直接可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习-学科-最优化算法">
 <meta property="og:url" content="http://yoursite.com/2017/11/22/机器学习-学科-最优化算法/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？ 答：  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。">
-<meta property="og:updated_time" content="2018-03-27T12:38:52.822Z">
+<meta property="og:description" content="最优化问题（如LR中的最大似然估计MLE求解）就是求一个极值点，是不是直接可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可">
+<meta property="og:updated_time" content="2018-06-06T14:12:51.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习-学科-最优化算法">
-<meta name="twitter:description" content="最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？ 答：  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。">
+<meta name="twitter:description" content="最优化问题（如LR中的最大似然估计MLE求解）就是求一个极值点，是不是直接可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？  首先很多时候我们无法确定数据集是否确定有极值点，找到解析解 其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可">
 
 
 
@@ -432,12 +432,11 @@
 
       
         <blockquote>
-<p>最优化问题（如LR中的MLE求解）就是求一个极值点，可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？</p>
-<p>答：</p>
+<p>最优化问题（如LR中的最大似然估计MLE求解）就是求一个极值点，是不是直接可以通过让其导数等于0就能找到极值点，我们为什么要采用这种梯度的渐进方式进行求解呢？</p>
 <ol>
-<li>首先很多时候我们无法确定数据集是否确定有极值点，找到解析解</li>
-<li>其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上。</li>
-<li>求导数=0的解并不是一件容易的事情，而且有些情况下即便能够求解，其时间复杂度也远远大于迭代寻优的方法。</li>
+<li>首先很多时候我们无法确定数据集是否确定有极值点，找到<strong>解析解</strong></li>
+<li>其次导数等于0也不代表其是全局最优解，尤其是在一些复杂的情况下，局部最优解非常多，这时候常规的梯度方法也无法解决，所以我们会有很多随机化方法像模拟退火之类，动量项之类，这些都可以应用到梯度上</li>
+<li>求导数=0的解并不是一件容易的事情，而且有些情况下即便能够求解，其时间复杂度也远远大于迭代寻优的方法</li>
 </ol>
 </blockquote>
 <hr>
@@ -468,23 +467,19 @@
 <li>拟牛顿法（BFGS -&gt; L-BFGS）</li>
 <li>坐标下降法</li>
 </ul>
-<blockquote>
-<ul>
-<li>样本的数量<ul>
+<h2 id="batch-iteration与epoch"><a href="#batch-iteration与epoch" class="headerlink" title="batch, iteration与epoch"></a>batch, iteration与epoch</h2><ul>
+<li>样本的数量</li>
 <li>batchsize 批大小。在深度学习中，一般采用SGD训练，即每次训练在训练集中取batchsize个样本训练<ul>
 <li>数字越小时，此时就相当于来了一个样本，然后做一次更新，训练过程越接近随机梯度下降sgd</li>
 <li>数字越大时，训练越接近梯度下降，即每一次参数更新都要用到全部样本数据</li>
 </ul>
 </li>
-<li>iteration1个iteration等于使用batchsize个样本训练一次</li>
-<li>epoch1个epoch等于使用训练集中的全部样本训练一次</li>
+<li>iteration  1个iteration等于使用batchsize个样本训练一次</li>
+<li>epoch  1个epoch等于使用训练集中的全部样本训练一次（每个epoch顺序可能是一致的，也有可能是不一致的）</li>
 </ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="GD"><a href="#GD" class="headerlink" title="GD"></a>GD</h2><p>而梯度下降法是从初始点的领域开始判断，在局部进行最速下降方向，然后步步逼近极值；所以往往会导致梯度下降法比牛顿法迭代的次数更多。</p>
+<h2 id="GD"><a href="#GD" class="headerlink" title="GD"></a>GD</h2><p>梯度下降法是从初始点的领域开始判断，在局部进行最速下降方向，然后步步逼近极值；所以往往会导致梯度下降法比牛顿法迭代的次数更多。</p>
 <h3 id="BGD"><a href="#BGD" class="headerlink" title="BGD"></a>BGD</h3><p>批量梯度下降和随机梯度下降的区别在于批量的话每次更新参数要用到每个样本（从对每个样本求和可以看到），而随机的话只用一个。</p>
-<h3 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h3><p>随机梯度下降（是梯度下降的batch版本，batch_size=1），在SGD中，每次迭代可以只用<strong>一个</strong>训练数据来更新参数。此时更新的算法，只用到了一个样本。其实具象的理解下，就是来了一条训练数据，算下此时根据模型算出的值和实际值的差距，如果差距大，那么参数更新的幅度大，反之则小。当训练数据过大时，用GD可能造成内存不够用，那么就可以用SGD了，SGD其实可以算作是一种online-learning。另外SGD收敛会比GD快，但是对于代价函数求最小值还是GD做的比较好，不过SGD也够用了。</p>
+<h3 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h3><p>随机梯度下降（是梯度下降的batch版本，batch_size=1），在SGD中，每次迭代可以只用<strong>一个训练数据</strong>来更新参数。此时更新的算法，只用到了一个样本。其实具象的理解下，就是来了一条训练数据，算下此时根据模型算出的值和实际值的差距，如果差距大，那么参数更新的幅度大，反之则小。<strong>当训练数据过大时，用GD可能造成内存不够用</strong>，那么就可以用SGD了，SGD其实可以算作是一种online-learning。另外SGD收敛会比GD快，但是对于代价函数求最小值还是GD做的比较好，不过SGD也够用了。</p>
 <h4 id="SGD-with-Momentum"><a href="#SGD-with-Momentum" class="headerlink" title="SGD with Momentum"></a>SGD with Momentum</h4><p>其实SAG就是SGD with momentum（带动量的随机梯度下降）的姊妹版本。SAG是对过去k次的梯度求均值。</p>
 <p>SGD with momentum是对<strong>过去所有的梯度</strong>求加权平均（权重成指数衰减）。</p>
 <h3 id="Adam算法"><a href="#Adam算法" class="headerlink" title="Adam算法"></a>Adam算法</h3><h4 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h4><p>该优化算法与普通的sgd算法差别就在于采取了累积平方梯度，<strong>简单来讲，设置全局学习率之后，每次通过，全局学习率逐参数的除以历史梯度平方和的平方根，使得每个参数的学习率不同</strong>。</p>
@@ -625,7 +620,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-count">108</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -739,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度"><span class="nav-number">1.</span> <span class="nav-text">梯度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">2.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GD"><span class="nav-number">3.</span> <span class="nav-text">GD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BGD"><span class="nav-number">3.1.</span> <span class="nav-text">BGD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SGD"><span class="nav-number">3.2.</span> <span class="nav-text">SGD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SGD-with-Momentum"><span class="nav-number">3.2.1.</span> <span class="nav-text">SGD with Momentum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam算法"><span class="nav-number">3.3.</span> <span class="nav-text">Adam算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AdaGrad"><span class="nav-number">3.3.1.</span> <span class="nav-text">AdaGrad</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RMSProp——AdaGrad的改进"><span class="nav-number">3.3.2.</span> <span class="nav-text">RMSProp——AdaGrad的改进</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#牛顿法"><span class="nav-number">3.4.</span> <span class="nav-text">牛顿法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拟牛顿法"><span class="nav-number">3.5.</span> <span class="nav-text">拟牛顿法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">4.</span> <span class="nav-text">引用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度"><span class="nav-number">1.</span> <span class="nav-text">梯度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">2.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#batch-iteration与epoch"><span class="nav-number">3.</span> <span class="nav-text">batch, iteration与epoch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GD"><span class="nav-number">4.</span> <span class="nav-text">GD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BGD"><span class="nav-number">4.1.</span> <span class="nav-text">BGD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SGD"><span class="nav-number">4.2.</span> <span class="nav-text">SGD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SGD-with-Momentum"><span class="nav-number">4.2.1.</span> <span class="nav-text">SGD with Momentum</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam算法"><span class="nav-number">4.3.</span> <span class="nav-text">Adam算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AdaGrad"><span class="nav-number">4.3.1.</span> <span class="nav-text">AdaGrad</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RMSProp——AdaGrad的改进"><span class="nav-number">4.3.2.</span> <span class="nav-text">RMSProp——AdaGrad的改进</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#牛顿法"><span class="nav-number">4.4.</span> <span class="nav-text">牛顿法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拟牛顿法"><span class="nav-number">4.5.</span> <span class="nav-text">拟牛顿法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">5.</span> <span class="nav-text">引用</span></a></li></ol></div>
             
 
           </div>
@@ -771,7 +766,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">259k</span>
+    <span title="Symbols count total">262k</span>
   
 
   
@@ -780,7 +775,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">4:19</span>
+    <span title="Reading time total">4:22</span>
   
 </div>
 
