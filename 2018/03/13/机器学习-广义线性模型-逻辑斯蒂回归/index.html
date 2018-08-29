@@ -56,7 +56,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-32x32-next.png?v=6.0.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/03/13/机器学习-广义线性模型-逻辑斯蒂回归/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="逻辑斯蒂回归 Logistic Regression逻辑斯蒂回归（Logistic Regression）是机器学习中的一种分类模型，由于算法的简单和高效，在实际中应用非常广泛。一句话描述LR的精华就是“逻辑回归假设数据服从伯努利分布,通过极大化似然函数（MLE）的方法，运用梯度下降（GD）来求解参数，来达到将数据二分类的目的”。其中我们需要重点关注逻辑回归算法的数学模型和参数求解方法。逻辑回归本">
-<meta property="og:updated_time" content="2018-03-27T12:34:13.379Z">
+<meta property="og:updated_time" content="2018-07-29T04:18:38.953Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习-广义线性模型-逻辑斯蒂回归">
 <meta name="twitter:description" content="逻辑斯蒂回归 Logistic Regression逻辑斯蒂回归（Logistic Regression）是机器学习中的一种分类模型，由于算法的简单和高效，在实际中应用非常广泛。一句话描述LR的精华就是“逻辑回归假设数据服从伯努利分布,通过极大化似然函数（MLE）的方法，运用梯度下降（GD）来求解参数，来达到将数据二分类的目的”。其中我们需要重点关注逻辑回归算法的数学模型和参数求解方法。逻辑回归本">
@@ -117,8 +117,6 @@
 
 
 
-
-  <link rel="canonical" href="http://yoursite.com/2018/03/13/机器学习-广义线性模型-逻辑斯蒂回归/"/>
 
 
 
@@ -397,7 +395,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article&#58;</span>
                 
-                <span title="Symbols count in article">4.4k</span>
+                <span title="Symbols count in article">4.5k</span>
               
 
               
@@ -501,8 +499,9 @@
 <li>线性回归要求自变量和因变量呈线性关系，而logistic回归不要求自变量和因变量呈线性关系<em>（此处不确定）</em></li>
 </ol>
 <p>总之, LR与线性回归实际上有很多相同之处，最大的区别就在于他们的因变量不同，其他的基本都差不多，正是因为如此，这两种回归可以归于同一个家族，即广义线性模型（generalized linear model）。这一家族中的模型形式基本上都差不多，不同的就是因变量不同，如果是连续的，就是多重线性回归，如果是伯努利分布，就是LR。LR的因变量可以是二分类的，也可以是多分类的，但是二分类的更为常用，也更加容易解释。所以实际中最为常用的就是二分类的logistic回归。</p>
-<h2 id="逻辑斯特回归为什么要对特征进行离散化？"><a href="#逻辑斯特回归为什么要对特征进行离散化？" class="headerlink" title="逻辑斯特回归为什么要对特征进行离散化？"></a>逻辑斯特回归为什么要对特征进行离散化？</h2><h3 id="海量离散特征与LR"><a href="#海量离散特征与LR" class="headerlink" title="海量离散特征与LR"></a>海量离散特征与LR</h3><p>首先，海量离散特征＋LR是业内常见的一个做法，但并不是Holy Grail，事实上这一般而言仅仅是因为LR的优化算法更加成熟，而且可以在计算中利用稀疏特性进行更好的优化—可谓不得已而为之。事实证明GBDT和深度学习特征的加入对于CTR预测是有正面帮助的。</p>
-<p>如果这个问题思考地更深一点，其实当前深度学习网络的最后一层，如果是binary classification，其实等同于LR。所以说，通过人工／半人工的方式产生的features，跟深度神经网络（无论之前用了怎样的结构）最后学出来的representation，其实是异曲同工，区别在于深度学习一般而言会学出一个dense representation，而特征工程做出来的是一堆sparse representation。某些时候，人工特征其实跟神经网络经过几层非线性之后的结果是高度相似的。</p>
+<h2 id="逻辑斯蒂回归为什么要对特征进行离散化？"><a href="#逻辑斯蒂回归为什么要对特征进行离散化？" class="headerlink" title="逻辑斯蒂回归为什么要对特征进行离散化？"></a>逻辑斯蒂回归为什么要对特征进行离散化？</h2><h3 id="海量离散特征与LR"><a href="#海量离散特征与LR" class="headerlink" title="海量离散特征与LR"></a>海量离散特征与LR</h3><p>首先，海量离散特征＋LR是业内常见的一个做法，但并不是Holy Grail（圣杯），事实上这一般而言仅仅是因为LR的优化算法更加成熟，而且可以在计算中利用<strong>稀疏特性</strong>进行更好的优化——可谓不得已而为之。</p>
+<p>事实证明GBDT和深度学习特征的加入对于CTR预测是有正面帮助的。</p>
+<p>如果这个问题思考地更深一点，其实当前深度学习网络的最后一层，如果是binary classification，其实等同于LR。所以说，通过人工／半人工的方式产生的features，跟深度神经网络（无论之前用了怎样的结构）最后学出来的representation，其实是异曲同工，区别在于深度学习一般而言会学出一个<strong>dense representation</strong>，而特征工程做出来的是一堆<strong>sparse representation</strong>。某些时候，人工特征其实跟神经网络经过几层非线性之后的结果是高度相似的。</p>
 <p>在暴力提取高阶／非线性特征的本事上，机器肯定胜过人类。但是，就算最牛的机器智能，有时候都敌不过一些“人类常识”。尤其是业务的一些逻辑，可以认为是人脑在更大的一个数据集上pre-train出来的一些特征，其包含的信息量一定是大于你用于预测的dataset的。在这种情况下，往往厉害的人工features会outperform暴力的机器方法。</p>
 <p>所以，特征离散化，从数学角度来说可以认为是增加robustness，但是更重要的，make sense of the data，将数据转变成人类可以理解、可以validate的格式。</p>
 <p>人类的业务逻辑，当然也不是完美的。在当前机器智能还未征服“常识”这个领域之前，人类的business insights还是一个有力的补充（在很多case，甚至是最重要的部分）。在机器能够完全掌握的范围内，譬如围棋，人类引以为傲的intuition已经无法抵抗机器的暴力计算了——所以在未来，我们一定会看到越来越多的机器智能开始侵入一些传统上认为必须要依靠人类的“感觉”的一些领域。</p>
@@ -517,13 +516,12 @@
 <li>特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20-30 作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间是门学问;</li>
 <li>特征离散化以后，起到了<strong>简化了逻辑斯蒂回归</strong>模型的作用，降低了模型过拟合的风险。</li>
 </ol>
-<p>李沐曾经说过：模型是使用离散特征还是连续特征，其实是<strong>一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡</strong>。既可以离散化用线性模型，也可以用连续特征加深度学习。就看是喜欢折腾特征还是折腾模型了。通常来说，前者容易，而且可以 n 个人一起并行做，有成功经验;后者目前看很赞，能走多远还须拭目以待。</p>
+<p>李沐曾经说过：模型是使用离散特征还是连续特征，其实是<strong>一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡</strong>。既可以离散化用线性模型，也可以用<strong>连续特征加深度学习</strong>。就看是喜欢<strong>折腾特征</strong>还是<strong>折腾模型</strong>了。通常来说，前者容易，而且可以多个人一起并行做，有成功经验；后者目前看很赞，能走多远还须拭目以待。</p>
 <h2 id="LR与MaxEnt"><a href="#LR与MaxEnt" class="headerlink" title="LR与MaxEnt"></a>LR与MaxEnt</h2><p>LR是最大熵在类别为2时候的特例</p>
-<h2 id="应用经验"><a href="#应用经验" class="headerlink" title="应用经验"></a>应用经验</h2><p>如果连续变量，注意做SCALING，缩放单位即标准化。<strong>LR对样本分布敏感</strong>，所以要注意样本的平衡性（y=1不能太少）样本量足的情况下采用下采样，不足的情况用上采样。选择0.5作为阈值是一个一般的做法，实际应用时特定的情况可以选择不同阈值，如果对正例的判别精确率要求高，可以选择阈值大一些，对正例的召回要求高，则可以选择阈值小一些。</p>
+<h2 id="应用经验"><a href="#应用经验" class="headerlink" title="应用经验"></a>应用经验</h2><p>如果连续变量，注意做SCALING，缩放单位即标准化。<strong>LR对样本分布敏感</strong>，所以要注意样本的平衡性（y=1不能太少）样本量足的情况下采用下采样，不足的情况用上采样。选择0.5作为阈值是一个一般的做法，实际应用时特定的情况可以选择不同阈值，如果对正例的判别精确率（查准率）要求高，可以选择阈值大一些，对正例的召回（查全率）要求高，则可以选择阈值小一些。</p>
 <ol>
-<li>​</li>
 <li>如何选择用来分类的threshold，怎么根据具体情况选择（sensitive or specific）</li>
-<li>怎么判断模型好坏，ROC和AUC是怎么来的，有什么意义</li>
+<li>怎么判断模型好坏，ROC和AUC是怎么来的，有什么意义？</li>
 </ol>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>线性回归与losistic回归的区别，如何估计回归参数?</p>
 <p>直接用线性回归做分类因为考虑到了所有样本点到分类决策面的距离，所以在两类数据分布不均匀的时候将导致误差非常大；逻辑斯蒂回归回归和SVM克服了这个缺点，前者采用将所有数据采用sigmod函数进行了非线性映射，使得远离分类决策面的数据作用减弱；后者则直接去掉了远离分类决策面的数据，只考虑支持向量的影响。</p>
@@ -638,6 +636,10 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="dzzxjl" />
             
               <p class="site-author-name" itemprop="name">dzzxjl</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -764,7 +766,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归-Logistic-Regression"><span class="nav-number">1.</span> <span class="nav-text">逻辑斯蒂回归 Logistic Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面试常见问题"><span class="nav-number">1.1.</span> <span class="nav-text">面试常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推导Sigmoid函数"><span class="nav-number">2.</span> <span class="nav-text">推导Sigmoid函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#几率（odds）"><span class="nav-number">2.1.</span> <span class="nav-text">几率（odds）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数"><span class="nav-number">3.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解"><span class="nav-number">4.</span> <span class="nav-text">求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点与缺点"><span class="nav-number">5.</span> <span class="nav-text">优点与缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR并行化"><span class="nav-number">6.</span> <span class="nav-text">LR并行化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR和线性回归的区别"><span class="nav-number">7.</span> <span class="nav-text">LR和线性回归的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯特回归为什么要对特征进行离散化？"><span class="nav-number">8.</span> <span class="nav-text">逻辑斯特回归为什么要对特征进行离散化？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#海量离散特征与LR"><span class="nav-number">8.1.</span> <span class="nav-text">海量离散特征与LR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why"><span class="nav-number">8.2.</span> <span class="nav-text">Why?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR与MaxEnt"><span class="nav-number">9.</span> <span class="nav-text">LR与MaxEnt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用经验"><span class="nav-number">10.</span> <span class="nav-text">应用经验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">11.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归-Logistic-Regression"><span class="nav-number">1.</span> <span class="nav-text">逻辑斯蒂回归 Logistic Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面试常见问题"><span class="nav-number">1.1.</span> <span class="nav-text">面试常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推导Sigmoid函数"><span class="nav-number">2.</span> <span class="nav-text">推导Sigmoid函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#几率（odds）"><span class="nav-number">2.1.</span> <span class="nav-text">几率（odds）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数"><span class="nav-number">3.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解"><span class="nav-number">4.</span> <span class="nav-text">求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点与缺点"><span class="nav-number">5.</span> <span class="nav-text">优点与缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR并行化"><span class="nav-number">6.</span> <span class="nav-text">LR并行化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR和线性回归的区别"><span class="nav-number">7.</span> <span class="nav-text">LR和线性回归的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归为什么要对特征进行离散化？"><span class="nav-number">8.</span> <span class="nav-text">逻辑斯蒂回归为什么要对特征进行离散化？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#海量离散特征与LR"><span class="nav-number">8.1.</span> <span class="nav-text">海量离散特征与LR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why"><span class="nav-number">8.2.</span> <span class="nav-text">Why?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LR与MaxEnt"><span class="nav-number">9.</span> <span class="nav-text">LR与MaxEnt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用经验"><span class="nav-number">10.</span> <span class="nav-text">应用经验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">11.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -796,7 +798,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">262k</span>
+    <span title="Symbols count total">272k</span>
   
 
   
@@ -805,7 +807,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">4:22</span>
+    <span title="Reading time total">4:32</span>
   
 </div>
 

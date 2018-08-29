@@ -56,7 +56,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-32x32-next.png?v=6.0.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/06/12/机器学习-应用-自然语言处理/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="nlp-jd 熟悉一些自然语言处理模型, 例如: 隐马尔可夫模型 (HMM), 最大熵模型(MaxEnt), 条件随机场模型(CRF) 熟悉文本挖掘算法，如文本分类、聚类，语言模型，实体识别，语义分析，情感分析，自动文摘等 熟悉一些分词算法, 命名实体识别算法, 词性标注算法, 依存句法分析算法, 词义消岐算法, 文本分类算法, 自动文摘算法  nlp常见模型 隐马尔科夫模型（HMM）hiden">
-<meta property="og:updated_time" content="2018-06-12T09:52:57.656Z">
+<meta property="og:updated_time" content="2018-06-27T13:02:20.630Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习-应用-自然语言处理">
 <meta name="twitter:description" content="nlp-jd 熟悉一些自然语言处理模型, 例如: 隐马尔可夫模型 (HMM), 最大熵模型(MaxEnt), 条件随机场模型(CRF) 熟悉文本挖掘算法，如文本分类、聚类，语言模型，实体识别，语义分析，情感分析，自动文摘等 熟悉一些分词算法, 命名实体识别算法, 词性标注算法, 依存句法分析算法, 词义消岐算法, 文本分类算法, 自动文摘算法  nlp常见模型 隐马尔科夫模型（HMM）hiden">
@@ -117,8 +117,6 @@
 
 
 
-
-  <link rel="canonical" href="http://yoursite.com/2018/06/12/机器学习-应用-自然语言处理/"/>
 
 
 
@@ -469,7 +467,7 @@
 <h2 id="TF-IDF"><a href="#TF-IDF" class="headerlink" title="TF-IDF"></a>TF-IDF</h2><p>TF-IDF（term frequency–inverse document frequency）是一种用于资讯检索与文本挖掘的常用加权技术。</p>
 <p>TF-IDF是一种<strong>统计方法</strong>，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。</p>
 <p>TF-IDF加权的各种形式常被搜索引擎应用，作为文件与用户查询之间相关程度的度量或评级。除了TF-IDF以外，互联网上的搜索引擎还会使用基于连结分析的评级方法，以确定文件在搜寻结果中出现的顺序。</p>
-<h2 id="onehot-VS-word2vec"><a href="#onehot-VS-word2vec" class="headerlink" title="onehot VS word2vec"></a>onehot VS word2vec</h2><p>自然语言理解的问题要转化为机器学习的问题，第一步肯定是要找一种方法把这些符号数学化，NLP 中最直观，也是到目前为止最常用的词表示方法是 One-hot Representation，这种方法把每个词表示为一个很长的向量。这个向量的维度是词表大小，其中绝大多数元素为 0，只有一个维度的值为 1，这个维度就代表了当前的词 </p>
+<h2 id="One-hot-VS-word2vec"><a href="#One-hot-VS-word2vec" class="headerlink" title="One-hot VS word2vec"></a>One-hot VS word2vec</h2><p>自然语言理解的问题要转化为机器学习的问题，第一步肯定是要找一种方法把这些符号数学化，NLP 中最直观，也是到目前为止最常用的词表示方法是 One-hot Representation，这种方法把每个词表示为一个很长的向量。这个向量的维度是词表大小，其中绝大多数元素为 0，只有一个维度的值为 1，这个维度就代表了当前的词 </p>
 <p>Deep Learning 中一般用到的词向量并不是刚才提到的用 One-hot Representation 表示的那种很长很长的词向量，而是用 Distributed Representation（不知道这个应该怎么翻译，因为还存在一种叫“Distributional Representation”(类似，LDA中用topic表示词语的词向量的表示方法）表示的一种低维实数向量。这种向量一般是这个样子：[0.792, −0.177, −0.107, 0.109, −0.542, …]。维度以 50 维和 100 维比较常见。</p>
 <p>与潜在语义分析（Latent Semantic Index, LSI）、潜在狄立克雷分配（Latent Dirichlet Allocation，LDA）的经典过程相比，Word2vec利用了词的上下文，语义信息更加地丰富。 </p>
 <h2 id="常用类库"><a href="#常用类库" class="headerlink" title="常用类库"></a>常用类库</h2><ul>
@@ -580,6 +578,10 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="dzzxjl" />
             
               <p class="site-author-name" itemprop="name">dzzxjl</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -706,7 +708,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nlp-jd"><span class="nav-number">1.</span> <span class="nav-text">nlp-jd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nlp常见模型"><span class="nav-number">2.</span> <span class="nav-text">nlp常见模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nlp常见任务"><span class="nav-number">3.</span> <span class="nav-text">nlp常见任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#接触过"><span class="nav-number">3.1.</span> <span class="nav-text">接触过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未接触过"><span class="nav-number">3.2.</span> <span class="nav-text">未接触过</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一般步骤"><span class="nav-number">4.</span> <span class="nav-text">一般步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#针对nlp任务传统机器学习与深度学习的区别"><span class="nav-number">5.</span> <span class="nav-text">针对nlp任务传统机器学习与深度学习的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TF-IDF"><span class="nav-number">6.</span> <span class="nav-text">TF-IDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onehot-VS-word2vec"><span class="nav-number">7.</span> <span class="nav-text">onehot VS word2vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用类库"><span class="nav-number">8.</span> <span class="nav-text">常用类库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nlp-jd"><span class="nav-number">1.</span> <span class="nav-text">nlp-jd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nlp常见模型"><span class="nav-number">2.</span> <span class="nav-text">nlp常见模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nlp常见任务"><span class="nav-number">3.</span> <span class="nav-text">nlp常见任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#接触过"><span class="nav-number">3.1.</span> <span class="nav-text">接触过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未接触过"><span class="nav-number">3.2.</span> <span class="nav-text">未接触过</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一般步骤"><span class="nav-number">4.</span> <span class="nav-text">一般步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#针对nlp任务传统机器学习与深度学习的区别"><span class="nav-number">5.</span> <span class="nav-text">针对nlp任务传统机器学习与深度学习的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TF-IDF"><span class="nav-number">6.</span> <span class="nav-text">TF-IDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#One-hot-VS-word2vec"><span class="nav-number">7.</span> <span class="nav-text">One-hot VS word2vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用类库"><span class="nav-number">8.</span> <span class="nav-text">常用类库</span></a></li></ol></div>
             
 
           </div>
@@ -738,7 +740,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">262k</span>
+    <span title="Symbols count total">272k</span>
   
 
   
@@ -747,7 +749,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">4:22</span>
+    <span title="Reading time total">4:32</span>
   
 </div>
 

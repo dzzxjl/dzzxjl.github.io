@@ -56,7 +56,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-32x32-next.png?v=6.0.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
@@ -101,26 +101,24 @@
   <meta name="keywords" content="ml," />
 
 
-<meta name="description" content="决策树决策树由Leo Breiman（1928-2005）提出。 决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是树结构的创建过程就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候选取最优特征的算法，他的主要目的就是要选取一个特征能够将分开的数据集尽量的规整，也就是尽可能的纯。最大的原则就是: 将无序的数据变得更加有序。">
+<meta name="description" content="决策树决策树由 Leo Breiman(1928-2005) 提出。 决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是树结构的创建过程就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候选取最优特征的算法，他的主要目的就是要选取一个特征能够将分开的数据集尽量的规整，也就是尽可能的纯。最大的原则就是：将无序的数据变得更加有序。">
 <meta name="keywords" content="ml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习-决策树">
 <meta property="og:url" content="http://yoursite.com/2017/11/28/机器学习-决策树/index.html">
 <meta property="og:site_name" content="十一城">
-<meta property="og:description" content="决策树决策树由Leo Breiman（1928-2005）提出。 决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是树结构的创建过程就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候选取最优特征的算法，他的主要目的就是要选取一个特征能够将分开的数据集尽量的规整，也就是尽可能的纯。最大的原则就是: 将无序的数据变得更加有序。">
+<meta property="og:description" content="决策树决策树由 Leo Breiman(1928-2005) 提出。 决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是树结构的创建过程就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候选取最优特征的算法，他的主要目的就是要选取一个特征能够将分开的数据集尽量的规整，也就是尽可能的纯。最大的原则就是：将无序的数据变得更加有序。">
 <meta property="og:image" content="http://p59abxhmx.bkt.clouddn.com/decision-tree.png">
-<meta property="og:updated_time" content="2018-03-27T12:49:08.001Z">
+<meta property="og:updated_time" content="2018-06-29T07:29:57.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习-决策树">
-<meta name="twitter:description" content="决策树决策树由Leo Breiman（1928-2005）提出。 决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是树结构的创建过程就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候选取最优特征的算法，他的主要目的就是要选取一个特征能够将分开的数据集尽量的规整，也就是尽可能的纯。最大的原则就是: 将无序的数据变得更加有序。">
+<meta name="twitter:description" content="决策树决策树由 Leo Breiman(1928-2005) 提出。 决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是树结构的创建过程就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候选取最优特征的算法，他的主要目的就是要选取一个特征能够将分开的数据集尽量的规整，也就是尽可能的纯。最大的原则就是：将无序的数据变得更加有序。">
 <meta name="twitter:image" content="http://p59abxhmx.bkt.clouddn.com/decision-tree.png">
 
 
 
 
 
-
-  <link rel="canonical" href="http://yoursite.com/2017/11/28/机器学习-决策树/"/>
 
 
 
@@ -399,7 +397,7 @@
                 
                   <span class="post-meta-item-text">Symbols count in article&#58;</span>
                 
-                <span title="Symbols count in article">1.8k</span>
+                <span title="Symbols count in article">2k</span>
               
 
               
@@ -433,8 +431,8 @@
       
 
       
-        <h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><p>决策树由Leo Breiman（1928-2005）提出。</p>
-<p>决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是<strong>树结构的创建过程</strong>就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候<strong>选取最优特征</strong>的算法，他的主要目的就是要选取一个特征能够将分开的数据集<strong>尽量的规整</strong>，也就是尽可能的<strong>纯</strong>。最大的原则就是: 将无序的数据变得更加有序。</p>
+        <h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><p>决策树由 Leo Breiman(1928-2005) 提出。</p>
+<p>决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是<strong>树结构的创建过程</strong>就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候<strong>选取最优特征</strong>的算法，他的主要目的就是要选取一个特征能够将分开的数据集<strong>尽量的规整</strong>，也就是尽可能的<strong>纯</strong>。最大的原则就是：将无序的数据变得更加有序。</p>
 <p><img src="http://p59abxhmx.bkt.clouddn.com/decision-tree.png" alt="decision-tree"></p>
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>### </p>
 <h2 id="常见算法"><a href="#常见算法" class="headerlink" title="常见算法"></a>常见算法</h2><h3 id="CART-1984"><a href="#CART-1984" class="headerlink" title="CART 1984"></a>CART 1984</h3><p>在数据挖掘中，决策树主要有两种类型:</p>
@@ -448,7 +446,8 @@
 <li>回归树——回归树总体流程也是类似，不过在每个节点（不一定是叶子节点）都会得一个预测值，以年龄为例，该预测值等于属于这个节点的所有人年龄的平均值。分枝时穷举每一个feature的每个阈值找最好的分割点，但衡量最好的标准不再是最大熵，而是<strong>最小化均方差</strong>–即（每个人的年龄-预测年龄）^2 的总和 / N，或者说是每个人的预测误差平方和 除以 N。这很好理解，被预测出错的人数越多，错的越离谱，均方差就越大，通过最小化均方差能够找到最靠谱的分枝依据。分枝直到每个叶子节点上人的年龄都唯一（这太难了）或者达到预设的终止条件（如叶子个数上限），若最终叶子节点上人的年龄不唯一，则以该节点上所有人的平均年龄做为该叶子节点的预测年龄。若还不明白可以Google “Regression Tree”。</li>
 </ul>
 <h3 id="ID3-1986"><a href="#ID3-1986" class="headerlink" title="ID3 1986"></a>ID3 1986</h3><p>pass</p>
-<h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4><h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><h3 id="C4-5-1993——分类决策树"><a href="#C4-5-1993——分类决策树" class="headerlink" title="C4.5 1993——分类决策树"></a>C4.5 1993——分类决策树</h3><h4 id="信息增益比"><a href="#信息增益比" class="headerlink" title="信息增益比"></a>信息增益比</h4><h2 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h2><ul>
+<h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4><p>X如果可以取三个值：x1,x2,x3,概率分别为p1,p2,p3。<br>那么-log(p1),-log(p2),-log(p3)相应称为x1,x2,x3的自信息，代表了它们各自的不确定性（信息论）。X的熵指的是X的所有取值的期望，H(X)可以理解为平均值，那X总的不确定性其实也可以用3<em>H(X)来表示。<br>题中N个结点，每个Nt结点都可以理解为这样的X，那么整棵树的不确定性（损失）就是所有叶结点的总熵Nt</em>Ht(T)的和，而不是平均值Ht(T)的和</p>
+<h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><h3 id="C4-5-1993——分类决策树"><a href="#C4-5-1993——分类决策树" class="headerlink" title="C4.5 1993——分类决策树"></a>C4.5 1993——分类决策树</h3><h4 id="信息增益比"><a href="#信息增益比" class="headerlink" title="信息增益比"></a>信息增益比</h4><h2 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h2><ul>
 <li>决策树这种算法有着很多良好的特性<ul>
 <li>比如说训练时间复杂度较低</li>
 <li>预测的过程比较快速</li>
@@ -579,6 +578,10 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="dzzxjl" />
             
               <p class="site-author-name" itemprop="name">dzzxjl</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -737,7 +740,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">262k</span>
+    <span title="Symbols count total">272k</span>
   
 
   
@@ -746,7 +749,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">4:22</span>
+    <span title="Reading time total">4:32</span>
   
 </div>
 
