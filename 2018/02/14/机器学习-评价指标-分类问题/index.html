@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/02/14/机器学习-评价指标-分类问题/index.html">
 <meta property="og:site_name" content="十一城">
 <meta property="og:description" content="机器学习(ML)，自然语言处理(NLP)，信息检索(IR)等领域，评估(Evaluation)是一个必要的工作，而其评价指标往往有如下几点：准确率(Accuracy)，精确率(Precision)，召回率(Recall)和F1-Measure。 他们存在的场景通常是在测试(Testing)或验证(Validating)情况下。    真实情况 预测结果       正例 反例   正例 TP FN">
-<meta property="og:updated_time" content="2018-03-27T12:37:44.362Z">
+<meta property="og:updated_time" content="2019-02-28T06:09:31.449Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习-评价指标-分类问题">
 <meta name="twitter:description" content="机器学习(ML)，自然语言处理(NLP)，信息检索(IR)等领域，评估(Evaluation)是一个必要的工作，而其评价指标往往有如下几点：准确率(Accuracy)，精确率(Precision)，召回率(Recall)和F1-Measure。 他们存在的场景通常是在测试(Testing)或验证(Validating)情况下。    真实情况 预测结果       正例 反例   正例 TP FN">
@@ -461,13 +461,13 @@
 <p><code>A =  (TP + TN) / (TP + FN + FP + TN)</code></p>
 <p>准确率 accuracy 对于给定的测试数据集，分类器正确分类的样本数与总样本数之比。也就是损失函数是0-1损失时测试数据集上的准确率，此时在正负样本不均的情况下，容易丧失意义。</p>
 <p>大白话就是“你的预测有多少是对的”</p>
-<h2 id="精确率-precision"><a href="#精确率-precision" class="headerlink" title="精确率 precision"></a>精确率 precision</h2><blockquote>
+<h2 id="精确率-precision-查准率"><a href="#精确率-precision-查准率" class="headerlink" title="精确率 precision  -查准率"></a>精确率 precision  -查准率</h2><blockquote>
 <p>The number of true positives divided by the number of true positives and false positives.</p>
 </blockquote>
 <p><code>P = TP / (TP + FP)</code> </p>
 <p>预测为正例中的数据真正的正例占多少？</p>
 <p><strong>精确率</strong>是针对我们<strong>预测结果</strong>而言的，它表示的是预测为正的样本中有多少是真正的正样本。那么预测为正就有两种可能了，一种就是把正类预测为正类(TP)，另一种就是把负类预测为正类(FP)</p>
-<h2 id="召回率-recall"><a href="#召回率-recall" class="headerlink" title="召回率 recall"></a>召回率 recall</h2><blockquote>
+<h2 id="召回率-recall-查全率"><a href="#召回率-recall-查全率" class="headerlink" title="召回率 recall-查全率"></a>召回率 recall-查全率</h2><blockquote>
 <p>The number of true positives divided by the number of true positives and the number of false negatives.</p>
 </blockquote>
 <p><code>R = TP / (TP + FN)</code></p>
@@ -769,7 +769,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准确率-accuracy"><span class="nav-number">1.</span> <span class="nav-text">准确率 accuracy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#精确率-precision"><span class="nav-number">2.</span> <span class="nav-text">精确率 precision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#召回率-recall"><span class="nav-number">3.</span> <span class="nav-text">召回率 recall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F1-Measure"><span class="nav-number">4.</span> <span class="nav-text">F1-Measure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROC与AUC"><span class="nav-number">5.</span> <span class="nav-text">ROC与AUC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">6.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准确率-accuracy"><span class="nav-number">1.</span> <span class="nav-text">准确率 accuracy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#精确率-precision-查准率"><span class="nav-number">2.</span> <span class="nav-text">精确率 precision  -查准率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#召回率-recall-查全率"><span class="nav-number">3.</span> <span class="nav-text">召回率 recall-查全率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F1-Measure"><span class="nav-number">4.</span> <span class="nav-text">F1-Measure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROC与AUC"><span class="nav-number">5.</span> <span class="nav-text">ROC与AUC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">6.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -801,7 +801,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">273k</span>
+    <span title="Symbols count total">272k</span>
   
 
   
@@ -810,7 +810,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">4:33</span>
+    <span title="Reading time total">4:32</span>
   
 </div>
 
