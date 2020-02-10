@@ -88,13 +88,12 @@
 <li>第一次采坑 20170830</li>
 <li>第二次采坑 20180101</li>
 <li>第三次采坑 20180118</li>
+<li>第四次采坑 20200210</li>
 <li>未完待续…</li>
 </ol>
 </blockquote>
 <p>Arch Linux在极客圈好像一直深受好评，许多人都放弃使用mac转而采用thinkpad+archlinux的方式。今天又被几个al的桌面给吸引了，于是踩坑装archlinux。</p>
-<p>衍生版 Manjaro Linux</p>
-<p>##安装</p>
-<p>基本的安装的过程只需要参照<a href="http://www.jianshu.com/p/98b8965b1d10" target="_blank" rel="external">简书上的这篇文章</a>就可以了，如果是在windows电脑上想装双系统，我强烈建议你根据附录中1与2来按部就班地安装，作者记录和解释地非常详细。我需要提前告知你，arch linux的安装非常繁琐，主要是在安装过程在命令行中进行，需要输入大量的命令。但是通过其安装过程对于你理解linux系统有很大的帮助。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>基本的安装的过程只需要参照<a href="http://www.jianshu.com/p/98b8965b1d10" target="_blank" rel="external">简书上的这篇文章</a>就可以了，如果是在windows电脑上想装双系统，我强烈建议你根据附录中1与2来按部就班地安装，作者记录和解释地非常详细。我需要提前告知你，arch linux的安装非常繁琐，主要是在安装过程在命令行中进行，需要输入大量的命令。但是通过其安装过程对于你理解linux系统有很大的帮助。</p>
 <h2 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h2><p>按照教程配置了网络，以为成功了，因为在光盘启动时是可以正常连接网络的，但是restart后用pacman命令下载软件包出现一连串的错误，紧接使用ping命令发现未连接，才定位到网络出现了问题，找到了如下方案解决：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> 在/etc/rc.conf文件中添加：</div><div class="line"><span class="meta">&gt;</span>interface = eth0</div><div class="line"><span class="meta">#</span>保存退出之后，敲入命令</div><div class="line">dhcpcd</div><div class="line"><span class="meta">#</span>马上发现一切正常工作了，使用ping命令检查网络是否正常连接</div></pre></td></tr></table></figure>
 <h2 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h2><p>archlinux 启动后一直卡在 reached target graphical interface</p>
