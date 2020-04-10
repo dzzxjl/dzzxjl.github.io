@@ -1,15 +1,15 @@
 <html>
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>机器学习-评价指标-分类问题 - 十一城</title>
-    <link href='/images/fav.png' rel='shortcut icon'>
-<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+    <link href="/images/fav.png" rel="shortcut icon">
+<link href="/atom.xml" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/basics.js"></script>
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
 
 
   </head>
@@ -21,50 +21,50 @@
   <p>跬步千里，小流江海。</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2018/02/14/机器学习-什锦-机器学习中的函数/'>
+    <div class="left">
+      <a href="/2018/02/14/机器学习-什锦-机器学习中的函数/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2018/02/13/机器学习-什锦-过拟合/'>
+    <div class="right">
+      <a href="/2018/02/13/机器学习-什锦-过拟合/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2018-02-14</div>
+            <div class="date">2018-02-14</div>
             机器学习-评价指标-分类问题
           </h1>
           
@@ -130,8 +130,8 @@
 <p>大白话就是“正例里你的预测覆盖了多少”</p>
 <blockquote>
 <p>如何提高机器学习算法的召回率？</p>
-<p>先说网上看到的这个汇总回答，就是针对样本失衡的分类学习的，个人认为其中比较可行简单的方案是<br>1，扩大数据量，然后直接把多数类样本随机删除，直到跟少数类样本的量一致。因为扩大了样本量，所以即便删除掉很多样本，也能保证少数累样本的数量够用<br>2，把分类问题当成单类模式识别or异常值识别问题。如果失衡问题特别严重，那么换个角度不做二类分类了，就直接当成异常值识别了<br>汇总回答的地址是 <a href="https://link.zhihu.com/?target=http%3A//blog.csdn.net/heyongluoyao8/article/details/49408131" target="_blank" rel="external">在分类中如何处理训练集中不平衡问题</a></p>
-<p>我之前处理这个问题的时候也用过过抽样和欠抽样（SMOTE），但效果也不好。反倒是直接调整分类算法中对两类样本的权重效果会好些。不过代价也是损失precision。内容地址如下权当是看个例子好了 <a href="https://link.zhihu.com/?target=http%3A//www.douban.com/note/343363386/" target="_blank" rel="external">回顾一下毕业论文中的问题</a></p>
+<p>先说网上看到的这个汇总回答，就是针对样本失衡的分类学习的，个人认为其中比较可行简单的方案是<br>1，扩大数据量，然后直接把多数类样本随机删除，直到跟少数类样本的量一致。因为扩大了样本量，所以即便删除掉很多样本，也能保证少数累样本的数量够用<br>2，把分类问题当成单类模式识别or异常值识别问题。如果失衡问题特别严重，那么换个角度不做二类分类了，就直接当成异常值识别了<br>汇总回答的地址是 <a href="https://link.zhihu.com/?target=http%3A//blog.csdn.net/heyongluoyao8/article/details/49408131" target="_blank" rel="noopener">在分类中如何处理训练集中不平衡问题</a></p>
+<p>我之前处理这个问题的时候也用过过抽样和欠抽样（SMOTE），但效果也不好。反倒是直接调整分类算法中对两类样本的权重效果会好些。不过代价也是损失precision。内容地址如下权当是看个例子好了 <a href="https://link.zhihu.com/?target=http%3A//www.douban.com/note/343363386/" target="_blank" rel="noopener">回顾一下毕业论文中的问题</a></p>
 </blockquote>
 <h2 id="F1-Measure"><a href="#F1-Measure" class="headerlink" title="F1-Measure"></a>F1-Measure</h2><blockquote>
 <p>Weighted average of precision and recall. </p>
@@ -180,11 +180,11 @@
 </li>
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="http://charleshm.github.io/2016/03/Model-Performance/" target="_blank" rel="external">http://charleshm.github.io/2016/03/Model-Performance/</a></li>
-<li><a href="http://bookshadow.com/weblog/2014/06/10/precision-recall-f-measure/" target="_blank" rel="external">http://bookshadow.com/weblog/2014/06/10/precision-recall-f-measure/</a></li>
-<li><a href="https://www.zhihu.com/question/19645541" target="_blank" rel="external">https://www.zhihu.com/question/19645541</a></li>
-<li><a href="https://blog.argcv.com/articles/1036.c" target="_blank" rel="external">https://blog.argcv.com/articles/1036.c</a></li>
-<li><a href="https://www.zhihu.com/question/39819838" target="_blank" rel="external">https://www.zhihu.com/question/39819838</a></li>
+<li><a href="http://charleshm.github.io/2016/03/Model-Performance/" target="_blank" rel="noopener">http://charleshm.github.io/2016/03/Model-Performance/</a></li>
+<li><a href="http://bookshadow.com/weblog/2014/06/10/precision-recall-f-measure/" target="_blank" rel="noopener">http://bookshadow.com/weblog/2014/06/10/precision-recall-f-measure/</a></li>
+<li><a href="https://www.zhihu.com/question/19645541" target="_blank" rel="noopener">https://www.zhihu.com/question/19645541</a></li>
+<li><a href="https://blog.argcv.com/articles/1036.c" target="_blank" rel="noopener">https://blog.argcv.com/articles/1036.c</a></li>
+<li><a href="https://www.zhihu.com/question/39819838" target="_blank" rel="noopener">https://www.zhihu.com/question/39819838</a></li>
 </ol>
 
           <br>
@@ -194,32 +194,32 @@
         </section>
       </div>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <span class="muted">&copy; dzzxjl. 2020. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
   <br>
   <br>
   <!--<img src='/images/scribble2.png' alt='scribble' />-->

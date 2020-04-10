@@ -1,15 +1,15 @@
 <html>
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>java运行时数据区 - 十一城</title>
-    <link href='/images/fav.png' rel='shortcut icon'>
-<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+    <link href="/images/fav.png" rel="shortcut icon">
+<link href="/atom.xml" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/basics.js"></script>
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
 
 
   </head>
@@ -21,50 +21,50 @@
   <p>跬步千里，小流江海。</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2017/02/18/session与cookie/'>
+    <div class="left">
+      <a href="/2017/02/18/session与cookie/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2017/01/17/理解与应用docker/'>
+    <div class="right">
+      <a href="/2017/01/17/理解与应用docker/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2017-01-22</div>
+            <div class="date">2017-01-22</div>
             java运行时数据区
           </h1>
           
@@ -100,7 +100,7 @@
 <h3 id="本地方法栈（Native-Method-Stack）"><a href="#本地方法栈（Native-Method-Stack）" class="headerlink" title="本地方法栈（Native Method Stack）"></a>本地方法栈（Native Method Stack）</h3><p>本地方法栈与虚拟机栈作用相似，后者为虚拟机执行Java方法服务，而前者为虚拟机用到的Native方法服务。虚拟机规范对于本地方法栈中方法使用的语言，使用方式和数据结构没有强制规定，甚至有的虚拟机（比如HotSpot）直接把二者合二为一。其抛出的异常跟上面的虚拟机栈一样。</p>
 <h2 id="线程间共享区域"><a href="#线程间共享区域" class="headerlink" title="线程间共享区域"></a>线程间共享区域</h2><h3 id="堆（Java-Heap）"><a href="#堆（Java-Heap）" class="headerlink" title="堆（Java Heap）"></a>堆（Java Heap）</h3><p>虚拟机管理的内存中最大的一块，同时也是被所有线程所共享的，它在虚拟机启动时创建，这货存在的意义就是存放对象实例，几乎所有的<strong>对象实例以及数组</strong>都要在这里分配内存。这里面的对象被自动管理，也就是俗称的GC（Garbage Collector）所管理。用就是了，有GC扛着呢，不用操心销毁回收的事儿。Java堆的容量可以是固定大小，也可以随着需求动态扩展（-Xms和-Xmx），并在不需要过多空间时自动收缩。Java堆所使用的内存<strong>不需要保证是物理连续的</strong>，只要逻辑上是连续的即可。JVM实现应当提供给程序员调节Java 堆初始容量的手段，对于可动态扩展和收缩的堆来说，则应当提供调节其最大和最小容量的手段。</p>
 <p>如果堆中没有内存完成实例分配并且堆也无法扩展，就会抛OutOfMemoryError。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">public</span> Test2 t2 = <span class="keyword">new</span> Test2();</div><div class="line">        <span class="comment">//JVM将Test2类信息加载到方法区,new Test2()实例保存在堆区,Test2引用保存在栈区  </span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> Test2 t2 = <span class="keyword">new</span> Test2();</span><br><span class="line">        <span class="comment">//JVM将Test2类信息加载到方法区,new Test2()实例保存在堆区,Test2引用保存在栈区  </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="方法区（Method-Area）"><a href="#方法区（Method-Area）" class="headerlink" title="方法区（Method Area）"></a>方法区（Method Area）</h3><p>方法区中包含的都是在整个程序中<strong>永远唯一的元素</strong>，如class，static变量。跟堆一样是被各个线程共享的内存区域，用于存储以被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。虽然这个区域被虚拟机规范把方法区描述为堆的一个逻辑部分，但是它的别名叫非堆，用来与堆做一下区别。方法区在虚拟机启动的时候创建。方法区的容量可以是固定大小的，也可以随着程序执行的需求动态扩展，并在不需要过多空间时自动收缩。方法区在实际内存空间中可以是不连续的。Java虚拟机实现应当提供给程序员或者最终用户调节方法区初始容量的手段，对于可以动态扩展和收缩方法区来说，则应当提供调节其最大、最小容量的手段。</p>
 <p>当方法区无法满足内存分配需求时就会抛OutOfMemoryError。</p>
 <h4 id="运行时常量池（Runtime-Constant-Pool）"><a href="#运行时常量池（Runtime-Constant-Pool）" class="headerlink" title="运行时常量池（Runtime Constant Pool）"></a>运行时常量池（Runtime Constant Pool）</h4><p><strong>它是方法区的一部分</strong>。Class文件中除了有类的版本、字段、方法、接口等描述等信息外，还有一项信息是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。</p>
@@ -111,11 +111,11 @@
 <p>JDK1.4加的NIO中，ByteBuffer有个方法是allocateDirect(int capacity) ，这是一种<strong>基于通道（Channel）与缓冲区（Buffer）的I/O方式</strong>，它可以使用Native函数库直接分配堆外内存，然后通过一个存储在Java堆里面的DirectByteBuffer对象作为这块内存的引用进行操作。这样能在一些场景中显著提高性能，因为避免了在Java堆和Native堆中来回复制数据。</p>
 <p>显然，本机直接内存的分配不会受到Java堆大小的限制，但是，既然是内存，则肯定还是会受到本机总内存（包括RAM及SWAP区或者分页文件）的大小及处理器寻址空间的限制。</p>
 <p>服务器管理员配置虚拟机参数时，一般会根据实际内存设置-Xmx等参数信息，但经常会忽略掉直接内存，使得各个内存区域的总和大于物理内存限制（包括物理上的和操作系统级的限制），从而导致动态扩展时出现OutOfMemoryError异常。</p>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java2.png" alt=""></p>
-<p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java3.png" alt=""></p>
-<p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java4.jpg" alt=""></p>
-<p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java5.png" alt=""></p>
-<p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java6.png" alt=""></p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java2.png" alt></p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java3.png" alt></p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java4.jpg" alt></p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java5.png" alt></p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com//image/java6.png" alt></p>
 
           <br>
 <p>dzzxjl</p>
@@ -124,32 +124,32 @@
         </section>
       </div>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <span class="muted">&copy; dzzxjl. 2020. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
   <br>
   <br>
   <!--<img src='/images/scribble2.png' alt='scribble' />-->

@@ -1,15 +1,15 @@
 <html>
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>在docker上使用mysql的正确方式 - 十一城</title>
-    <link href='/images/fav.png' rel='shortcut icon'>
-<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+    <link href="/images/fav.png" rel="shortcut icon">
+<link href="/atom.xml" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/basics.js"></script>
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
 
 
   </head>
@@ -21,50 +21,50 @@
   <p>跬步千里，小流江海。</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2017/08/30/ArchLiunx踩坑/'>
+    <div class="left">
+      <a href="/2017/08/30/ArchLiunx踩坑/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2017/08/25/Spark与Scala/'>
+    <div class="right">
+      <a href="/2017/08/25/Spark与Scala/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2017-08-29</div>
+            <div class="date">2017-08-29</div>
             在docker上使用mysql的正确方式
           </h1>
           
@@ -85,10 +85,10 @@
 
           <p>今天将spring boot应用打包并部署到百度云的服务器上，遇到了一些问题，记录下来。</p>
 <p>spring boot应用需要连接到服务器上的数据库，为了方便日后迁移，我想将数据库安装在docker上，刚开始参考的是菜鸟教程，其上的步骤是正确的，只是会遇到一些问题：菜鸟上强调docker的容器和数据要分离，因此要创建相应的文件夹，主要包括conf、logs以及data，然后在运行docker run命令的时候，以-v参数进行本机host文件夹路径到容器内部相应文件夹的路径映射就可以了，但是菜鸟上面的命令是有问题的，我使用的命令如下</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="keyword">run</span><span class="bash"> --name some-mysql -p 3306:3306 -v /root/mysql/conf:/etc/mysql/conf.d -v /root/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span></div></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> --name some-mysql -p 3306:3306 -v /root/mysql/conf:/etc/mysql/conf.d -v /root/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span></span><br></pre></td></tr></table></figure>
 <p>这里还是要强调参考官方文档，因为一般国内的中文教程会存在未更新等各种各样的问题，官网还是会提供一手资料。</p>
 <p>另外一点需要注意的是，docker默认情况下安装的mysql内部不完全是utf8编码的，因此应用程序启动后，会出现乱码的问题，所以在服务器上的conf文件夹的my.cnf配置文件中填入如下参数再启动相应容器，可以解决乱码的问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">[client]   # 新增客户端的编码  </div><div class="line">default-character-set=utf8  </div><div class="line">  </div><div class="line">[mysql]   # 新增客户端的编码，缺省  </div><div class="line">default-character-set=utf8  </div><div class="line">  </div><div class="line">[mysqld]  </div><div class="line">#  </div><div class="line"># Remove leading # and set to the amount of RAM for the most important data  </div><div class="line"># cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.  </div><div class="line"># innodb_buffer_pool_size = 128M  </div><div class="line">#  </div><div class="line"># Remove leading # to turn on a very important data integrity option: logging  </div><div class="line"># changes to the binary log between backups.  </div><div class="line"># log_bin  </div><div class="line">#  </div><div class="line"># Remove leading # to set options mainly useful for reporting servers.  </div><div class="line"># The server defaults are faster for transactions and fast SELECTs.  </div><div class="line"># Adjust sizes as needed, experiment to find the optimal values.  </div><div class="line"># join_buffer_size = 128M  </div><div class="line"># sort_buffer_size = 2M  </div><div class="line"># read_rnd_buffer_size = 2M  </div><div class="line">datadir=/var/lib/mysql  </div><div class="line">socket=/var/lib/mysql/mysql.sock  </div><div class="line">  </div><div class="line"># Disabling symbolic-links is recommended to prevent assorted security risks  </div><div class="line">symbolic-links=0  </div><div class="line">  </div><div class="line"># Recommended in standard MySQL setup  </div><div class="line">sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES   </div><div class="line">  </div><div class="line"># 新增 关于character_set_server的编码设置  </div><div class="line">init-connect=&apos;SET NAMES utf8&apos;  </div><div class="line">character-set-server = utf8  </div><div class="line">  </div><div class="line">[mysqld_safe]  </div><div class="line">log-error=/var/log/mysqld.log  </div><div class="line">pid-file=/var/run/mysqld/mysqld.pid</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[client]   # 新增客户端的编码  </span><br><span class="line">default-character-set=utf8  </span><br><span class="line">  </span><br><span class="line">[mysql]   # 新增客户端的编码，缺省  </span><br><span class="line">default-character-set=utf8  </span><br><span class="line">  </span><br><span class="line">[mysqld]  </span><br><span class="line">#  </span><br><span class="line"># Remove leading # and set to the amount of RAM for the most important data  </span><br><span class="line"># cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.  </span><br><span class="line"># innodb_buffer_pool_size = 128M  </span><br><span class="line">#  </span><br><span class="line"># Remove leading # to turn on a very important data integrity option: logging  </span><br><span class="line"># changes to the binary log between backups.  </span><br><span class="line"># log_bin  </span><br><span class="line">#  </span><br><span class="line"># Remove leading # to set options mainly useful for reporting servers.  </span><br><span class="line"># The server defaults are faster for transactions and fast SELECTs.  </span><br><span class="line"># Adjust sizes as needed, experiment to find the optimal values.  </span><br><span class="line"># join_buffer_size = 128M  </span><br><span class="line"># sort_buffer_size = 2M  </span><br><span class="line"># read_rnd_buffer_size = 2M  </span><br><span class="line">datadir=/var/lib/mysql  </span><br><span class="line">socket=/var/lib/mysql/mysql.sock  </span><br><span class="line">  </span><br><span class="line"># Disabling symbolic-links is recommended to prevent assorted security risks  </span><br><span class="line">symbolic-links=0  </span><br><span class="line">  </span><br><span class="line"># Recommended in standard MySQL setup  </span><br><span class="line">sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES   </span><br><span class="line">  </span><br><span class="line"># 新增 关于character_set_server的编码设置  </span><br><span class="line">init-connect=&apos;SET NAMES utf8&apos;  </span><br><span class="line">character-set-server = utf8  </span><br><span class="line">  </span><br><span class="line">[mysqld_safe]  </span><br><span class="line">log-error=/var/log/mysqld.log  </span><br><span class="line">pid-file=/var/run/mysqld/mysqld.pid</span><br></pre></td></tr></table></figure>
 
           <br>
 <p>dzzxjl</p>
@@ -97,32 +97,32 @@
         </section>
       </div>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <span class="muted">&copy; dzzxjl. 2020. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
   <br>
   <br>
   <!--<img src='/images/scribble2.png' alt='scribble' />-->

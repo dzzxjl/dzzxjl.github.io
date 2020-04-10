@@ -1,15 +1,15 @@
 <html>
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>机器学习-集成学习-详解GBDT - 十一城</title>
-    <link href='/images/fav.png' rel='shortcut icon'>
-<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+    <link href="/images/fav.png" rel="shortcut icon">
+<link href="/atom.xml" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/basics.js"></script>
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
 
 
   </head>
@@ -21,50 +21,50 @@
   <p>跬步千里，小流江海。</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2018/03/13/机器学习-广义线性模型-逻辑斯蒂回归/'>
+    <div class="left">
+      <a href="/2018/03/13/机器学习-广义线性模型-逻辑斯蒂回归/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2018/03/09/机器学习-决策树-如何处理缺失值/'>
+    <div class="right">
+      <a href="/2018/03/09/机器学习-决策树-如何处理缺失值/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2018-03-12</div>
+            <div class="date">2018-03-12</div>
             机器学习-集成学习-详解GBDT
           </h1>
           
@@ -87,7 +87,7 @@
 <p>作者注：本来GBDT这一块，最开始我写在决策树那篇文章中，但是随着对GBDT的一步步深入了解，发现GBDT的核心思想并不体现在决策树，就像XGBoost上，虽然他论文中基学习器使用的是决策树，但是也提供了线性模型的学习器，作者一开始也没有领悟到几乎所有的教材上都是把GBDT安排在集成学习处的原因在何？。GBDT中关于决策树最主要的部分就是CART，这点读者可以参照讲述CART的文章，本文关注的重点是GBDT中的GB体现在哪？如何理解？</p>
 </blockquote>
 <h2 id="Boosting提升方法"><a href="#Boosting提升方法" class="headerlink" title="Boosting提升方法"></a>Boosting提升方法</h2><p>Boost是”提升”的意思，一般Boosting算法都是一个迭代的过程，每一次新的训练都是为了改进上一次的结果。</p>
-<p>集成学习Boosting提升方法的核心是加法模型(additive training)，即基函数的线性组合与前向分布算法(Forward stagewise additive modeling)。boosting最终可以表示为：<br>$$<br>f(x) = w<em>0 + \sum</em>{m=1}^{M}w_m\phi_m(x)<br>$$<br>其中的$w$是权重，$\phi$是弱分类器(回归器)的集合,其实就是一个加法模型(即基函数的线性组合)。  前向分布算法实际上是一个贪心的算法，也就是在每一步求解弱分类器$\phi_m$和其参数$w_m$的时候不去修改之前已经求好的分类器和参数。</p>
+<p>集成学习Boosting提升方法的核心是加法模型(additive training)，即基函数的线性组合与前向分布算法(Forward stagewise additive modeling)。boosting最终可以表示为：<br>$$<br>f(x) = w_0 + \sum_{m=1}^{M}w_m\phi_m(x)<br>$$<br>其中的$w$是权重，$\phi$是弱分类器(回归器)的集合,其实就是一个加法模型(即基函数的线性组合)。  前向分布算法实际上是一个贪心的算法，也就是在每一步求解弱分类器$\phi_m$和其参数$w_m$的时候不去修改之前已经求好的分类器和参数。</p>
 <p>Boosting主要关注降低偏差，因此Boosting能基于泛化性能相当弱的学习器构建出很强的集成。</p>
 <h2 id="GBDT-MART"><a href="#GBDT-MART" class="headerlink" title="GBDT(MART)"></a>GBDT(MART)</h2><p>GBDT(Gradient Boosting Decision Tree)又叫 MART(Multiple Additive Regression Tree)，GBRT(Gradient Boost Regression Tree)，是一种以决策树（CART）为基学习器的<strong>迭代</strong>的算法，该算法由多棵决策树CART（不是分类树）组成，所有树的结论<strong>累加</strong>起来做最终答案。它在被提出之初就和SVM一起被认为是<strong>泛化能力较强</strong>的算法。GBDT用来做回归预测，调整后也可以用于分类。</p>
 <blockquote>
@@ -95,7 +95,7 @@
 </blockquote>
 <p>GBDT的思想可以用一个通俗的例子解释，假如有个人30岁，我们首先用20岁去拟合，发现损失有10岁，这时我们用6岁去拟合剩下的损失，发现差距还有4岁，第三轮我们用3岁拟合剩下的差距，差距就只有一岁了。如果我们的迭代轮数还没有完，可以继续迭代下面，每一轮迭代，拟合的岁数误差都会减小。</p>
 <p>从上面的例子看这个思想还是蛮简单的，但是有个问题是这个损失的拟合不好度量，损失函数各种各样，怎么找到一种通用的拟合方法呢？</p>
-<h2 id="Gradient-Boost"><a href="#Gradient-Boost" class="headerlink" title="Gradient Boost"></a>Gradient Boost</h2><h3 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h3><p>大牛Freidman提出了用损失函数的负梯度来拟合本轮损失的近似值，进而拟合一个CART回归树。第t轮的第i个样本的损失函数的负梯度表示为<br>$$<br>r_{ti} = -[\frac{\partial L(y_i,f(x_i))}{\partial f(x<em>i)}]</em>{f(x)=f_{t-1}(x)}<br>$$</p>
+<h2 id="Gradient-Boost"><a href="#Gradient-Boost" class="headerlink" title="Gradient Boost"></a>Gradient Boost</h2><h3 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h3><p>大牛Freidman提出了用损失函数的负梯度来拟合本轮损失的近似值，进而拟合一个CART回归树。第t轮的第i个样本的损失函数的负梯度表示为<br>$$<br>r_{ti} = -[\frac{\partial L(y_i,f(x_i))}{\partial f(x_i)}]<em>{f(x)=f</em>{t-1}(x)}<br>$$</p>
 <blockquote>
 <p>关于这点，我阅读了大量的材料，还是觉得难以理解。目前，我对这点的简单认知，就是Loss function是关于变量f（）的一个函数，此时不要把f（x）再想想成一个函数了，只当做是变量，然后我们想要得到Loss function的最小值，此时就是拿L对f（x）求导，此时可以，如果有解析解的话，那么这个问题直接就解决了，因为我们此时就可以得到这个f(x)了，知道他长什么样子，可是是没法得到解析解(closed form solution)的，因此就使用梯度下降法，此时梯度下降法的主角就是f（x），他此时是参数，所以我们对他进行一步步地迭代，最后每次迭代的量相加起来就是我们最终的模型，每次进行迭代的量就是负梯度的值，这里用到了泰勒公式，当然，也可以使用负梯度+负梯度的平方，三次方，以此类推，都是可以的。</p>
 <p>把f（x）想象成参数的这个过程，其实也就是术语从参数空间的梯度下降到函数空间的梯度下降。</p>
@@ -123,11 +123,11 @@
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li>Greedy Function Approximation: A Gradient Boosting Machine</li>
 <li>Tree Boosting With XGBoost—Why Does XGBoost Win “Every” Machine Learning Competition?</li>
-<li><a href="http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/" target="_blank" rel="external">http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/</a></li>
-<li><a href="https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&amp;utm_medium=social" target="_blank" rel="external">https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&amp;utm_medium=social</a></li>
-<li><a href="http://www.cnblogs.com/pinard/p/6140514.html" target="_blank" rel="external">http://www.cnblogs.com/pinard/p/6140514.html</a></li>
-<li><a href="https://www.cnblogs.com/ModifyRong/p/7744987.html" target="_blank" rel="external">https://www.cnblogs.com/ModifyRong/p/7744987.html</a></li>
-<li><a href="http://www.cnblogs.com/LeftNotEasy/archive/2011/03/07/random-forest-and-gbdt.html" target="_blank" rel="external">http://www.cnblogs.com/LeftNotEasy/archive/2011/03/07/random-forest-and-gbdt.html</a></li>
+<li><a href="http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/" target="_blank" rel="noopener">http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/</a></li>
+<li><a href="https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&amp;utm_medium=social" target="_blank" rel="noopener">https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&amp;utm_medium=social</a></li>
+<li><a href="http://www.cnblogs.com/pinard/p/6140514.html" target="_blank" rel="noopener">http://www.cnblogs.com/pinard/p/6140514.html</a></li>
+<li><a href="https://www.cnblogs.com/ModifyRong/p/7744987.html" target="_blank" rel="noopener">https://www.cnblogs.com/ModifyRong/p/7744987.html</a></li>
+<li><a href="http://www.cnblogs.com/LeftNotEasy/archive/2011/03/07/random-forest-and-gbdt.html" target="_blank" rel="noopener">http://www.cnblogs.com/LeftNotEasy/archive/2011/03/07/random-forest-and-gbdt.html</a></li>
 </ol>
 
           <br>
@@ -137,32 +137,32 @@
         </section>
       </div>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <span class="muted">&copy; dzzxjl. 2020. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
   <br>
   <br>
   <!--<img src='/images/scribble2.png' alt='scribble' />-->

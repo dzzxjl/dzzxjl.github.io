@@ -1,15 +1,15 @@
 <html>
-  <head>
+  <head><meta name="generator" content="Hexo 3.9.0">
     <title>机器学习-决策树-从sklearn中理解决策树-转 - 十一城</title>
-    <link href='/images/fav.png' rel='shortcut icon'>
-<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+    <link href="/images/fav.png" rel="shortcut icon">
+<link href="/atom.xml" rel="alternate" type="application/rss+xml">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/highlight.css">
 <link rel="stylesheet" href="/css/responsive.css">
 <script src="/js/jquery.js"></script>
 <script src="/js/basics.js"></script>
-<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
-<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
 
 
   </head>
@@ -21,50 +21,50 @@
   <p>跬步千里，小流江海。</p>
 </header>
 
-    <div id='container'>
-      <div class='block'>
+    <div id="container">
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
-      <section class='paging'>
+      <section class="paging">
   
-    <div class='left'>
-      <a href='/2018/03/15/机器学习-决策树-随机森林/'>
+    <div class="left">
+      <a href="/2018/03/15/机器学习-决策树-随机森林/">
         ‹
       </a>
     </div>
   
   
-    <div class='right'>
-      <a href='/2018/03/13/机器学习-广义线性模型-逻辑斯蒂回归/'>
+    <div class="right">
+      <a href="/2018/03/13/机器学习-广义线性模型-逻辑斯蒂回归/">
         ›
       </a>
     </div>
   
 </section>
 
-      <div class='content'>
-        <section class='post'>
+      <div class="content">
+        <section class="post">
           <h1>
-            <div class='date'>2018-03-15</div>
+            <div class="date">2018-03-15</div>
             机器学习-决策树-从sklearn中理解决策树-转
           </h1>
           
@@ -84,7 +84,7 @@
 
 
           <blockquote>
-<p>本文转自<a href="http://www.cnblogs.com/pinard/p/6056319.html" target="_blank" rel="external">scikit-learn决策树算法类库使用小结</a>，作者从实践的角度来介绍决策树算法，主要是讲解使用scikit-learn来跑决策树算法，结果的可视化以及一些参数调参的关键点。</p>
+<p>本文转自<a href="http://www.cnblogs.com/pinard/p/6056319.html" target="_blank" rel="noopener">scikit-learn决策树算法类库使用小结</a>，作者从实践的角度来介绍决策树算法，主要是讲解使用scikit-learn来跑决策树算法，结果的可视化以及一些参数调参的关键点。</p>
 </blockquote>
 <h2 id="scikit-learn决策树算法类库介绍"><a href="#scikit-learn决策树算法类库介绍" class="headerlink" title="scikit-learn决策树算法类库介绍"></a>scikit-learn决策树算法类库介绍</h2><p>scikit-learn决策树算法类库内部实现是使用了<strong>调优过的CART树算法</strong>，既可以做分类，又可以做回归。分类决策树的类对应的是DecisionTreeClassifier，而回归决策树的类对应的是DecisionTreeRegressor。两者的参数定义几乎完全相同，但是意义不全相同。下面就对DecisionTreeClassifier和DecisionTreeRegressor的重要参数做一个总结，重点比较两者参数使用的不同点和调参的注意点。</p>
 <h2 id="DecisionTreeClassifier和DecisionTreeClassifier-重要参数调参注意点"><a href="#DecisionTreeClassifier和DecisionTreeClassifier-重要参数调参注意点" class="headerlink" title="DecisionTreeClassifier和DecisionTreeClassifier 重要参数调参注意点"></a>DecisionTreeClassifier和DecisionTreeClassifier 重要参数调参注意点</h2><p>为了便于比较，这里我们用表格的形式对DecisionTreeClassifier和DecisionTreeRegressor重要参数要点做一个比较。</p>
@@ -109,7 +109,7 @@
 </tr>
 <tr>
 <td>划分时考虑的最大特征数max_features</td>
-<td>可以使用很多种类型的值，默认是”None”,意味着划分时考虑所有的特征数；如果是”log2”意味着划分时最多考虑$\log_2N$个特征；如果是”sqrt”或者”auto”意味着划分时最多考虑$\sqrt{N}$个特征。如果是整数，代表考虑的特征绝对数。如果是浮点数，代表考虑特征百分比，即考虑（$百分比<em>N$）取整后的特征数。其中N为样本总特征数。一般来说，如果样本特征数不多，比如小于50，我们用默认的”None”就可以了，如果特征数非常多，<em>*我们可以灵活使用刚才描述的其他取值来控制划分时考虑的最大特征数，以控制决策树的生成时间</em></em>。</td>
+<td>可以使用很多种类型的值，默认是”None”,意味着划分时考虑所有的特征数；如果是”log2”意味着划分时最多考虑$\log_2N$个特征；如果是”sqrt”或者”auto”意味着划分时最多考虑$\sqrt{N}$个特征。如果是整数，代表考虑的特征绝对数。如果是浮点数，代表考虑特征百分比，即考虑（$百分比*N$）取整后的特征数。其中N为样本总特征数。一般来说，如果样本特征数不多，比如小于50，我们用默认的”None”就可以了，如果特征数非常多，<strong>我们可以灵活使用刚才描述的其他取值来控制划分时考虑的最大特征数，以控制决策树的生成时间</strong>。</td>
 <td></td>
 </tr>
 <tr>
@@ -164,7 +164,7 @@
 </ol>
 <h2 id="scikit-learn决策树结果的可视化"><a href="#scikit-learn决策树结果的可视化" class="headerlink" title="scikit-learn决策树结果的可视化　"></a>scikit-learn决策树结果的可视化　</h2><p>决策树可视化化可以方便我们直观的观察模型，以及发现模型中的问题。这里介绍下scikit-learn中决策树的可视化方法。</p>
 <h3 id="决策树可视化环境搭建"><a href="#决策树可视化环境搭建" class="headerlink" title="决策树可视化环境搭建"></a>决策树可视化环境搭建</h3><p>scikit-learn中决策树的可视化一般需要安装graphviz。主要包括graphviz的安装和python的graphviz插件的安装。</p>
-<p>第一步是安装graphviz。下载地址在：<a href="http://www.graphviz.org/。如果你是linux，可以用apt-get或者yum的方法安装。如果是windows，就在官网下载msi文件安装。无论是linux还是windows，装完后都要设置环境变量，将graphviz的bin目录加到PATH，比如我是windows，将C:/Program" target="_blank" rel="external">http://www.graphviz.org/。如果你是linux，可以用apt-get或者yum的方法安装。如果是windows，就在官网下载msi文件安装。无论是linux还是windows，装完后都要设置环境变量，将graphviz的bin目录加到PATH，比如我是windows，将C:/Program</a> Files (x86)/Graphviz2.38/bin/加入了PATH</p>
+<p>第一步是安装graphviz。下载地址在：<a href="http://www.graphviz.org/。如果你是linux，可以用apt-get或者yum的方法安装。如果是windows，就在官网下载msi文件安装。无论是linux还是windows，装完后都要设置环境变量，将graphviz的bin目录加到PATH，比如我是windows，将C:/Program" target="_blank" rel="noopener">http://www.graphviz.org/。如果你是linux，可以用apt-get或者yum的方法安装。如果是windows，就在官网下载msi文件安装。无论是linux还是windows，装完后都要设置环境变量，将graphviz的bin目录加到PATH，比如我是windows，将C:/Program</a> Files (x86)/Graphviz2.38/bin/加入了PATH</p>
 <p>第二步是安装python插件graphviz： pip install graphviz</p>
 <p>第三步是安装python插件pydotplus。这个没有什么好说的: pip install pydotplus</p>
 <p>这样环境就搭好了，有时候python会很笨，仍然找不到graphviz，这时，可以在代码里面加入这一行：</p>
@@ -172,24 +172,24 @@
 <p>注意后面的路径是你自己的graphviz的bin目录。</p>
 <h3 id="决策树可视化的三种方法"><a href="#决策树可视化的三种方法" class="headerlink" title="决策树可视化的三种方法"></a>决策树可视化的三种方法</h3><p>这里我们有一个例子讲解决策树可视化。</p>
 <p>首先载入类库：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from sklearn.datasets import load_iris</div><div class="line">from sklearn import tree</div><div class="line">import sys</div><div class="line">import os       </div><div class="line">os.environ[&quot;PATH&quot;] += os.pathsep + &apos;C:/Program Files (x86)/Graphviz2.38/bin/&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.datasets import load_iris</span><br><span class="line">from sklearn import tree</span><br><span class="line">import sys</span><br><span class="line">import os       </span><br><span class="line">os.environ[&quot;PATH&quot;] += os.pathsep + &apos;C:/Program Files (x86)/Graphviz2.38/bin/&apos;</span><br></pre></td></tr></table></figure>
 <p>接着载入sciki-learn的自带数据，有决策树拟合，得到模型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iris = load_iris()</div><div class="line">clf = tree.DecisionTreeClassifier()</div><div class="line">clf = clf.fit(iris.data, iris.target)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iris = load_iris()</span><br><span class="line">clf = tree.DecisionTreeClassifier()</span><br><span class="line">clf = clf.fit(iris.data, iris.target)</span><br></pre></td></tr></table></figure>
 <p>现在可以将模型存入dot文件iris.dot。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">with open(&quot;iris.dot&quot;, &apos;w&apos;) as f:</div><div class="line">    f = tree.export_graphviz(clf, out_file=f)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">with open(&quot;iris.dot&quot;, &apos;w&apos;) as f:</span><br><span class="line">    f = tree.export_graphviz(clf, out_file=f)</span><br></pre></td></tr></table></figure>
 <p>这时候我们有3种可视化方法，第一种是用graphviz的dot命令生成决策树的可视化文件，敲完这个命令后当前目录就可以看到决策树的可视化文件iris.pdf.打开可以看到决策树的模型图。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#注意，这个命令在命令行执行</div><div class="line">dot -Tpdf iris.dot -o iris.pdf</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#注意，这个命令在命令行执行</span><br><span class="line">dot -Tpdf iris.dot -o iris.pdf</span><br></pre></td></tr></table></figure>
 <p>第二种方法是用<code>pydotplus</code>生成iris.pdf。这样就不用再命令行去专门生成pdf文件了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import pydotplus </div><div class="line">dot_data = tree.export_graphviz(clf, out_file=None) </div><div class="line">graph = pydotplus.graph_from_dot_data(dot_data) </div><div class="line">graph.write_pdf(&quot;iris.pdf&quot;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import pydotplus </span><br><span class="line">dot_data = tree.export_graphviz(clf, out_file=None) </span><br><span class="line">graph = pydotplus.graph_from_dot_data(dot_data) </span><br><span class="line">graph.write_pdf(&quot;iris.pdf&quot;)</span><br></pre></td></tr></table></figure>
 <p>第三种办法是个人比较推荐的做法，因为这样可以直接把图产生在ipython的notebook。代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">from IPython.display import Image  </div><div class="line">dot_data = tree.export_graphviz(clf, out_file=None, </div><div class="line">                         feature_names=iris.feature_names,  </div><div class="line">                         class_names=iris.target_names,  </div><div class="line">                         filled=True, rounded=True,  </div><div class="line">                         special_characters=True)  </div><div class="line">graph = pydotplus.graph_from_dot_data(dot_data)  </div><div class="line">Image(graph.create_png())</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from IPython.display import Image  </span><br><span class="line">dot_data = tree.export_graphviz(clf, out_file=None, </span><br><span class="line">                         feature_names=iris.feature_names,  </span><br><span class="line">                         class_names=iris.target_names,  </span><br><span class="line">                         filled=True, rounded=True,  </span><br><span class="line">                         special_characters=True)  </span><br><span class="line">graph = pydotplus.graph_from_dot_data(dot_data)  </span><br><span class="line">Image(graph.create_png())</span><br></pre></td></tr></table></figure>
 <p>在ipython的notebook生成的图如下：</p>
 <p><img src="https://images2015.cnblogs.com/blog/1042406/201611/1042406-20161112134751389-1951028811.png" alt="img">　　</p>
 <h3 id="DecisionTreeClassifier实例"><a href="#DecisionTreeClassifier实例" class="headerlink" title="DecisionTreeClassifier实例"></a>DecisionTreeClassifier实例</h3><p>这里给一个限制决策树层数为4的DecisionTreeClassifier例子。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">from itertools import product</div><div class="line"></div><div class="line">import numpy as np</div><div class="line">import matplotlib.pyplot as plt</div><div class="line"></div><div class="line">from sklearn import datasets</div><div class="line">from sklearn.tree import DecisionTreeClassifier</div><div class="line"></div><div class="line"></div><div class="line"># 仍然使用自带的iris数据</div><div class="line">iris = datasets.load_iris()</div><div class="line">X = iris.data[:, [0, 2]]</div><div class="line">y = iris.target</div><div class="line"></div><div class="line"># 训练模型，限制树的最大深度4</div><div class="line">clf = DecisionTreeClassifier(max_depth=4)</div><div class="line">#拟合模型</div><div class="line">clf.fit(X, y)</div><div class="line"></div><div class="line"></div><div class="line"># 画图</div><div class="line">x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1</div><div class="line">y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1</div><div class="line">xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.1),</div><div class="line">                     np.arange(y_min, y_max, 0.1))</div><div class="line"></div><div class="line">Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])</div><div class="line">Z = Z.reshape(xx.shape)</div><div class="line"></div><div class="line">plt.contourf(xx, yy, Z, alpha=0.4)</div><div class="line">plt.scatter(X[:, 0], X[:, 1], c=y, alpha=0.8)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">from itertools import product</span><br><span class="line"></span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">from sklearn import datasets</span><br><span class="line">from sklearn.tree import DecisionTreeClassifier</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 仍然使用自带的iris数据</span><br><span class="line">iris = datasets.load_iris()</span><br><span class="line">X = iris.data[:, [0, 2]]</span><br><span class="line">y = iris.target</span><br><span class="line"></span><br><span class="line"># 训练模型，限制树的最大深度4</span><br><span class="line">clf = DecisionTreeClassifier(max_depth=4)</span><br><span class="line">#拟合模型</span><br><span class="line">clf.fit(X, y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 画图</span><br><span class="line">x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1</span><br><span class="line">y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1</span><br><span class="line">xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.1),</span><br><span class="line">                     np.arange(y_min, y_max, 0.1))</span><br><span class="line"></span><br><span class="line">Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])</span><br><span class="line">Z = Z.reshape(xx.shape)</span><br><span class="line"></span><br><span class="line">plt.contourf(xx, yy, Z, alpha=0.4)</span><br><span class="line">plt.scatter(X[:, 0], X[:, 1], c=y, alpha=0.8)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>得到的图如下：</p>
 <p><img src="https://images2015.cnblogs.com/blog/1042406/201611/1042406-20161112142033999-5911597.png" alt="img"><br>接着我们可视化我们的决策树，使用了推荐的第三种方法。代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">from IPython.display import Image  </div><div class="line">from sklearn import tree</div><div class="line">import pydotplus </div><div class="line">dot_data = tree.export_graphviz(clf, out_file=None, </div><div class="line">                         feature_names=iris.feature_names,  </div><div class="line">                         class_names=iris.target_names,  </div><div class="line">                         filled=True, rounded=True,  </div><div class="line">                         special_characters=True)  </div><div class="line">graph = pydotplus.graph_from_dot_data(dot_data)  </div><div class="line">Image(graph.create_png())</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from IPython.display import Image  </span><br><span class="line">from sklearn import tree</span><br><span class="line">import pydotplus </span><br><span class="line">dot_data = tree.export_graphviz(clf, out_file=None, </span><br><span class="line">                         feature_names=iris.feature_names,  </span><br><span class="line">                         class_names=iris.target_names,  </span><br><span class="line">                         filled=True, rounded=True,  </span><br><span class="line">                         special_characters=True)  </span><br><span class="line">graph = pydotplus.graph_from_dot_data(dot_data)  </span><br><span class="line">Image(graph.create_png())</span><br></pre></td></tr></table></figure>
 <p>生成的决策树图如下：</p>
 <p><img src="https://images2015.cnblogs.com/blog/1042406/201611/1042406-20161112142549952-2076035538.png" alt="img"></p>
 <p>以上就是scikit-learn决策树算法使用的一个总结，希望可以帮到大家。</p>
@@ -201,32 +201,32 @@
         </section>
       </div>
       
-      <div class='block'>
+      <div class="block">
   
-    <a class='main' href='/'>Home</a>
+    <a class="main" href="/">Home</a>
   
-    <a class='main' href='/categories/java'>Java</a>
+    <a class="main" href="/categories/java">Java</a>
   
-    <a class='main' href='/categories/python'>Python</a>
+    <a class="main" href="/categories/python">Python</a>
   
-    <a class='main' href='/categories/linux'>Linux</a>
+    <a class="main" href="/categories/linux">Linux</a>
   
-    <a class='main' href='/categories/ml'>ML</a>
+    <a class="main" href="/categories/ml">ML</a>
   
-    <a class='main' href='/thoughts'>Thoughts</a>
+    <a class="main" href="/thoughts">Thoughts</a>
   
-    <a class='main' href='/bookcan'>BookCan</a>
+    <a class="main" href="/bookcan">BookCan</a>
   
-    <a class='main' href='/links'>Links</a>
+    <a class="main" href="/links">Links</a>
   
-    <a class='main' href='/about'>About</a>
+    <a class="main" href="/about">About</a>
   
 </div>
 
     </div>
     <footer>
-  <span class='muted'>&copy; dzzxjl. 2018. All Rights Reserved.</span><br>
-  <a href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <span class="muted">&copy; dzzxjl. 2020. All Rights Reserved.</span><br>
+  <a href="https://github.com/saintwinkle/hexo-theme-scribble" class="muted">一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
   <br>
   <br>
   <!--<img src='/images/scribble2.png' alt='scribble' />-->
