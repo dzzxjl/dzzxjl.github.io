@@ -94,12 +94,16 @@
 <h2 id="Linux系统的主要用途"><a href="#Linux系统的主要用途" class="headerlink" title="Linux系统的主要用途"></a>Linux系统的主要用途</h2><ul>
 <li>服务器</li>
 <li>嵌入式硬件</li>
-<li>桌面系统——极客爱好者</li>
+<li>桌面系统</li>
 </ul>
-<h2 id="常见发行版"><a href="#常见发行版" class="headerlink" title="常见发行版"></a>常见发行版</h2><h3 id="linux发行版"><a href="#linux发行版" class="headerlink" title="linux发行版"></a>linux发行版</h3><ol>
+<h2 id="常见发行版"><a href="#常见发行版" class="headerlink" title="常见发行版"></a>常见发行版</h2><p>虽然同为Unix宗族，由于文化的差异，苹果的开发者擅长在图形界面解决问题，而 Linux 开发者擅长在文本界面解决问题。</p>
+<h3 id="linux发行版"><a href="#linux发行版" class="headerlink" title="linux发行版"></a>linux发行版</h3><ol>
 <li>RedHat 系列（商业公司维护的发行版本）：RHEL(Redhat Enterprise Linux)、Cent OS、Fedora Core等</li>
 <li>Debian 系列（社区组织维护的发行版本）：Debian(stable, testing 和 unstable)、Ubuntu、Deepin 等</li>
-<li>Arch</li>
+<li>openSUSE</li>
+<li>Arch Linux</li>
+<li>gentoo</li>
+<li>Linux From Scratch</li>
 </ol>
 <h3 id="RedHat-系列"><a href="#RedHat-系列" class="headerlink" title="RedHat 系列"></a>RedHat 系列</h3><ul>
 <li>常见的安装包格式 rpm 包，安装rpm包的命令是“rpm -参数”</li>
@@ -112,31 +116,29 @@
 <li>支持 tar 包</li>
 <li>dpkg/apt-get/apt-cache/apt 之間的關係</li>
 </ul>
-<h3 id="archlinux系列"><a href="#archlinux系列" class="headerlink" title="archlinux系列"></a>archlinux系列</h3><ul>
+<h3 id="Arch-Linux系列"><a href="#Arch-Linux系列" class="headerlink" title="Arch Linux系列"></a>Arch Linux系列</h3><ul>
 <li>Manjaro Linux</li>
 <li>发行版自行开发的软件少（基本上只有pacman, abs和安装程序（及安装程序需要的wifi-menu等）），对上游修改少</li>
 </ul>
 <h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><ul>
-<li>/：存放系统程序，也就是At&amp;t开发的Unix程序<ul>
+<li>/：存放系统程序，也就是AT&amp;T开发的Unix程序<ul>
 <li>/bin：<strong>重要执行文件</strong>，单用户维护模式下还能够被操作的命令</li>
 <li>/sbin：root才能操作</li>
 <li>/etc：配置文件</li>
-<li>/dev：所需要的设备文件<ul>
-<li>/dev/tty</li>
+<li>/dev：设备文件<ul>
+<li>/dev/tty 终端</li>
 </ul>
 </li>
 <li>/lib：执行文件所需的函数库与内核所需的模块</li>
-<li><hr>
-</li>
-<li>/usr(<strong>UNIX Software Resource</strong>)：存放Unix系统商（比如IBM和HP）开发的程序<ul>
+<li>/usr(UNIX Software Resource)：存放<strong>Unix系统商</strong>（比如IBM和HP）开发的程序<ul>
 <li>/usr/sbin：服务器安装程序</li>
-<li>/usr/local/sbin：存放用户自己安装的程序，本机自行安装的软件所产生的系统执行文件（system binary）</li>
+<li>/usr/local/sbin：存放<strong>用户自己安装的程序</strong>，本机自行安装的软件所产生的系统执行文件（system binary）</li>
 </ul>
 </li>
 <li>/opt：在某些系统，用于存放第三方厂商开发的程序，所以取名为option，意为”选装”</li>
 <li>/proc：基于内存的<strong>虚拟文件系统</strong>，本身不占任何硬盘空间。用于显示内核信息</li>
 <li>/var 包含系统一般运行时要改变的数据。通常这些数据所在的目录的大小是要经常变化或扩充的<ul>
-<li>/var/lock ： 锁定文件。许多程序遵循在 /var/lock 中产生一个锁定文件的约定，以用来支持他们正在使用某个特定的设备或文件。其他程序注意到这个锁定文件时，就不会再使用这个设备或文件</li>
+<li>/var/lock：锁定文件。许多程序遵循在 /var/lock 中产生一个锁定文件的约定，以用来支持他们正在使用某个特定的设备或文件。其他程序注意到这个锁定文件时，就不会再使用这个设备或文件</li>
 </ul>
 </li>
 <li>/lost+found：这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。这个目录是使用标准的<strong>ext2/ext3</strong>文件系统格式才会产生的一个目录</li>
@@ -145,25 +147,6 @@
 </ul>
 </li>
 </ul>
-<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><blockquote>
-<p>关键是会“偷”，偷了会改，改了会变，变则通矣。</p>
-</blockquote>
-<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h3 id="管道命令"><a href="#管道命令" class="headerlink" title="管道命令"></a>管道命令</h3><h3 id="数据流重定向"><a href="#数据流重定向" class="headerlink" title="数据流重定向"></a>数据流重定向</h3><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
-<li>service *** start/stop</li>
-<li>du</li>
-<li>uname -a   #显示详细的内核信息</li>
-<li>tar -xzvf</li>
-<li>curl ip</li>
-<li>kill -9 pid 关闭进程 </li>
-<li>ssh root@ip  使用root账户登录指定ip的服务器</li>
-<li>whereis java 查看java安装路径——/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home</li>
-<li>lsof –i:端口号 Linux查看端口占用情况</li>
-<li>netstat -anpt | grep :5000 Linux查看端口占用情况</li>
-<li>ps -ef | grep uwsgi 查看进程情况：ps -aux | grep pid</li>
-<li>scp api.py root@IP:api.py</li>
-<li>free 查看内存使用情况</li>
-</ul>
-<h3 id="部分命令解析"><a href="#部分命令解析" class="headerlink" title="部分命令解析"></a>部分命令解析</h3><p>service *** start/stop</p>
 <h2 id="linux权限管理"><a href="#linux权限管理" class="headerlink" title="linux权限管理"></a>linux权限管理</h2><p>文件的权限主要针对三类对象进行定义：</p>
 <ul>
 <li>owner: 属主, u</li>
@@ -242,10 +225,10 @@
 </table>
 <p>简化记忆：读(r) = 4 写(w) = 2 执行(x) = 1</p>
 <p>修改文件权限：<code>chmod [OPTION]... OCTAL-MODE FILE…</code></p>
-<h2 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h2><h3 id="桌面"><a href="#桌面" class="headerlink" title="桌面"></a>桌面</h3><h4 id="显卡驱动"><a href="#显卡驱动" class="headerlink" title="显卡驱动"></a>显卡驱动</h4><h4 id="Xorg"><a href="#Xorg" class="headerlink" title="Xorg"></a>Xorg</h4><p><code>Xorg</code>是<code>Linux</code>下的一个著名的开源图形服务，我们的桌面环境需要<code>Xorg</code>的支持。</p>
-<h4 id="桌面环境"><a href="#桌面环境" class="headerlink" title="桌面环境"></a><a href="https://linux.cn/article-7081-1.html" target="_blank" rel="noopener">桌面环境</a></h4><p>Linux 创建了一个友好的环境，为我们提供了选择的可能。它们的外观、操作、设计理念等各方面都有所不同。</p>
+<h2 id="X-Window-System"><a href="#X-Window-System" class="headerlink" title="X Window System"></a>X Window System</h2><h3 id="显卡驱动"><a href="#显卡驱动" class="headerlink" title="显卡驱动"></a>显卡驱动</h3><h3 id="Xorg"><a href="#Xorg" class="headerlink" title="Xorg"></a>Xorg</h3><p><code>Xorg</code>是<code>Linux</code>下的一个著名的开源图形服务，我们的桌面环境需要<code>Xorg</code>的支持。</p>
+<h3 id="Desktop-Environment"><a href="#Desktop-Environment" class="headerlink" title="Desktop Environment"></a><a href="https://linux.cn/article-7081-1.html" target="_blank" rel="noopener">Desktop Environment</a></h3><p>Linux 创建了一个友好的环境，为我们提供了选择的可能。它们的外观、操作、设计理念等各方面都有所不同。</p>
 <ul>
-<li>Xfce<br><a href="http://www.xfce.org/" target="_blank" rel="noopener">Xfce</a> 早于 KDE 桌面环境，它是最古老和最轻量级的桌面环境。Xfce 的最新版本是 4.15，发布于 2015 年，使用了诸如 GTK+ 3 的大量的现代科技。很多发行版都使用了 Xfce 环境以满足特定需求，比如 Ubuntu Studio ——与 MATE 类似——尽量节省系统资源给其他的应用。并且，许多的著名的 Linux 发行版——包括 Manjaro Linux、PC/OS、Salix 和 Mythbuntu ——都把它作为默认桌面环境。</li>
+<li><a href="http://www.xfce.org/" target="_blank" rel="noopener">Xfce</a> 早于 KDE 桌面环境，它是最古老和最轻量级的桌面环境。Xfce 的最新版本是 4.15，发布于 2015 年，使用了诸如 GTK+ 3 的大量的现代科技。很多发行版都使用了 Xfce 环境以满足特定需求，比如 Ubuntu Studio ——与 MATE 类似——尽量节省系统资源给其他的应用。并且，许多的著名的 Linux 发行版——包括 Manjaro Linux、PC/OS、Salix 和 Mythbuntu ——都把它作为默认桌面环境。</li>
 <li>KDE Plasma<ul>
 <li>KDE 是由 Plasma <a href="https://wiki.archlinux.org/index.php/Desktop_environment_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">桌面环境</a>)、库、框架 (KDE Frameworks)、和应用组成的软件项目。</li>
 <li>一个非常好的文件管理器 —— Dolphin</li>
@@ -253,20 +236,31 @@
 </li>
 <li>GNOME 3 <ul>
 <li>GNU 网络对象模型环境</li>
-<li>​</li>
 </ul>
 </li>
-<li>Unity: Ubuntu开发——它只是 Canonical 为 Ubuntu 开发的一个图形化 Shell。Unity 运行于 GNOME 桌面之上，并使用很多 GNOME 的应用和工具。Ubuntu 团队分支了一些 GNOME 组件，以便更好的满足 Unity 用户的需求。</li>
-<li>Deepin: Deepin开发</li>
+<li>Deepin</li>
 <li>lxde</li>
+<li><del>Unity: Ubuntu开发——它只是 Canonical 为 Ubuntu 开发的一个图形化 Shell。Unity 运行于 GNOME 桌面之上，并使用很多 GNOME 的应用和工具。Ubuntu 团队分支了一些 GNOME 组件，以便更好的满足 Unity 用户的需求。</del></li>
 </ul>
-<h4 id="桌面管理器"><a href="#桌面管理器" class="headerlink" title="桌面管理器"></a>桌面管理器</h4><ul>
+<h3 id="X-Display-Manager"><a href="#X-Display-Manager" class="headerlink" title="X Display Manager"></a>X Display Manager</h3><ul>
 <li>sddm</li>
 </ul>
-<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><ul>
-<li>nginx/apache</li>
-<li>​</li>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li>service *** start/stop</li>
+<li>du</li>
+<li>uname -a   #显示详细的内核信息</li>
+<li>tar -xzvf</li>
+<li>curl ip</li>
+<li>kill -9 pid 关闭进程 </li>
+<li>ssh root@ip  使用root账户登录指定ip的服务器</li>
+<li>whereis java 查看java安装路径——/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home</li>
+<li>lsof –i:端口号 Linux查看端口占用情况</li>
+<li>netstat -anpt | grep :5000 Linux查看端口占用情况</li>
+<li>ps -ef | grep uwsgi 查看进程情况：ps -aux | grep pid</li>
+<li>scp api.py root@IP:api.py</li>
+<li>free 查看内存使用情况</li>
 </ul>
+<h3 id="部分命令解析"><a href="#部分命令解析" class="headerlink" title="部分命令解析"></a>部分命令解析</h3><p>service *** start/stop</p>
 <h2 id="Linux国内镜像源"><a href="#Linux国内镜像源" class="headerlink" title="Linux国内镜像源"></a>Linux国内镜像源</h2><ul>
 <li><a href="http://mirrors.aliyun.com/" target="_blank" rel="noopener">http://mirrors.aliyun.com/</a> 【阿里】</li>
 <li><a href="http://mirrors.aliyuncs.com/" target="_blank" rel="noopener">http://mirrors.aliyuncs.com/</a> 【阿里云ECS内网专用】</li>
