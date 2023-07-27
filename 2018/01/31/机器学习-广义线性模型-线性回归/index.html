@@ -1,0 +1,245 @@
+<html>
+  <head>
+    <title>机器学习-广义线性模型-线性回归 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/31/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B-Differences-Between-OLS-and-MLE/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/22/%E8%BD%AC-%E7%BD%91%E7%BB%9C%E6%97%B6%E4%BB%A3%E7%9A%84%E7%88%B1%E8%BF%AA%E7%94%9F-Bill-Joy/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-31</div>
+            机器学习-广义线性模型-线性回归
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml-glm/" rel="tag">ml glm</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>线性回归是建立在<strong>高斯分布</strong>的假设上，Logistic 回归是建立在<strong>伯努利分布</strong>的假设上。如果不能<strong>从概率的角度</strong>理解线性回归和 Logistic 回归，就很难升一级去理解广义线性回归，而广义线性模型就是要将<strong>其它的分布</strong>也包纳进来，提取这些分布模型的<strong>共同点</strong>，成为一个模型，这样再遇到其它分布，如多项式分布、泊松分布、伽马分布、指数分布、贝塔分布和 Dirichlet 分布等，就可以按部就班地套模型进行计算。</p>
+</blockquote>
+<h2 id="广义线性模型（generalized-linear-model）综述"><a href="#广义线性模型（generalized-linear-model）综述" class="headerlink" title="广义线性模型（generalized linear model）综述"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/muzixi/p/6642203.html">广义线性模型（generalized linear model）</a>综述</h2><blockquote>
+<p>使用广义线性模型的步骤：</p>
+<ol>
+<li>分析数据集，确定<strong>概率分布类型</strong>，如高斯分布、伯努利分布等</li>
+<li>把概率$P(y;\eta)$写成**指数分布簇$exp()$**的形式，并找到对应的 $T(y)$、$\eta$、$E(y;x)$ 等</li>
+<li>写出$log$最大似然函数，不同的分布所使用的<strong>连接函数</strong>不一样，并找到使该似然函数最大化的参数值</li>
+</ol>
+</blockquote>
+<ul>
+<li>线性回归（linear regression） -&gt; 用一条线去拟合训练数据<ul>
+<li><strong>回归模型</strong></li>
+<li>损失函数 &#x3D; MSE + 无正则项</li>
+<li>损失函数<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/37031188">最小二乘法（OLS）</a>——误差平方</li>
+<li>LAD线性回归——最小绝对偏差(Least Absolute Deviation, LAD)回归模型<ul>
+<li>分位数回归</li>
+</ul>
+</li>
+<li>Huber回归</li>
+</ul>
+</li>
+<li>惩罚线性模型<ul>
+<li>前向逐步回归</li>
+<li>岭回归 Ridge<ul>
+<li>应用欧式几何的指标</li>
+<li>方差</li>
+<li>L2范数&#x2F;正则化</li>
+</ul>
+</li>
+<li>套索回归 Lasso<ul>
+<li>出租车&#x2F;曼哈顿距离</li>
+<li>方差</li>
+<li>L1范数&#x2F;正则化</li>
+<li>求解算法——L1-norm的求解比较困难，可以用<strong>坐标下降法</strong>或是<strong>最小角度回归法</strong>求解<ul>
+<li>坐标下降法</li>
+<li>最小角度回归法 LARS</li>
+<li>Glmnet</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Elastic Net</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>分类模型</strong><ul>
+<li>逻辑斯蒂回归（logistic regression）<ul>
+<li>logistic 误差（<strong>对数似然损失函数</strong>）</li>
+<li>损失函数（极大似然法MLE）解法<ul>
+<li>梯度下降法</li>
+<li>牛顿法</li>
+</ul>
+</li>
+<li>L2范数</li>
+</ul>
+</li>
+<li>感知机 Percetron<ul>
+<li>感知机的$wx+b$可以理解为线性回归，即感知机将<strong>线性回归的输出</strong>作为使用<strong>单位阶跃函数的输入，</strong>最终的分类结果是<strong>阶跃函数的输出</strong></li>
+<li>损失函数——<strong>误分类点到分类超平面的总距离</strong></li>
+<li>随机梯度下降</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="指数分布簇"><a href="#指数分布簇" class="headerlink" title="指数分布簇"></a>指数分布簇</h2><p>当一个分布能写成以下形式时，我们就说它属于指数分布簇。<br>$$<br>p(y;\eta)&#x3D;b(y)exp(\eta^TT(y)-a(\eta))<br>$$<br>其中$\eta$是分布的自然参数，$T(y)$是充分统计量，$a(\eta)$被称为log partition function，$exp(—a(\eta))$起着归一化的作用，保证分布$p(y;\eta)$积分从y到1。</p>
+<p>参考：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/NaughtyBaby/p/5294547.html">http://www.cnblogs.com/NaughtyBaby/p/5294547.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/NaughtyBaby/p/5300831.html">http://www.cnblogs.com/NaughtyBaby/p/5300831.html</a></li>
+</ol>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><h3 id="前提假设—LINE"><a href="#前提假设—LINE" class="headerlink" title="前提假设—LINE"></a>前提假设—LINE</h3><ol>
+<li>Linearity 线性——因变量和每个自变量都是线性关系</li>
+<li>Indpendence 独立性——对于所有的观测值，它们的<strong>误差项</strong>相互之间是独立的</li>
+<li>Normality 正态性——误差项服从正态分布</li>
+<li>Equal-variance 等方差——所有的误差项具有同样方差</li>
+</ol>
+<p><strong>当给定参数$θ$和$x$时，目标值$y$也服从正态分布</strong>，这里 y 服从的是均值为$θ^Tx$的正态分布，当我们训练得到参数$θ$后，那么对于不同的$\theta$值，$y$服从的就是不同均值的正态分布。</p>
+<h3 id="基函数"><a href="#基函数" class="headerlink" title="基函数"></a>基函数</h3><p>pass</p>
+<h3 id="求解方法"><a href="#求解方法" class="headerlink" title="求解方法"></a>求解方法</h3><ul>
+<li>a directed closed-form equation</li>
+<li>an iterative optimization approach</li>
+</ul>
+<h3 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h3><ul>
+<li>优点<ul>
+<li>线性回归的理解和解释都非常直观，还能通过正则化来避免过拟合。此外，线性模型很容易通过随机梯度下降来更新数据模型。</li>
+<li>回归分析法在分析多因素模型时，更加简单和方便；</li>
+<li>运用回归模型，只要采用的模型和数据相同，通过标准的统计方法可以计算出的结果，但在图和表的形式中，数据之间关系的解释往往因人而异，不同分析者画出的拟合曲线很可能也是不一样的；</li>
+<li>回归分析可以准确地计量<strong>各个因素之间的相关程度</strong>与<strong>回归拟合程度</strong>的高低，提高预测方程式的效果；在回归分析法时，由于实际一个变量仅受单个因素的影响的情况极少，要注意模式的适合范围，所以一元回归分析法适用确实存在一个对因变量影响作用明显高于其他因素的变量是使用。多元回归分析法比较适用于实际经济问题，受多因素综合影响时使用。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>线性回归在处理<strong>非线性关系</strong>时非常糟糕，在识别<strong>复杂模式</strong>上也不够灵活，而添加正确的相互作用项或多项式又极为棘手且耗时。</li>
+<li>有时候在回归分析中，选用<strong>何种因子</strong>和<strong>该因子采用何种表达式</strong>只是一种推测，这影响了用电因子的多样性和某些因子的不可测性，使得回归分析在某些情况下受到限制。</li>
+</ul>
+</li>
+</ul>
+<h2 id="多项式回归"><a href="#多项式回归" class="headerlink" title="多项式回归"></a>多项式回归</h2><p>也是为了解决线性不可分的问题啊</p>
+<p>是否就是核函数啊？？？！！！！</p>
+<p>基函数</p>
+<h2 id="岭回归与套索回归"><a href="#岭回归与套索回归" class="headerlink" title="岭回归与套索回归"></a>岭回归与套索回归</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5930cc4c2f301e006bd4b2a9">https://juejin.im/post/5930cc4c2f301e006bd4b2a9</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/cyh_24/article/details/50359055">http://blog.csdn.net/cyh_24/article/details/50359055</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/NaughtyBaby/p/5300831.html">http://www.cnblogs.com/NaughtyBaby/p/5300831.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/31989952">https://www.zhihu.com/question/31989952</a></li>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/intro_to_logistic_regression.html">https://tech.meituan.com/intro_to_logistic_regression.html</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,207 @@
+<html>
+  <head>
+    <title>磁盘与文件系统 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/22/%E8%BD%AC-%E7%BD%91%E7%BB%9C%E6%97%B6%E4%BB%A3%E7%9A%84%E7%88%B1%E8%BF%AA%E7%94%9F-Bill-Joy/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/19/python%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%9C%B0%E5%9D%80/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-20</div>
+            磁盘与文件系统
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/linux/">linux</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/linux/" rel="tag">linux</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="磁盘（Disk）"><a href="#磁盘（Disk）" class="headerlink" title="磁盘（Disk）"></a>磁盘（Disk）</h2><blockquote>
+<p>温习下英语</p>
+<ul>
+<li>磁头（head）</li>
+<li>磁道就是一个圈（track）</li>
+<li>柱面就是多个磁道号相同的圈组成的（cylinder）</li>
+<li>扇区（sector）</li>
+<li>圆盘（platter）</li>
+</ul>
+</blockquote>
+<p>计算机的外部存储器中也采用了类似磁带的装置，比较常用的一种叫磁盘，将圆形的磁性盘片装在一个方的密封盒子里，这样做的目的是为了防止磁盘表面划伤，导致数据丢失。</p>
+<h3 id="扇区（Sector）"><a href="#扇区（Sector）" class="headerlink" title="扇区（Sector）"></a>扇区（Sector）</h3><p>扇区为最小的物理存储单位，每个扇区为512bytes。</p>
+<p>横向组合形成了柱面</p>
+<p>纵向组合形成了扇面</p>
+<h3 id="柱面"><a href="#柱面" class="headerlink" title="柱面"></a>柱面</h3><p>将扇区组成组成一个圆，就是柱面。柱面是分区的最小单位。</p>
+<blockquote>
+<p>简单说一下</p>
+<p>磁盘由N个盘片构成，每个盘片一般有两面，一面一个磁头，两面都可以存储数据</p>
+<p>磁道号相同的组成一个柱面，柱面是硬盘分区时候最小单位。</p>
+<p>sector 扇区 磁道按512Byte分成若干扇区，计算机对硬盘读写，是按扇区为最小单位。<br>而一般文件系统中的BLOCK为KB，通常为4KB.（现在有的硬盘每个扇区有4K了）</p>
+<p>可以这么说：即使读一个字节，也必须把这512字节全部读入内存</p>
+</blockquote>
+<h3 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a>疑惑</h3><p>今天我也在查这个问题，为避免后来人误解，特将<a href="https://link.zhihu.com/?target=http://blog.sina.com.cn/hcling97">hcling97的博客</a>引用：</p>
+<p>硬盘性能调优，说道：Outer tracks contain more linear storage area.</p>
+<p>我的概念里面每个磁道的扇区数都是相等的啊，因为硬盘要控制角速度相等，单位时间里面磁臂掠过的扇区数应该是相等的。以前课本都是这么讲的啊，说是外圈的存储密度要低于内圈的，但是外圈磁道包含的磁介质要明显多于内圈的，难道废弃不用？书上是这么解释的，说是空闲的空间填充了控制信号，不用的空间填写了gap，算空白区域。这就更纳闷了，第一点调优的书上说外圈的存储密度要高于内圈的，另一点是：For a given rotational speed, read more data per second on outer tracks.转速相同，外圈怎么可能多读东西呢？扇区数一样，每扇区512字节，数据大小也是一样。支持这个的有效证明是fdisk -l，一看，明明有一个“每磁道扇区数”的数值在概要说明的部分摆着呢。</p>
+<p>包括百度百科和网上搜到的信息来看，都跟老板教科书观点相同，每磁道扇区数相同。那调优的书上教导我们“外圈的读取速度快，要将频繁访问的分区部署在磁盘的外侧柱面上”，这不见鬼了么？再翻IBM的调优的书，明明白白写着“当今大多数硬盘驱动器的盘片在外侧磁道上封装的扇区数要多于内侧磁道”，又找了找，原来磁盘的寻址技术改变了，为了减少浪费，真的是外侧磁道的扇区数多而内测磁道的扇区数少，现在每磁道扇区数自是一个换算平均值。这也是为什么机械硬盘在测试处理大量数据的吞吐率不断下降的原因，因为处理到内圈的数据时要多次移动移动机械臂，产生更多的延时。</p>
+<p>其实想想也是，磁盘的存储密度不断增加，外圈的长度要大大长于内圈的长度，如果每磁道扇区数相等，那么整个磁盘上有大量面积的存储单元会被浪费。就像一个扇子的表面，我们只用了以内周长为边的一个矩形面积，剩下的都浪费，这是不可能的，工业界也是绝对不会允许这种事情存在的。</p>
+<p>那道理就明白了，我们看到的fdisk里面的柱面的显示结果也是经过换算的结果，不是真正写道分区表里面的结果！</p>
+<p>磁盘的记录方式有两种</p>
+<ul>
+<li>旧式——非分区记录方式（不同磁道扇区数相同）</li>
+<li>新式——分区记录方式（不同磁道扇区数不同）</li>
+</ul>
+<h2 id="文件系统（File-system）"><a href="#文件系统（File-system）" class="headerlink" title="文件系统（File system）"></a>文件系统（File system）</h2><blockquote>
+<p>计算机的<strong>文件系统</strong>是一种<strong>存储和组织计算机数据的方法</strong>，它使得对其存取和查找变得容易，文件系统使用<strong>文件</strong>和<strong>树形目录</strong>的抽象逻辑概念代替了硬盘和光盘等物理设备使用数据块的概念，用户使用文件系统来保存数据不必关心数据实际保存在硬盘（或者光盘）的地址为多少的数据块上，只需要记住这个文件的所属目录和文件名。</p>
+</blockquote>
+<p>文件系统是一套实现了数据的存储、分级组织、存取和获取等操作的抽象数据类型（Abstract data type）。</p>
+<ul>
+<li>Linux<ul>
+<li>最传统的文件系统是EXT2</li>
+<li>centos从7开始使用XFS作为缺省操作系统，之前为EXT4</li>
+<li>部分Linux发行版默认不支持NTFS</li>
+</ul>
+</li>
+<li>MacOS<ul>
+<li>APFS</li>
+</ul>
+</li>
+<li>Windows<ul>
+<li>Windows98以前的操作系统主要利用的是FAT或FAT16</li>
+<li>2000以后版本使用NTFS</li>
+<li>目前win10支持FAT12&#x2F;FAT16，FAT32&#x2F;VFAT，NTFS</li>
+</ul>
+</li>
+</ul>
+<p>随着互联网产生的数据量越来越多，<strong>分布式文件系统</strong>在更多的场合开始派上用场。在这样的文件系统中，客户端并非直接存取底层的资料<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%84%B2%E5%AD%98%E5%8D%80%E5%A1%8A">储存区块</a>，而是通过网络，以特定的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E5%82%B3%E8%BC%B8%E5%8D%94%E5%AE%9A">通讯协定</a>和伺服器沟通。通过通讯协定的设计，可以让客户端和伺服器端都能根据<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AD%98%E5%8F%96%E6%8E%A7%E5%88%B6%E4%B8%B2%E5%88%97">存取控制清单</a>或是授权，来限制对于档案系统的存取。</p>
+<p>可能包含的功能有</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E8%B3%87%E6%96%99%E8%A4%87%E8%A3%BD&action=edit&redlink=1">资料复制</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E5%AE%B9%E9%8C%AF&action=edit&redlink=1">容错</a></li>
+</ul>
+<p>通过著名的CAP定理来进行权衡</p>
+<ul>
+<li>一致性（Consistency）</li>
+<li>可用性（Availability）</li>
+<li>网路分隔的容忍程度（Partition tolerance）</li>
+</ul>
+<h3 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h3><p>记录文件的属性，一个文件占用一个inode，同时记录此文件的数据所在的block号码</p>
+<h2 id="MasterBootRecord"><a href="#MasterBootRecord" class="headerlink" title="MasterBootRecord"></a>MasterBootRecord</h2><p>在第一个扇区 512bytes &#x3D;  mbr446bytes + 分区表64bytes</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000007392163">https://segmentfault.com/a/1190000007392163</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20537787">https://www.zhihu.com/question/20537787</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

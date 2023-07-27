@@ -1,0 +1,185 @@
+<html>
+  <head>
+    <title>理解与应用git - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/08/02/java%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/07/31/%E6%B5%85%E8%B0%88web%E5%89%8D%E5%90%8E%E7%AB%AF/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-08-01</div>
+            理解与应用git
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/linux/">linux</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/linux/" rel="tag">linux</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>打开github.com，寻找到入站信息，</p>
+<p>Joined GitHub on <a target="_blank" rel="noopener" href="https://github.com/dzzxjl?tab=overview&from=2014-01-01&to=2014-01-31#contribution-joined-github-6430442-2014-01-17">January 17, 2014</a></p>
+</blockquote>
+<p>已经近四年了。</p>
+<p>github分享与开源的精神已经深入人心，愿这个程序员的大家庭越来越好。今天记录一下使用git的相关心得。</p>
+<h2 id="git原理"><a href="#git原理" class="headerlink" title="git原理"></a>git原理</h2><p>其实可以将git中许多操作与c++中的指针联系在一起。</p>
+<h2 id="关键词origin"><a href="#关键词origin" class="headerlink" title="关键词origin"></a>关键词origin</h2><p>之前一直不理解git push origin master中的origin的意义，今天特意百度一下，实质这个origin代表的就是远程的仓库，我们在本地的git目录下使用git remote -v命令，可以得到如下信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">origin	git@github.com:dzzxjl/Cluster-analysis-platform.git (fetch)</span><br><span class="line">origin	git@github.com:dzzxjl/Cluster-analysis-platform.git (push)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这是一个远程的url，举个不恰当的例子，这里的url我们可以看做一个网站，而提交时的命令git push -u origin master中的master可以看做是一个端口，这样通过二级坐标来定义一个地址。</p>
+<p>再次引用知乎的一段话来加深对于origin的理解：</p>
+<blockquote>
+<p>origin指向的是repository，master只是这个repository中默认创建的第一个branch。当你git push的时候因为origin和master都是默认创建的，所以可以这样省略，但是这个是bad practice，因为当你换一个branch再git push的时候，有时候就纠结了。</p>
+</blockquote>
+<h2 id="客户端与github-remote建立连接的两种方式"><a href="#客户端与github-remote建立连接的两种方式" class="headerlink" title="客户端与github remote建立连接的两种方式"></a>客户端与github remote建立连接的两种方式</h2><ul>
+<li><p>https——https方式每次提交都需要输入账号和密码进行认证</p>
+</li>
+<li><p>基于密钥的SSH连接——SSH方式是在客户端所在的电脑生成密钥，同时把密钥部署到github服务器上，客户端与github服务器通过密钥进行认证。</p>
+<p>如果每次push都要输入账号和密码，原因是使用了https方式push。</p>
+</li>
+</ul>
+<h3 id="如何把https换成ssh方式"><a href="#如何把https换成ssh方式" class="headerlink" title="如何把https换成ssh方式"></a>如何把https换成ssh方式</h3><p>通过下面的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. git remote rm origin</span><br></pre></td></tr></table></figure>
+
+<p>git remote add origin <a href="mailto:&#x67;&#x69;&#116;&#x40;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#x40;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:fety&#x2F;fety.github.com.git</p>
+<p>git push origin</p>
+<h3 id="什么是SSH"><a href="#什么是SSH" class="headerlink" title="什么是SSH?"></a>什么是SSH?</h3><p>Secure Shell（缩写为SSH），由IETF的网络工作小组（Network Working Group）所制定；SSH为一项<strong>创建在应用层和传输层基础上的安全协议</strong>，为计算机上的Shell（壳层）提供安全的传输和使用环境。</p>
+<p>优点：</p>
+<ul>
+<li>SSH是目前较可靠，专为<strong>远程登录会话</strong>和其他网络服务提供安全性的协议</li>
+<li>利用SSH协议可以有效<strong>防止</strong>远程管理过程中的<strong>信息泄露</strong>问题</li>
+<li>通过SSH可以对所有传输的数据进行<strong>加密</strong>，也能够防止DNS欺骗和IP欺骗</li>
+<li>其传输的数据可以是经过压缩的，所以可以<strong>加快传输的速度</strong></li>
+</ul>
+<h4 id="在客户端来看，SSH提供两种级别的安全验证。"><a href="#在客户端来看，SSH提供两种级别的安全验证。" class="headerlink" title="在客户端来看，SSH提供两种级别的安全验证。"></a>在客户端来看，SSH提供两种级别的安全验证。</h4><p>第一种级别（基于密码的安全验证），知道帐号和密码，就可以登录到远程主机，并且所有传输的数据都会被加密。但是，可能会有别的服务器在冒充真正的服务器，无法避免被<strong>“中间人”</strong>攻击。</p>
+<p>第二种级别（基于密匙的安全验证），需要依靠密匙，也就是你必须为自己创建<strong>一对密匙</strong>，并把公有密匙放在需要访问的服务器上。客户端软件会向服务器发出请求，请求用你的密匙进行安全验证。服务器收到请求之后，先在你在该服务器的用户根目录下寻找你的公有密匙，然后把它和你发送过来的公有密匙进行比较。如果两个密匙一致，服务器就用公有密匙加密“质询”（challenge）并把它发送给客户端软件。从而避免被“中间人”攻击。</p>
+<p>通过SSH连接github，正是基于第二种级别（基于密钥的安全验证）的验证方式。 </p>
+<p>github生成SSH密钥步骤，请参考<a target="_blank" rel="noopener" href="https://help.github.com/articles/generating-ssh-keys">generating-ssh-keys</a>，或者<a target="_blank" rel="noopener" href="http://beiyuu.com/github-pages/">使用Github Pages建独立博客</a>。</p>
+<h2 id="PR最佳实践"><a href="#PR最佳实践" class="headerlink" title="PR最佳实践"></a>PR最佳实践</h2><ol>
+<li><code>fork</code> 原始仓库</li>
+<li><code>clone</code> 自己的仓库</li>
+<li>在 <code>master</code> 分支添加原始仓库为远程分支 <code>git remote add upstream</code> 远程仓库</li>
+<li>自己分支开发，如 <code>dev</code> 分支开发：<code>git checkout -b dev</code></li>
+<li>本地 <code>dev</code> 提交</li>
+<li>切换 <code>master</code> 分支，同步原始仓库：<code>git checkout master</code>，<code>git pull upstream master</code></li>
+<li>切换本地 <code>dev</code> 分支，合并本地 <code>master</code> 分支（已经和原始仓库同步），可能需要解冲突</li>
+<li>提交本地 <code>dev</code> 分支到自己的远程 <code>dev</code> 仓库</li>
+<li>现在才是给原始仓库发 <code>pull request</code> 请求</li>
+<li>等待原作者回复（接受&#x2F;拒绝）</li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

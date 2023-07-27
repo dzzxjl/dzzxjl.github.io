@@ -1,0 +1,172 @@
+<html>
+  <head>
+    <title>机器学习-降维 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/02/19/python%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/02/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-PGM-%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E6%A8%A1%E5%9E%8B/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-02-18</div>
+            机器学习-降维
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="PCA与SVD的关系"><a href="#PCA与SVD的关系" class="headerlink" title="PCA与SVD的关系"></a>PCA与SVD的关系</h2><p>PCA与SVD不是一个回事，但是本质上是一样的。</p>
+<p>PCA的理论基础是SVD。</p>
+<p>PCA可以看作是截断SVD，因为我们只选取了权重大（解释性大）的前$k$个主成分而舍弃其他成分。</p>
+<h2 id="PCA-Principal-components-analysis-1901"><a href="#PCA-Principal-components-analysis-1901" class="headerlink" title="PCA-Principal components analysis-1901"></a>PCA-Principal components analysis-1901</h2><p>在多元统计分析中，主成分分析（PCA）是一种分析、简化数据集的技术。主成分分析经常用于减少数据集的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BB%B4%E6%95%B0">维数</a>，同时保持数据集中的对方差贡献最大的特征。这是通过<strong>保留低阶主成分，忽略高阶主成分</strong>做到的。这样低阶成分往往能够保留住数据的最重要方面。但是，这也不是一定的，要视具体应用而定。由于主成分分析依赖所给数据，所以数据的准确性对分析结果影响很大。PCA是最简单的以特征量分析多元统计分布的方法。通常情况下，这种运算可以被看作是揭露数据的内部结构，从而更好的解释数据的变量的方法。如果一个多元数据集能够在一个高维数据空间坐标系中被显现出来，那么PCA就能够提供一幅比较低维度的图像，这幅图像即为在讯息最多的点上原对象的一个‘投影’。这样就可以利用少量的主成分使得数据的维度降低了。</p>
+<p>PCA有两种通俗易懂的解释，</p>
+<ol>
+<li><p>是最大化投影后数据的方差(让数据更分散)</p>
+</li>
+<li><p>是最小化投影造成的损失</p>
+</li>
+</ol>
+<p>这两个思路最后都能推导出同样的结果。 </p>
+<p>PCA的几个缺点：</p>
+<ol>
+<li>PCA依赖于线性假设</li>
+<li>PCA是正交的</li>
+<li>PCA让方差尽可能大</li>
+</ol>
+<h3 id="SVD——PCA的实现"><a href="#SVD——PCA的实现" class="headerlink" title="SVD——PCA的实现"></a>SVD——PCA的实现</h3><p><strong>奇异值分解</strong>（singular value decomposition）是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0">线性代数</a>中一种重要的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3">矩阵分解</a>，在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86">信号处理</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E8%AE%A1%E5%AD%A6">统计学</a>等领域有重要应用。奇异值分解在某些方面与<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%A8%B1%E7%9F%A9%E9%99%A3">对称矩阵</a>或<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8E%84%E7%B1%B3%E7%9F%A9%E9%98%B5">厄米矩陣</a>基于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F">特征向量</a>的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%B9%E8%A7%92%E5%8C%96">对角化</a>类似。然而这两种矩阵分解尽管有其相关性，但还是有明显的不同。对称阵特征向量分解的基础是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E8%B0%B1%E5%88%86%E6%9E%90&action=edit&redlink=1">谱分析</a>，而奇异值分解则是谱分析理论在任意矩阵上的推广。</p>
+<blockquote>
+<p>$$<br>X&#x3D;UΣV^∗<br>$$</p>
+<p>其中$U$是$m×m$阶酉矩阵；$Σ$是$m×n$阶非负实数对角矩阵；而$V^*$，即$V$的共轭转置，是$n×n$阶酉矩阵。这样的分解就称作X的奇异值分解。</p>
+<ol>
+<li>$V$的列（columns）组成一套对$X$的正交“输入”或“分析”的基向量。这些向量是$X^TX$的特征向量。 </li>
+<li>$U$的列（columns）组成一套对$X$的正交“输出”的基向量。这些向量是$XX^T$的特征向量。 </li>
+<li>$Σ$对角线上的元素是奇异值，可视为是在输入与输出间进行的标量的”膨胀控制”。这些是$X^TX$及$XX^T$的特征值的非零平方根，并与$U$和$V$的行向量相对应。</li>
+</ol>
+</blockquote>
+<p>SVD其实是众多矩阵分解的一种，除了在PCA上使用，也有用于推荐，在推荐领域的svd算法形式上并不能和标准的奇异值分解对应上，但其思路是相通的，具体可以参考<a target="_blank" rel="noopener" href="http://blog.csdn.net/dark_scope/article/details/17228643">协同过滤算法实现</a>。</p>
+<p>SVD只是一种矩阵分解或者说降维的方法，其实我们是借用它的特性来近似计算item-item之间或者user-user之间的相似度，以此作为推荐的依据。SVD是一种有损的压缩，让你可以在低维情况下近似出矩阵在高维时候的状态。那么，问题就很好理解了，你不做降维也可以，只要能保证在千万维的数据上也能从容的降噪以及做相似度的计算。</p>
+<h2 id="LDA-Linear-Discriminant-Analysis"><a href="#LDA-Linear-Discriminant-Analysis" class="headerlink" title="LDA-Linear Discriminant Analysis"></a>LDA-Linear Discriminant Analysis</h2><p><strong>线性判别分析</strong> (<strong>LDA</strong>)是对<strong>费舍尔的线性鉴别方法</strong>的归纳，这种方法使用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E8%AE%A1%E5%AD%A6">统计学</a>，<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB">模式识别</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>方法，试图找到两类物体或事件的特征的一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%88">线性组合</a>，以能够特征化或区分它们。所得的组合可用来作为一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E5%99%A8">线性分类器</a>，或者，更常见的是，为后续的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98">分类</a>做降维处理。</p>
+<p>LDA与<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%96%B9%E5%B7%AE%E5%88%86%E6%9E%90">方差分析</a>（ANOVA）和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90">回归分析</a>紧密相关，这两种分析方法也试图通过一些特征或测量值的线性组合来表示一个因变量。然而，方差分析使用类别自变量和连续数因变量，而判别分析连续自变量和类别因变量（即类标签）。 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92">逻辑回归</a>和概率回归比方差分析更类似于LDA，因为他们也是用连续自变量来解释类别因变量的。LDA的基本假设是自变量是正态分布的，当这一假设无法满足时，在实际应用中更倾向于用上述的其他方法。</p>
+<p>LDA也与<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90">主成分分析</a>（PCA）和因子分析紧密相关，<strong>它们都在寻找最佳解释数据的变量线性组合</strong>。LDA明确的尝试为数据类之间不同建立模型。 另一方面，PCA不考虑类的任何不同，因子分析是根据不同点而不是相同点来建立特征组合。判别的分析不同因子分析还在于，它不是一个相互依存技术：即必须区分出自变量和因变量（也称为准则变量）的不同。</p>
+<p>在对自变量每一次观察测量值都是连续量的时候，LDA能有效的起作用。当处理类别自变量时，与LDA相对应的技术称为判别反应分析。</p>
+<h2 id="自编码器"><a href="#自编码器" class="headerlink" title="自编码器"></a>自编码器</h2><p>自编码器(autoencoder)是一种用于降维的神经网络。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/dark_scope/article/details/53150883">http://blog.csdn.net/dark_scope/article/details/53150883</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

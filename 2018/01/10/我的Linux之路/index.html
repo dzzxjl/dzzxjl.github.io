@@ -1,0 +1,336 @@
+<html>
+  <head>
+    <title>我的Linux之路 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/12/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0-%E7%90%86%E8%A7%A3%E4%B8%8E%E5%BA%94%E7%94%A8XGBoost/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/09/scrapy%E7%88%AC%E8%99%AB%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-10</div>
+            我的Linux之路
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/linux/">linux</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/linux/" rel="tag">linux</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>小时候，崇拜《神奇宝贝》里的那个小智，或者说想成为一个小智那样的人。羡慕他有那么多的宠物小精灵陪伴着，还被装在了一个个GS球里面。若需要哪个帮助自己应战，潇洒地一抛。</p>
+<p>现在的我，有时候会把一个个linux平台当做我的GS球，如centos，ubuntu，arch。上面的软件与计算工具当做我的宠物，这也算从另一面实现了小时候的一个梦想。</p>
+</blockquote>
+<blockquote>
+<p>2014年9月，我大二，当时是校移动互联网俱乐部的成员。在这个月的第三个星期六，我们为了纪念世界软件自由日举办了一场分享会。活动开始时，我和另一位同学去地铁站接活动的分享嘉宾，伊始只知道他是南大的一位讲师。在交流中了解到他也是linux内核的贡献者，平日在校园中他也很希望有更多同学加入到linux的大家庭里，只是很多同学往往初始时有着极大的热情，一腔热血，然而在学习的路上，往往由于些许晦涩枯燥，而难以坚持。</p>
+</blockquote>
+<p><strong>Linux创建于1991年，<a target="_blank" rel="noopener" href="https://www.kernel.org/">Linux内核归档</a>。</strong></p>
+<h2 id="Linux系统的主要用途"><a href="#Linux系统的主要用途" class="headerlink" title="Linux系统的主要用途"></a>Linux系统的主要用途</h2><ul>
+<li>服务器</li>
+<li>嵌入式硬件</li>
+<li>桌面系统</li>
+</ul>
+<h2 id="常见发行版"><a href="#常见发行版" class="headerlink" title="常见发行版"></a>常见发行版</h2><p>虽然同为Unix宗族，由于文化的差异，苹果的开发者擅长在图形界面解决问题，而 Linux 开发者擅长在文本界面解决问题。</p>
+<h3 id="linux发行版"><a href="#linux发行版" class="headerlink" title="linux发行版"></a>linux发行版</h3><ol>
+<li>RedHat 系列（商业公司维护的发行版本）：RHEL(Redhat Enterprise Linux)、Cent OS、Fedora Core等</li>
+<li>Debian 系列（社区组织维护的发行版本）：Debian(stable, testing 和 unstable)、Ubuntu、Deepin 等</li>
+<li>openSUSE</li>
+<li>Arch Linux</li>
+<li>gentoo</li>
+<li>Linux From Scratch</li>
+</ol>
+<h3 id="RedHat-系列"><a href="#RedHat-系列" class="headerlink" title="RedHat 系列"></a>RedHat 系列</h3><ul>
+<li>常见的安装包格式 rpm 包，安装rpm包的命令是“rpm -参数”</li>
+<li>包管理工具 yum</li>
+<li>支持 tar 包</li>
+</ul>
+<h3 id="Debian系列"><a href="#Debian系列" class="headerlink" title="Debian系列"></a>Debian系列</h3><ul>
+<li>常见的安装包格式 deb 包，安装 deb 包的命令是“dpkg -参数”</li>
+<li>包管理工具 apt-get</li>
+<li>支持 tar 包</li>
+<li>dpkg&#x2F;apt-get&#x2F;apt-cache&#x2F;apt 之間的關係</li>
+</ul>
+<h3 id="Arch-Linux系列"><a href="#Arch-Linux系列" class="headerlink" title="Arch Linux系列"></a>Arch Linux系列</h3><ul>
+<li>Manjaro Linux</li>
+<li>发行版自行开发的软件少（基本上只有pacman, abs和安装程序（及安装程序需要的wifi-menu等）），对上游修改少</li>
+</ul>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><ul>
+<li>&#x2F;：存放系统程序，也就是AT&amp;T开发的Unix程序<ul>
+<li>&#x2F;bin：<strong>重要执行文件</strong>，单用户维护模式下还能够被操作的命令</li>
+<li>&#x2F;sbin：root才能操作</li>
+<li>&#x2F;etc：配置文件</li>
+<li>&#x2F;dev：设备文件<ul>
+<li>&#x2F;dev&#x2F;tty 终端</li>
+</ul>
+</li>
+<li>&#x2F;lib：执行文件所需的函数库与内核所需的模块</li>
+<li>&#x2F;usr(UNIX Software Resource)：存放<strong>Unix系统商</strong>（比如IBM和HP）开发的程序<ul>
+<li>&#x2F;usr&#x2F;sbin：服务器安装程序</li>
+<li>&#x2F;usr&#x2F;local&#x2F;sbin：存放<strong>用户自己安装的程序</strong>，本机自行安装的软件所产生的系统执行文件（system binary）</li>
+</ul>
+</li>
+<li>&#x2F;opt：在某些系统，用于存放第三方厂商开发的程序，所以取名为option，意为”选装”</li>
+<li>&#x2F;proc：基于内存的<strong>虚拟文件系统</strong>，本身不占任何硬盘空间。用于显示内核信息</li>
+<li>&#x2F;var 包含系统一般运行时要改变的数据。通常这些数据所在的目录的大小是要经常变化或扩充的<ul>
+<li>&#x2F;var&#x2F;lock：锁定文件。许多程序遵循在 &#x2F;var&#x2F;lock 中产生一个锁定文件的约定，以用来支持他们正在使用某个特定的设备或文件。其他程序注意到这个锁定文件时，就不会再使用这个设备或文件</li>
+</ul>
+</li>
+<li>&#x2F;lost+found：这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。这个目录是使用标准的<strong>ext2&#x2F;ext3</strong>文件系统格式才会产生的一个目录</li>
+<li>&#x2F;mnt：挂载</li>
+<li>&#x2F;media：挂载</li>
+</ul>
+</li>
+</ul>
+<h2 id="linux权限管理"><a href="#linux权限管理" class="headerlink" title="linux权限管理"></a>linux权限管理</h2><p>文件的权限主要针对三类对象进行定义：</p>
+<ul>
+<li>owner: 属主, u</li>
+<li>group: 属组, g</li>
+<li>other: 其他, o</li>
+</ul>
+<p>每个文件针对每类访问者都定义了三种权限：</p>
+<ul>
+<li>r: Readable</li>
+<li>w: Writable</li>
+<li>x: eXcutable</li>
+</ul>
+<p>文件：</p>
+<ul>
+<li>r: 可使用文件查看类工具获取其内容；</li>
+<li>w: 可修改其内容；</li>
+<li>x: 可以把此文件提请内核启动为一个进程；</li>
+</ul>
+<p>目录：</p>
+<ul>
+<li>r: 可以使用ls查看此目录中文件列表；</li>
+<li>w: 可在此目录中创建文件，也可删除此目录中的文件；</li>
+<li>x: 可以使用ls -l查看此目录中文件列表，可以cd进入此目录；</li>
+</ul>
+<p>权限用数字表示</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>二进制</th>
+<th>十进制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>—</td>
+<td>000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>–x</td>
+<td>001</td>
+<td>1</td>
+</tr>
+<tr>
+<td>-w-</td>
+<td>010</td>
+<td>2</td>
+</tr>
+<tr>
+<td>-wx</td>
+<td>011</td>
+<td>3</td>
+</tr>
+<tr>
+<td>r–</td>
+<td>100</td>
+<td>4</td>
+</tr>
+<tr>
+<td>r-x</td>
+<td>101</td>
+<td>5</td>
+</tr>
+<tr>
+<td>rw-</td>
+<td>110</td>
+<td>6</td>
+</tr>
+<tr>
+<td>rwx</td>
+<td>111</td>
+<td>7</td>
+</tr>
+</tbody></table>
+<p>简化记忆：读(r) &#x3D; 4 写(w) &#x3D; 2 执行(x) &#x3D; 1</p>
+<p>修改文件权限：<code>chmod [OPTION]... OCTAL-MODE FILE…</code></p>
+<h2 id="X-Window-System"><a href="#X-Window-System" class="headerlink" title="X Window System"></a>X Window System</h2><h3 id="显卡驱动"><a href="#显卡驱动" class="headerlink" title="显卡驱动"></a>显卡驱动</h3><h3 id="Xorg"><a href="#Xorg" class="headerlink" title="Xorg"></a>Xorg</h3><p><code>Xorg</code>是<code>Linux</code>下的一个著名的开源图形服务，我们的桌面环境需要<code>Xorg</code>的支持。</p>
+<h3 id="Desktop-Environment"><a href="#Desktop-Environment" class="headerlink" title="Desktop Environment"></a><a target="_blank" rel="noopener" href="https://linux.cn/article-7081-1.html">Desktop Environment</a></h3><p>Linux 创建了一个友好的环境，为我们提供了选择的可能。它们的外观、操作、设计理念等各方面都有所不同。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.xfce.org/">Xfce</a> 早于 KDE 桌面环境，它是最古老和最轻量级的桌面环境。Xfce 的最新版本是 4.15，发布于 2015 年，使用了诸如 GTK+ 3 的大量的现代科技。很多发行版都使用了 Xfce 环境以满足特定需求，比如 Ubuntu Studio ——与 MATE 类似——尽量节省系统资源给其他的应用。并且，许多的著名的 Linux 发行版——包括 Manjaro Linux、PC&#x2F;OS、Salix 和 Mythbuntu ——都把它作为默认桌面环境。</li>
+<li>KDE Plasma<ul>
+<li>KDE 是由 Plasma <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Desktop_environment_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">桌面环境</a>、库、框架 (KDE Frameworks)、和应用组成的软件项目。</li>
+<li>一个非常好的文件管理器 —— Dolphin</li>
+</ul>
+</li>
+<li>GNOME 3 <ul>
+<li>GNU 网络对象模型环境</li>
+</ul>
+</li>
+<li>Deepin</li>
+<li>lxde</li>
+<li><del>Unity: Ubuntu开发——它只是 Canonical 为 Ubuntu 开发的一个图形化 Shell。Unity 运行于 GNOME 桌面之上，并使用很多 GNOME 的应用和工具。Ubuntu 团队分支了一些 GNOME 组件，以便更好的满足 Unity 用户的需求。</del></li>
+</ul>
+<h3 id="X-Display-Manager"><a href="#X-Display-Manager" class="headerlink" title="X Display Manager"></a>X Display Manager</h3><ul>
+<li>sddm</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li>service *** start&#x2F;stop</li>
+<li>du</li>
+<li>uname -a   #显示详细的内核信息</li>
+<li>tar -xzvf</li>
+<li>curl ip</li>
+<li>kill -9 pid 关闭进程 </li>
+<li>ssh root@ip  使用root账户登录指定ip的服务器</li>
+<li>whereis java 查看java安装路径——&#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;jdk1.8.0_121.jdk&#x2F;Contents&#x2F;Home</li>
+<li>lsof –i:端口号 Linux查看端口占用情况</li>
+<li>netstat -anpt | grep :5000 Linux查看端口占用情况</li>
+<li>ps -ef | grep uwsgi 查看进程情况：ps -aux | grep pid</li>
+<li>scp api.py root@IP:api.py</li>
+<li>free 查看内存使用情况</li>
+</ul>
+<h3 id="部分命令解析"><a href="#部分命令解析" class="headerlink" title="部分命令解析"></a>部分命令解析</h3><p>service *** start&#x2F;stop</p>
+<h2 id="Linux国内镜像源"><a href="#Linux国内镜像源" class="headerlink" title="Linux国内镜像源"></a>Linux国内镜像源</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/">http://mirrors.aliyun.com/</a> 【阿里】</li>
+<li><a target="_blank" rel="noopener" href="http://mirrors.aliyuncs.com/">http://mirrors.aliyuncs.com/</a> 【阿里云ECS内网专用】</li>
+<li><a target="_blank" rel="noopener" href="http://mirrors.163.com/">http://mirrors.163.com/</a> 【网易】</li>
+<li><a target="_blank" rel="noopener" href="http://mirrors.sohu.com/">http://mirrors.sohu.com/</a> 【搜狐】</li>
+<li><a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/">http://mirrors.ustc.edu.cn/</a> 【中国科技大学】</li>
+<li><a target="_blank" rel="noopener" href="http://mirror.bit.edu.cn/">http://mirror.bit.edu.cn/</a> 【北京理工大学】</li>
+<li><a target="_blank" rel="noopener" href="http://mirror.bjtu.edu.cn/">http://mirror.bjtu.edu.cn/</a> 【北京交通大学】</li>
+<li><a target="_blank" rel="noopener" href="http://mirror.lzu.edu.cn/">http://mirror.lzu.edu.cn/</a> 【兰州大学】</li>
+<li><a target="_blank" rel="noopener" href="http://ftp.sjtu.edu.cn/">http://ftp.sjtu.edu.cn/</a> 【上海交通大学】</li>
+<li><a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/">http://mirrors.tuna.tsinghua.edu.cn/</a> 【清华大学】</li>
+<li><a target="_blank" rel="noopener" href="http://mirror.tju.edu.cn/">http://mirror.tju.edu.cn/</a> 【天津大学】</li>
+<li><a target="_blank" rel="noopener" href="http://linux.swu.edu.cn/swudownload/Distributions/">http://linux.swu.edu.cn/swudownload/Distributions/</a> 【西南大学】</li>
+<li><a target="_blank" rel="noopener" href="http://mirror.neu.edu.cn/">http://mirror.neu.edu.cn/</a> 【东北大学】</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><p>《鸟哥的Linux私房菜——基础学习篇(第三版)》</p>
+</li>
+<li><p>《鸟哥的Linux私房菜——服务器架构篇(第三版)》</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2012/02/a_history_of_unix_directory_structure.html">Unix目录结构的来历</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://linux.vbird.org/">鸟哥的私房菜馆</a></p>
+<p>​</p>
+</li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

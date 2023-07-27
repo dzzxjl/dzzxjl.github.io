@@ -1,0 +1,233 @@
+<html>
+  <head>
+    <title>机器学习-评价指标-分类问题 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/02/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E4%BB%80%E9%94%A6-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/02/13/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E4%BB%80%E9%94%A6-%E8%BF%87%E6%8B%9F%E5%90%88/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-02-14</div>
+            机器学习-评价指标-分类问题
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <p>机器学习(ML)，自然语言处理(NLP)，信息检索(IR)等领域，评估(Evaluation)是一个必要的工作，而其评价指标往往有如下几点：<code>准确率(Accuracy)</code>，<code>精确率(Precision)</code>，<code>召回率(Recall)</code>和<code>F1-Measure</code>。</p>
+<p>他们存在的场景通常是在<code>测试(Testing)</code>或<code>验证(Validating)</code>情况下。</p>
+<table>
+<thead>
+<tr>
+<th>真实情况</th>
+<th>预测结果</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>正例</td>
+<td>反例</td>
+</tr>
+<tr>
+<td>正例</td>
+<td>TP</td>
+<td>FN</td>
+</tr>
+<tr>
+<td>反例</td>
+<td>FP</td>
+<td>TN</td>
+</tr>
+</tbody></table>
+<h2 id="准确率-accuracy"><a href="#准确率-accuracy" class="headerlink" title="准确率 accuracy"></a>准确率 accuracy</h2><p><code>TP + FP + FN + TN = 总样本数</code></p>
+<p><code>A =  (TP + TN) / (TP + FN + FP + TN)</code></p>
+<p>准确率 accuracy 对于给定的测试数据集，分类器正确分类的样本数与总样本数之比。也就是损失函数是0-1损失时测试数据集上的准确率，此时在正负样本不均的情况下，容易丧失意义。</p>
+<p>大白话就是“你的预测有多少是对的”</p>
+<h2 id="精确率-precision-查准率"><a href="#精确率-precision-查准率" class="headerlink" title="精确率 precision  -查准率"></a>精确率 precision  -查准率</h2><blockquote>
+<p>The number of true positives divided by the number of true positives and false positives.</p>
+</blockquote>
+<p><code>P = TP / (TP + FP)</code> </p>
+<p>预测为正例中的数据真正的正例占多少？</p>
+<p><strong>精确率</strong>是针对我们<strong>预测结果</strong>而言的，它表示的是预测为正的样本中有多少是真正的正样本。那么预测为正就有两种可能了，一种就是把正类预测为正类(TP)，另一种就是把负类预测为正类(FP)</p>
+<h2 id="召回率-recall-查全率"><a href="#召回率-recall-查全率" class="headerlink" title="召回率 recall-查全率"></a>召回率 recall-查全率</h2><blockquote>
+<p>The number of true positives divided by the number of true positives and the number of false negatives.</p>
+</blockquote>
+<p><code>R = TP / (TP + FN)</code></p>
+<p><strong>召回率</strong>是针对我们原来的<strong>样本</strong>而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)。</p>
+<p>举个例子，丰田公司的“召回门”事件，当时在全球召回850万辆车，但是这里面真正有问题的车有多少呢？可以理解为丰田公司为了提高“召回率”，下了血本，那也是没有办法的，回到题目，在样本不平衡的情况下提高召回率，只能‘’误杀‘’大部分，就是降低P，这里有一个平衡P和R的一个指标F1，就是两者的调和均值，但是像上面的例子就不需要了，目标就是提高R。</p>
+<p>大白话就是“正例里你的预测覆盖了多少”</p>
+<blockquote>
+<p>如何提高机器学习算法的召回率？</p>
+<p>先说网上看到的这个汇总回答，就是针对样本失衡的分类学习的，个人认为其中比较可行简单的方案是<br>1，扩大数据量，然后直接把多数类样本随机删除，直到跟少数类样本的量一致。因为扩大了样本量，所以即便删除掉很多样本，也能保证少数累样本的数量够用<br>2，把分类问题当成单类模式识别or异常值识别问题。如果失衡问题特别严重，那么换个角度不做二类分类了，就直接当成异常值识别了<br>汇总回答的地址是 <a href="https://link.zhihu.com/?target=http://blog.csdn.net/heyongluoyao8/article/details/49408131">在分类中如何处理训练集中不平衡问题</a></p>
+<p>我之前处理这个问题的时候也用过过抽样和欠抽样（SMOTE），但效果也不好。反倒是直接调整分类算法中对两类样本的权重效果会好些。不过代价也是损失precision。内容地址如下权当是看个例子好了 <a href="https://link.zhihu.com/?target=http://www.douban.com/note/343363386/">回顾一下毕业论文中的问题</a></p>
+</blockquote>
+<h2 id="F1-Measure"><a href="#F1-Measure" class="headerlink" title="F1-Measure"></a>F1-Measure</h2><blockquote>
+<p>Weighted average of precision and recall. </p>
+</blockquote>
+<p>F1-measure 认为精确率和召回率的权重是一样的,但有些场景下,我们可能认为精确率会更加重要</p>
+<h2 id="ROC与AUC"><a href="#ROC与AUC" class="headerlink" title="ROC与AUC"></a>ROC与AUC</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>相关(Relevant),正类</th>
+<th>无关(NonRelevant),负类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>被检索到(Retrieved)</td>
+<td>TP</td>
+<td>FP</td>
+</tr>
+<tr>
+<td>未被检索到(Not Retrieved)</td>
+<td>FN</td>
+<td>TN</td>
+</tr>
+</tbody></table>
+<p>在信息检索领域，精确率和召回率又被称为<strong>查准率</strong>和<strong>查全率</strong>，</p>
+<p><code>查准率＝检索出的相关信息量 / 检索出的信息总量</code><br><code>查全率＝检索出的相关信息量 / 系统中的相关信息总量</code></p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><blockquote>
+<p>假设我们手上有60个正样本，40个负样本，我们要找出所有的正样本，系统查找出50个，其中只有40个是真正的正样本，计算上述各指标。</p>
+</blockquote>
+<ul>
+<li>TP: 将正类预测为正类数  40</li>
+<li>FN: 将正类预测为负类数  20</li>
+<li>FP: 将负类预测为正类数  10</li>
+<li>TN: 将负类预测为负类数  30</li>
+</ul>
+<p><strong>准确率</strong>(accuracy) &#x3D; 预测对的&#x2F;所有 &#x3D; (TP+TN)&#x2F;(TP+FN+FP+TN) &#x3D; 70%<br><strong>精确率</strong>(precision) &#x3D; TP&#x2F;(TP+FP) &#x3D; 80%<br><strong>召回率</strong>(recall) &#x3D; TP&#x2F;(TP+FN) &#x3D; 2&#x2F;3</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>precision 与 recall 其实就是分母不同，一个分母是预测为正的样本数，另一个是原来样本中所有的正样本数</p>
+</li>
+<li><p>Accuracy measures the model over all.Precision, recall and F1 measure a model’s relevance. For example, it would be dangerous to predict that cancer will not reoccur (i.e. a false negative) as the person would not seek further treatment. Because of this, it would be wise to choose a model that avoids false negatives (i.e. a higher precision, recall and F1) even if the overall accuracy lower.</p>
+</li>
+<li><p>由此可见，正确率是评估捕获的成果中目标成果所占得比例；召回率，顾名思义，就是从关注领域中，召回目标类别的比例；而F值，则是综合这二者指标的评估指标，用于综合反映整体的指标。</p>
+<p>当然希望检索结果Precision越高越好，同时Recall也越高越好，但事实上这两者在某些情况下有矛盾的。比如极端情况下，我们只搜索出了一个结果，且是准确的，那么Precision就是100%，但是Recall就很低；而如果我们把所有结果都返回，那么比如Recall是100%，但是Precision就会很低。因此在不同的场合中需要自己判断希望Precision比较高或是Recall比较高。如果是做实验研究，可以绘制<strong>Precision-Recall曲线</strong>来帮助分析。</p>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://charleshm.github.io/2016/03/Model-Performance/">http://charleshm.github.io/2016/03/Model-Performance/</a></li>
+<li><a target="_blank" rel="noopener" href="http://bookshadow.com/weblog/2014/06/10/precision-recall-f-measure/">http://bookshadow.com/weblog/2014/06/10/precision-recall-f-measure/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19645541">https://www.zhihu.com/question/19645541</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.argcv.com/articles/1036.c">https://blog.argcv.com/articles/1036.c</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/39819838">https://www.zhihu.com/question/39819838</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

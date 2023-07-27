@@ -1,0 +1,276 @@
+<html>
+  <head>
+    <title>机器学习-什锦-特征工程 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/16/%E7%90%86%E8%A7%A3linux%E7%9A%84service%E5%91%BD%E4%BB%A4/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/12/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0-%E7%90%86%E8%A7%A3%E4%B8%8E%E5%BA%94%E7%94%A8LightGBM/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-15</div>
+            机器学习-什锦-特征工程
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>“数据和特征工程决定了你能到达的上限，机器学习模型决定了你能多么逼近这个上限”。</p>
+<p>Actually the sucess of all Machine Learning algorithms depends on how you <strong>present the data</strong>. ——Mohammad Pezeshki</p>
+<p>Better feature means flexibility. Better feature means simpler models. Better feature means better results.</p>
+</blockquote>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>特征（Feature）是机器学习的原材料。 特征工程是使用专业背景知识和技巧处理数据，使得特征能在机器学习算法上发挥很好的作用的过程。经典机器学习方式是以<strong>人类的先验知识</strong>将raw数据预处理成feature，然后对feature进行分类。分类结果十分取决于feature的好坏。所以过去的机器学习专家<strong>将大部分时间花费在设计feature</strong>上。那时的机器学习有个更合适的名字叫feature engineering。</p>
+<p><strong>不过</strong>，后来人们发现，利用神经网络，让网络自己学习如何抓取feature效果更佳。于是兴起了representation learning。这种方式对数据的拟合更加灵活。</p>
+<table>
+<thead>
+<tr>
+<th>任务领域</th>
+<th>原始输入</th>
+<th>浅层特征</th>
+<th>中层特征</th>
+<th>高层特征</th>
+<th>训练目标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>语音</td>
+<td>样本</td>
+<td>频段 声音</td>
+<td>音调 音素</td>
+<td>单词</td>
+<td>语音识别</td>
+</tr>
+<tr>
+<td>图像</td>
+<td>像素</td>
+<td>线条 纹理</td>
+<td>图案 局部</td>
+<td>物体</td>
+<td>图像识别</td>
+</tr>
+<tr>
+<td>文本</td>
+<td>字母</td>
+<td>单词 词组</td>
+<td>短语 句子 段落</td>
+<td>文章</td>
+<td>语义理解</td>
+</tr>
+</tbody></table>
+<h2 id="根据特征的可解释性划分特征"><a href="#根据特征的可解释性划分特征" class="headerlink" title="根据特征的可解释性划分特征"></a>根据特征的可解释性划分特征</h2><ul>
+<li>显性特征<ul>
+<li>可以理解为用户直接可以拿到的数据字段</li>
+</ul>
+</li>
+<li>半隐形特征<ul>
+<li>用户数据在通过GBDT等算法的计算过程中产出的一些特征</li>
+</ul>
+</li>
+<li>隐形特征<ul>
+<li>深度学习在很大程度上可以简化人肉特征工程的工作量，因为深度学习可以在计算过程中自动生成一些特征向量，这些特征的表达往往是不可解释的，那这些特征就是隐性特征</li>
+</ul>
+</li>
+</ul>
+<h2 id="特征工程的种类"><a href="#特征工程的种类" class="headerlink" title="特征工程的种类"></a>特征工程的种类</h2><ul>
+<li><p>数值型特征</p>
+<ul>
+<li>bathrooms</li>
+<li>bedrooms</li>
+<li>price</li>
+</ul>
+</li>
+<li><p>高势集类别（High Categorical）型feature</p>
+<ul>
+<li><p>building_id</p>
+</li>
+<li><p>display_address</p>
+</li>
+<li><p>manager_id</p>
+</li>
+<li><p>street_address</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>高势集类别（High Categorical）进行经验贝叶斯转换成数值feature</strong></p>
+<p>什么是High Categorical的特征呢？一个简单的例子就是邮编，有100个城市就会有好几百个邮编，有些房子坐落在同一个邮编下面。很显然随着邮编的数量增多，如果用简单的one-hot编码显然效果不太好，因此有人就用一些统计学思想（经验贝叶斯）将这些类别数据进行一个map，得到的结果是数值数据。在这场比赛中有人分享了一篇<a href="http://link.zhihu.com/?target=http://helios.mm.di.uoa.gr/~rouvas/ssi/sigkdd/sigkdd.vol3.1/barreca.ps">paper</a>里面就提到了具体的算法。详细就不仔细讲了，用了这个encoding之后，的确效果提升了很多。那么这场比赛中哪些数据可以进行这样的encoding呢，只要满足下面几点：1. 会重复，2. 根据相同的值分组会分出超过一定数量（比如100）的组。也就是说building_id, manager_id, street_address, display_address都能进行这样的encoding，而取舍就由最后的实验来决定了。</p>
+</blockquote>
+</li>
+<li><p>时间型feature</p>
+<ul>
+<li>created</li>
+</ul>
+</li>
+<li><p>地理位置型feature</p>
+<ul>
+<li>longitude</li>
+<li>latitude</li>
+</ul>
+</li>
+<li><p>文本feature</p>
+<ul>
+<li>description</li>
+</ul>
+</li>
+<li><p>稀疏特征集feature</p>
+<ul>
+<li>features</li>
+</ul>
+</li>
+<li><p>id型feature</p>
+<ul>
+<li>listing_id</li>
+<li>index</li>
+</ul>
+</li>
+</ul>
+<h2 id="特征的构造与处理"><a href="#特征的构造与处理" class="headerlink" title="特征的构造与处理"></a>特征的构造与处理</h2><h3 id="标准化（Standardization）"><a href="#标准化（Standardization）" class="headerlink" title="标准化（Standardization）"></a>标准化（Standardization）</h3><p>比如说有一些数字的单位是千克，有一些数字的单位是克，这个时候需要统一单位。如果没有标准化，两个变量混在一起搞，那么肯定就会不合适。</p>
+<h3 id="归一化（Normalization）"><a href="#归一化（Normalization）" class="headerlink" title="归一化（Normalization）"></a>归一化（Normalization）</h3><p>又称“规范化”，是将不同变化范围的值映射到相同的固定范围中，常见的是<code>[0,1]</code>归一化是因为在特征会在不同的尺度下有不同的表现形式，归一化会使得各个特征能够同时以恰当的方式表现。比方说某个专辑的点击播放率一般不会超过0.2，但是专辑的播放次数可能会达到几千次，所以说为了能够在模型里面得到更合适结果，需要先把一些特征在尺度上进行归一化，然后进行模型训练。</p>
+<blockquote>
+<p>标准化与归一化的区别？</p>
+<p>简单来说，标准化是依照特征矩阵的列处理数据，其通过求z-score的方法，将样本的特征值转换到同一量纲下。归一化是依照特征矩阵的行处理数据，其目的在于样本向量在点乘运算或其他核函数计算相似性时，拥有统一的标准，也就是说都转化为“单位向量”。</p>
+</blockquote>
+<h3 id="离散化（Discretization）"><a href="#离散化（Discretization）" class="headerlink" title="离散化（Discretization）"></a>离散化（Discretization）</h3><p>离散化是指把特征进行必要的离散处理，比方说年龄特征是一个连续的特征，但是把年龄层分成5－18岁（中小学生），19－23岁（大学生），24－29岁（工作前几年），30－40岁（成家立业），40－60岁（中年人）从某些层面来说比连续的年龄数据（比如说某人年龄是20岁1月3日之类的）更容易理解不同年龄层人的特性。典型的离散化步骤：对特征做排序－&gt; 选择合适的分割点－&gt; 作出区间的分割 －&gt;  作出区间分割－&gt; 查看是否能够达到停止条件。</p>
+<h2 id="交叉特征"><a href="#交叉特征" class="headerlink" title="交叉特征"></a>交叉特征</h2><p>交叉特征算是特征工程中非常重要的方法之一了，交叉特征是一种很独特的方式，它将两个或更多的类别属性组合成一个。当组合的特征要比单个特征更好时，这是一项非常有用的技术。数学上来说，是对类别特征的所有可能值进行交叉相乘。</p>
+<p>假如拥有一个特征A，A有两个可能值<code>&#123;A1,A2&#125;</code>。拥有一个特征B，存在<code>&#123;B1,B2&#125;</code>等可能值。然后，<code>A&amp;B</code>之间的交叉特征如下：<code>&#123;(A1,B1),(A1,B2),(A2,B1),(A2,B2)&#125;</code>，并且你可以给这些组合特征取任何名字。但是需要明白每个组合特征其实代表着A和B各自信息协同作用。</p>
+<p>一个更好地诠释好的交叉特征的实例是类似于<code>(经度,纬度)</code>。一个相同的经度对应了地图上很多的地方，纬度也是一样。但是一旦你将经度和纬度组合到一起，它们就代表了地理上特定的一块区域，区域中每一部分是拥有着类似的特性。</p>
+<h2 id="特征选择与特征提取"><a href="#特征选择与特征提取" class="headerlink" title="特征选择与特征提取"></a>特征选择与特征提取</h2><p>首先需要说明的是，特征选择和特征提取是两个完全不同的概念。</p>
+<h3 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h3><p>特征选择是指去掉<strong>无关特征</strong>，保留<strong>相关特征</strong>的过程，也可以认为是从所有的特征中选择<strong>一个最好的特征子集</strong>。特征选择本质上可以认为是降维的过程。</p>
+<p>特征选择是一个重要的<strong>数据预处理</strong>过程，主要有两个原因：一是减少特征数量、降维，使模型泛化能力更强，减少过拟合;二是增强对特征和特征值之间的理解<br>常见的特征选择方式：</p>
+<ol>
+<li>去除方差较小的特征</li>
+<li>正则化。1正则化能够生成稀疏的模型。L2正则化的表现更加稳定，由于有用的特征往往对应系数非零。</li>
+<li>随机森林，对于分类问题，通常采用基尼不纯度或者信息增益，对于回归问题，通常采用的是方差或者最小二乘拟合。一般不需要feature engineering、调参等繁琐的步骤。它的两个主要问题，1是重要的特征有可能得分很低（关联特征问题），2是这种方法对特征变量类别多的特征越有利（偏向问题）。</li>
+<li>稳定性选择。是一种基于<strong>二次抽样</strong>和选择算法相结合较新的方法，选择算法可以是回归、SVM或其他类似的方法。它的主要思想是在不同的数据子集和特征子集上运行特征选择算法，不断的重复，最终汇总特征选择结果，比如可以统计某个特征被认为是重要特征的频率（被选为重要特征的次数除以它所在的子集被测试的次数）。理想情况下，重要特征的得分会接近100%。稍微弱一点的特征得分会是非0的数，而最无用的特征得分将会接近于0。</li>
+</ol>
+<h3 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h3><p>特征提取起初是针对图像处理领域，是指<strong>将机器学习算法不能识别的原始数据转化为算法可以识别的特征</strong>的过程，如将原始特征转换为一组具有明显物理意义（Gabor、几何特征[角点、不变量]、纹理[LBP HOG]）或者统计意义或核的特征，从而实现减少冗余，能发现更有意义的潜在的变量，帮助对数据产生更深入的了解。比如说，文本是由一系列文字组成的，这些文字在经过分词后会形成一个词语集合，对于这些词语集合（原始数据），机器学习算法是不能直接使用的，我们需要将它们转化成机器学习算法可以识别的数值特征（固定长度的向量表示），然后再交给机器学习的算法进行操作。再比如说，图片是由一系列像素点构（原始数据）成的，这些像素点本身无法被机器学习算法直接使用，但是如果将这些像素点转化成矩阵的形式（数值特征），那么机器学习算法就可以使用了。</p>
+<p>从上面的概念可以看出，特征提取实际上是把原始数据转化为机器学习算法可以识别的数值特征的过程，不存在降维的概念，特征提取不需要理会这些特征是否是有用的；而特征选择是在提取出来的特征中选择最优的一个特征子集。</p>
+<h2 id="tricks"><a href="#tricks" class="headerlink" title="tricks"></a>tricks</h2><ul>
+<li>总的来讲，特征工程不一定要做很多，最重要的要根据课题&#x2F;题目的背景&#x2F;情景找到<strong>强特征</strong>，有些特征基本上一个顶10个，提升非常明显。要找到这些特征需要大胆假设和联想，还有不断地实验，因为不是所有感觉上有用的特征都会实际上在你用的这个模型上有用。甚至有时候试验了一个特征发现没什么用，但是过了一段时间，加了一些其他特征之后再加这个特征又变得很有用了，这是因为不同的特征配合起来也有不同的效果，所以多尝试是有好处的。</li>
+<li>如果通过新增加一个或几个feature，如果cv分数上去了，就增加这个feature，如果cv分数没有上去，就舍弃这个feature，也就是相当于贪心验证。这样做的弊处在于，如果之前被舍弃的feature和之后被舍弃的feature联合在一起才会有正面影响，就相当于你错过了两个比较好的feature。因此特征的选择和联合显得非常关键。</li>
+<li>高重要性的特征做两两结合，应该会是比较好的办法，对两两结合的特征元组，再不限思路地去多用条件概率和分组聚集。</li>
+<li>采用间隔量（interval），譬如原来的票价为实数值，划分区间后，此类属性值大大减少，这样对算法更加友好</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikiversity.org/wiki/Dummy_variable_(statistics)">哑变量(Dummy variable)</a></li>
+</ul>
+<h2 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://www.csuldw.com/2015/10/24/2015-10-24%20feature%20engineering/">http://www.csuldw.com/2015/10/24/2015-10-24%20feature%20engineering/</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26645088">https://zhuanlan.zhihu.com/p/26645088</a></li>
+<li><a target="_blank" rel="noopener" href="https://flystarhe.github.io/2016/09/05/feature-engineering/">https://flystarhe.github.io/2016/09/05/feature-engineering/</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

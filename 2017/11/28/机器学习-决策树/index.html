@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <title>机器学习-决策树 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/11/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/11/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%AD%A6%E7%A7%91-%E6%9C%80%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-11-28</div>
+            机器学习-决策树
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><p>决策树由 Leo Breiman(1928-2005) 提出。</p>
+<p>决策树一个重要任务是为了发现数据中所蕴含的知识信息，并提取出一系列的规则，这些规则也就是<strong>树结构的创建过程</strong>就是机器学习的过程。决策树算法主要是指决策树在创建过程中进行树分裂(划分数据集)的时候<strong>选取最优特征</strong>的算法，他的主要目的就是要选取一个特征能够将分开的数据集<strong>尽量的规整</strong>，也就是尽可能的<strong>纯</strong>。最大的原则就是：将无序的数据变得更加有序。</p>
+<p><img src="http://p59abxhmx.bkt.clouddn.com/decision-tree.png" alt="decision-tree"></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="常见算法"><a href="#常见算法" class="headerlink" title="常见算法"></a>常见算法</h2><h3 id="CART-1984"><a href="#CART-1984" class="headerlink" title="CART 1984"></a>CART 1984</h3><p>在数据挖掘中，决策树主要有两种类型:</p>
+<ul>
+<li>分类树 的输出是样本的类标。</li>
+<li>回归树 的输出是一个实数 (例如房子的价格，病人呆在医院的时间等)。</li>
+</ul>
+<p>术语分类和回归树 (CART) 包含了上述两种决策树, 最先由Breiman 等提出。分类树和回归树有些共同点和不同点—例如处理在何处分裂的问题。分类回归树(CART,Classification And Regression Tree)也属于一种决策树，之前我们介绍了基于ID3和C4.5算法的决策树。这里只介绍CART是怎样用于分类的。</p>
+<ul>
+<li>分类树——先说分类树，我们知道C4.5分类树在每次分枝时，是穷举每一个feature的每一个阈值，找到使得按照feature&lt;&#x3D;阈值，和feature&gt;阈值分成的两个分枝的熵最大的feature和阈值（熵最大的概念可理解成尽可能每个分枝的男女比例都远离1:1），按照该标准分枝得到两个新节点，用同样方法继续分枝直到所有人都被分入性别唯一的叶子节点，或达到预设的终止条件，若最终叶子节点中的性别不唯一，则以多数人的性别作为该叶子节点的性别。</li>
+<li>回归树——回归树总体流程也是类似，不过在每个节点（不一定是叶子节点）都会得一个预测值，以年龄为例，该预测值等于属于这个节点的所有人年龄的平均值。分枝时穷举每一个feature的每个阈值找最好的分割点，但衡量最好的标准不再是最大熵，而是<strong>最小化均方差</strong>——即（每个人的年龄-预测年龄）^2 的总和 &#x2F; N，或者说是每个人的预测误差平方和 除以 N。这很好理解，被预测出错的人数越多，错的越离谱，均方差就越大，通过最小化均方差能够找到最靠谱的分枝依据。分枝直到每个叶子节点上人的年龄都唯一（这太难了）或者达到预设的终止条件（如叶子个数上限），若最终叶子节点上人的年龄不唯一，则以该节点上所有人的平均年龄做为该叶子节点的预测年龄。若还不明白可以Google “Regression Tree”。</li>
+</ul>
+<h3 id="ID3-1986"><a href="#ID3-1986" class="headerlink" title="ID3 1986"></a>ID3 1986</h3><p>pass</p>
+<h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4><p>X如果可以取三个值：x1,x2,x3,概率分别为p1,p2,p3。<br>那么-log(p1),-log(p2),-log(p3)相应称为x1,x2,x3的自信息，代表了它们各自的不确定性（信息论）。X的熵指的是X的所有取值的期望，H(X)可以理解为平均值，那X总的不确定性其实也可以用3<em>H(X)来表示。<br>题中N个结点，每个Nt结点都可以理解为这样的X，那么整棵树的不确定性（损失）就是所有叶结点的总熵Nt</em>Ht(T)的和，而不是平均值Ht(T)的和</p>
+<h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><h3 id="C4-5-1993——分类决策树"><a href="#C4-5-1993——分类决策树" class="headerlink" title="C4.5 1993——分类决策树"></a>C4.5 1993——分类决策树</h3><h4 id="信息增益比"><a href="#信息增益比" class="headerlink" title="信息增益比"></a>信息增益比</h4><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/27905967?utm_source=qq&utm_medium=social">https://zhuanlan.zhihu.com/p/27905967?utm_source=qq&amp;utm_medium=social</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/34075616/answer/131957868?utm_source=qq&utm_medium=social">https://www.zhihu.com/question/34075616/answer/131957868?utm_source=qq&amp;utm_medium=social</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/68130282">https://www.zhihu.com/question/68130282</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22928442">https://www.zhihu.com/question/22928442</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/7e0e2d66b3d4">http://www.jianshu.com/p/7e0e2d66b3d4</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/tianxiaguixin002/article/details/47701881">http://blog.csdn.net/tianxiaguixin002/article/details/47701881</a></li>
+<li><a target="_blank" rel="noopener" href="http://djjowfy.com/2017/08/01/XGBoost%E7%9A%84%E5%8E%9F%E7%90%86/">http://djjowfy.com/2017/08/01/XGBoost%E7%9A%84%E5%8E%9F%E7%90%86/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&utm_medium=social">https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&amp;utm_medium=social</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/suranxu007/article/details/49910323">http://blog.csdn.net/suranxu007/article/details/49910323</a></li>
+<li><a target="_blank" rel="noopener" href="http://chuan92.com/2016/04/11/regularization-on-gbdt">http://chuan92.com/2016/04/11/regularization-on-gbdt</a></li>
+</ul>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

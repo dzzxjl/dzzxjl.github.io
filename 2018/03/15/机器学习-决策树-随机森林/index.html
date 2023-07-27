@@ -1,0 +1,182 @@
+<html>
+  <head>
+    <title>机器学习-决策树-随机森林 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/03/20/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-SVMs-%E6%A0%B8%E6%96%B9%E6%B3%95/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91-%E4%BB%8Esklearn%E4%B8%AD%E7%90%86%E8%A7%A3%E5%86%B3%E7%AD%96%E6%A0%91-%E8%BD%AC/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-03-15</div>
+            机器学习-决策树-随机森林
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="随机森林-2009"><a href="#随机森林-2009" class="headerlink" title="随机森林 2009"></a>随机森林 2009</h2><p>随机森林，顾名思义，是用<strong>随机的方式</strong>建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。</p>
+<p>在建立每一棵决策树的过程中，有两点需要注意：采样与完全分裂。</p>
+<p>首先是两个随机采样的过程，random forest对输入的数据要进行“行”、“列”的采样。对于行采样，采用有放回的方式，也就是在采样得到的样本集合中，可能有重复的样本。假设输入样本为N个，那么采样的样本也为N个。这样使得在训练的时候，每一棵树的输入样本都不是全部的样本，使得相对不容易出现over-fitting。然后进行列采样，从M个feature中，选择m个(m &lt;&lt; M)。之后就是对采样之后的数据使用完全分裂的方式建立出决策树，这样决策树的某一个叶子节点要么是<strong>无法继续分裂的，要么里面的所有样本的都是指向的同一个分类</strong>。一般很多的决策树算法都有一个重要的步骤 ——剪枝，但是这里不这样干，由于之前的两个随机采样的过程保证了随机性，所以就算不剪枝，也不会出现over-fitting。</p>
+<p>按这种算法得到的随机森林中的每一棵都是很弱的，但是大家组合起来就很厉害了。我觉得可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个feature中选择m让每一棵决策树进行学习），这样在随机森林中就有了很多个精通不同领域的专家，对一个新的问题（新的输入数据），可以用不同的角度去看待它，最终由各个专家，投票得到结果。</p>
+<p><strong>样本抽样是针对单棵决策树的，特征抽样是针对单棵决策树上的节点的。</strong></p>
+<h2 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h2><p>决策树的优点</p>
+<ul>
+<li>不需要太多的数据预处理工作，即不需要进行数据归一化，创造哑变量等操作</li>
+<li>容易理解和解释，树可以被可视化</li>
+<li>能够处理feature很多的数据，并且不用做特征选择</li>
+<li>隐含地创造了多个联合特征，并能够解决非线性问题，在训练过程中，能够检测到feature间的互相影响</li>
+<li>在训练完后，它能够给出哪些feature比较重要</li>
+</ul>
+<p>随机森林的优点： </p>
+<ol>
+<li>泛化能力较强，和决策树模型，GBDT模型相比，随机森林模型不容易过拟合</li>
+<li>自带out-of-bag (oob)错误评估功能</li>
+<li>易于并行化</li>
+<li>它能够处理很高维度（feature很多）的数据，并且不用做特征选择</li>
+<li>在创建随机森林的时候，对generlization error使用的是无偏估计</li>
+<li>模型简单，易于实现</li>
+<li>计算开销小，训练速度快</li>
+</ol>
+<p>随机森林的缺点： </p>
+<ol>
+<li>不适合小样本，只适合大样本</li>
+<li>大多数情况下，RF模型的<strong>精度略低于GBDT模型</strong></li>
+<li>适合决策边界是矩形的，不适合对角线型的</li>
+</ol>
+<h2 id="随机森林与GBDT"><a href="#随机森林与GBDT" class="headerlink" title="随机森林与GBDT"></a>随机森林与GBDT</h2><p>GBDT和随机森林的相同点：</p>
+<ol>
+<li>都是由多棵树组成</li>
+<li>最终的结果都是由多棵树一起决定</li>
+</ol>
+<p>GBDT和随机森林的不同点： </p>
+<ol>
+<li>组成随机森林的树可以是分类树，也可以是回归树；而GBDT<strong>只由回归树</strong>组成 </li>
+<li>组成随机森林的树可以并行生成；而GBDT只能是串行生成 </li>
+<li>对于最终的输出结果而言，随机森林采用多数投票等；而GBDT则是将所有结果累加起来，或者加权累加起来 </li>
+<li>随机森林对异常值不敏感，GBDT对异常值非常敏感 </li>
+<li>随机森林对训练集一视同仁，GBDT是基于权值的弱分类器的集成 </li>
+<li><strong>随机森林是通过减少模型方差提高性能，GBDT是通过减少模型偏差提高性能</strong></li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>Lior Rokach的《Data Mining with Decision Trees: Theory and Application》</li>
+<li>Microsoft Research的Decision Forests for Classification, Regression, Density Estimation, Manifold Learning, and Semi-Supervised Learning</li>
+<li><a href="https://link.zhihu.com/?target=https://www.stat.berkeley.edu/~breiman/RandomForests/">Random Forests</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

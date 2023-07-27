@@ -1,0 +1,165 @@
+<html>
+  <head>
+    <title>机器学习-SVMs-核方法 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/03/20/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0-%E4%BB%8Esklearn%E4%B8%AD%E7%90%86%E8%A7%A3GB-%E8%BD%AC/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-03-20</div>
+            机器学习-SVMs-核方法
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml-kernel/" rel="tag">ml kernel</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="核方法、核技巧"><a href="#核方法、核技巧" class="headerlink" title="核方法、核技巧"></a>核方法、核技巧</h2><p>pass</p>
+<h2 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h2><p>核函数是内积，而不是映射，但其定义了映射。</p>
+<p>其主要是将线性不可分的数据<strong>映射</strong>到高位空间再进行线性分类，他是映射到新的特征空间后的内积运算，因为最终核函数的结果表达式中只需要内积的形式，</p>
+<p>kernel的本质是给出了任意两个样本之间关系的度量。如果不严谨的形象解释，分类器有两种，一种是找到一个分类面函数，这个函数只要输入一个样本的特征就知道类别。还有一大类分类器（比如knn），他们的思想就是和我像的样本类别一定大概率和我一样，而kernel就是定义了什么叫“像”。所以带kernel的svm也不是能解决任意非线性分类问题，是否能解决某一类问题，取决于它的kernel定义出的“像”是否能让这个问题里互相比较“像”的样本具有同样类别的概率大。</p>
+<p>但是kernel确实可以<strong>定义</strong>一个映射，而且确实是一个非常强大的映射，很多方法在这个映射下是可以直接推广到kernel space的，包括SVM，logistic regression, least squre，dimension reduction。</p>
+<h3 id="核函数的种类"><a href="#核函数的种类" class="headerlink" title="核函数的种类"></a>核函数的种类</h3><ul>
+<li><strong>线性核</strong><ul>
+<li>线性核$$\kappa(x_1,x_2)&#x3D; \left&lt;x_1,x_2\right&gt;$$，实际上就是原始空间中的内积。这个核存在的主要目的是使得“映射后空间中的问题”和“映射前空间中的问题”两者在形式上统一起来了(意思是说，咱们有的时候，写代码，或写公式的时候，只要写个模板或通用表达式，然后再代入不同的核，便可以了，于此，便在形式上统一了起来，不用再分别写一个线性的，和一个非线性的)</li>
+<li>主要用于线性可分的情形。参数少，速度快，对于一般数据，分类效果已经很理想。</li>
+<li><strong>线性核函数是RBF的一个特例</strong></li>
+</ul>
+</li>
+<li>多项式核</li>
+<li><strong>RBF核——例如高斯核</strong><ul>
+<li>高斯核是用的最多的核函数，对训练数据分类效果最好</li>
+<li>主要用于线性不可分的情形。参数多，分类结果非常依赖于参数。有很多人是通过训练数据的交叉验证来寻找合适的参数，不过这个过程比较耗时</li>
+<li>容易过拟合，需要更多的样本、泛化能力弱</li>
+</ul>
+</li>
+<li>Sigmoid核</li>
+</ul>
+<h3 id="核函数的选择"><a href="#核函数的选择" class="headerlink" title="核函数的选择"></a>核函数的选择</h3><ol>
+<li>如果样本数量小于特征数，那么就没必要选择非线性核，简单的使用线性核就可以了</li>
+<li>如果样本数量大于特征数目，这时可以使用非线性核，将样本映射到更高维度，一般可以得到更好的结果</li>
+<li>如果样本数目和特征数目相等，该情况可以使用非线性核，原理和第二种一样</li>
+<li>对于第一种情况，也可以先对数据进行降维，然后使用非线性核，这也是一种方法</li>
+</ol>
+<p>联想线性方程组</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>​</li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,181 @@
+<html>
+  <head>
+    <title>索引中的B+树 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/04/initrd%E4%B8%8Evmlinuz/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/11/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-12-31</div>
+            索引中的B+树
+          </h1>
+          
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h2><p>索引，从逻辑上可以理解成目录，即索引提供了指向存储在表的<strong>指定列中的数据值</strong>的指针，索引的物理存在形式为文件，存储方式为键值对（可以理解成键为数据项，值为指针地址）。</p>
+<p>建立索引的优点：</p>
+<ol>
+<li>提高查询速度</li>
+</ol>
+<p>建立索引的缺点：</p>
+<ol>
+<li>增加存储空间</li>
+<li>对表进行写操作（Insert、Update）时会同时更新索引，这样会增加操作时间</li>
+</ol>
+<p>一般情况下索引通过B+树或哈希桶来实现索引。</p>
+<h2 id="二、B-树"><a href="#二、B-树" class="headerlink" title="二、B+树"></a>二、B+树</h2><p>二叉查找树 -&gt; B树 -&gt; B+树</p>
+<h3 id="2-1-B树"><a href="#2-1-B树" class="headerlink" title="2.1 B树"></a>2.1 B树</h3><p>B树是对二叉查找树的改进。它的设计思想是，将相关数据尽量集中在一起，以便一次读取多个数据，减少硬盘操作次数。</p>
+<p>B树的特点也有三个</p>
+<blockquote>
+<p>（1）一个节点可以容纳多个值。</p>
+<p>（2）除非数据已经填满，否则不会增加新的层。也就是说，B树追求”层”越少越好。</p>
+<p>（3）子节点中的值，与父节点中的值，有严格的大小对应关系。一般来说，如果父节点有a个值，那么就有a+1个子节点。比如上图中，父节点有两个值（7和16），就对应三个子节点，第一个子节点都是小于7的值，最后一个子节点都是大于16的值，中间的子节点就是7和16之间的值。</p>
+</blockquote>
+<p>这种数据结构，非常有利于减少读取硬盘的次数。假定一个节点可以容纳100个值，那么3层的B树可以容纳100万个数据，如果换成二叉查找树，则需要20层！假定操作系统一次读取一个节点，并且根节点保留在内存中，那么B树在100万个数据中查找目标值，只需要读取两次硬盘。</p>
+<h3 id="2-2-B-树相较于B树："><a href="#2-2-B-树相较于B树：" class="headerlink" title="2.2 B+树相较于B树："></a>2.2 B+树相较于B树：</h3><ol>
+<li>B树的一个升级版</li>
+<li>B-树和B+树最重要的一个区别就是B+树只有叶节点存放数据，其余节点用来索引，而B-树是每个索引节点都会有Data域，这就决定了B+树更适合用来存储外部数据，也就是所谓的磁盘数据</li>
+</ol>
+<p>其实二者最主要的区别是:</p>
+<p>(1) B+树改进了B树, 让内结点只作索引使用, 去掉了其中指向data record的指针, 使得每个结点中能够存放更多的key, 因此能有更大的出度. 这有什么用? 这样就意味着存放同样多的key, 树的层高能进一步被压缩, 使得检索的时间更短.</p>
+<p>(2)当然了,由于底部的叶子结点是链表形式, 因此也可以实现更方便的顺序遍历, 但是这是比较次要的, 最主要的的还是第(1)点.</p>
+<h2 id="三、索引与B-树的联系"><a href="#三、索引与B-树的联系" class="headerlink" title="三、索引与B+树的联系"></a>三、索引与B+树的联系</h2><p>数据库以B树格式储存，只解决了按照”主键”查找数据的问题。如果想查找其他字段，就需要建立索引（index）。</p>
+<p>所谓索引，就是以某个字段为关键字的B树文件。假定有一张”雇员表”，包含了员工号（主键）和姓名两个字段。可以对姓名建立索引文件，该文件以B树格式对姓名进行储存，每个姓名后面是其在数据库中的位置（即第几条记录）。查找姓名的时候，先从索引中找到对应第几条记录，然后再从表格中读取。</p>
+<h3 id="3-1-B-树在数据库索引中的应用"><a href="#3-1-B-树在数据库索引中的应用" class="headerlink" title="3.1 B+树在数据库索引中的应用"></a>3.1 B+树在数据库索引中的应用</h3><p>目前大部分数据库系统及文件系统都采用B-Tree或其变种B+Tree作为索引结构</p>
+<p>3.1.1 在数据库索引的应用</p>
+<p>在数据库索引的应用中，B+树按照下列方式进行组织   ：</p>
+<p>**①  **叶结点的组织方式 。B+树的查找键是数据文件的主键 ，且索引是稠密的。也就是说，叶结点中为数据文件的第一个记录设有一个键、指针对，该数据文件可以按主键排序，也可以不按主键排序；数据文件按主键排序，且 B+树是稀疏索引，在叶结点中为数据文件的每一个块设有一个键、指针对；数据文件不按键属性排序，且该属性是B+树的查找键 ，叶结点中为数据文件里出现的每个属性K设有一个键 、指针对，其中指针执行排序键值为 K的记录中的第一个。</p>
+<p>**② **非叶结点的组织方式。B+树中的非叶结点形成了叶结点上的一个多级稀疏索引。每个非叶结点中至少有ceil( m&#x2F;2 ) 个指针，至多有m个指针 。  </p>
+<p>3.1.2 B+树索引的插入和删除</p>
+<p>①在向数据库中插入新的数据时，同时也需要向数据库索引中插入相应的索引键值 ，则需要向 B+树中插入新的键值。<strong>即上面我们提到的B-树插入算法。</strong></p>
+<p>②当从数据库中删除数据时，同时也需要从数据库索引中删除相应的索引键值 ，则需要从 B+树中删除该键值 。<strong>即B-树删除算法</strong></p>
+<p><strong>为什么使用B-Tree（B+Tree）</strong></p>
+<p>​     二叉查找树进化品种的红黑树等数据结构也可以用来实现索引，但是文件系统及数据库系统普遍采用B-&#x2F;+Tree作为索引结构。</p>
+<p>　一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。这样的话，索引查找过程中就要产生磁盘I&#x2F;O消耗，相对于内存存取，I&#x2F;O存取的消耗要高几个数量级，所以评价一个数据结构作为索引的优劣最重要的指标就是在查找过程中磁盘I&#x2F;O操作次数的渐近复杂度。换句话说，索引的结构组织要尽量减少查找过程中磁盘I&#x2F;O的存取次数。为什么使用B-&#x2F;+Tree，还跟磁盘存取原理有关。</p>
+<p>​       <strong>局部性原理与磁盘预读</strong></p>
+<p>　　由于存储介质的特性，磁盘本身存取就比主存慢很多，再加上机械运动耗费，磁盘的存取速度往往是主存的几百分分之一，因此为了提高效率，要尽量减少磁盘I&#x2F;O。为了达到这个目的，磁盘往往不是严格按需读取，而是每次都会预读，即使只需要一个字节，磁盘也会从这个位置开始，顺序向后读取一定长度的数据放入内存。这样做的理论依据是计算机科学中著名的局部性原理：</p>
+<p>　　当一个数据被用到时，其附近的数据也通常会马上被使用。</p>
+<p>　　程序运行期间所需要的数据通常比较集中。</p>
+<p>　　由于磁盘顺序读取的效率很高（不需要寻道时间，只需很少的旋转时间），因此对于具有局部性的程序来说，预读可以提高I&#x2F;O效率。</p>
+<p>　　预读的长度一般为页（page）的整倍数。页是计算机管理存储器的逻辑块，硬件及操作系统往往将主存和磁盘存储区分割为连续的大小相等的块，每个存储块称为一页（在许多操作系统中，页得大小通常为4k），主存和磁盘以页为单位交换数据。当程序要读取的数据不在主存中时，会触发一个缺页异常，此时系统会向磁盘发出读盘信号，磁盘会找到数据的起始位置并向后连续读取一页或几页载入内存中，然后异常返回，程序继续运行。</p>
+<h2 id="哈希桶"><a href="#哈希桶" class="headerlink" title="哈希桶"></a>哈希桶</h2><p>pass</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://webcache.googleusercontent.com/search?q=cache:p_toOAGnBfgJ:https://troywu0.gitbooks.io/spark/content/bshu_b_shu.html+&cd=2&hl=zh-CN&ct=clnk&gl=cn">https://webcache.googleusercontent.com/search?q=cache:p_toOAGnBfgJ:https://troywu0.gitbooks.io/spark/content/bshu_b_shu.html+&amp;cd=2&amp;hl=zh-CN&amp;ct=clnk&amp;gl=cn</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6a0cfebfae90">https://www.jianshu.com/p/6a0cfebfae90</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/hguisu/article/details/7786014">http://blog.csdn.net/hguisu/article/details/7786014</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

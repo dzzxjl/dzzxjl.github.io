@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <title>警惕jupyter - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2019/06/08/NLP-word%20embedding/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/05/08/%E7%A7%91%E7%A0%94-%E5%AD%A6%E6%9C%AF%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-09-06</div>
+            警惕jupyter
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/python/">python</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/python/" rel="tag">python</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>作者：司马懿</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/37490497/answer/211663595">https://www.zhihu.com/question/37490497/answer/211663595</a></p>
+<p>来源：知乎</p>
+<p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<p>答案都是在说Jupyter Notebook好话的，我说一点滥用的可能性。</p>
+<p>优点很多答案都说了，Notebook确实很强大，尤其适合Python&#x2F;Shell&#x2F;R这些解释型语言，比如我们读入了一个海量的数据库需要花5分钟，那么在编译型语言比如C&#x2F;Java&#x2F;Rust里面，每次编译运行都要花5分钟来读这个数据库。这个在实验各种数据处理的时候就非常的令人恼火，但是在notebook里面，这完全不是问题，我们可以复制很多个数据对象，然后一个一个的用来实验。</p>
+<p>但是我仍然不太建议用Notebook作为写代码的主力，尤其是初学者。最好是在其他地方，比如Sublime Text、Vim、Pycharm、Rstudio等等先写个框架，分成小块贴到Notebook里面然后填充、调试和运行。</p>
+<p>理由是这样的：因为Notebook可以非常的碎片化——比如一个cell就一行或者几行，所以需要写作者拥有较强的自律能力，在写代码的时候有计划的整理和组织cell以形成还不错的代码结构，但是碎片化运行的诱惑实在是太大了。</p>
+<blockquote>
+<p>『我过滤了一下数据，把之前的那一行式子改一下参数再跑一下看看？』<br>『哎呀，之前写的那个函数应该再加一个argument，然后直接就可以处理现在的数据了』<br>……</p>
+</blockquote>
+<p>到最后一两百个乱序的Cell，外加从一开始迭代到现在，很多类、函数和方程都已经修改的面目全非，import的库散落各地，连发现了问题想回滚几乎都是不可能的任务，于是怎么办呢？再开一个Notebook，把现在还能用的代码copy过去，重新开始一轮循环……</p>
+<p>灵活性是优势，也是诱惑。程序语言社区讨论过为什么LISP这么强大的语言没有统治世界，反而现在的工业语言是C++&#x2F;Java这种占多数。有一个人说的就非常的发人深省：</p>
+<blockquote>
+<p>当你去写其他语言的时候，是你要扭曲自己来适应其他语言的范式，但是你去写LISP的时候，是LISP扭曲自己在适应你。</p>
+</blockquote>
+<p>然后结果就形成了一个方言众多，极度分裂的LISP社区。</p>
+<p>Notebook给个人，尤其是初学者带来的影响也是类似的。如果自身有一套成型的、还不错的编程习惯，那么notebook不会造成太大的影响，反而是锦上添花的利器；但是如果还没有形成自己的习惯，从一上手就用notebook，那需要时常自我约束一下，因为一旦形成了这种修修补补的碎片化的习惯，长期来看对自己的效率负面影响并不可忽视。</p>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

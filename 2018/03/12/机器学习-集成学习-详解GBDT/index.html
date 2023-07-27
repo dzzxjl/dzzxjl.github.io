@@ -1,0 +1,180 @@
+<html>
+  <head>
+    <title>机器学习-集成学习-详解GBDT - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/03/13/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B-%E9%80%BB%E8%BE%91%E6%96%AF%E8%92%82%E5%9B%9E%E5%BD%92/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/03/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91-%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E5%80%BC/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-03-12</div>
+            机器学习-集成学习-详解GBDT
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>作者注：本来GBDT这一块，最开始我写在决策树那篇文章中，但是随着对GBDT的一步步深入了解，发现GBDT的核心思想并不体现在决策树，就像XGBoost上，虽然他论文中基学习器使用的是决策树，但是也提供了线性模型的学习器，作者一开始也没有领悟到几乎所有的教材上都是把GBDT安排在集成学习处的原因在何？。GBDT中关于决策树最主要的部分就是CART，这点读者可以参照讲述CART的文章，本文关注的重点是GBDT中的GB体现在哪？如何理解？</p>
+</blockquote>
+<h2 id="Boosting提升方法"><a href="#Boosting提升方法" class="headerlink" title="Boosting提升方法"></a>Boosting提升方法</h2><p>Boost是”提升”的意思，一般Boosting算法都是一个迭代的过程，每一次新的训练都是为了改进上一次的结果。</p>
+<p>集成学习Boosting提升方法的核心是加法模型(additive training)，即基函数的线性组合与前向分布算法(Forward stagewise additive modeling)。boosting最终可以表示为：<br>$$<br>f(x) &#x3D; w_0 + \sum_{m&#x3D;1}^{M}w_m\phi_m(x)<br>$$<br>其中的$w$是权重，$\phi$是弱分类器(回归器)的集合,其实就是一个加法模型(即基函数的线性组合)。  前向分布算法实际上是一个贪心的算法，也就是在每一步求解弱分类器$\phi_m$和其参数$w_m$的时候不去修改之前已经求好的分类器和参数。</p>
+<p>Boosting主要关注降低偏差，因此Boosting能基于泛化性能相当弱的学习器构建出很强的集成。</p>
+<h2 id="GBDT-MART"><a href="#GBDT-MART" class="headerlink" title="GBDT(MART)"></a>GBDT(MART)</h2><p>GBDT(Gradient Boosting Decision Tree)又叫 MART(Multiple Additive Regression Tree)，GBRT(Gradient Boost Regression Tree)，是一种以决策树（CART）为基学习器的<strong>迭代</strong>的算法，该算法由多棵决策树CART（不是分类树）组成，所有树的结论<strong>累加</strong>起来做最终答案。它在被提出之初就和SVM一起被认为是<strong>泛化能力较强</strong>的算法。GBDT用来做回归预测，调整后也可以用于分类。</p>
+<blockquote>
+<p>SVM算法泛化能力为什么比较强？</p>
+</blockquote>
+<p>GBDT的思想可以用一个通俗的例子解释，假如有个人30岁，我们首先用20岁去拟合，发现损失有10岁，这时我们用6岁去拟合剩下的损失，发现差距还有4岁，第三轮我们用3岁拟合剩下的差距，差距就只有一岁了。如果我们的迭代轮数还没有完，可以继续迭代下面，每一轮迭代，拟合的岁数误差都会减小。</p>
+<p>从上面的例子看这个思想还是蛮简单的，但是有个问题是这个损失的拟合不好度量，损失函数各种各样，怎么找到一种通用的拟合方法呢？</p>
+<h2 id="Gradient-Boost"><a href="#Gradient-Boost" class="headerlink" title="Gradient Boost"></a>Gradient Boost</h2><h3 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h3><p>大牛Freidman提出了用损失函数的负梯度来拟合本轮损失的近似值，进而拟合一个CART回归树。第t轮的第i个样本的损失函数的负梯度表示为<br>$$<br>r_{ti} &#x3D; -[\frac{\partial L(y_i,f(x_i))}{\partial f(x_i)}]<em>{f(x)&#x3D;f</em>{t-1}(x)}<br>$$</p>
+<blockquote>
+<p>关于这点，我阅读了大量的材料，还是觉得难以理解。目前，我对这点的简单认知，就是Loss function是关于变量f（）的一个函数，此时不要把f（x）再想想成一个函数了，只当做是变量，然后我们想要得到Loss function的最小值，此时就是拿L对f（x）求导，此时可以，如果有解析解的话，那么这个问题直接就解决了，因为我们此时就可以得到这个f(x)了，知道他长什么样子，可是是没法得到解析解(closed form solution)的，因此就使用梯度下降法，此时梯度下降法的主角就是f（x），他此时是参数，所以我们对他进行一步步地迭代，最后每次迭代的量相加起来就是我们最终的模型，每次进行迭代的量就是负梯度的值，这里用到了泰勒公式，当然，也可以使用负梯度+负梯度的平方，三次方，以此类推，都是可以的。</p>
+<p>把f（x）想象成参数的这个过程，其实也就是术语从参数空间的梯度下降到函数空间的梯度下降。</p>
+</blockquote>
+<p>通过损失函数的负梯度来拟合，我们找到了一种通用的拟合损失误差的办法，这样无论是分类问题还是回归问题，我们通过其损失函数的负梯度的拟合，就可以用GBDT来解决我们的分类回归问题。区别仅仅在于损失函数不同导致的负梯度不同而已。</p>
+<h3 id="泰勒公式"><a href="#泰勒公式" class="headerlink" title="泰勒公式"></a>泰勒公式</h3><p>当损失函数为误差平方和的时候，是不是直接能用最小二乘法得到结果呢？</p>
+<ol>
+<li><p>其实感觉博主说”针对一般的损失函数，往往每一步的优化不是那么容易“，这句话说得很牵强，你可以详细去读一下adaboost这些模型，并不是因为残差难求了，而是boost算法的目的是将损失函数降低到最小，也就是通过一阶导数等于零来进行求解，有些损失函数的一阶导数等于零很难解。因而在当前模型上面做一阶泰勒展开，求一阶导数是很容易的，所以就有了gradient boost</p>
+</li>
+<li><p>个人理解：可以把梯度提升&#x2F;下降看成特殊损失函数无法求解全局最优解而不断逼近最优解的一个解决办法。损失函数是mse时，可以直接求出最优解，所以并不需要使用梯度方法求解。当损失函数是MSE时，直接求出最优解需要满足X是列满秩的（X表示训练特征矩阵），而且求矩阵的逆比较慢，因此最小二乘法求解存在局限性，可以采用梯度下降法近似求解。</p>
+<p>联系xgboost中的线性</p>
+</li>
+</ol>
+<h2 id="各种提升方法"><a href="#各种提升方法" class="headerlink" title="各种提升方法"></a>各种提升方法</h2><p>在前面一个部分中，我们主要考虑的是损失函数为误差平方和时的情况，如果我们选择不同的损失函数和极小化损失函数方法决定了boosting的最终效果（和名字）。</p>
+<h2 id="与Adaboost的关系"><a href="#与Adaboost的关系" class="headerlink" title="与Adaboost的关系"></a>与Adaboost的关系</h2><blockquote>
+<p>Adaboost处理的都是分类问题？</p>
+</blockquote>
+<p>GBDT与Adaboost Decistion Tree虽然同属Boost，但是原理不尽相同。就像提到决策树大家会想起C4.5，提到boost多数人也会想到Adaboost。Adaboost是另一种boost方法，<strong>它按分类对错，分配不同的weight</strong>，更官方的说法是“利用前一轮迭代弱学习器的误差率来更新训练集的权重，这样一轮轮的迭代下去”。是计算cost function时使用这些weight，从而让“错分的样本权重越来越大，使它们更被重视”。</p>
+<p>Bootstrap也有类似思想，它在每一步迭代时不改变模型本身，也不计算残差，而是从N个instance训练集中按一定概率重新抽取N个instance出来（单个instance可以被重复sample），对着这N个新的instance再训练一轮。</p>
+<p>由于数据集变了迭代模型训练结果也不一样，而一个instance被前面分错的越厉害，它的概率就被设的越高，这样就能同样达到逐步关注被分错的instance，逐步完善的效果。Adaboost的方法被实践证明是一种很好的<strong>防止过拟合</strong>的方法，但至于为什么则至今没从理论上被证明。GBDT也可以在使用残差的同时引入Bootstrap re-sampling，GBDT多数实现版本中也增加的这个选项，但是否一定使用则有不同看法。re-sampling一个缺点是它的随机性，即同样的数据集合训练两遍结果是不一样的，也就是模型不可稳定复现，这对评估是很大挑战，比如很难说一个模型变好是因为你选用了更好的feature，还是由于这次sample的随机因素。</p>
+<h2 id="DART"><a href="#DART" class="headerlink" title="DART"></a>DART</h2><blockquote>
+<p>DART divergesfrom MART at two places. First, when computing the gradient that the next tree will fit, only a random subset of the existing ensemble is considered. The second place at which DART diverges from MART is when adding the new tree to the ensemble where DART performs a normalization step.</p>
+</blockquote>
+<p>简单说就是每次新加一棵树，这棵树要拟合的并不是之前全部树ensemble后的残差，而是随机抽取的一些树ensemble；同时新加的树结果要规范化一下。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>Greedy Function Approximation: A Gradient Boosting Machine</li>
+<li>Tree Boosting With XGBoost—Why Does XGBoost Win “Every” Machine Learning Competition?</li>
+<li><a target="_blank" rel="noopener" href="http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/">http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&utm_medium=social">https://www.jianshu.com/p/005a4e6ac775?utm_source=qq&amp;utm_medium=social</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/pinard/p/6140514.html">http://www.cnblogs.com/pinard/p/6140514.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ModifyRong/p/7744987.html">https://www.cnblogs.com/ModifyRong/p/7744987.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/LeftNotEasy/archive/2011/03/07/random-forest-and-gbdt.html">http://www.cnblogs.com/LeftNotEasy/archive/2011/03/07/random-forest-and-gbdt.html</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

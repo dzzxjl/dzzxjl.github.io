@@ -1,0 +1,192 @@
+<html>
+  <head>
+    <title>算法-回溯-基础 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/05/08/%E7%A7%91%E7%A0%94-%E5%AD%A6%E6%9C%AF%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/05/05/cpp-vector%E7%9A%84%E7%94%A8%E6%B3%95/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-05-08</div>
+            算法-回溯-基础
+          </h1>
+          
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/backtracking/" rel="tag">backtracking</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>学而不思则罔，思而不学则殆。</p>
+</blockquote>
+<blockquote>
+<p>本文主体转载自<a target="_blank" rel="noopener" href="https://blog.csdn.net/versencoder/article/details/52071930">https://blog.csdn.net/versencoder/article/details/52071930</a> ，进行了修改，并添加了部分内容。</p>
+</blockquote>
+<p>leetcode有一个系列的考察回溯算法，例如<a target="_blank" rel="noopener" href="https://leetcode.com/problems/combination-sum/">Combination Sum</a> 系列 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/subsets/">Subsets</a>系列等。</p>
+<p>根据百度百科定义：回溯法（探索与回溯法）是一种选优搜索法，又称为试探法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。</p>
+<p>博主在学习回溯算法到应用其完成算法题经历了很多的困惑，查看别人博客的时候基本都是解决某个特定问题，而不是注重方法，相信不少读者看完和我一样一脸懵逼。所以博主想要尝试下写下自己总结的方法。希望这篇博客能够帮助和我一样在学习算法的人！第一次写博客，如有疏漏，欢迎指正。</p>
+<p>首先我们来看一道题目：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Combinations：Given two integers n and k,return all possible combinations of k numbersout of 1 ... n. For example, If n = 4 and k =2, a solution is:</span><br><span class="line">[</span><br><span class="line"> [2,4],</span><br><span class="line"> [3,4],</span><br><span class="line"> [2,3],</span><br><span class="line"> [1,2],</span><br><span class="line"> [1,3],</span><br><span class="line"> [1,4],</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>（做一个白话版的描述，给你两个整数 n和k，从1-n中选择k个数字的组合。比如n&#x3D;4，那么从1,2,3,4中选取两个数字的组合，包括图上所述的四种。）</p>
+<p>然后我们看看题目给出的框架：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">   public List&lt;List&lt;Integer&gt;&gt; combine(int n, int k) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要求返回的类型是<code>List&lt;List&lt;Integer&gt;&gt;</code> 也就是说将所有可能的组合list（由整数构成）放入另一个list（由list构成）中。</p>
+<p>现在进行套路教学：要求返回<code>List&lt;List&lt;Integer&gt;&gt;</code>，那我就给你一个<code>List&lt;List&lt;Integer&gt;&gt;</code>，因此</p>
+<ol>
+<li>定义一个<strong>全局的</strong>容器<code>List&lt;List&lt;Integer&gt;&gt; result=new ArrayList&lt;List&lt;Integer&gt;&gt;();</code></li>
+<li>定义一个辅助的方法（函数）<code>public void backtracking(int n,int k, List&lt;Integer&gt;list)&#123;&#125;</code>n k 总是要有的吧，加上这两个参数，前面提到<code>List&lt;Integer&gt; </code>是数字的组合，也是需要的吧，这三个是必须的，没问题吧。（可以尝试性地写参数，最后不需要的删除）</li>
+<li>接着就是我们的重头戏了，如何实现这个算法？对于n&#x3D;4，k&#x3D;2，1,2,3,4中选2个数字，我们可以做如下尝试，加入先选择1，那我们只需要再选择一个数字，注意这时候k&#x3D;1了（此时只需要选择1个数字啦）。当然，我们也可以先选择2,3 或者4，通俗化一点，我们可以选择（1-n）的所有数字，这个是可以用一个循环来描述？每次选择一个加入我们的链表list中，下一次只要再选择k-1个数字。那什么时候结束呢？当然是k&lt;0的时候啦，这时候都选完了。</li>
+</ol>
+<p>有了上面的分析，我们可以开始填写public void backtracking(int n,int k, List<Integer> list){}中的内容。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">backtracking</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> k,<span class="type">int</span> start,List&lt;Integer&gt; list)</span>&#123;  </span><br><span class="line">        <span class="keyword">if</span>(k&lt;<span class="number">0</span>)        <span class="keyword">return</span>;  </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(k==<span class="number">0</span>)&#123;  <span class="comment">//k==0表示已经找到了k个数字的组合，这时候加入全局result中  </span></span><br><span class="line">            result.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>(list));  </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=start;i&lt;=n;i++)&#123;  </span><br><span class="line">                list.add(i);<span class="comment">//尝试性的加入i  </span></span><br><span class="line">                <span class="comment">//开始回溯啦，下一次要找的数字减少一个所以用k-1，i+1见后面分析  </span></span><br><span class="line">                backtracking(n,k-<span class="number">1</span>,i+<span class="number">1</span>,list);  </span><br><span class="line">                <span class="comment">//（留白，有用=。=）  </span></span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br></pre></td></tr></table></figure>
+
+<p>观察一下上述代码，我们加入了一个start变量，它是i的起点。为什么要加入它呢？比如我们第一次加入了1，下一次搜索的时候还能再搜索1了么？肯定不可以啊！我们必须从他的下一个数字开始，也就是2 、3或者4啦。所以start就是一个开始标记这个很重要啦！</p>
+<p>这时候我们在主方法中加入backtracking(n,k,1,list);调试后发现答案不对啊！为什么我的答案比他长那么多？</p>
+<p><img src="https://img-blog.csdn.net/20160730143911982?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>回溯回溯当然要退回再走啦，你不退回，当然又臭又长了！所以我们要在刚才代码注释留白处加上退回语句。仔细分析刚才的过程，我们每次找到了1,2这一对答案以后，下一次希望2退出然后让3进来，1 3就是我们要找的下一个组合。如果不回退，找到了2 ，3又进来，找到了3，4又进来，所以就出现了我们的错误答案。正确的做法就是加上：list.remove(list.size()-1);他的作用就是每次清除一个空位 让后续元素加入。寻找成功，最后一个元素要退位，寻找不到，方法不可行，那么我们回退，也要移除最后一个元素。</p>
+<p>所以完整的程序如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;  </span><br><span class="line">   List&lt;List&lt;Integer&gt;&gt; result=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;List&lt;Integer&gt;&gt;();  </span><br><span class="line">   <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">combine</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> k)</span> &#123;  </span><br><span class="line">       List&lt;Integer&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();  </span><br><span class="line">       backtracking(n,k,<span class="number">1</span>,list);  </span><br><span class="line">       <span class="keyword">return</span> result;  </span><br><span class="line">    &#125;  </span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">backtracking</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> k,<span class="type">int</span> start,List&lt;Integer&gt;list)</span>&#123;  </span><br><span class="line">       <span class="keyword">if</span>(k&lt;<span class="number">0</span>) <span class="keyword">return</span> ;  </span><br><span class="line">       <span class="keyword">else</span> <span class="keyword">if</span>(k==<span class="number">0</span>)&#123;  </span><br><span class="line">           result.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>(list));  </span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">           <span class="keyword">for</span>(<span class="type">int</span> i=start;i&lt;=n;i++)&#123;  </span><br><span class="line">                list.add(i);  </span><br><span class="line">                backtracking(n,k-<span class="number">1</span>,i+<span class="number">1</span>,list);  </span><br><span class="line">                list.remove(list.size()-<span class="number">1</span>);  </span><br><span class="line">            &#125;  </span><br><span class="line">       &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>是不是有点想法了？那么我们操刀一下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Combination Sum</span><br><span class="line">Given a set of candidate numbers (C) and a target number (T), find all unique combinations in C where the candidate numbers sums to T.</span><br><span class="line">The same repeated number may be chosen from C unlimited number of times.</span><br><span class="line">Note:</span><br><span class="line">- All numbers (including target) will be positive integers.</span><br><span class="line">- The solution set must not contain duplicate combinations.</span><br><span class="line">For example,given candidate set [2, 3, 6, 7] and target 7, </span><br><span class="line">A solution set is: </span><br><span class="line">[</span><br><span class="line"> [7],</span><br><span class="line"> [2, 2, 3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>（容我啰嗦地白话下，给你一个正数数组candidate[],一个目标值target，寻找里面所有的不重复组合，让其和等于target，给你[2,3,6,7] 2+2+3&#x3D;7 ,7&#x3D;7,所以可能组合为[2,2,3],[7]）</p>
+<p>按照前述的套路走一遍：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">   List&lt;List&lt;Integer&gt;&gt; result=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;List&lt;Integer&gt;&gt;();</span><br><span class="line">   <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">combinationSum</span><span class="params">(<span class="type">int</span>[] candidates,<span class="type">int</span> target)</span> &#123;</span><br><span class="line">       Arrays.sort(candidates);</span><br><span class="line">       List&lt;Integer&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">backtracking</span><span class="params">(<span class="type">int</span>[] candidates,<span class="type">int</span> target,<span class="type">int</span> start, List&lt;Integer&gt; list)</span>&#123;       </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>全局<code>List&lt;List&lt;Integer&gt;&gt; result</code>先定义</p>
+</li>
+<li><p>回溯<code>backtracking()</code>要定义，数组candidates 目标target 开头start 辅助链表List<Integer> list都加上。</p>
+</li>
+<li><p>分析算法：以[2,3,6,7]  每次尝试加入数组任何一个值，用循环来描述，表示依次选定一个值</p>
+</li>
+<li><pre><code class="java">for (int i = start; i &lt; candidates.length; i++)&#123;
+    list.add(candidates[i]);
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">接下来回溯方法再调用。比如第一次选了2，下次还能再选2是吧，所以每次start都可以从当前i开始（ps：如果不允许重复，从i+1开始）。第一次选择2，下一次要凑的数就不是7了，而是7-2，也就是5，一般化就是remain=target-candidates[i]所以回溯方法为：</span><br><span class="line"></span><br><span class="line">`backtracking(candidates,target-candidates[i],i,list);`</span><br><span class="line"></span><br><span class="line">然后加上退回语句：list.remove(list.size()-1);</span><br><span class="line"></span><br><span class="line">那么什么时候找到的解符合要求呢？自然是remain（注意区分初始的target）=0了，表示之前的组合恰好能凑出target。如果remain&lt;0 表示凑的数太大了，组合不可行，要回退。当remain&gt;0 说明凑的还不够，继续凑。</span><br><span class="line"></span><br><span class="line">所以完整方法如下：</span><br><span class="line"></span><br><span class="line">```Java</span><br><span class="line">public class Solution &#123;  </span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result=newArrayList&lt;List&lt;Integer&gt;&gt;();  </span><br><span class="line">    public List&lt;List&lt;Integer&gt;&gt;combinationSum(int[] candidates, int target) &#123;  </span><br><span class="line">        Arrays.sort(candidates);//所给数组可能无序，排序保证解按照非递减组合  </span><br><span class="line">        List&lt;Integer&gt; list=newArrayList&lt;Integer&gt;();  </span><br><span class="line">        backtracking(candidates,target,0,list);//给定target，start=0表示从数组第一个开始  </span><br><span class="line">        return result;//返回解的组合链表  </span><br><span class="line">    &#125;  </span><br><span class="line">    public void backtracking(int[]candidates,int target,int start,List&lt;Integer&gt; list)&#123;</span><br><span class="line">            if(target&lt;0)    return;//凑过头了  </span><br><span class="line">            else if(target==0)&#123;  </span><br><span class="line">                 </span><br><span class="line">                result.add(newArrayList&lt;&gt;(list));//正好凑出答案，开心地加入解的链表  </span><br><span class="line">                 </span><br><span class="line">            &#125;else&#123;  </span><br><span class="line">                for(inti=start;i&lt;candidates.length;i++)&#123;//循环试探每个数  </span><br><span class="line">                    list.add(candidates[i]);//尝试加入  </span><br><span class="line">           //下一次凑target-candidates[i]，允许重复，还是从i开始  </span><br><span class="line">                   backtracking(candidates,target-candidates[i],i,list);                     </span><br><span class="line">           list.remove(list.size()-1);//回退  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">         </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+<p>是不是觉得还是有迹可循的？下一篇博客将部分回溯算法拿出来，供大家更好地发现其中的套路。</p>
+<p>链接如下：</p>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/versencoder/article/details/52072350">回溯法欣赏</a></p>
+<hr>
+<p>八皇后问题也是一个回溯法典型应用的场景</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">P5</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> ArrayList&lt;String[]&gt; res;</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;String[]&gt; solveNQueens(<span class="type">int</span> n) &#123;</span><br><span class="line">        res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String[]&gt;();</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span>[] cols = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            cols[<span class="number">0</span>] = i;</span><br><span class="line">            Strategy(cols, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">Strategy</span><span class="params">(<span class="type">int</span>[] cols, <span class="type">int</span> row)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (row == cols.length) &#123;</span><br><span class="line">            String[] str = <span class="keyword">new</span> <span class="title class_">String</span>[cols.length];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cols.length; i++) &#123;</span><br><span class="line">                str[i] = <span class="string">&quot;&quot;</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; str.length; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j == cols[i]) &#123;</span><br><span class="line">                        str[i]+=<span class="string">&quot;Q&quot;</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        str[i]+=<span class="string">&quot;.&quot;</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(str);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; cols.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isValid(cols, row, i)) &#123;</span><br><span class="line">                cols[row] = i;</span><br><span class="line">                Strategy(cols, row+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isValid</span><span class="params">(<span class="type">int</span>[] cols, <span class="type">int</span> row, <span class="type">int</span> col)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (cols == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; row; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (cols[i] == col || Math.abs(col-cols[i]) == Math.abs(row-i)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

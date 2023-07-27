@@ -1,0 +1,211 @@
+<html>
+  <head>
+    <title>dia&#34;OS&#34;i - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2015/04/15/%E5%85%B3%E4%BA%8E%E4%B9%90%E8%A7%86/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2015/02/07/2014%E5%8D%97%E9%82%AE%E6%99%A8%E8%B7%91%E6%8A%A5%E5%91%8A/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2015-03-13</div>
+            dia&#34;OS&#34;i
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/linux/">linux</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/linux/" rel="tag">linux</a>
+            </font>
+          
+          <hr>
+
+
+          <p><em>注：本文主要基于CentOS 7.0来理解操作系统，想深入理解OS，推荐阅读《鸟哥的私房菜——基础学习篇》、《30天自制操作系统》</em></p>
+<blockquote>
+<p>穷玩车，富玩表，屌丝玩电脑。</p>
+</blockquote>
+<p>这个电脑可以理解成操作系统，</p>
+<p>而且不严谨地说，每个人接触的第一个电脑程序就是操作系统。</p>
+<p>我印象中接触的第一个操作系统是windows98，那时也就七八岁，当时对98的认识就是可以打单机游戏，时间太过久远，现在能记得的只有超级马里奥了。后来，发现邻居家的电脑开机画面上的数字已经由98变成了2000，伴随着的是，电脑可以打开一个窗口，然后向其中输入一串神奇的数字4399就可以打游戏了，其中射击类型为主。</p>
+<p>再后来就进入到了window xp时代，我与很多人一样对xp有着好感，因为自己从xp才真正开始了解电脑，而且使用这个系统将近9年。xp公认是一个非常优秀的桌面操作系统，在它身上我度过了那少年时代。而可悲的是，把大部分时间花在了游戏上。</p>
+<p>高中时代，我除了周末与节假日几乎很少碰电脑，因此兴趣自然而然的转移到了手机上，因为手机这个东西24h可以接触，对于最早接触的MTK的山寨机我们很难将其定义为操作系统，我真正地接触手机端的操作系统第一个还是Symbian，从塞班系统我开始认识到原来手机就是micro computer。</p>
+<p>那段时间，我对操作系统开始很痴迷，我发现原来不止symbian，我开始了解到Andriod ，ios ，bbos，wp，并对每个系统大体上有了些许了解，例如安卓的开放，ios的封闭，bbos的安全与企业级功能，wp可怜的用户数量。</p>
+<p>从那时开始，我才发现操作系统是这样的多元化，当时我便产生了一个疑问，为什么移动终端上的OS这么多元化，那么PC端，每次开机画面都是醒目的windows的logo，难道电脑端只有这一种操作系统，why？后来我才从互联网上了解到mac，发现了mac上运行的便不是windows，而是mac os x ，但是当时对这个也是一知半解。即使当时了解到安卓是源于linux的，但对于linux是什么东西也不懂。</p>
+<p>就这样带着很多疑惑来到了大学，我期待着了解更多关于操作系统的知识。</p>
+<p><img src="http://7xie74.com1.z0.glb.clouddn.com/windows_install" alt="安装操作系统"></p>
+<p><em>2014年寒假期间，痴迷于系统的安装绘制的系统安装网络图</em></p>
+<p>来到大学后，我通过各种信息源去了解操作系统。此时我认识到，操作系统衔接着软硬件，处于硬件与软件的中间位置，意义可见一斑。对于操作系统的功能，难以一言以蔽之。可以理解成一个管家，处理着计算机所有内部大大小小的事务，有些看得见，有些看不见，终极目的就是为我们——使用者来服务。</p>
+<p>站在学科的角度，操作系统主要功能模块有以下这些：</p>
+<ul>
+<li>文件系统</li>
+<li>内存管理</li>
+<li>进程管理<ul>
+<li>进程与线程</li>
+<li>进程间通信</li>
+<li>死锁</li>
+</ul>
+</li>
+<li>网络通信<ul>
+<li>​</li>
+</ul>
+</li>
+</ul>
+<p>在下面具体的介绍中，文件系统站在Linux文件系统与HDFS的角度，内存管理与管理站在JVM的角度，网络通信站在web数据传输的角度。</p>
+<h3 id="内核（Kernel）"><a href="#内核（Kernel）" class="headerlink" title="内核（Kernel）"></a>内核（Kernel）</h3><p>内核主要作用是运行程序和管理硬件。</p>
+<p>内核包括几个主要部分：进程管理、内存管理、硬件设备驱动、文件系统驱动、网络管理和其他一些部分。</p>
+<p>内核最重要的部分是内存管理和进程管理。</p>
+<h3 id="文件系统（File-system）"><a href="#文件系统（File-system）" class="headerlink" title="文件系统（File system）"></a>文件系统（File system）</h3><blockquote>
+<p>计算机的<strong>文件系统</strong>是一种<strong>存储和组织计算机数据的方法</strong>，它使得对其存取和查找变得容易，文件系统使用<strong>文件</strong>和<strong>树形目录</strong>的抽象逻辑概念代替了硬盘和光盘等物理设备使用数据块的概念，用户使用文件系统来保存数据不必关心数据实际保存在硬盘（或者光盘）的地址为多少的数据块上，只需要记住这个文件的所属目录和文件名。</p>
+</blockquote>
+<p>文件系统是一套实现了数据的存储、分级组织、存取和获取等操作的抽象数据类型（Abstract data type）。</p>
+<h3 id="内存管理（Memory-management）"><a href="#内存管理（Memory-management）" class="headerlink" title="内存管理（Memory management）"></a>内存管理（Memory management）</h3><p>以java内存模型为例</p>
+<h3 id="进程管理（Processing-management）"><a href="#进程管理（Processing-management）" class="headerlink" title="进程管理（Processing management）"></a>进程管理（Processing management）</h3><h4 id="进程定义"><a href="#进程定义" class="headerlink" title="进程定义"></a>进程定义</h4><p>一个进程包括由<strong>操作系统分配的内存空间</strong>，是系统进行资源分配的独立单位，每个进程<strong>拥有自己的一套变量</strong>。其往往包括一个或多个线程。一个进程一直运行，直到所有的非守候线程都结束运行后才能结束。</p>
+<p>进程的五大状态</p>
+<ul>
+<li>新生（<em>new</em>）：行程新产生中</li>
+<li>执行（<em>running</em>）：正在执行</li>
+<li>等待（<em>waiting</em>）：等待某事发生，例如等待使用者输入完成。亦称“阻塞”（<em>blocked</em>）</li>
+<li>就绪（<em>ready</em>）：排队中，等待CPU</li>
+<li>结束（<em>terminated</em>）：完成执行</li>
+</ul>
+<h4 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h4><ul>
+<li>进程：正在运行的程序，是系统进行资源分配的独立单位</li>
+<li>线程：进程的执行路径，调度和执行的单位，单个路径单线程，多个路径多线程</li>
+</ul>
+<p>本质区别：每个进程拥有自己的一套变量，而线程只是共享数据。</p>
+<p>多进程的意义：提高CPU的<strong>使用率</strong></p>
+<p>多线程的意义：提高应用程序的<strong>效率</strong></p>
+<h4 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h4><ol>
+<li>管道<br>管道一般用于两个<strong>具有亲缘关系</strong>的不同进程之间的通信。当一个进程创建一个管道，并调用fork创建自己的一个子进程后，父进程关闭读管道端，子进程关闭写管道端，这样 提供了两个进程之间数据流动的一种方式。管道是一种半双工的通信方式，数据只能单向流动。进程的亲缘关系通常是指父子进程关系。</li>
+<li>信号量（semophore）——信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种<strong>锁机制</strong>，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。<strong>不是用于交换大批数据</strong>，而用于多进程之间的<strong>同步</strong>（协调对共享存储段的存取）。</li>
+<li>消息队列（message queue）——UNIX下不同进程之间可实现共享资源的一种机制；UNIX允许不同进程将格式化的数据流以消息形式发送给任意进程。对消息队列具有操作权限的进程都可以使用msget完成对消息队列的操作控制。通过使用消息类型，进程可以按任何顺序读消息，或为消息安排优先级顺序。</li>
+<li>共享内存（shared memory）——共享内存就是<strong>映射一段能被其他进程所访问的内存</strong>，这段共享内存由一个进程创建，但多个进程都可以访问。共享内存是最快的 IPC 方式，它是针对其他进程间通信方式运行效率低而专门设计的。它往往与其他通信机制，如信号量，配合使用，来实现进程间的同步和通信。</li>
+</ol>
+<h4 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h4><p>centos7使用ps命令可以查看当前系统正在执行的进程。</p>
+<h3 id="网络通讯（Networking）"><a href="#网络通讯（Networking）" class="headerlink" title="网络通讯（Networking）"></a>网络通讯（Networking）</h3><ul>
+<li>TCP&#x2F;IP等传输层协议</li>
+<li>Http、Https等应用层协议</li>
+<li>Socket等接口</li>
+</ul>
+<h3 id="安全机制（Security）"><a href="#安全机制（Security）" class="headerlink" title="安全机制（Security）"></a>安全机制（Security）</h3><h3 id="驱动程序（Device-drivers）"><a href="#驱动程序（Device-drivers）" class="headerlink" title="驱动程序（Device drivers）"></a>驱动程序（Device drivers）</h3><h3 id="用户界面（User-interface）"><a href="#用户界面（User-interface）" class="headerlink" title="用户界面（User interface）"></a>用户界面（User interface）</h3><h3 id="使用工具"><a href="#使用工具" class="headerlink" title="使用工具"></a>使用工具</h3><p>分为三类：</p>
+<ol>
+<li>编辑器：用于编辑文件。</li>
+<li>过滤器：用于接收数据并过滤数据。</li>
+<li>交互程序：允许用户发送信息或接收来自其他用户的信息。</li>
+</ol>
+<p>Linux上的过滤器主要有ed、ex、Vi、Emacs。ed和ex是行编辑器，vi和Emacs是全屏幕编辑器。</p>
+<blockquote>
+<p>怎么样，有没有觉得OS——Oh,So cool!</p>
+</blockquote>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,391 @@
+<html>
+  <head>
+    <title>机器学习-集成学习-理解与应用XGBoost - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/12/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0-%E7%90%86%E8%A7%A3%E4%B8%8E%E5%BA%94%E7%94%A8LightGBM/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/10/%E6%88%91%E7%9A%84Linux%E4%B9%8B%E8%B7%AF/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-12</div>
+            机器学习-集成学习-理解与应用XGBoost
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <p>XGBoost–eXtreme Gradient Boosting</p>
+<h2 id="发展历程"><a href="#发展历程" class="headerlink" title="发展历程"></a>发展历程</h2><p>XGBoost是从决策树一步步发展而来的。</p>
+<ol>
+<li>决策树 ⟶ 对样本重抽样，然后多个树平均 ⟶ Tree bagging</li>
+<li>Tree bagging ⟶ 再同时对<strong>特征</strong>进行随机挑选 ⟶ 随机森林</li>
+<li>随机森林 ⟶ 对随机森林中的树进行<strong>加权平均</strong>，而非简单平均 ⟶ Boosing (Adaboost, GradientBoost)</li>
+<li>boosting ⟶ 对boosting中的树进行正则化 ⟶ XGBoosting</li>
+</ol>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>在运行XGBoost之前，必须设置三种类型成熟：general parameters，booster parameters和task parameters：</p>
+<ul>
+<li>General parameters：参数控制在提升（boosting）过程中使用哪种booster，常用的booster有树模型（tree）和线性模型（linear model）。</li>
+<li>Booster parameters：这取决于使用哪种booster。</li>
+<li>Task parameters：控制学习的场景，例如在回归问题中会使用不同的参数控制排序。</li>
+<li>除了以上参数还可能有其它参数，在命令行中使用</li>
+</ul>
+<p>XGBoost使用的基学习器是CART</p>
+<ul>
+<li>决策规则与决策树的一样</li>
+<li>每个叶子节点上都包含了一个权重，也有人叫做分数</li>
+</ul>
+<h2 id="二阶泰勒展开"><a href="#二阶泰勒展开" class="headerlink" title="二阶泰勒展开"></a>二阶泰勒展开</h2><p>pass</p>
+<h2 id="决策树的复杂度"><a href="#决策树的复杂度" class="headerlink" title="决策树的复杂度"></a>决策树的复杂度</h2><h2 id="Shrinkage与列抽样"><a href="#Shrinkage与列抽样" class="headerlink" title="Shrinkage与列抽样"></a>Shrinkage与列抽样</h2><ul>
+<li>Shrinkage（缩减），相当于学习速率（xgboost中的eta）。xgboost在进行完一次迭代后，会将叶子节点的权重乘上该系数，主要是为了削弱每棵树的影响，让后面有更大的学习空间。实际应用中，一般把eta设置得小一点，然后迭代次数设置得大一点。（补充：传统GBDT的实现也有学习速率）</li>
+<li>列抽样（column subsampling）。xgboost借鉴了随机森林的做法，支持列抽样，不仅能降低过拟合，还能减少计算，这也是xgboost异于传统gbdt的一个特性。</li>
+</ul>
+<h2 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h2><p>对缺失值的处理。对于特征的值有缺失的样本，xgboost可以自动学习出它的分裂方向。</p>
+<ul>
+<li>XGBoost内置处理缺失值的规则。</li>
+<li>用户需要提供一个和其它样本不同的值，然后把它作为一个参数传进去，以此来作为缺失值的取值。<strong>XGBoost在不同节点遇到缺失值时采用不同的处理方法</strong>，并且会学习未来遇到缺失值时的处理方法。</li>
+</ul>
+<h2 id="近似直方图算法"><a href="#近似直方图算法" class="headerlink" title="近似直方图算法"></a>近似直方图算法</h2><p>可并行的近似直方图算法。树节点在进行分裂时，我们需要计算<strong>每个特征的每个分割点对应的增益</strong>，即用<strong>贪心法</strong>枚举所有可能的分割点。当数据无法一次载入内存或者在分布式情况下，贪心算法效率就会变得很低，所以xgboost还提出了一种可并行的近似直方图算法，用于高效地生成候选的分割点。</p>
+<h2 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h2><ul>
+<li>XGBoost允许在每一轮boosting迭代中使用交叉验证。因此，可以方便地获得最优boosting迭代次数。</li>
+</ul>
+<p>GridSearchCV</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> xgboost <span class="keyword">import</span> XGBClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line">xgb_model = XGBClassifier(n_estimators=<span class="number">1</span>)</span><br><span class="line">parameters = &#123;<span class="string">&#x27;learning_rate&#x27;</span>: [<span class="number">0.01</span>, <span class="number">0.02</span>, <span class="number">0.03</span>], <span class="string">&#x27;max_depth&#x27;</span>: [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]&#125;</span><br><span class="line">clf = GridSearchCV(xgb_model, parameters, scoring=<span class="string">&#x27;roc_auc&#x27;</span>)</span><br><span class="line">clf.fit(data, target)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="并行化"><a href="#并行化" class="headerlink" title="并行化"></a>并行化</h2><p>xgboost工具支持并行。</p>
+<p>boosting不是一种串行的结构吗？怎么并行的？注意xgboost的并行不是tree粒度的并行，xgboost也是一次迭代完才能进行下一次迭代的（第t次迭代的代价函数里包含了前面t-1次迭代的预测值）。xgboost的并行是在<strong>特征粒度上</strong>的。我们知道，决策树的学习<strong>最耗时的一个步骤就是对特征的值进行排序（因为要确定最佳分割点）</strong>，xgboost在训练之前，<strong>预先对数据进行了排序</strong>，然后保存为<strong>block结构</strong>，后面的迭代中重复地使用这个结构，大大减小计算量。这个block结构也使得并行成为了可能，在进行节点的分裂时，需要计算每个特征的增益，最终选增益最大的那个特征去做分裂，那么各个特征的增益计算就可以开多线程进行。</p>
+<h2 id="机器学习算法中GBDT和XGBOOST的区别有哪些？"><a href="#机器学习算法中GBDT和XGBOOST的区别有哪些？" class="headerlink" title="机器学习算法中GBDT和XGBOOST的区别有哪些？"></a><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/41354392/answer/91371364">机器学习算法中GBDT和XGBOOST的区别有哪些？</a></h2><p>首先<strong>XGBoost</strong>是Gradient Boosting的一种高效系统实现，并不是一种单一算法。XGBoost里面的基学习器除了用tree(gbtree)，也可用线性分类器(gblinear)。而GBDT则特指梯度提升决策树算法。XGBoost相对于普通gbm的实现，可能具有以下的一些优势：</p>
+<ol>
+<li>显式地将<strong>树模型的复杂度</strong>作为正则项加在优化目标</li>
+<li>公式推导里用到了<strong>二阶导数</strong>信息，而普通的GBDT只用到一阶</li>
+<li>允许使用column(feature) sampling来防止过拟合，借鉴了Random Forest的思想，sklearn里的gbm好像也有类似实现</li>
+<li>实现了一种分裂节点寻找的近似算法，用于加速和减小内存消耗</li>
+<li>节点分裂算法能自动利用特征的稀疏性</li>
+<li>data事先排好序并以block的形式存储，利于并行计算</li>
+<li>cache-aware, out-of-core computation</li>
+<li>支持分布式计算可以运行在MPI，YARN上，得益于底层支持容错的分布式通信框架rabit。</li>
+</ol>
+<h2 id="LR-XGBoost"><a href="#LR-XGBoost" class="headerlink" title="LR+XGBoost"></a>LR+XGBoost</h2><p>pass</p>
+<h2 id="Xgboost和LightGBM部分参数对照"><a href="#Xgboost和LightGBM部分参数对照" class="headerlink" title="Xgboost和LightGBM部分参数对照"></a>Xgboost和LightGBM部分参数对照</h2><table>
+<thead>
+<tr>
+<th>Xgboost</th>
+<th>LightGbm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>booster(default&#x3D;gbtree)</strong></td>
+<td><strong>boosting(default&#x3D;gbdt)</strong></td>
+</tr>
+<tr>
+<td><strong>eta(default&#x3D;0.3)</strong></td>
+<td><strong>learning_rate(default&#x3D;0.1)</strong></td>
+</tr>
+<tr>
+<td><strong>max_depth(default&#x3D;6)</strong></td>
+<td><strong>num_leaves(default&#x3D;31)</strong></td>
+</tr>
+<tr>
+<td><strong>min_child_weight(default&#x3D;1)</strong></td>
+<td><strong>min_sum_hessian_in_leaf(1e-3)</strong></td>
+</tr>
+<tr>
+<td><strong>gamma(default&#x3D;0)</strong></td>
+<td><strong>min_gain_to_split(default&#x3D;20)</strong></td>
+</tr>
+<tr>
+<td><strong>subsample(default&#x3D;1)</strong></td>
+<td><strong>bagging_fraction(default&#x3D;1.0)</strong></td>
+</tr>
+<tr>
+<td><strong>colsample_bytree(default&#x3D;1)</strong></td>
+<td><strong>feature_fraction( default&#x3D;1.0)</strong></td>
+</tr>
+<tr>
+<td><strong>alpha(default&#x3D;0)</strong></td>
+<td><strong>lambda_l1(default&#x3D;0)</strong></td>
+</tr>
+<tr>
+<td><strong>lambda(default&#x3D;1)</strong></td>
+<td><strong>lambda_l2(default&#x3D;0)</strong></td>
+</tr>
+<tr>
+<td><strong>objective( default&#x3D;reg:linear)</strong></td>
+<td><strong>application(default&#x3D;regression)</strong></td>
+</tr>
+<tr>
+<td><strong>eval_metric(default according to objective)</strong></td>
+<td><strong>metric</strong></td>
+</tr>
+<tr>
+<td><strong>nthread</strong></td>
+<td><strong>num_threads</strong></td>
+</tr>
+</tbody></table>
+<ol>
+<li>使用num_leaves</li>
+</ol>
+<p>因为LightGBM使用的是leaf-wise的算法，因此在调节树的复杂程度时，使用的是num_leaves而不是max_depth。</p>
+<p>大致换算关系：num_leaves &#x3D; 2^(max_depth)。它的值的设置应该小于2^(max_depth)，否则可能会导致过拟合。</p>
+<ol start="2">
+<li><p>对于<strong>非平衡数据集</strong>：可以param[‘is_unbalance’]&#x3D;’true’</p>
+</li>
+<li><p>Bagging参数：bagging_fraction+bagging_freq（必须同时设置）、feature_fraction。bagging_fraction可以使bagging的更快的运行出结果，feature_fraction设置在每次迭代中使用特征的比例。</p>
+</li>
+<li><p>min_data_in_leaf：这也是一个比较重要的参数，调大它的值可以防止过拟合，它的值通常设置的比较大。</p>
+</li>
+<li><p>max_bin:调小max_bin的值可以提高模型训练速度，调大它的值和调大num_leaves起到的效果类似。</p>
+</li>
+</ol>
+<p>参数速查：</p>
+<table>
+<thead>
+<tr>
+<th><a target="_blank" rel="noopener" href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/2_xgb/README.md#1-%E5%8E%9F%E7%94%9F%E6%8E%A5%E5%8F%A3">xgb</a></th>
+<th><a target="_blank" rel="noopener" href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/1_lgb/README.md#1-%E5%8E%9F%E7%94%9F%E6%8E%A5%E5%8F%A3">lgb</a></th>
+<th><a target="_blank" rel="noopener" href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/2_xgb/README.md#2-sk%E6%8E%A5%E5%8F%A3">xgb.sklearn</a></th>
+<th><a target="_blank" rel="noopener" href="https://github.com/Jie-Yuan/DataMining/blob/master/5_PopularAlgorithm/1_Boosting/1_lgb/README.md#2-sk%E6%8E%A5%E5%8F%A3">lgb.sklearn</a></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>booster&#x3D;’gbtree’</td>
+<td>boosting&#x3D;’gbdt’</td>
+<td>booster&#x3D;’gbtree’</td>
+<td>boosting_type&#x3D;’gbdt’</td>
+</tr>
+<tr>
+<td>objective&#x3D;’binary:logistic’</td>
+<td>application&#x3D;’binary’</td>
+<td>objective&#x3D;’binary:logistic’</td>
+<td>objective&#x3D;’binary’</td>
+</tr>
+<tr>
+<td>max_depth&#x3D;7</td>
+<td>num_leaves&#x3D;2**7</td>
+<td>max_depth&#x3D;7</td>
+<td>num_leaves&#x3D;2**7</td>
+</tr>
+<tr>
+<td>eta&#x3D;0.1</td>
+<td>learning_rate&#x3D;0.1</td>
+<td>learning_rate&#x3D;0.1</td>
+<td>learning_rate&#x3D;0.1</td>
+</tr>
+<tr>
+<td>num_boost_round&#x3D;10</td>
+<td>num_boost_round&#x3D;10</td>
+<td>n_estimators&#x3D;10</td>
+<td>n_estimators&#x3D;10</td>
+</tr>
+<tr>
+<td>gamma&#x3D;0</td>
+<td>min_split_gain&#x3D;0.0</td>
+<td>gamma&#x3D;0</td>
+<td>min_split_gain&#x3D;0.0</td>
+</tr>
+<tr>
+<td>min_child_weight&#x3D;5</td>
+<td>min_child_weight&#x3D;5</td>
+<td>min_child_weight&#x3D;5</td>
+<td>min_child_weight&#x3D;5</td>
+</tr>
+<tr>
+<td>subsample&#x3D;1</td>
+<td>bagging_fraction&#x3D;1</td>
+<td>subsample&#x3D;1.0</td>
+<td>subsample&#x3D;1.0</td>
+</tr>
+<tr>
+<td>colsample_bytree&#x3D;1.0</td>
+<td>feature_fraction&#x3D;1</td>
+<td>colsample_bytree&#x3D;1.0</td>
+<td>colsample_bytree&#x3D;1.0</td>
+</tr>
+<tr>
+<td>alpha&#x3D;0</td>
+<td>lambda_l1&#x3D;0</td>
+<td>reg_alpha&#x3D;0.0</td>
+<td>reg_alpha&#x3D;0.0</td>
+</tr>
+<tr>
+<td>lambda&#x3D;1</td>
+<td>lambda_l2&#x3D;0</td>
+<td>reg_lambda&#x3D;1</td>
+<td>reg_lambda&#x3D;0.0</td>
+</tr>
+<tr>
+<td>scale_pos_weight&#x3D;1</td>
+<td>scale_pos_weight&#x3D;1</td>
+<td>scale_pos_weight&#x3D;1</td>
+<td>scale_pos_weight&#x3D;1</td>
+</tr>
+<tr>
+<td>seed</td>
+<td>bagging_seedfeature_fraction_seed</td>
+<td>random_state&#x3D;888</td>
+<td>random_state&#x3D;888</td>
+</tr>
+<tr>
+<td>nthread</td>
+<td>num_threads</td>
+<td>n_jobs&#x3D;4</td>
+<td>n_jobs&#x3D;4</td>
+</tr>
+<tr>
+<td>evals</td>
+<td>valid_sets</td>
+<td>eval_set</td>
+<td>eval_set</td>
+</tr>
+<tr>
+<td>eval_metric</td>
+<td>metric</td>
+<td>eval_metric</td>
+<td>eval_metric</td>
+</tr>
+<tr>
+<td>early_stopping_rounds</td>
+<td>early_stopping_rounds</td>
+<td>early_stopping_rounds</td>
+<td>early_stopping_rounds</td>
+</tr>
+<tr>
+<td>verbose_eval</td>
+<td>verbose_eval</td>
+<td>verbose</td>
+<td>verbose</td>
+</tr>
+</tbody></table>
+<h2 id="XGBoost还需要做特征工程吗？"><a href="#XGBoost还需要做特征工程吗？" class="headerlink" title="XGBoost还需要做特征工程吗？"></a>XGBoost还需要做特征工程吗？</h2><p>特征工程是个很广的概念，包括特征筛选、特征变换、特征合成、特征提取等等。对于XGBoost，它能够很好地做到特征选择，所以这一点不用我们去操心太多。至于特征变换（离散化、归一化、标准化、取log等等），我们也不需要做太多，因为XGBoost是基于决策树，决策树自然能够解决这些。相比较来说，线性模型则需要做离散化或者取log处理。因为<strong>XGBoost（树类模型）不依赖于线性假设</strong>。但是对于分类特征，XGBoost需要对其进行独热编码，否则无法训练模型。XGBoost也可以免于一部分特征合成的工作，比如线性回归中的交互项a:b，在树类模型中都可以自动完成。但是对于加法a+b，减法a-b，除法a-b这类合成的特征，则需要手动完成。</p>
+<p>绝大部分模型都无法自动完成的一步就是特征提取。很多nlp的问题或者图象的问题，没有现成的特征，你需要自己去提取这些特征，这些是我们需要人工完成的。</p>
+<p>综上来说，XGBoost的确比线性模型要省去很多特征工程的步骤。但是特征工程依然是非常必要的。</p>
+<h2 id="附录——参数"><a href="#附录——参数" class="headerlink" title="附录——参数"></a>附录——参数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">max_depth : int</span><br><span class="line">Maximum tree depth for base learners.</span><br><span class="line"></span><br><span class="line">learning_rate : float #learning_rate ＝ 0.1 或更小，越小就需要多加入弱学习器</span><br><span class="line">Boosting learning rate (xgb’s “eta”)</span><br><span class="line">n_estimators : int</span><br><span class="line">Number of boosted trees to fit.</span><br><span class="line">silent : boolean</span><br><span class="line">Whether to print messages while running boosting.</span><br><span class="line">objective : string or callable</span><br><span class="line">Specify the learning task and the corresponding learning objective or a custom objective function to be used (see note below).</span><br><span class="line">booster: string</span><br><span class="line">Specify which booster to use: gbtree, gblinear or dart.</span><br><span class="line">nthread : int</span><br><span class="line">Number of parallel threads used to run XGBoost. (Deprecated, please use n_jobs)</span><br><span class="line">n_jobs : int</span><br><span class="line">Number of parallel threads used to run XGBoost. (replaces nthread)</span><br><span class="line">gamma : float</span><br><span class="line">Minimum loss reduction required to make a further partition on a leaf node of the tree.</span><br><span class="line">min_child_weight : int</span><br><span class="line">Minimum sum of instance weight(hessian) needed in a child.</span><br><span class="line">max_delta_step : int</span><br><span class="line">Maximum delta step we allow each tree’s weight estimation to be.</span><br><span class="line">subsample : float</span><br><span class="line">Subsample ratio of the training instance.</span><br><span class="line">colsample_bytree : float</span><br><span class="line">Subsample ratio of columns when constructing each tree.</span><br><span class="line">colsample_bylevel : float</span><br><span class="line">Subsample ratio of columns for each split, in each level.</span><br><span class="line">reg_alpha : float (xgb’s alpha)</span><br><span class="line">L1 regularization term on weights</span><br><span class="line">reg_lambda : float (xgb’s lambda)</span><br><span class="line">L2 regularization term on weights</span><br><span class="line">scale_pos_weight : float</span><br><span class="line">Balancing of positive and negative weights.</span><br><span class="line">base_score:</span><br><span class="line">The initial prediction score of all instances, global bias.</span><br><span class="line">seed : int</span><br><span class="line">Random number seed. (Deprecated, please use random_state)</span><br><span class="line">random_state : int</span><br><span class="line">Random number seed. (replaces seed)</span><br><span class="line">missing : float, optional</span><br><span class="line">Value in the input which needs to be present as a missing value. If None, defaults to np.nan.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://wepon.me/2016/05/07/XGBoost%E6%B5%85%E5%85%A5%E6%B5%85%E5%87%BA/">http://wepon.me/2016/05/07/XGBoost%E6%B5%85%E5%85%A5%E6%B5%85%E5%87%BA/</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/weiyongle1996/article/details/78446244">http://blog.csdn.net/weiyongle1996/article/details/78446244</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8346d4f80ab0">https://www.jianshu.com/p/8346d4f80ab0</a></li>
+<li><a target="_blank" rel="noopener" href="http://chuan92.com/2016/03/19/XGBoost-and-gbdt">http://chuan92.com/2016/03/19/XGBoost-and-gbdt</a></li>
+<li><a target="_blank" rel="noopener" href="http://sofasofa.io/forum_main_post.php?postid=1001161">http://sofasofa.io/forum_main_post.php?postid=1001161</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<html>
+  <head>
+    <title>机器学习-SVMs - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/02/09/%E5%A6%82%E4%BD%95%E5%86%99%E5%A5%BD%E4%B8%80%E7%AF%87%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84IEEE%E6%88%96ACM-Transaction%E7%BA%A7%E5%88%AB%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E8%AE%BA%E6%96%87/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/02/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%AD%A6%E7%A7%91-%E4%BF%A1%E6%81%AF%E8%AE%BA/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-02-07</div>
+            机器学习-SVMs
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>这个算法的历史已经有五十出头，适应于各种其它问题比如回归、离群值分析和排序等</p>
+</blockquote>
+<h2 id="从感知机到SVM"><a href="#从感知机到SVM" class="headerlink" title="从感知机到SVM"></a>从感知机到SVM</h2><p>感知机的解有无数个，而svm以最大间隔的概念定义了一个目标函数仅有一个最优解。</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>SVM的核心是<strong>结构风险最小化</strong>。</p>
+<p>SVM（支持向量机）是一个有监督的学习模型，通常用来进行模式识别、分类以及回归分析。是数学规划方法在分类上的一个典型应用。</p>
+<p>SVM学习问题可以表示为凸优化问题，因此可以利用已知的有效算法发现目标函数的全局最小值。而其他分类方法（如基于规则的分类器和人工神经网络）都采用一种基于贪心学习的策略来搜索假设空间，这种方法一般只能获得局部最优解。</p>
+<p>主要体现在最优化问题的处理上，包括MaxEnt、SVM等算法都利用了对偶理论来解决最优化问题。</p>
+<p>a) 可以解决样本有限情况下的机器学习问题， 目标是得到现有情况下的最优解；b) 算法最后转化为 二次型寻优问题，得到全局最优解，可以避免神经网络结构选择和局部极值问题；c) 算法将实际问题通过 非线性变换到高维特征空间，在高维空间中构造线性 判别函数解决非线性问题，可以提高泛化性能；d) 通过对二类问题的推广，可以解决多类分类问题。</p>
+<h2 id="拉格朗日对偶"><a href="#拉格朗日对偶" class="headerlink" title="拉格朗日对偶"></a>拉格朗日对偶</h2><p>拉格朗日对偶事实上把SVM从依赖d个维度转变到依赖N个数据点。考虑到在最后计算时只有支持向量SV才有意义，所以这个计算量事实上比N小得多。</p>
+<h2 id="线性可分SVM算法数学建模"><a href="#线性可分SVM算法数学建模" class="headerlink" title="线性可分SVM算法数学建模"></a>线性可分SVM算法数学建模</h2><p>一个最优化问题通常有两个最基本的因素：1）目标函数，也就是你希望什么东西的什么指标达到最好；2）优化对象，你期望通过改变哪些因素来使你的目标函数达到最优。在线性SVM算法中，目标函数显然就是那个“分类间隔”，而优化对象则是决策面。最终可得到如下的最优化模型。<br>$$<br>\min_{w,b}\frac12\Vert w\Vert<br>$$</p>
+<h2 id="软间隔SVM"><a href="#软间隔SVM" class="headerlink" title="软间隔SVM"></a>软间隔SVM</h2><blockquote>
+<p>如果有一些点是异常点，那么怎么会把他理解成作为惩罚项，如果使用了核函数，此时是否会把他映射在高维情况下，从而线性可分了呢？</p>
+</blockquote>
+<h2 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h2><p><strong>优点</strong>：</p>
+<ul>
+<li>支持向量机能对非线性决策边界建模，又有许多可选的核函数。</li>
+<li>在面对过拟合时，支持向量机有着极强的稳健性，尤其是在高维空间中。</li>
+<li>可以解决小样本情况下的机器学习问题</li>
+<li>可以解决高维问题，即大型特征空间；</li>
+<li>能够处理非线性特征的相互作用；</li>
+<li>无需依赖整个数据；</li>
+<li>可以提高泛化能力；</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>支持向量机是内存密集型算法，当观测样本很多时，效率并不是很高，<strong>不太适用较大的数据集</strong>；</li>
+<li>选择正确的核函数就需要相当的技巧，对非线性问题没有通用解决方案，有时候很难找到一个合适的核函数；</li>
+<li>对缺失数据敏感；</li>
+<li>在当前的业界应用中，<strong>随机森林的表现往往要优于支持向量机</strong>。</li>
+</ul>
+<h2 id="SMO"><a href="#SMO" class="headerlink" title="SMO"></a>SMO</h2><p>pass</p>
+<h2 id="SVR"><a href="#SVR" class="headerlink" title="SVR"></a>SVR</h2><p>SVR是支持向量回归(support vector regression)的英文缩写，是支持向量机(SVM)的重要的应用分支。</p>
+<h2 id="One-class-SVM"><a href="#One-class-SVM" class="headerlink" title="One class SVM"></a>One class SVM</h2><p>pass</p>
+<h2 id="SVM的应用"><a href="#SVM的应用" class="headerlink" title="SVM的应用"></a>SVM的应用</h2><p>SVM在很多诸如文本分类，图像分类（手写字符识别），生物序列分析和生物数据挖掘等领域有很多的应用，而且SVM可以成功应用的领域远远超出现在已经在开发应用了的领域。</p>
+<p>然而工业界中特征的多样性导致很少去使用 svm ，其中一个重要原因，因为 svm 本质上是属于一个几何模型，这个模型需要去定义 instance 之间的 kernel 或者 similarity （对于linear svm 来说，这个similarity 就是内积）。这其实和我们在之前说过的问题是相似的，我们无法预先设定一个很好的similarity。这样的数学模型使得 svm 更适合去处理 “同性质”的特征，例如图像特征提取中的 lbp 。而从不同 channel 中来的 feature 则更适合 tree-based model, 这些模型对数据的 distributation 通常并不敏感。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/details/7624837">http://blog.csdn.net/v_july_v/article/details/7624837</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/35602879">https://www.zhihu.com/question/35602879</a></li>
+<li>零基础学SVM—Support Vector Machine(一)</li>
+<li>零基础学SVM-Support Vector Machine(二)</li>
+<li>为什么支持向量机要用拉格朗日对偶算法来解最大化间隔问题？</li>
+<li>机器学习技法–SVM的对偶问题</li>
+<li>支持向量机SVM（二）</li>
+<li>NTUML 18. 对偶支持向量机</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650731669&idx=1&sn=b31a361017e0c6b9ecb2270fe3c01cbf&chksm=871b30ebb06cb9fdd51d6ae57fa7e3375bcff98a649ecff8a1ba9f485ae8cd5f63876bb20cf6&mpshare=1&scene=23&srcid=1008EaBplXTYgkkch7WXBnDW#rd">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650731669&amp;idx=1&amp;sn=b31a361017e0c6b9ecb2270fe3c01cbf&amp;chksm=871b30ebb06cb9fdd51d6ae57fa7e3375bcff98a649ecff8a1ba9f485ae8cd5f63876bb20cf6&amp;mpshare=1&amp;scene=23&amp;srcid=1008EaBplXTYgkkch7WXBnDW#rd</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5930cc4c2f301e006bd4b2a9">https://juejin.im/post/5930cc4c2f301e006bd4b2a9</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21704547/answer/20293255">https://www.zhihu.com/question/21704547/answer/20293255</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/">http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/</a></li>
+</ol>
+<p>$$<br>\sum_i y_i \alpha_i &#x3D; 0<br>$$</p>
+<p>$$<br>(x_i,y_i), \quad x \in R^d, y \in {-1,1}.<br>$$</p>
+<p>$$<br>g(x) &#x3D; \text{sign}(\phi(w) \cdot \phi(x) + b)<br>$$</p>
+<p>$$<br>\phi^*(w) &#x3D; \arg \min_{\phi(w)} \frac{1}{2} \norm{\phi(w)}^2, \<br>\text{such that} \quad y_i (\phi(w) \cdot \phi(x_i) + b) \ge 1.<br>$$</p>
+<p>$$<br>L(\phi(w),b,\alpha) &#x3D; \frac{1}{2}||\phi(w)||^2 - \sum_i \alpha_i (y_i (\phi(w) \cdot \phi(x_i) + b) - 1).<br>$$</p>
+<p>$$<br>\pd{L(\phi(w),b,\alpha)}{\phi(w)} &#x3D; \phi(w) - \sum_i y_i \alpha_i \phi(x_i) &#x3D; 0,\<br>\pd{L(\phi(w),b,\alpha)}{b} &#x3D; \sum_i y_i \alpha_i &#x3D; 0.<br>$$</p>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

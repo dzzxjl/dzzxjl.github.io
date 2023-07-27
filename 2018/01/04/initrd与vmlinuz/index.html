@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <title>initrd与vmlinuz - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/08/%E4%B8%BB%E6%9C%BA%E4%B8%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/12/31/%E7%B4%A2%E5%BC%95%E4%B8%AD%E7%9A%84B-%E6%A0%91/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-04</div>
+            initrd与vmlinuz
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/linux/">linux</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/linux/" rel="tag">linux</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="uImage、zImage、bzImage、vlinzx区别"><a href="#uImage、zImage、bzImage、vlinzx区别" class="headerlink" title="uImage、zImage、bzImage、vlinzx区别"></a>uImage、zImage、bzImage、vlinzx区别</h2><p>在网络中，不少服务器采用的是Linux系统。为了进一步提高服务器的性能，可能需要根 据特定的硬件及需求重新编译Linux内核。编译Linux 内核，需要根据规定的步骤进行，编译内核过程中涉及到几个重要的文件。比如对于RedHat Linux，在&#x2F;boot目录下有一些与Linux内核有关的文件 . 　　编译过RedHat Linux内核的人对其中的System.map、vmlinuz、initrd-2.4.7-10.img印象可能比较深刻，因为编译内核过程中涉及到这些文件的建立等操作。那么这几个文件是怎么产生的?又有什么作用呢?</p>
+<p>对于Linux内核，编译可以生成不同格式的映像文件，例如： <code>make zImage</code> <code>make uImage</code> <code>make bzImage</code> ##zImage</p>
+<p>是ARM Linux常用的一种压缩映像文件不能超过512KB，<code>bzImage</code> 即<code>bigzImage</code> ，二者的内核都是<code>gzip</code>压缩的</p>
+<h3 id="uImage"><a href="#uImage" class="headerlink" title="uImage"></a>uImage</h3><p>是U-boot专用的映像文件，它是在&#96;zImage之前加上一个长度为0x40的“头”，说明这个映像文件的 类型、加载位置、生成时间、大小等信息。换句话说，如果直接从uImage的0x40位置开始执行，zImage和 uImage没有任何区别。另外，Linux2.4内核不支持uImage，Linux2.6内核加入了很多对嵌入式系统的支持 ，但是uImage的生成也需要设置。</p>
+<h3 id="vmlinuz"><a href="#vmlinuz" class="headerlink" title="vmlinuz"></a>vmlinuz</h3><p>　　<code>vmlinuz</code>是可引导的、压缩的内核。“vm”代表“Virtual Memory”。Linux支持虚拟内存，不像老的操作系统比如DOS有640KB内存的限制。Linux能够使用硬盘空间作为虚拟内存，因此得名“vm”。<code>vmlinuz</code>是可执行 的Linux内核，它位于<code>/boot/vmlinuz</code>，它一般是一个软链接，比如图中是vmlinuz-2.4.7-10的软链接。</p>
+<p>vmlinuz的建立有两种方式:</p>
+<ol>
+<li>是编译内核时通过<code>make zImage</code>创建，手动拷贝到&#x2F;boot目录下面. zImage适用于小内核的情况，它的存在是为了向后的兼容性.</li>
+<li>是内核编译时通过命令<code>make bzImage</code>创建，然后手动拷贝至&#x2F;boot目录下。<code>bzImage</code>是压缩的 　　内核映像，需要注意，<code>bzImage</code>不是用<code>bzip2</code>压缩的,bz表示<code>big zImage</code>。 <code>bzImage</code>中的b是“big”意思。 <code>zImage(vmlinuz)</code>和<code>bzImage(vmlinuz)</code>都是用gzip压缩的。它们不仅是一个压缩文件，而且在这两个文件的开头部分内嵌有<code>gzip</code>解压缩代码。所以你不能用<code>gunzip</code>或<code>gzip –dc</code>解包<code>vmlinuz</code>。 内核文件中包含一个微型的<code>gzip</code>用于解压缩内核并引导它。两者的不同之处在于，老的<code>zImage</code>解压缩内核到低端内存(第一个 640K)，<code>bzImage</code>解压缩内核到高端内存(1M以上)。如果内核比较小，那么可以采用<code>zImage</code>或<code>bzImage</code>之一，两种方式引导的系统运行 时是相同的。大的内核采用<code>bzImage</code>，不能采用<code>zImage</code>。 <code>vmlinux</code>是未压缩的内核，<code>vmlinuz</code>是<code>vmlinux</code>的压缩文件。</li>
+</ol>
+<h3 id="initrd-x-x-x-img"><a href="#initrd-x-x-x-img" class="headerlink" title="initrd-x.x.x.img"></a>initrd-x.x.x.img</h3><p><code>initrd</code>是“initial ramdisk”的简写。<code>initrd</code>一般被用来临时的引导硬件到实际内核<code>vmlinuz</code>能够接管并继续引导的状态。图中的initrd-2.4.7-10.img主要是用于加载ext3等文件系统及scsi设备的驱动。</p>
+<p>比如，使用的是scsi硬盘，而内核vmlinuz中并没有这个scsi硬件的驱动，scsi模块是存储在根文件系统的&#x2F;lib&#x2F;modules下的，那么在装入scsi模块之前，内核不能加载根文件系统。为了解决这个问题，可以引导一个能够读实际内核的initrd内核并用initrd修正 scsi引导问题。initrd-2.4.7-10.img是用gzip压缩的文件，initrd实现加载一些模块和安装文件系统等功能。</p>
+<p><code>initrd</code>映象文件是使用<code>initrd</code>创建的。<code>initrd</code>实用程序能够创建<code>initrd</code>映象文件。这个命令是RedHat专有的(这也是为什么，在Linux内核包里&#x2F;Documentation&#x2F;Changes里面没有提到要将<code>initrd</code>升级）。其它Linux发行版或许有相应的命令。这是个很方便的实用程序。具体情况请看帮助:<code>man initrd</code>下面的命令创建<code>initrd</code>映象文件。 <code>initrd</code>映象文件是使用<code>initrd</code>创建的。<code>initrd</code>实用程序能够创建<code>initrd</code>映象文件。这个命令是RedHat专有的。其它Linux发行版或许有相应的命令。这是个很方便的实用程序。具体情况请看帮助:<code>man initrd</code>下面的命令创建<code>initrd</code>映象文件。</p>
+<h3 id="uImage-1"><a href="#uImage-1" class="headerlink" title="uImage"></a>uImage</h3><p>vmlinux是内核文件，zImage是一般情况下默认的压缩内核映像文件，压缩vmlinux，加上一段解压启动代码得到。而uImage是u-boot使用bootm命令引导的Linux压缩内核映像文件格式,是使用工具mkimage对普通的压缩内核映像文件（zImage）加工而得。它是uboot专用的映像文件，它是在zImage之前加上一个长度为 64字节的“头”，说明这个内核的版本、加载位置、生成时间、大小等信息；其0x40之后与zImage没区别。 由于bootloader一般要占用0X0地址，所以，uImage相比zImage的好处就是可以和bootloader共存。 其实就是一个自动跟手动的区别,有了uImage头部的描述,u-boot就知道对应Image的信息,如果没有头部则需要自己手动去搞那些参数。</p>
+<p>如何生成uImage文件？首先 在uboot的&#x2F;tools目录下寻找mkimage文件，把其copy到系统&#x2F;usr&#x2F;local&#x2F;bin目录下，这样就完成制作工具。然后在内核目录下运行make uImage，如果成功，便可以在arch&#x2F;arm&#x2F;boot&#x2F;目录下发现uImage文件，其大小比zImage多64个字节。 此外，平时调试用uImage，不用去管调整了哪些东西；zImage则是一切OK后直接烧0X0。开机就运行。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/spinsoft/archive/2013/01/09/2852228.html">http://www.cnblogs.com/spinsoft/archive/2013/01/09/2852228.html</a></p>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

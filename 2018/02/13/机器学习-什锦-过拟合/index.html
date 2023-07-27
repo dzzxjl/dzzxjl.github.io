@@ -1,0 +1,222 @@
+<html>
+  <head>
+    <title>机器学习-什锦-过拟合 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/02/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87-%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/02/09/%E5%A6%82%E4%BD%95%E5%86%99%E5%A5%BD%E4%B8%80%E7%AF%87%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84IEEE%E6%88%96ACM-Transaction%E7%BA%A7%E5%88%AB%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E8%AE%BA%E6%96%87/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-02-13</div>
+            机器学习-什锦-过拟合
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>与过拟合、欠拟合的斗争是机器学习的核心问题。</p>
+</blockquote>
+<h2 id="什么是拟合？"><a href="#什么是拟合？" class="headerlink" title="什么是拟合？"></a>什么是拟合？</h2><p>先打个比方，“不知道大家在学车的时候教练教倒库和侧方停车的时候有没有教一串口诀：类似于在车窗的XX框切XX杆的时候打满，切XX的时候回正等等，这个口诀可以顺利让你通过科目二，然而换个车或者换个场地，你就发现并没有卵用… 我们说这只是overfit了某个车和某个场地（训练数据），在新的测试集（新车新场地）上的泛化性能为0。”</p>
+<p>再打个比方，“如果期末考试题就是平时的作业，那我们把平时的作业都背一遍就是最好的方式，而这就是过拟合。如果期末考试不考平时作业，全是新题，那么这个时候就不能只背平时的作业，还要充分理解这门课的知识，掌握如何推理解题的技巧。所以过拟合好坏与否，完全取决于场景。”</p>
+<p>如果应用场景依靠死记硬背就能搞定，那过拟合反倒是好的。实际上在我们的设计里面，很多时候我们会倾向于往过拟合靠一点，可能做新题会差一点，但是对于死记硬背的送分题会做的非常好。在拿过去预测未来的应用场景下，有的时候过拟合不一定不好，要根据实际情况来看。</p>
+<p>上面是直观的认识，我们以“用CART拟合$y&#x3D;sin(x)$”来举例，如下图所示</p>
+<p><img src="http://p59abxhmx.bkt.clouddn.com/underfit&overfit.png" alt="underfit&amp;overfit"></p>
+<p>我们将CART的<code>max_depth</code>分别设置为1，2，5，10，从图中可以发现最大深度为1，2时欠拟合，最大深度为10时，对于数据拟合得太好，以至于将噪音数据都考虑进去了，导致其最终的模型过于复杂，当决策树深度为5时，最为折中（trade-off）。</p>
+<h2 id="拟合的几种情况"><a href="#拟合的几种情况" class="headerlink" title="拟合的几种情况"></a>拟合的几种情况</h2><ul>
+<li>拟合 Fitting：模型（构建的函数）与真实数据之间的贴合程度</li>
+<li>欠拟合 underfitting：就是训练得不够，数据不足，训练数据无法代表数据整体的分布情况</li>
+<li>过拟合 overfitting：指在模型参数拟合过程中的问题，由于训练数据包含抽样误差，训练时，复杂的模型<strong>将抽样误差也考虑在内</strong>，将抽样误差也进行了很好的拟合。模型对定型数据的拟合非常好，然而一旦在实际应用中遇到从未出现过的数据，运行效果就变得很不理想，即在训练集上效果好，在测试集上效果差。</li>
+</ul>
+<p>过拟合发生的本质原因，是由于监督学习问题的不适定：在高中数学我们知道，从n个（线性无关）方程可以解n个变量，解n+1个变量就会解不出。在监督学习中，往往<strong>数据（对应了方程）远远少于模型空间（对应了变量）</strong>。因此过拟合现象的发生，可以分解成以下三点：</p>
+<ol>
+<li>有限的训练数据不能完全反映出一个模型的好坏，然而我们却<strong>不得不在这有限的数据上挑选模型</strong>，因此我们完全有可能挑选到在训练数据上表现很好而在测试数据上表现很差的模型，因为我们完全无法知道模型在测试数据上的表现。</li>
+<li>如果模型空间很大，也就是有很多很多模型可以给我们挑选，那么挑到对的模型的机会就会很小。</li>
+<li>与此同时，如果我们要在训练数据上表现良好，最为直接的方法就是要在足够大的模型空间中挑选模型，否则如果模型空间很小，就不存在能够拟合数据很好的模型。</li>
+</ol>
+<p>另外值得一提的是，不少人会用“模型复杂度”替代上面我讲的“模型空间”。这其实是一回事，但“模型复杂度”往往容易给人一个误解，认为是一个模型本身长得复杂。例如5次多项式就要比2次多项式复杂，这是错的。因此我更愿意用“模型空间”，强调“复杂度”是候选模型的“数量”，而不是模型本事的“长相”。</p>
+<h2 id="防止过拟合"><a href="#防止过拟合" class="headerlink" title="防止过拟合"></a>防止过拟合</h2><p>具体的做法与模型有关，总的思路是让模型做一些与被拟合数据无关的事。例如对于决策树模型，让树不要太长；对于线性模型，加入正则项让向量不要太长；boosting用短一点的树和early stop、神经网络模型的early stop、drop out等让网络不要拟合太好等等。但是并不是控制了候选模型的数量，泛化能力就会好，而是对训练数据的拟合程度不变的情况下，减少候选模型数量。然而这两者往往矛盾，候选模型少了，对训练数据的拟合也会变差。</p>
+<ul>
+<li>simpler model structure</li>
+<li>regularization</li>
+<li>data augmentation</li>
+<li>dropout</li>
+<li>Bootstrap&#x2F;Bagging</li>
+<li>ensemble</li>
+<li>early stopping</li>
+<li>utilize invariance</li>
+<li>Bayesian</li>
+</ul>
+<h3 id="获取更多数据，增加训练数据量——最直接的方案"><a href="#获取更多数据，增加训练数据量——最直接的方案" class="headerlink" title="获取更多数据，增加训练数据量——最直接的方案"></a>获取更多数据，增加训练数据量——最直接的方案</h3><p>这是解决过拟合最有效的方法，只要给足够多的数据，让模型「看见」尽可能多的「例外情况」，它就会不断修正自己，从而得到更好的结果。</p>
+<ul>
+<li>从数据源头获取更多数据：这个是容易想到的，例如物体分类，我就再多拍几张照片好了；但是，在很多情况下，大幅增加数据本身就不容易；另外，我们不清楚获取多少数据才算够；</li>
+<li>根据当前数据集估计<strong>数据分布</strong>参数，使用该分布产生更多数据：这个一般不用，因为估计分布参数的过程也会代入抽样误差。</li>
+<li>数据增强：通过一定规则扩充数据。如在物体分类问题里，物体在图像中的位置、姿态、尺度，整体图片明暗度等都不会影响分类结果。我们就可以通过图像平移、翻转、缩放、切割等手段将数据库成倍扩充；</li>
+</ul>
+<h3 id="正则化——限制权值"><a href="#正则化——限制权值" class="headerlink" title="正则化——限制权值"></a>正则化——限制权值</h3><p>运用正则化（L1, L2 regularization等等），这些方法适用于大多数的机器学习，包括神经网络。他们的做法大同小异，我们简化机器学习的关键公式为$y&#x3D;Wx$ 。$W$为机器需要学习到的各种参数。在过拟合中，**$W$的值往往变化得特别大或特别小**。为了不让W变化太大，我们在计算误差上做些手脚。</p>
+<p>原始的 cost 误差是这样计算, cost &#x3D; 预测值-真实值的平方. 如果 W 变得太大, 我们就让 cost 也跟着变大, 变成一种惩罚机制. 所以我们把 W 自己考虑进来. 这里 abs 是绝对值. 这一种形式的 正规化, 叫做 l1 正规化. L2 正规化和 l1 类似, 只是绝对值换成了平方. 其他的l3, l4 也都是换成了立方和4次方等等. 形式类似. 用这些方法,我们就能保证让学出来的线条<strong>不会过于扭曲</strong>。</p>
+<h4 id="正则化时为什么能防止过拟合？"><a href="#正则化时为什么能防止过拟合？" class="headerlink" title="正则化时为什么能防止过拟合？"></a>正则化时为什么能防止过拟合？</h4><p>过拟合表现在训练数据上的误差非常小，而在测试数据上误差反而增大。其原因一般是模型过于复杂，过分得去拟合数据的噪声。正则化则是<strong>对模型参数添加先验</strong>，使得模型复杂度较小，对于噪声的输入扰动相对较小。  </p>
+<p><img src="http://p59abxhmx.bkt.clouddn.com/L1&L2.png" alt="L1&amp;L2"></p>
+<p><em>图片引自wepon大神ppt</em></p>
+<h4 id="L0-norm"><a href="#L0-norm" class="headerlink" title="L0-norm"></a>L0-norm</h4><p>其实稀疏的根本还是在于L0-norm也就是直接统计参数不为0的个数作为规则项，但实际上不好执行于是引入了L1-norm。</p>
+<h4 id="L1-norm"><a href="#L1-norm" class="headerlink" title="L1-norm"></a>L1-norm</h4><p>L1-norm本质上是假设参数先验是服从Laplace分布的。</p>
+<blockquote>
+<p>L1范数：是指向量中各个元素绝对值之和，也有个美称叫“<strong>稀疏规则算子</strong>”（Lasso regularization）。那么，<strong>参数稀疏</strong>有什么好处呢？</p>
+</blockquote>
+<p>一个关键原因在于它能实现<strong>特征的自动选择</strong>。一般来说，大部分特征$x^i$和输出$y$之间并没有多大关系。在最小化目标函数的时候考虑到这些额外的特征$x^i$，虽然可以获得更小的训练误差，但在预测新的样本时，这些没用的信息反而会<strong>干扰</strong>了对正确$y$的预测。稀疏规则化算子的引入就是为了<strong>完成特征自动选择</strong>的光荣使命，它会学习地去掉这些没有信息的特征，也就是把这些特征对应的权重置为0。</p>
+<p>L1-norm的求解比较困难，可以用<strong>坐标下降法</strong>或是<strong>最小角度回归法</strong>求解。</p>
+<h4 id="L2-norm"><a href="#L2-norm" class="headerlink" title="L2-norm"></a>L2-norm</h4><p>L2-norm本质上是假设参数先验为Gaussian分布。L2正则化时，相当于是给模型参数$w$添加了一个协方差为$\frac1\lambda$的零均值高斯分布先验。对于$\lambda&#x3D;0$，也就是不添加正则化约束，则相当于参数的高斯先验分布有着无穷大的协方差，那么这个先验约束则会非常弱，模型为了拟合所有的训练数据，$w$可以变得任意大不稳定。$\lambda$越大，表明先验的高斯协方差越小，模型约稳定，相对的variance(方差)也越小。</p>
+<blockquote>
+<p><strong>L2范数</strong>：它有两个美称，在回归里面，有人把有它的回归叫“岭回归”（Ridge Regression），有人也叫它“权值衰减”(weight decay)。</p>
+</blockquote>
+<p>它的强大之处就是它能<strong>解决过拟合</strong>问题。我们让L2范数的规则项$||w||^2$最小，可以使得$w$的每个元素都很小，都接近于0，但与L1范数不同，它不会让它等于0，而是接近于0，这里还是有很大区别的。而越小的参数说明模型越简单，越简单的模型则越不容易产生过拟合现象。<strong>为啥说越小的参数表示的模型越简单呢？</strong> <em>其实我也不知道，我也是猜，可能是因为参数小，对结果的影响就小了吧。</em></p>
+<blockquote>
+<p>一句话<strong>总结</strong>就是：L1正则化是截断效应，会趋向于产生少量的特征，而其他的特征都是0（实现稀疏，把不相关的特征的系数变成0）；L2正则化是缩放效应，使最后得到的参数很小，L2 会选择更多的特征，这些特征都会接近于0。</p>
+</blockquote>
+<h3 id="Early-stoping——从训练时间角度"><a href="#Early-stoping——从训练时间角度" class="headerlink" title="Early-stoping——从训练时间角度"></a>Early-stoping——从训练时间角度</h3><blockquote>
+<p>In machine learning, early stopping is a form of <em>regularization</em> used to <em>avoid overfitting</em> when training a learner with an <em>iterative method</em>, such as gradient descent. —wikipedia</p>
+</blockquote>
+<p>验证集</p>
+<p>其实就是评价训练正确率、测试正确率曲线，提早结束训练</p>
+<p>具体的做法是选择一部分样本作为验证集，在迭代拟合训练集的过程中，如果模型在验证集里错误率不再下降，就停止训练，也就是说控制迭代的轮数（树的个数）。</p>
+<h3 id="dropout——可以看成是一种正则化"><a href="#dropout——可以看成是一种正则化" class="headerlink" title="dropout——可以看成是一种正则化"></a>dropout——可以看成是一种正则化</h3><p>Dropout 是一种非常通用的解决深层神经网络中 overfitting 问题的方法, 过程极其简单, 在调试算法中效果也非常有效，对于神经网络单元，按照一定的概率将其暂时从网络中丢弃。</p>
+<p>首先设定一个 dropout ratio $σ$，$σ$是超参数，范围设置为 (0,1)，表示在 Forward 阶段需要随机断开的连接的比例。每次 Forward 的时候都要随机的断开该比例的连接，只更新剩下的 weight。最后, 在 test&#x2F;predict 的时候, 使用全部的连接, 不过, 这些 weights 全部都需要乘上 $1−σ$。</p>
+<p>我们可以想象其实每次训练的时候, 我们都让每一次预测结果都不会依赖于其中某部分特定的神经元. 像l1, l2正规化一样, 过度依赖的 W , 也就是训练参数的数值会很大, l1, l2会惩罚这些大的 参数. Dropout 的做法是从根本上让神经网络没机会过度依赖.</p>
+<h3 id="决策树剪枝——从结构-Architecture-角度"><a href="#决策树剪枝——从结构-Architecture-角度" class="headerlink" title="决策树剪枝——从结构 Architecture 角度"></a>决策树剪枝——从结构 Architecture 角度</h3><p>算法生成的决策树非常详细并且庞大，每个属性都被详细地加以考虑，决策树的树叶节点所覆盖的训练样本都是“纯”的。因此用这个决策树来对训练样本进行分类的话，你会发现对于训练样本而言，这个树表现完好，误差率极低且能够正确得对训练样本集中的样本进行分类。训练样本中的错误数据也会被决策树学习，成为决策树的部分，但是对于测试数据的表现就没有想象的那么好，或者极差，这就是所谓的过拟合(Overfitting)问题。Quinlan教授试验，在数据集中，过拟合的决策树的错误率比经过简化的决策树的错误率要高。</p>
+<h4 id="怎么剪枝？"><a href="#怎么剪枝？" class="headerlink" title="怎么剪枝？"></a>怎么剪枝？</h4><p>现在问题就在于，如何(HOW)在原生的过拟合决策树的基础上，生成简化版的决策树？可以通过剪枝的方法来简化过拟合的决策树。</p>
+<p>剪枝可以分为两种</p>
+<ul>
+<li><p>预剪枝(Pre-Pruning)</p>
+</li>
+<li><p>后剪枝(Post-Pruning)</p>
+</li>
+</ul>
+<p>下面我们来详细学习下这两种方法：</p>
+<p>PrePrune：预剪枝，及早的停止树增长，方法可以参考见上面树停止增长的方法。<br>PostPrune：后剪枝，在已生成过拟合决策树上进行剪枝，可以得到简化版的剪枝决策树。<br>其实剪枝的准则是如何确定决策树的规模，可以参考的剪枝思路有以下几个：<br>1：使用训练集合(Training Set）和验证集合(Validation Set)，来评估剪枝方法在修剪结点上的效用<br>2：使用所有的训练集合进行训练，但是用统计测试来估计修剪特定结点是否会改善训练集合外的数据的评估性能，如使用Chi-Square（Quinlan，1986）测试来进一步扩展结点是否能改善整个分类数据的性能，还是仅仅改善了当前训练集合数据上的性能。<br>3：使用明确的标准来衡量训练样例和决策树的复杂度，当编码长度最小时，停止树增长，如MDL(Minimum Description Length)准则。</p>
+<h3 id="SVM松弛变量"><a href="#SVM松弛变量" class="headerlink" title="SVM松弛变量"></a>SVM松弛变量</h3><p>pass 是解决拟合问题吗？只是为了容错性</p>
+<h2 id="过拟合一定不好吗？"><a href="#过拟合一定不好吗？" class="headerlink" title="过拟合一定不好吗？"></a>过拟合一定不好吗？</h2><p>过拟合是一个讨论特别多的话题。以前，通常我们会说如果模型做的太复杂了就会过拟合，而最好的方式应该是拟合的刚刚好。但现在来看，大多数的实际场景都是在拿过去预测未来，过拟合不一定是不好的，还是要看具体场景。如果这个场景是过去见过的情况比较多，新的情况比较少的时候，过拟合反倒是好的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/59201590/answer/163996540">https://www.zhihu.com/question/59201590/answer/163996540</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/59201590">https://www.zhihu.com/question/59201590</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/26898675">如何解决过拟合的问题？</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/u011067360/article/details/24871801">http://blog.csdn.net/u011067360/article/details/24871801</a></li>
+<li><a target="_blank" rel="noopener" href="https://morvanzhou.github.io/tutorials/machine-learning/torch/5-03-A-overfitting/">https://morvanzhou.github.io/tutorials/machine-learning/torch/5-03-A-overfitting/</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

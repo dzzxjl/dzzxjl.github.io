@@ -1,0 +1,157 @@
+<html>
+  <head>
+    <title>机器学习-什锦-参数与超参数 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/03/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E4%BB%80%E9%94%A6-%E7%81%B5%E6%84%9F%E4%B8%8E%E7%BB%8F%E9%AA%8C/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/02/28/%E6%A6%82%E7%8E%87%E7%BB%9F%E8%AE%A1%E4%B8%80%E2%80%94%E2%80%94%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-03-06</div>
+            机器学习-什锦-参数与超参数
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="参数-parameter——模型训练"><a href="#参数-parameter——模型训练" class="headerlink" title="参数 parameter——模型训练"></a>参数 parameter——模型训练</h2><p>机器学习里的模型通俗来说就是一个函数关系，表明输入数据到输出结果的映射，基本的假设前提是输入数据和输出数据符合某种联合概率分布，而模型训练的过程其实就是在确定函数式的具体参数值的过程。假设你要做一个多项式回归分析的模型，比如$f(x)&#x3D;w_1x_1+w_2x_2+w_3x_3$，那么模型训练的过程中其实就是在学习对应的$w$的值，这里的$w$就是参数。</p>
+<h2 id="超参数-hyperparameter——模型选择"><a href="#超参数-hyperparameter——模型选择" class="headerlink" title="超参数 hyperparameter——模型选择"></a>超参数 hyperparameter——模型选择</h2><p><strong>理解超参数时一定要和验证集挂钩。</strong></p>
+<p>模型超参数是模型外部的配置，其值不能从数据估计得到。</p>
+<p>具体特征有：</p>
+<ul>
+<li>模型超参数常应用于估计模型参数的过程中。</li>
+<li>模型超参数通常由实践者直接指定。</li>
+<li>模型超参数通常可以使用启发式方法来设置。</li>
+<li>模型超参数通常根据给定的预测建模问题而调整。</li>
+</ul>
+<p>怎样得到它的最优值：对于给定的问题，我们无法知道模型超参数的最优值。但我们可以使用经验法则来探寻其最优值，或复制用于其他问题的值，也可以通过反复试验的方法。</p>
+<p>模型超参数的一些例子包括：</p>
+<ul>
+<li>神经网络的结构（隐藏层的数量，每个隐藏层上节点的数量）</li>
+<li>训练神经网络的学习率</li>
+<li>SVM的C和sigma超参数</li>
+<li>KNN中的k</li>
+<li>树模型中的深度、叶子数</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总而言之，模型参数是从数据中自动估计的，而模型超参数是手动设置的，并用于估计模型参数的过程。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://izhaoyi.top/2017/06/01/parameter-hyperparameter/">http://izhaoyi.top/2017/06/01/parameter-hyperparameter/</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

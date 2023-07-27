@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <title>算法-dp-骰子求和 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/05/05/cpp-vector%E7%9A%84%E7%94%A8%E6%B3%95/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/04/04/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-pandas%E4%B8%AD%E7%9A%84axis/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-05-03</div>
+            算法-dp-骰子求和
+          </h1>
+          
+          
+          
+          <hr>
+
+
+          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> n an integer</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> a list of Map.Entry&lt;sum, probability&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Map.Entry&lt;Integer, Double&gt;&gt; dicesSum(<span class="type">int</span> n) &#123;</span><br><span class="line">        <span class="comment">// Write your code here</span></span><br><span class="line">        <span class="comment">// Ps. new AbstractMap.SimpleEntry&lt;Integer, Double&gt;(sum, pro)</span></span><br><span class="line">        <span class="comment">// to create the pair</span></span><br><span class="line">        <span class="type">long</span>[][] dp = <span class="keyword">new</span> <span class="title class_">long</span>[n+<span class="number">1</span>][<span class="number">6</span>*n+<span class="number">1</span>];</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">4</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">5</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">6</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;=n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &lt;= i * <span class="number">6</span>; j++) &#123;</span><br><span class="line">                <span class="type">long</span> x1=<span class="number">0</span>, x2=<span class="number">0</span>, x3=<span class="number">0</span>, x4=<span class="number">0</span>, x5=<span class="number">0</span>, x6=<span class="number">0</span>;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> (j-<span class="number">1</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    x1 = dp[i-<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(j-<span class="number">2</span>&gt;<span class="number">0</span>)&#123;    </span><br><span class="line">                x2=dp[i-<span class="number">1</span>][j-<span class="number">2</span>];    </span><br><span class="line">                &#125;    </span><br><span class="line">                <span class="keyword">if</span>(j-<span class="number">3</span>&gt;<span class="number">0</span>)&#123;    </span><br><span class="line">                    x3=dp[i-<span class="number">1</span>][j-<span class="number">3</span>];    </span><br><span class="line">                &#125;    </span><br><span class="line">                <span class="keyword">if</span>(j-<span class="number">4</span>&gt;<span class="number">0</span>)&#123;    </span><br><span class="line">                    x4=dp[i-<span class="number">1</span>][j-<span class="number">4</span>];    </span><br><span class="line">                &#125;    </span><br><span class="line">                <span class="keyword">if</span>(j-<span class="number">5</span>&gt;<span class="number">0</span>)&#123;    </span><br><span class="line">                    x5=dp[i-<span class="number">1</span>][j-<span class="number">5</span>];    </span><br><span class="line">                &#125;    </span><br><span class="line">                <span class="keyword">if</span>(j-<span class="number">6</span>&gt;<span class="number">0</span>)&#123;    </span><br><span class="line">                    x6=dp[i-<span class="number">1</span>][j-<span class="number">6</span>];    </span><br><span class="line">                &#125;    </span><br><span class="line">                dp[i][j]=x1+x2+x3+x4+x5+x6;  </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Map.Entry&lt;Integer, Double&gt;&gt; result=<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Map.Entry&lt;Integer,Double&gt;&gt;();    </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=n;i&lt;=<span class="number">6</span>*n;i++)&#123;    </span><br><span class="line">            AbstractMap.SimpleEntry&lt;Integer, Double&gt; entry=<span class="keyword">new</span> <span class="title class_">AbstractMap</span>.SimpleEntry&lt;Integer, Double&gt;(i, dp[n][i]/Math.pow(<span class="number">6</span>, n));    </span><br><span class="line">            result.add(entry);    </span><br><span class="line">        &#125;    </span><br><span class="line">        <span class="keyword">return</span> result; </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

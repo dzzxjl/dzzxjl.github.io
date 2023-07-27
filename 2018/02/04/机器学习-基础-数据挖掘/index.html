@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <title>机器学习-基础-数据挖掘 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/02/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%AD%A6%E7%A7%91-%E4%BF%A1%E6%81%AF%E8%AE%BA/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/02/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B-LR%E4%B8%8ESVM/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-02-04</div>
+            机器学习-基础-数据挖掘
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="数据挖掘、机器学习与深度学习"><a href="#数据挖掘、机器学习与深度学习" class="headerlink" title="数据挖掘、机器学习与深度学习"></a>数据挖掘、机器学习与深度学习</h2><p>数据挖掘是一个很宽泛的概念， 只要能从已知数据得中到未知有益的信息都属于数据挖掘， 而机器学习属于数据挖掘的一种方法，深度学习（神经网络算法的新近发展，是随着机器学习概念被广知的）只是机器学习的一个子类。</p>
+<h2 id="大数据与机器学习"><a href="#大数据与机器学习" class="headerlink" title="大数据与机器学习"></a>大数据与机器学习</h2><p>大数据（Spark&#x2F;Hadoop）应该主要是处理大量数据（TB级）使用的技术，而机器学习主要是通过大量样本数据来进行学习从而对未知样本进行决策的方法，大数据重点在<strong>“大”</strong>，机器学习强调<strong>学习</strong>的过程。</p>
+<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><p>做到精通数据挖掘与机器学习算法，需要算法基础好，对算法<strong>原理</strong>、<strong>实现</strong>、<strong>优化</strong>与<strong>应用</strong>有较深入了解</p>
+<h2 id="数据挖掘中的常见任务"><a href="#数据挖掘中的常见任务" class="headerlink" title="数据挖掘中的常见任务"></a>数据挖掘中的常见任务</h2><ul>
+<li>分类。是对新的数据<strong>推广已知的结构</strong>的任务。例如，一个电子邮件程序可能试图将一个电子邮件分类为“合法的”或“垃圾邮件”。</li>
+<li>回归。试图找到能够<strong>以最小误差对该数据建模</strong>的函数。</li>
+<li>聚类。是<strong>在未知数据的结构下</strong>，发现数据的类别与结构。</li>
+<li>异常检测（异常&#x2F;变化&#x2F;偏差检测）。识别不寻常的数据记录，错误数据需要进一步调查。</li>
+<li>关联规则学习（依赖建模）– 搜索变量之间的关系。例如，一个超市可能会收集顾客购买习惯的数据。运用关联规则学习，超市可以确定哪些产品经常一起买，并利用这些信息帮助营销。这有时被称为市场购物篮分析。</li>
+<li>汇总。提供了一个<strong>更紧凑的</strong>数据集表示，包括生成可视化和报表。</li>
+</ul>
+<h3 id="知乎对于机器学习的应用"><a href="#知乎对于机器学习的应用" class="headerlink" title="知乎对于机器学习的应用"></a>知乎对于机器学习的应用</h3><ul>
+<li>用户画像</li>
+<li>内容分析</li>
+<li>排序</li>
+<li>推荐</li>
+<li>商业化</li>
+<li>社区管理</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26266371?utm_source=qq&utm_medium=social">https://zhuanlan.zhihu.com/p/26266371?utm_source=qq&amp;utm_medium=social</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

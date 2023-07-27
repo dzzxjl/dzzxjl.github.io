@@ -1,0 +1,179 @@
+<html>
+  <head>
+    <title>docker和harbor的安装 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/07/31/%E6%B5%85%E8%B0%88web%E5%89%8D%E5%90%8E%E7%AB%AF/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/06/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E8%81%9A%E7%B1%BB/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-07-05</div>
+            docker和harbor的安装
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/linux/">linux</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/linux/" rel="tag">linux</a>
+            </font>
+          
+          <hr>
+
+
+          <h4 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1.安装docker"></a>1.安装docker</h4><p>环境要求:centos 7   内核 3.10.0-514.21.1.el7.x86_64 </p>
+<p>软件版本: 17.06.0-ce 最新稳定社区版本</p>
+<p>在线版安装步骤 如下: </p>
+<ol>
+<li><p>执行以下脚本安装docker:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">添加一个远程仓库</span></span><br><span class="line">sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line">sudo yum makecache fast</span><br><span class="line"></span><br><span class="line">sudo yum install docker-ce-17.06.0.ce-1.el7.centos</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>启动服务 <code>sudo systemctl start docker </code>   备注:systemctl命令和service命令类似</p>
+</li>
+<li><p>修改docker的连接为tcp连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/lib/systemd/system/docker.service</span><br><span class="line">ExecStart=/usr/bin/docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock</span><br></pre></td></tr></table></figure>
+
+<p>验证tcp连接设置是否成功， 在docker client这台上执行 <code>docker -H 10.18.1.23:2375 version</code> 会显示client和server的版本信息。如果只显示client则说明配置是有问题的</p>
+</li>
+<li><p>重启docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="2-harbor-安装"><a href="#2-harbor-安装" class="headerlink" title="2. harbor 安装"></a>2. harbor 安装</h4><p>harbor相当于一个docker image的仓库</p>
+<p>安装步骤:</p>
+<ol>
+<li><p>解压离线版压缩包 harbor-offline-installer-v1.1.2.tgz  </p>
+<p>离线文件路径 maxcd03-dev10  &#x2F;home&#x2F;maxent</p>
+</li>
+<li><p>配置harbor.cfg  <code>cd harbor </code> <code>vi harbor.cfg</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd harbor</span><br><span class="line">vi harbor.cfg</span><br><span class="line"></span><br><span class="line">hostname = 10.18.1.19 #设置hostname </span><br><span class="line">harbor_admin_password = maxcd#4Jiy  #设置admin登录密码</span><br></pre></td></tr></table></figure>
+
+<p><strong>note:</strong> 这里hostname设置成了本机ip地址，因为在实际安装过程中，如果设置成本机hostname，那么我在其他机器上pull镜像的时候默认没有把hostname映射成ip，而是在pull的地址前面加上了docker.io</p>
+</li>
+<li><p>安装 docker-compose 先下载离线docker-compose文件 </p>
+<p><code>ln -s docker-compose-Linux-x86_64 /usr/bin/docker-compose</code></p>
+<p><code>chmod +x /usr/bin/docker-compose </code> </p>
+<p>离线文件下载地址 <a target="_blank" rel="noopener" href="https://github.com/docker/compose/releases/download/1.14.0/docker-compose-Linux-x86_64">https://github.com/docker/compose/releases/download/1.14.0/docker-compose-Linux-x86_64</a></p>
+</li>
+<li><p>执行脚本 <code>./install.sh</code> 开始安装harbor</p>
+</li>
+<li><p>harbor 完成之后，其他机器上的docker要想从这个私库中拉到镜像就得配置私库的地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;insecure-registries&quot; : [&quot;maxcd03-kube1.chinacloudapp.cn&quot;, &quot;10.18.1.19&quot;] </span><br><span class="line">&#125;</span><br><span class="line">这里可以添加多个私库，字符串，逗号隔开。注意这里配置的要和harbor里面的hostname一致</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证harbor是否安装完成。 如果登录成功返回successful 表示harbor安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker login -u admin -p password xxx.xx.xxx </span><br></pre></td></tr></table></figure>
+
+<p>注意这里-p 后面的参数是harbor里面设置的admin的密码 而最后一个参数是harbor中设置的hostname</p>
+</li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

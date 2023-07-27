@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <title>概率统计一——概率分布 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/03/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E4%BB%80%E9%94%A6-%E5%8F%82%E6%95%B0%E4%B8%8E%E8%B6%85%E5%8F%82%E6%95%B0/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/02/27/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87-%E5%9B%9E%E5%BD%92%E9%97%AE%E9%A2%98/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-02-28</div>
+            概率统计一——概率分布
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>其实很多机器学习模型本身都是对数据分布有一定的假设的，在这个假设前提之下去进行理论研究有助于我们关注主要矛盾，忽律次要矛盾。但是在工程当中，很多时候我们对数据的分布其实是不了解的，贸然对数据进行假设容易造成模型无法无法拟合真实的分布。</p>
+</blockquote>
+<h2 id="关于概率的几个概念"><a href="#关于概率的几个概念" class="headerlink" title="关于概率的几个概念"></a>关于概率的几个概念</h2><p>举个例子，已知车祸有一定概率会导致堵车，此处车祸是因，堵车是果。</p>
+<p>$P(堵车)$为先验概率——（出门前根据有种要堵车的感觉，这也是先验的意思）</p>
+<p>$P(堵车|车祸)$是后验概率——（发生车祸了，这下估计要堵车）</p>
+<hr>
+<p>为了很好的说明这个问题，在这里举一个例子：</p>
+<p>玩英雄联盟占到中国总人口的60%，不玩英雄联盟的人数占到40%：</p>
+<p>为了便于数学叙述，这里我们用变量X来表示取值情况，根据概率的定义以及加法原则，我们可以写出如下表达式：</p>
+<p>P(X&#x3D;玩lol)&#x3D;0.6；P(X&#x3D;不玩lol)&#x3D;0.4，这个概率是<strong>统计</strong>得到的，即X的概率分布已知，我们称其为**先验概率(prior probability)**；</p>
+<p>另外玩lol中80%是男性，20%是小姐姐,不玩lol中20%是男性，80%是小姐姐,这里我用离散变量Y表示性别取值，同时写出相应的条件概率分布：</p>
+<p>P(Y&#x3D;男性|X&#x3D;玩lol)&#x3D;0.8，P(Y&#x3D;小姐姐|X&#x3D;玩lol)&#x3D;0.2</p>
+<p>P(Y&#x3D;男性|X&#x3D;不玩lol)&#x3D;0.2，P(Y&#x3D;小姐姐|X&#x3D;不玩lol)&#x3D;0.8</p>
+<p>那么我想问在已知玩家为男性的情况下，他是lol玩家的概率是多少：</p>
+<p>依据贝叶斯准则可得：</p>
+<p>P(X&#x3D;玩lol|Y&#x3D;男性)&#x3D;P(Y&#x3D;男性|X&#x3D;玩lol)*P(X&#x3D;玩lol)&#x2F;</p>
+<p>[ P(Y&#x3D;男性|X&#x3D;玩lol)*P(X&#x3D;玩lol)+P(Y&#x3D;男性|X&#x3D;不玩lol)*P(X&#x3D;不玩lol)]</p>
+<p>最后算出的P(X&#x3D;玩lol|Y&#x3D;男性)称之为X的<strong>后验概率</strong>，即它获得是在观察到事件Y发生后得到的</p>
+<h3 id="先验概率——执因求果"><a href="#先验概率——执因求果" class="headerlink" title="先验概率——执因求果"></a>先验概率——执因求果</h3><p>事件发生前的预判概率。可以是基于历史数据的统计，可以由背景常识得出，也可以是人的主观观点给出。一般都是单独事件概率，如$P(x)$,$P(y)$。</p>
+<h3 id="后验概率——知果求因"><a href="#后验概率——知果求因" class="headerlink" title="后验概率——知果求因"></a>后验概率——知果求因</h3><p>事件发生后求的反向条件概率；或者说，基于先验概率求得的反向条件概率。概率形式与条件概率相同。</p>
+<h3 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h3><p>一个事件发生后另一个事件发生的概率。一般的形式为$P(x|y)$表示$y$发生的条件下x发生的概率。</p>
+<h3 id="极大似然概率——知果求最可能的原因"><a href="#极大似然概率——知果求最可能的原因" class="headerlink" title="极大似然概率——知果求最可能的原因"></a>极大似然概率——知果求最可能的原因</h3><h2 id="常用概率分布"><a href="#常用概率分布" class="headerlink" title="常用概率分布"></a>常用概率分布</h2><p><a target="_blank" rel="noopener" href="http://www.csuldw.com/2016/08/19/2016-08-19-probability-distributions/">http://www.csuldw.com/2016/08/19/2016-08-19-probability-distributions/</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26464206">https://zhuanlan.zhihu.com/p/26464206</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.douban.com/note/479501378/">https://www.douban.com/note/479501378/</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

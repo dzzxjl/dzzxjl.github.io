@@ -1,0 +1,232 @@
+<html>
+  <head>
+    <title>机器学习-广义线性模型-逻辑斯蒂回归 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%86%B3%E7%AD%96%E6%A0%91-%E4%BB%8Esklearn%E4%B8%AD%E7%90%86%E8%A7%A3%E5%86%B3%E7%AD%96%E6%A0%91-%E8%BD%AC/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/03/12/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0-%E8%AF%A6%E8%A7%A3GBDT/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-03-13</div>
+            机器学习-广义线性模型-逻辑斯蒂回归
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml-glm/" rel="tag">ml glm</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="逻辑斯蒂回归-Logistic-Regression"><a href="#逻辑斯蒂回归-Logistic-Regression" class="headerlink" title="逻辑斯蒂回归 Logistic Regression"></a>逻辑斯蒂回归 Logistic Regression</h2><p>逻辑斯蒂回归（Logistic Regression）是机器学习中的一种<strong>分类模型</strong>，由于算法的简单和高效，在实际中应用非常广泛。一句话描述LR的精华就是“逻辑回归假设<strong>数据服从伯努利分布</strong>,通过<strong>极大化似然函数（MLE）</strong>的方法，运用<strong>梯度下降（GD）</strong>来求解参数，来达到将数据<strong>二分类</strong>的目的”。其中我们需要重点关注逻辑回归算法的<strong>数学模型</strong>和<strong>参数求解</strong>方法。逻辑回归本质上是一个线性模型，但是，这不意味着只有线性可分的数据能通过LR求解，实际上，我们可以通过特征变换的方式把低维空间转换到高维空间（核方法），而在低维空间不可分的数据，到高维空间中线性可分的几率会高一些。</p>
+<h3 id="面试常见问题"><a href="#面试常见问题" class="headerlink" title="面试常见问题"></a>面试常见问题</h3><ul>
+<li>LR原理<ul>
+<li>目的</li>
+<li>假设</li>
+<li>损失函数</li>
+<li>求解数学推导</li>
+</ul>
+</li>
+<li>LR的正则化</li>
+<li>为什么LR能比线性回归好？</li>
+<li>LR与MaxEnt的关系</li>
+<li>并行化的LR</li>
+</ul>
+<h2 id="推导Sigmoid函数"><a href="#推导Sigmoid函数" class="headerlink" title="推导Sigmoid函数"></a>推导Sigmoid函数</h2><h3 id="几率（odds）"><a href="#几率（odds）" class="headerlink" title="几率（odds）"></a>几率（odds）</h3><p>一个事件的几率是指该事件发生的概率与该事件不发生的概率的比值。如果事件发生的概率是$p$，那么该事件的几率是$\frac{p}{1-p}$<br>$$<br>\log\frac{p}{1-p}&#x3D;w^Tx<br>$$</p>
+<p>$$<br>P(Y&#x3D;1|x)&#x3D;\frac{1}{1+\exp(-w^Tx)}<br>$$</p>
+<p>对sigmoid变化的理解：</p>
+<ol>
+<li>sigmoid函数光滑，处处可导，导数还能用自己表示</li>
+<li>sigmoid能把数据从负无穷到正无穷压缩到0，1之间，压缩掉了长尾，扩展了核心分辨率</li>
+<li>sigmoid在有观测误差的情况下最优的保证了输入信号的信息</li>
+</ol>
+<p>线形回归怎么推到logistic回归，为什么logistic回归比线形回归更好（0到1的值域可以表示概率，自变量接近0时因变量更敏感，<strong>odds的现实意义</strong>，尤其是在自变量中存在虚拟变量，或者多分类问题上的意义），缺点（梯度爆炸，计算量更大）</p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>$$<br>\prod_{i&#x3D;1}^{N}[\pi(x_i)]^{y_i}[1-\pi(x_i)]^{1-y_i}<br>$$</p>
+<h2 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h2><p>怎么求解，为什么不能用OLS，要用MLE，</p>
+<p>其实MLE从本质上还是OLS，具体可从PRML此书的推导得知</p>
+<p>MLE又怎么解</p>
+<ul>
+<li>梯度下降</li>
+<li>牛顿</li>
+<li>其他优化算法</li>
+</ul>
+<p>由于该极大似然函数无法直接求解，我们一般通过对该函数进行梯度下降来不断逼近最优解。梯度下降本身来看的话就有随机梯度下降，批梯度下降，small batch 梯度下降三种方式，如何选择最合适的梯度下降方式？</p>
+<ul>
+<li>简单来说，批梯度下降会获得全局最优解，缺点是在更新每个参数的时候需要遍历所有的数据，计算量会很大，并且会有很多的冗余计算，导致的结果是当数据量大的时候，每个参数的更新都会很慢</li>
+<li>随机梯度下降是以<strong>高方差</strong>频繁更新，优点是使得sgd会跳到新的和潜在更好的局部最优解，缺点是使得收敛到局部最优解的过程更加的复杂</li>
+<li>小批量梯度下降结合了sgd和batch gd的优点，<strong>每次更新的时候使用n个样本</strong>。减少了参数更新的次数，可以达到<strong>更加稳定收敛</strong>结果，一般在深度学习当中我们采用这种方法</li>
+</ul>
+<h2 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h2><ul>
+<li><p>优点</p>
+<ul>
+<li>形式简单，模型的可解释性非常好。从<strong>特征的权重</strong>可以看到不同的特征对最后结果的影响，某个特征的权重值比较高，那么这个特征最后对结果的影响会比较大</li>
+<li>模型效果不错。在工程上是可以接受的（作为baseline)，如果特征工程做的好，效果不会太差，并且特征工程可以大家并行开发，大大加快开发的速度</li>
+<li><strong>训练速度较快</strong>。分类的时候，计算量仅仅只和特征的数目相关。并且<strong>逻辑回归的分布式优化sgd</strong>发展比较成熟，训练的速度可以通过堆机器进一步提高，这样我们可以在短时间内迭代好几个版本的模型</li>
+<li>资源占用小,尤其是内存。因为只需要存储各个维度的特征值</li>
+<li>方便<strong>输出结果调整</strong>。逻辑回归可以很方便的得到最后的分类结果，因为输出的是每个样本的概率分数，我们可以很容易的对这些概率分数进行cutoff，也就是划分阈值(大于某个阈值的是一类，小于某个阈值的是一类)</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li><p>准确率并不是很高。因为形式非常的简单(非常类似线性模型)，<strong>很难去拟合数据的真实分布</strong></p>
+</li>
+<li><p>很难处理数据不平衡的问题。举个例子：如果我们对于一个正负样本非常不平衡的问题比如正负样本比 10000:1.我们把所有样本都预测为正也能使损失函数的值比较小。但是作为一个分类器，它对正负样本的区分能力不会很好</p>
+</li>
+<li><p>处理非线性数据较麻烦。逻辑回归在不引入其他方法的情况下，只能处理线性可分的数据，或者进一步说，处理二分类的问题</p>
+</li>
+<li><p>逻辑回归本身无法筛选特征。有时候，我们会用gbdt来筛选特征，然后再上逻辑回归</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="LR并行化"><a href="#LR并行化" class="headerlink" title="LR并行化"></a>LR并行化</h2><p>并行LR实际上就是在求解损失函数最优解的过程中，针对<strong>寻找损失函数下降方向</strong>中的梯度方向计算作了并行化处理，而在利用梯度确定下降方向的过程中也可以采用并行化（如L-BFGS中的两步循环法求牛顿方向）。</p>
+<h2 id="LR和线性回归的区别"><a href="#LR和线性回归的区别" class="headerlink" title="LR和线性回归的区别"></a>LR和线性回归的区别</h2><ol>
+<li>线性回归要求因变量服从<strong>正态分布</strong>，是连续性数值变量，LR要求因变量服从<strong>伯努利分布</strong>，要求因变量是分类型变量</li>
+<li>线性回归是直接分析因变量与自变量的关系，而LR是分析因变量<strong>取某个值的概率与自变量的关系</strong></li>
+<li>线性回归要求自变量和因变量呈线性关系，而logistic回归不要求自变量和因变量呈线性关系<em>（此处不确定）</em></li>
+</ol>
+<p>总之, LR与线性回归实际上有很多相同之处，最大的区别就在于他们的因变量不同，其他的基本都差不多，正是因为如此，这两种回归可以归于同一个家族，即广义线性模型（generalized linear model）。这一家族中的模型形式基本上都差不多，不同的就是因变量不同，如果是连续的，就是多重线性回归，如果是伯努利分布，就是LR。LR的因变量可以是二分类的，也可以是多分类的，但是二分类的更为常用，也更加容易解释。所以实际中最为常用的就是二分类的logistic回归。</p>
+<h2 id="逻辑斯蒂回归为什么要对特征进行离散化？"><a href="#逻辑斯蒂回归为什么要对特征进行离散化？" class="headerlink" title="逻辑斯蒂回归为什么要对特征进行离散化？"></a>逻辑斯蒂回归为什么要对特征进行离散化？</h2><h3 id="海量离散特征与LR"><a href="#海量离散特征与LR" class="headerlink" title="海量离散特征与LR"></a>海量离散特征与LR</h3><p>首先，海量离散特征＋LR是业内常见的一个做法，但并不是Holy Grail（圣杯），事实上这一般而言仅仅是因为LR的优化算法更加成熟，而且可以在计算中利用<strong>稀疏特性</strong>进行更好的优化——可谓不得已而为之。</p>
+<p>事实证明GBDT和深度学习特征的加入对于CTR预测是有正面帮助的。</p>
+<p>如果这个问题思考地更深一点，其实当前深度学习网络的最后一层，如果是binary classification，其实等同于LR。所以说，通过人工／半人工的方式产生的features，跟深度神经网络（无论之前用了怎样的结构）最后学出来的representation，其实是异曲同工，区别在于深度学习一般而言会学出一个<strong>dense representation</strong>，而特征工程做出来的是一堆<strong>sparse representation</strong>。某些时候，人工特征其实跟神经网络经过几层非线性之后的结果是高度相似的。</p>
+<p>在暴力提取高阶／非线性特征的本事上，机器肯定胜过人类。但是，就算最牛的机器智能，有时候都敌不过一些“人类常识”。尤其是业务的一些逻辑，可以认为是人脑在更大的一个数据集上pre-train出来的一些特征，其包含的信息量一定是大于你用于预测的dataset的。在这种情况下，往往厉害的人工features会outperform暴力的机器方法。</p>
+<p>所以，特征离散化，从数学角度来说可以认为是增加robustness，但是更重要的，make sense of the data，将数据转变成人类可以理解、可以validate的格式。</p>
+<p>人类的业务逻辑，当然也不是完美的。在当前机器智能还未征服“常识”这个领域之前，人类的business insights还是一个有力的补充（在很多case，甚至是最重要的部分）。在机器能够完全掌握的范围内，譬如围棋，人类引以为傲的intuition已经无法抵抗机器的暴力计算了——所以在未来，我们一定会看到越来越多的机器智能开始侵入一些传统上认为必须要依靠人类的“感觉”的一些领域。</p>
+<p>广告领域当然也不能躲过这个大的趋势。</p>
+<h3 id="Why"><a href="#Why" class="headerlink" title="Why?"></a>Why?</h3><p>在工业界，很少直接将连续值作为逻辑回归模型的特征输入，而是将连续特征离散化为一系列 0、1 特征交给逻辑斯蒂回归模型，这样做的优势有以下几点:</p>
+<ol start="0">
+<li>离散特征的增加和减少都很容易，易于模型的快速迭代; <em>怎么理解</em></li>
+<li>稀疏向量内积乘法运算速度快，计算结果方便存储，容易扩展;</li>
+<li>离散化后的特征对异常数据有很强的鲁棒性：比如一个特征是$age&gt;30$ 是1，否则0。如果特征没有离散化，一个异常数据$age&#x3D;300$会给模型造成很大的干扰;</li>
+<li>逻辑斯蒂回归属于广义线性模型，表达能力受限；单变量离散化为 N 个后，每个变量有单独的权重，相当于为模型引入了非线性，能够提升模型表达能力，加大拟合；</li>
+<li>离散化后可以进行特征交叉，由 M+N 个变量变为 M*N 个变量，进一步引入非线性，提升表达能力;</li>
+<li>特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20-30 作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间是门学问;</li>
+<li>特征离散化以后，起到了<strong>简化了逻辑斯蒂回归</strong>模型的作用，降低了模型过拟合的风险。</li>
+</ol>
+<p>李沐曾经说过：模型是使用离散特征还是连续特征，其实是<strong>一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡</strong>。既可以离散化用线性模型，也可以用<strong>连续特征加深度学习</strong>。就看是喜欢<strong>折腾特征</strong>还是<strong>折腾模型</strong>了。通常来说，前者容易，而且可以多个人一起并行做，有成功经验；后者目前看很赞，能走多远还须拭目以待。</p>
+<h2 id="LR与MaxEnt"><a href="#LR与MaxEnt" class="headerlink" title="LR与MaxEnt"></a>LR与MaxEnt</h2><p>LR是最大熵在类别为2时候的特例</p>
+<h2 id="应用经验"><a href="#应用经验" class="headerlink" title="应用经验"></a>应用经验</h2><p>如果连续变量，注意做SCALING，缩放单位即标准化。<strong>LR对样本分布敏感</strong>，所以要注意样本的平衡性（y&#x3D;1不能太少）样本量足的情况下采用下采样，不足的情况用上采样。选择0.5作为阈值是一个一般的做法，实际应用时特定的情况可以选择不同阈值，如果对正例的判别精确率（查准率）要求高，可以选择阈值大一些，对正例的召回（查全率）要求高，则可以选择阈值小一些。</p>
+<ol>
+<li>如何选择用来分类的threshold，怎么根据具体情况选择（sensitive or specific）</li>
+<li>怎么判断模型好坏，ROC和AUC是怎么来的，有什么意义？</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>线性回归与losistic回归的区别，如何估计回归参数?</p>
+<p>直接用线性回归做分类因为考虑到了所有样本点到分类决策面的距离，所以在两类数据分布不均匀的时候将导致误差非常大；逻辑斯蒂回归回归和SVM克服了这个缺点，前者采用将所有数据采用sigmod函数进行了非线性映射，使得远离分类决策面的数据作用减弱；后者则直接去掉了远离分类决策面的数据，只考虑支持向量的影响。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/ModifyRong/p/7739955.html">http://www.cnblogs.com/ModifyRong/p/7739955.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/31989952/">https://www.zhihu.com/question/31989952/</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

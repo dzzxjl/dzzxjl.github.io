@@ -1,0 +1,237 @@
+<html>
+  <head>
+    <title>java语言基础 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/08/07/%E6%97%B6%E7%A9%BA%E6%95%B0%E6%8D%AE%E9%A2%86%E5%9F%9F%E4%BC%9A%E8%AE%AE/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/08/01/%E7%90%86%E8%A7%A3%E4%B8%8E%E5%BA%94%E7%94%A8git/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-08-02</div>
+            java语言基础
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/java/">java</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/java/" rel="tag">java</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>理解了边界所在，你才能成为程序高手。 ——《Thinking in java》</p>
+</blockquote>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><ul>
+<li>java语言特性<ul>
+<li>数组与字符串</li>
+<li>关键字<ul>
+<li>static</li>
+<li>final——一般比较基本的类型或防止扩展类无意间破坏原来方法的实现的类型都应该是final的，在jdk中System,String,StringBuffer等都是基本类型。</li>
+</ul>
+</li>
+<li>重写与重载</li>
+<li>泛型</li>
+<li>集合类<ul>
+<li>HashMap<ul>
+<li>冲突解决</li>
+<li>线程不安全</li>
+</ul>
+</li>
+<li>Collection<ul>
+<li>ArrayList</li>
+<li>LinkedList</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>反射机制与注解</li>
+<li>深入理解面向对象思想、面向接口编程<ul>
+<li>抽象类与接口</li>
+<li>java单一继承</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>java虚拟机机制</strong><ul>
+<li>运行时数据区</li>
+<li>垃圾回收机制</li>
+<li>类加载机制</li>
+</ul>
+</li>
+<li><strong>java高并发</strong><ul>
+<li>java内存模型</li>
+<li>线程的状态</li>
+<li>线程安全</li>
+</ul>
+</li>
+<li><strong>异步编程</strong><ul>
+<li>NIO</li>
+</ul>
+</li>
+<li><em>Java Web</em><ul>
+<li>熟悉 <em>JSP</em> 、 <em>Servlet</em> 等原理</li>
+<li>熟悉 <em>Tomcat</em> 、 <em>Apache</em> 等 <em>web</em> 服务器工作原理 </li>
+<li>熟悉 <em>Spring(IOC&#x2F;AOP)</em> 、<em>Spring MVC</em> 等开发框架</li>
+<li>熟悉 <em>Hibernate</em> 、 <em>MyBatis</em> 等 <em>ORM</em> 框架</li>
+</ul>
+</li>
+<li>分布式与流处理<ul>
+<li>了解 <em>ZooKeeper</em> 、 <em>Dubbo</em> 等分布式处理框架</li>
+<li>了解 <em>Kafka</em>、<em>RocketMQ</em> 等流处理框架</li>
+</ul>
+</li>
+</ul>
+<h2 id="局部"><a href="#局部" class="headerlink" title="局部"></a>局部</h2><h3 id="泛型T"><a href="#泛型T" class="headerlink" title="泛型T"></a>泛型T</h3><p>泛型在入门java的过程中很常见，在java中我们往往以泛型来称呼它，而在c++中则更多叫它模板。泛型出现的最引人注目的一个原因是为了创造<strong>容器类</strong>。</p>
+<p>以下两个为经常在源码中看到的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;? <span class="keyword">extends</span> <span class="title class_">T</span>&gt; 与 &lt;? <span class="built_in">super</span> T&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>? &lt;&#x3D; T</li>
+<li>? &gt;&#x3D; T</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;T <span class="keyword">extends</span> <span class="title class_">Comparable</span>&lt;T&gt;&gt;与&lt;T <span class="keyword">extends</span> <span class="title class_">Comparable</span>&lt;? <span class="built_in">super</span> T&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>1 类型 T 必须实现 <code>Comparable</code> 接口，并且这个接口的类型是 T。只有这样，T 的实例之间才能相互比较大小。例如，在实际调用时若使用的具体类是 Dog，那么 Dog 必须 <code>implements Comparable&lt;Dog&gt;</code></li>
+<li>2 类型 T 必须实现 <code>Comparable</code> 接口，并且这个接口的类型是 T 或 T 的任一父类。这样声明后，T 的实例之间，T 的实例和它的父类的实例之间，可以相互比较大小。例如，在实际调用时若使用的具体类是 Dog (假设 Dog 有一个父类 Animal），Dog 可以从 Animal 那里继承 <code>Comparable&lt;Animal&gt;</code> ，或者自己 <code>implements Comparable&lt;Dog&gt;</code></li>
+</ul>
+<h3 id="反射与注解"><a href="#反射与注解" class="headerlink" title="反射与注解"></a>反射与注解</h3><h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><p>JAVA反射机制是在<strong>运行时</strong>，对于任意一个类，都能够知道这个类的所有属性和方法，用类的全限定名就运行时动态获得java类的class对象，然后从class对象就可以得到这个类的所有信息。</p>
+<p>包含以下几个功能：</p>
+<ul>
+<li>在运行时判断任意一个对象所属的类</li>
+<li>在运行时构造任意一个类的对象</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法</li>
+<li>在运行时调用任意一个对象的方法</li>
+</ul>
+<p>包含四个核心类：</p>
+<ul>
+<li>Class</li>
+<li>Constructor</li>
+<li>Method</li>
+<li>Field</li>
+</ul>
+<p>反射的作用：</p>
+<ul>
+<li>操作引访问权限限制的属性和方法</li>
+<li>实现自定义注解</li>
+<li>动态加载第三方jar包，解决android开发中方法不能超过65536个的问题</li>
+<li>按需加载类，节省编译个初始化apk的时间</li>
+</ul>
+<p>反射的工作原理：</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/21423208?utm_source=qq&utm_medium=social">https://zhuanlan.zhihu.com/p/21423208?utm_source=qq&amp;utm_medium=social</a></p>
+<h4 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h4><p>Java源代码中的元数据，注解会影响源代码的行为（注解可能会被保存在字节码中），而注释不会。注解是描述Java代码的代码，它能够被编译器解析，注解处理工具在运行时也能够解析注解。首先要知道注解本身没有任何作用，但是它能够被获取，并在代码中根据注解做一些处理。</p>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

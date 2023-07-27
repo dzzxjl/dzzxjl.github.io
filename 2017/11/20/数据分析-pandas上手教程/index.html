@@ -1,0 +1,277 @@
+<html>
+  <head>
+    <title>数据分析-pandas上手教程 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/11/20/python%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/11/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-11-20</div>
+            数据分析-pandas上手教程
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/python/">python</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/python-pandas/" rel="tag">python pandas</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>使用pandas主要进行<strong>data manipulation</strong>。通过带有标签的列和索引，pandas 使我们可以以一种所有人都能理解的方式来处理数据。它可以让我们毫不费力地从诸如 <code>csv</code> 类型的文件中导入数据。我们可以用它快速地对数据进行复杂的转换和过滤等操作。</p>
+<p>pandas中最基本的数据结构是Series与DataFrame。</p>
+<blockquote>
+<p>pandas 讲究整体操作，想对里面的一些数据进行一些批量操作的时候，挨个用纯 Python 的方法，挨个遍历。这样简单是足够简单，但很不 pandasic。那有没有更为简单一些的办法呢？</p>
+</blockquote>
+<h2 id="关键缩写和包导入"><a href="#关键缩写和包导入" class="headerlink" title="关键缩写和包导入"></a>关键缩写和包导入</h2><p>在这个速查手册中，我们使用如下缩写：</p>
+<blockquote>
+<p>df：任意的Pandas DataFrame对象<br>s：任意的Pandas Series对象</p>
+</blockquote>
+<p>同时我们需要做如下的引入：</p>
+<blockquote>
+<p>import pandas as pd<br>import numpy as np</p>
+</blockquote>
+<h2 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h2><p>DataFrame是将数个Series按列合并而成的二维数据结构，每一列单独取出来是一个Series，这和SQL数据库中取出的数据是很类似的。</p>
+<h2 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h2><p>Series 有个 <code>map</code> 方法，就是把函数映射到里面每个单元上，对单元进行操作。</p>
+<p>Series的<code>map()</code>可以接受<strong>一个函数</strong>或<strong>含有映射关系的字典型对象</strong>或**<code>lambda x</code>**。</p>
+<p>使用map是一种实现元素级转换以及其他数据清理工作的便捷方式（DataFrame中对应的是<code>applymap()</code>，当然DataFrame还有<code>apply()</code>）。</p>
+<p>字典映射</p>
+<p>应用函数</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="预览数据"><a href="#预览数据" class="headerlink" title="预览数据"></a>预览数据</h3><ol>
+<li><pre><code>from subprocess import check_output
+print(check_output([&quot;ls&quot;, &quot;./data&quot;]).decode(&#39;utf8&#39;))
+</code></pre>
+</li>
+<li><p><code>pd.read_csv()</code> 读取数据</p>
+</li>
+<li><ul>
+<li><code>df.head()</code></li>
+<li><code>df.tail()</code></li>
+<li><code>df.info</code></li>
+<li><code>df.describe()</code></li>
+</ul>
+</li>
+<li><p><code>df.info</code></p>
+</li>
+<li><ul>
+<li><code>df[&#39;&#39;].value_counts()</code></li>
+<li><code>df[&#39;&#39;].unique()</code></li>
+</ul>
+</li>
+<li><p>​</p>
+</li>
+</ol>
+<h3 id="操作数据"><a href="#操作数据" class="headerlink" title="操作数据"></a>操作数据</h3><ol>
+<li><code>df[:,&#39;&#39;] = value </code> <code>df[&#39;&#39;] = value </code> 添加新的列 </li>
+<li><code>df.groupby()</code> 数据聚合<ol>
+<li>mean</li>
+<li>count</li>
+<li>Min</li>
+<li>sum</li>
+<li>等</li>
+</ol>
+</li>
+</ol>
+<h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><ul>
+<li>pd.read_csv(filename)：从CSV文件导入数据</li>
+<li>pd.read_table(filename)：从限定分隔符的文本文件导入数据</li>
+<li>pd.read_excel(filename)：从Excel文件导入数据</li>
+<li>pd.read_sql(query, connection_object)：从SQL表&#x2F;库导入数据</li>
+<li>pd.read_json(json_string)：从JSON格式的字符串导入数据</li>
+<li>pd.read_html(url)：解析URL、字符串或者HTML文件，抽取其中的tables表格</li>
+<li>pd.read_clipboard()：从你的粘贴板获取内容，并传给read_table()</li>
+<li>pd.DataFrame(dict)：从字典对象导入数据，Key是列名，Value是数据</li>
+</ul>
+<h2 id="数据合并"><a href="#数据合并" class="headerlink" title="数据合并"></a>数据合并</h2><ul>
+<li>df1.append(df2)：将df2中的行添加到df1的尾部</li>
+<li>df.concat([df1, df2],axis&#x3D;1)：将df2中的列添加到df1的尾部</li>
+<li>df1.join(df2,on&#x3D;col1,how&#x3D;’inner’)：对df1的列和df2的列执行SQL形式的join</li>
+</ul>
+<h2 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h2><ul>
+<li>df.describe()：查看数据值列的汇总统计</li>
+<li>df.mean()：返回所有列的均值</li>
+<li>df.corr()：返回列与列之间的相关系数</li>
+<li>df.count()：返回每一列中的非空值的个数</li>
+<li>df.max()：返回每一列的最大值</li>
+<li>df.min()：返回每一列的最小值</li>
+<li>df.median()：返回每一列的中位数</li>
+<li>df.std()：返回每一列的标准差</li>
+</ul>
+<h2 id="创建测试对象"><a href="#创建测试对象" class="headerlink" title="创建测试对象"></a>创建测试对象</h2><ul>
+<li>pd.DataFrame(np.random.rand(20,5))：创建20行5列的随机数组成的DataFrame对象</li>
+<li>pd.Series(my_list)：从可迭代对象my_list创建一个Series对象</li>
+<li>df.index &#x3D; pd.date_range(‘1900&#x2F;1&#x2F;30’, periods&#x3D;df.shape[0])：增加一个日期索引</li>
+</ul>
+<h2 id="查看、检查数据"><a href="#查看、检查数据" class="headerlink" title="查看、检查数据"></a>查看、检查数据</h2><ul>
+<li>df.head(n)：查看DataFrame对象的前n行</li>
+<li>df.tail(n)：查看DataFrame对象的最后n行</li>
+<li>df.shape()：查看行数和列数</li>
+<li>df.info()：查看索引、数据类型和内存信息</li>
+<li>df.describe()：查看数值型列的汇总统计</li>
+<li>s.value_counts(dropna&#x3D;False)：查看Series对象的唯一值和计数</li>
+<li>df.apply(pd.Series.value_counts)：查看DataFrame对象中每一列的唯一值和计数</li>
+</ul>
+<h2 id="数据选取"><a href="#数据选取" class="headerlink" title="数据选取"></a>数据选取</h2><ul>
+<li>df[col]：根据列名，并以Series的形式返回列</li>
+<li>df[[col1, col2]]：以DataFrame形式返回多列</li>
+<li>s.iloc[0]：按位置选取数据</li>
+<li>s.loc[‘index_one’]：按索引选取数据</li>
+<li>df.iloc[0,:]：返回第一行</li>
+<li>df.iloc[0,0]：返回第一列的第一个元素</li>
+</ul>
+<h2 id="数据清理"><a href="#数据清理" class="headerlink" title="数据清理"></a>数据清理</h2><ul>
+<li>df.columns &#x3D; [‘a’,’b’,’c’]：重命名列名</li>
+<li>pd.isnull()：检查DataFrame对象中的空值，并返回一个Boolean数组</li>
+<li>pd.notnull()：检查DataFrame对象中的非空值，并返回一个Boolean数组</li>
+<li>df.dropna()：删除所有包含空值的行</li>
+<li>df.dropna(axis&#x3D;1)：删除所有包含空值的列</li>
+<li>df.dropna(axis&#x3D;1,thresh&#x3D;n)：删除所有小于n个非空值的行</li>
+<li>df.fillna(x)：用x替换DataFrame对象中所有的空值</li>
+<li>s.astype(float)：将Series中的数据类型更改为float类型</li>
+<li>s.replace(1,’one’)：用‘one’代替所有等于1的值</li>
+<li>s.replace([1,3],[‘one’,’three’])：用’one’代替1，用’three’代替3</li>
+<li>df.rename(columns&#x3D;lambda x: x + 1)：批量更改列名</li>
+<li>df.rename(columns&#x3D;{‘old_name’: ‘new_ name’})：选择性更改列名</li>
+<li>df.set_index(‘column_one’)：更改索引列</li>
+<li>df.rename(index&#x3D;lambda x: x + 1)：批量重命名索引</li>
+</ul>
+<h2 id="数据处理：Filter、Sort和GroupBy"><a href="#数据处理：Filter、Sort和GroupBy" class="headerlink" title="数据处理：Filter、Sort和GroupBy"></a>数据处理：Filter、Sort和GroupBy</h2><ul>
+<li>df[df[col] &gt; 0.5]：选择col列的值大于0.5的行</li>
+<li>df.sort_values(col1)：按照列col1排序数据，默认升序排列</li>
+<li>df.sort_values(col2, ascending&#x3D;False)：按照列col1降序排列数据</li>
+<li>df.sort_values([col1,col2], ascending&#x3D;[True,False])：先按列col1升序排列，后按col2降序排列数据</li>
+<li>df.groupby(col)：返回一个按列col进行分组的Groupby对象</li>
+<li>df.groupby([col1,col2])：返回一个按多列进行分组的Groupby对象</li>
+<li>df.groupby(col1)[col2]：返回按列col1进行分组后，列col2的均值</li>
+<li>df.pivot_table(index&#x3D;col1, values&#x3D;[col2,col3], aggfunc&#x3D;max)：创建一个按列col1进行分组，并计算col2和col3的最大值的数据透视表</li>
+<li>df.groupby(col1).agg(np.mean)：返回按列col1分组的所有列的均值</li>
+<li>data.apply(np.mean)：对DataFrame中的每一列应用函数np.mean</li>
+<li>data.apply(np.max,axis&#x3D;1)：对DataFrame中的每一行应用函数np.max</li>
+</ul>
+<h2 id="导出数据"><a href="#导出数据" class="headerlink" title="导出数据"></a>导出数据</h2><ul>
+<li>df.to_csv(filename)：导出数据到CSV文件</li>
+<li>df.to_excel(filename)：导出数据到Excel文件</li>
+<li>df.to_sql(table_name, connection_object)：导出数据到SQL表</li>
+<li>df.to_json(filename)：以Json格式导出数据到文本文件</li>
+</ul>
+<h2 id="性能瓶颈"><a href="#性能瓶颈" class="headerlink" title="性能瓶颈"></a>性能瓶颈</h2><p>因为使用pandas进行数据分析时，会将所有的数据读入内存中。一般来说，用pandas处理小于100M的数据，性能不是问题。但用pandas来处理100M至几个G的数据时，将会比较耗时，同时会导致程序因内存不足而运行失败。如果使用pandas处理规模较大的数据，请参考文末参考1。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.dataquest.io/blog/pandas-big-data/">https://www.dataquest.io/blog/pandas-big-data/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.dataquest.io/blog/pandas-cheat-sheet/">https://www.dataquest.io/blog/pandas-cheat-sheet/</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25630700">https://zhuanlan.zhihu.com/p/25630700</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/youngbit007/article/details/54288603">https://blog.csdn.net/youngbit007/article/details/54288603</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

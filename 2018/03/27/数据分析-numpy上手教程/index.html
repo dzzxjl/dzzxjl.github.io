@@ -1,0 +1,312 @@
+<html>
+  <head>
+    <title>数据分析-numpy上手教程 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/04/04/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-pandas%E4%B8%AD%E7%9A%84axis/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/03/20/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0-%E4%BB%8Esklearn%E4%B8%AD%E7%90%86%E8%A7%A3GB-%E8%BD%AC/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-03-27</div>
+            数据分析-numpy上手教程
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/python/">python</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/python-numpy/" rel="tag">python numpy</a>
+            </font>
+          
+          <hr>
+
+
+          <h3 id="Numpy-简介"><a href="#Numpy-简介" class="headerlink" title="Numpy 简介"></a>Numpy 简介</h3><p>NumPy 是 Python 科学计算的底层包, 提供了 ndarray 等方便大规模科学计算的类和方法等. NumPy 也是 Python 数据分析所用的 Pandas 包的基础, 所以这里简要介绍一下 numpy 的基础使用以方便学习和使用 Pandas 进行生物信息学分析.</p>
+<p>NumPy 主要包括: N-dimensional array object, 即 ndarry; 向量化可广播的函数和方法; 方便整合 C&#x2F;C++ 和 Fortran 代码的工具; 线性代数函数, 傅立叶变换和随机数生成器.</p>
+<p>NumPy 已经归属于整合的 SciPy 科学计算包, 有更多复杂的功能, 可以应用于不同的科学计算任务, 本文所介绍的 NumPy 基础主要是作为未来学习和使用 Pandas 包进行数据分析, 所以不会提及太复杂的内容, 主要会是 ndarry 的一些函数和十分好用的生成随机数的函数.</p>
+<h4 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h4><p>NumPy 中有多种创建数组的方法, 还可以根据需要创建单位矩阵或者零矩阵. NumPy 中建立的数组类型为 ndarray, 是能够高效进行大规模计算的数据类型.</p>
+<ul>
+<li><code>np.array</code>: 可以把 list, tuple, array, 或者其他的序列模式的数据转创建为 ndarray, 默认创建一个新的 ndarray.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data = np.array(range(5), dtype = int)</span><br><span class="line">data</span><br><span class="line"># array([0, 1, 2, 3, 4])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>np.asarray</code>: 把其他类型的数据转换成为 ndarray, 如果是 ndarray 输入则默认不进行 copy, 而如果是其他类型数据则创建新的 ndarray.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data2 = np.asarray(data)</span><br><span class="line">data2 is data</span><br><span class="line"># True</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>np.arange</code>: 类似于 range 函数, 创建一个序列.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">np.arange(1, 16, 2)</span><br><span class="line"># array([ 1,  3,  5,  7,  9, 11, 13, 15])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>np.ones</code>, <code>np.ones_like</code>: 创建一个数组, 其中的元素全为 1. <code>np.ones</code> 根据参数设定的纬度创建一个元素为 1 的数组, 而 <code>np.ones_like</code> 则根据一个已有的数组创建和其有相同纬度的元素全为 1 的数组.</li>
+<li><code>np.zeros</code>, <code>np.zeros_like</code>: 创建元素全为 0 的数组, 类似 <code>np.ones</code>.</li>
+<li><code>np.empty</code>, <code>np.empty_like</code>: 创建空数组, 类似 <code>np.ones</code>. 其中每个元素都没有进行初始化, 并不能保证都是 0.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">np.ones((2, 3))</span><br><span class="line"># array([[ 1.,  1.,  1.],</span><br><span class="line">#        [ 1.,  1.,  1.]])</span><br><span class="line">np.zeros((2, 3))</span><br><span class="line"># array([[ 0.,  0.,  0.],</span><br><span class="line">#        [ 0.,  0.,  0.]])</span><br><span class="line">np.empty((2,3))</span><br><span class="line"># array([[ 0.,  0.,  0.],</span><br><span class="line">#        [ 0.,  0.,  0.]])</span><br><span class="line">np.ones_like(data)</span><br><span class="line"># array([1, 1, 1, 1, 1])</span><br><span class="line">np.zeros_like(data)</span><br><span class="line"># array([0, 0, 0, 0, 0])</span><br><span class="line">np.empty_like(data)</span><br><span class="line"># array([0, 0, 0, 0, 0])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>np.eye</code>: 创建一个对角线为 1 其他为 0 的矩阵.</li>
+<li><code>np.identity</code>: 创建一个主对角线为 1 其他为 0 的方阵.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">np.eye(2, 2)</span><br><span class="line"># array([[ 1.,  0.],</span><br><span class="line">#        [ 0.,  1.]])</span><br><span class="line">np.identity(3)</span><br><span class="line"># array([[ 1.,  0.,  0.],</span><br><span class="line">#        [ 0.,  1.,  0.],</span><br><span class="line">#        [ 0.,  0.,  1.]])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="ndarray-方法"><a href="#ndarray-方法" class="headerlink" title="ndarray 方法"></a>ndarray 方法</h4><p>一个 ndarray 有如下常用的属性.</p>
+<p>虽然一个矩阵可能是多维的, 但由于内存的物理特性, 其存储在内存上是线性的. 把二维的矩阵存储成一维需要确定的是一行一行地存 (行优先) 还是一列一列地存 (列优先). 和 R 默认把矩阵按照列优先存储不同, NumPy 的 ndarray 默认把数据按照行优先存储, 这样在考虑 ndarray 地算法的时候也尽量按照行优先.</p>
+<ul>
+<li><code>np.size</code>: ndarray 的属性, ndarray 的元素的数量.</li>
+<li><code>np.dtype</code>: ndarray 的属性, ndarray 的元素的类型, 和 C&#x2F;C++ 中的类型有对应关系. <code>np.sctypes</code> 为一个存有 numpy 支持的 dtype 的 dict. 整型 (int) 有 int8 (代表其长度为 8 个字, 即 1 个字节, 后面类似), int16, int32, int64. 无符号整型 (unit) 有 uint8, uit16, uint32, uint64. 浮点型 (float) 有 float16, float32, float64, float128. 复数型 (complex) 有 complex64, complex 128, complex256. 其他还有布尔型 (bool), 字符串型 (object, str) 等.</li>
+<li><code>np.itemsize</code>: ndarray 的属性, 元素的字节数, 例如一个 dtype 为 float64 的 ndarray 的元素的大小为 8.</li>
+<li><code>np.ndim</code>: ndarray 的属性, ndarray 的维度数.</li>
+<li><code>np.shape</code>: ndarray 的属性, 为包含 ndarray 每个维度的大小的 tuple.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">nd = np.random.randint(10, size = (3, 4))</span><br><span class="line"># array([[6, 2, 4, 5],</span><br><span class="line">#        [5, 3, 6, 9],</span><br><span class="line">#        [5, 1, 3, 5]])</span><br><span class="line">nd.size</span><br><span class="line"># 12</span><br><span class="line">nd.dtype</span><br><span class="line"># dtype(&#x27;int64&#x27;)</span><br><span class="line">nd.itemsize</span><br><span class="line"># 8</span><br><span class="line">nd.ndim</span><br><span class="line"># 2</span><br><span class="line">nd.shape</span><br><span class="line"># (3, 4)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>NumPy 提供了常用的对 ndarray 进行变换的方法.</p>
+<ul>
+<li><code>np.reshape</code>: 返回一个按照给定的维度改变的 ndarray.</li>
+<li><code>np.resize</code>: 在原位修改 ndarray 的维度.</li>
+<li><code>np.ravel</code>: 把 ndarray 拉成线性, 即一个维度的长度为其元素数量, 其他维度为 1.</li>
+<li><code>np.squeeze</code>: 返回一个把长度为 1 的维度去掉的 ndarray.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">nd.reshape((2, 6))</span><br><span class="line"># array([[6, 2, 4, 5, 5, 3],</span><br><span class="line">#        [6, 9, 5, 1, 3, 5]])</span><br><span class="line">nd</span><br><span class="line"># array([[6, 2, 4, 5],</span><br><span class="line">#        [5, 3, 6, 9],</span><br><span class="line">#        [5, 1, 3, 5]])</span><br><span class="line">nd.ravel()</span><br><span class="line"># array([6, 2, 4, 5, 5, 3, 6, 9, 5, 1, 3, 5])</span><br><span class="line">nd.ravel().reshape((12, 1))</span><br><span class="line"># array([[6],</span><br><span class="line">#        [2],</span><br><span class="line">#        [4],</span><br><span class="line">#        [5],</span><br><span class="line">#        [5],</span><br><span class="line">#        [3],</span><br><span class="line">#        [6],</span><br><span class="line">#        [9],</span><br><span class="line">#        [5],</span><br><span class="line">#        [1],</span><br><span class="line">#        [3],</span><br><span class="line">#        [5]])</span><br><span class="line">nd.ravel().reshape((12, 1)).sequeeze()</span><br><span class="line"># array([6, 2, 4, 5, 5, 3, 6, 9, 5, 1, 3, 5])</span><br><span class="line">nd.resize((2, 6))</span><br><span class="line">nd</span><br><span class="line"># array([[6, 2, 4, 5, 5, 3],</span><br><span class="line">#        [6, 9, 5, 1, 3, 5]])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>np.nonzero</code>: 返回元素中非零的索引, 如果是多维的, 则每个维度都会有一个包含该维度的序号的 ndarray.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nd.nonzero()</span><br><span class="line"># (array([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]),</span><br><span class="line">#  array([0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>np.repeat</code>: 复制 ndarray 的每个元素的值, 返回一个延长的 ndarray, 需要传入复制的次数作为参数. 当 ndarray 不是一维的时候, 返回的 ndarray 也会是一维的.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nd.repeat(2)</span><br><span class="line"># array([6, 6, 2, 2, 4, 4, 5, 5, 5, 5, 3, 3,</span><br><span class="line">#        6, 6, 9, 9, 5, 5, 1, 1, 3, 3, 5, 5])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>np.compress</code>: 按照给定的 bool list 来选取 ndarray 中的值, 返回一个新的 ndarray.</li>
+<li><code>np.itemset</code>: 按照元素的序号设定元素的值.</li>
+<li><code>np.put</code>: 按照元素的索引设定元素的值.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nd.compress([True, True, False, False, True], axis = 1)</span><br><span class="line"># array([[6, 2, 5],</span><br><span class="line">#        [6, 9, 3]])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>ndarray 也有排序的方法可以使用.</p>
+<ul>
+<li><code>np.partition</code>: 返回一个 ndarray 的 copy, 其中 kth 参数指定的原 ndarray 中的值在返回的 ndarray 中处于排序后的对应的位置, 比其小的元素均在前面, 和其相同或比其大的在后面.</li>
+<li><code>np.argpartition</code>: 类似于 <code>np.partition</code> 函数, 返回值为对应的编号而非值.</li>
+<li><code>np.argsort</code>: 返回元素排序所对应的序号.</li>
+<li><code>np.sort</code>: 在原位排序.</li>
+</ul>
+<h4 id="逻辑计算"><a href="#逻辑计算" class="headerlink" title="逻辑计算"></a>逻辑计算</h4><p>如果想要对布尔数组进行一个对一个地和与或操作, Python 的 and 和 or 操作符是不能用的, 而应该使用 numpy 提供的函数: <code>np.logical_and</code>, <code>np.logical_or</code> 和 <code>np.logical_xor</code> 接受两个等长的布尔数组, 分别进行元素一一对应的和, 或, 异或的逻辑运算; <code>np.logical_not</code> 则是对布尔数组进行取非运算.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">bool1 = np.random.choice([True, False], 5)</span><br><span class="line">bool1</span><br><span class="line"># array([ True,  True, False,  True,  True], dtype=bool)</span><br><span class="line">bool2 = np.random.choice([True, False], 5)</span><br><span class="line">bool2</span><br><span class="line"># array([ True, False, False,  True,  True], dtype=bool)</span><br><span class="line">np.logical_and(bool1, bool2)</span><br><span class="line"># array([ True, False, False,  True,  True], dtype=bool)</span><br><span class="line">np.logical_or(bool1, bool2)</span><br><span class="line"># array([ True,  True, False,  True,  True], dtype=bool)</span><br><span class="line">np.logical_xor(bool1, bool2)</span><br><span class="line"># array([False,  True, False, False, False], dtype=bool)</span><br><span class="line">np.logical_not(bool1)</span><br><span class="line"># array([False, False,  True, False, False], dtype=bool)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>np.all</code>: 如果所有的值都是真或者非零则返回 True, 否则返回 False.</li>
+<li><code>np.any</code>: ndarray 中有任何真值或者非零值则返回 True.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mybool = np.random.choice([True, False], 10)</span><br><span class="line"># array([False,  True,  True, False,  True, False,  True, False,  True, False], dtype=bool)</span><br><span class="line">mybool.all()</span><br><span class="line"># False</span><br><span class="line">mybool.any()</span><br><span class="line"># True</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="数值计算"><a href="#数值计算" class="headerlink" title="数值计算"></a>数值计算</h4><p>NumPy 中有许多和数值计算相关的函数, 这些函数与 math module 中的不同, 是向量化的, 能够高效地对 ndarray 类型的数组中的每一个元素进行运算. 这些函数也被称为通用函数 (ufunc).</p>
+<p>下面是一些单目运算函数.</p>
+<ul>
+<li><code>np.max</code>: 返回 ndarray 中的最大值.</li>
+<li><code>np.argmax</code>: 返回 ndarray 中最大的值的序号.</li>
+<li><code>np.min</code>: 返回 ndarray 中的最小值.</li>
+<li><code>np.argmin</code>: 返回 ndarray 中最小的值的序号.</li>
+<li><code>np.absolute</code>: 计算绝对值. <code>np.absolute(a)</code> 或者 <code>np.abs(a)</code>, 对于非复数的数组, <code>np.fabs</code> 速度更快.</li>
+<li><code>np.exp</code>: 计算 e 的指数, <code>e ** x</code>.</li>
+<li><code>np.sqrt</code>: 计算平方根, <code>x ** 0.5</code>.</li>
+<li><code>np.square</code>: 计算平方, <code>x ** 2</code>.</li>
+<li><code>np.log</code>, <code>np.log10</code>, <code>np.log2</code>, <code>np.log1p</code>: 分别为以 e, 10, 2 为底取 log, 和 <code>log(1 + x)</code>.</li>
+<li><code>np.sign</code>: 取数值的正负号.</li>
+<li><code>np.ceil</code>: 计算比每一个元素大或相等的最小的整数.</li>
+<li><code>np.floor</code>: 计算比每一个元素小或相等的最大的整数.</li>
+<li><code>np.rint</code>: 近似到最近的整数.</li>
+<li><code>np.clip</code>: 返回一个 ndarray, 其元素的值限制在给定的最大最小值之间. 如果原 ndarray 的值在给定的范围之外, 则替换成最大或最小值.</li>
+<li><code>np.modf</code>: 返回一个 tuple, 包含两个数组, 一个是小数部分, 一个是整数部分.</li>
+<li><code>np.cos</code>, <code>np.cosh</code>, <code>np.sin</code>, <code>np.sinh</code>, <code>np.tan</code>, <code>np.tanh</code>, <code>np.arccos</code>, <code>np.arccosh</code>, <code>np.arcsin</code>, <code>np.arcsinh</code>, <code>np.arctan</code>, <code>np.arctanh</code>: 三角函数和反三角函数.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nd = np.random.randn(10)</span><br><span class="line"># array([-1.38153059, -0.66621482, -0.58001284, -0.81628342,  0.0656215 ,</span><br><span class="line">#        -0.01538155, -0.77812592,  0.94664076,  0.85143997, -0.68542156])</span><br><span class="line">np.absolute(nd)</span><br><span class="line"># array([ 1.38153059,  0.66621482,  0.58001284,  0.81628342,  0.0656215 ,</span><br><span class="line">#         0.01538155,  0.77812592,  0.94664076,  0.85143997,  0.68542156])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>还有一些双目运算函数.</p>
+<ul>
+<li><code>np.add</code>, <code>+</code>: 两个数组元素一一对应相加.</li>
+<li><code>np.substract</code>, <code>-</code>: 两个数组元素一一对应相减.</li>
+<li><code>np.multiply</code>, <code>*</code>: 两个数组元素一一对应相乘.</li>
+<li><code>np.devide</code>, <code>/</code>: 两个数组元素一一对应相除.</li>
+<li><code>np.floor_divide</code>, <code>np.remainder</code>, <code>np.mod</code>, <code>np.fmod</code>: <code>np.floor_divide</code> 返回一一对应相除的最大整数商, 即 floor, 而 <code>np.remainder</code> 或 <code>np.mod</code> 则返回余数. 同时, <code>np.fmod</code> 返回的余数则根据被除数和除数的符号可能是负数.</li>
+<li><code>np.power</code>: 计算幂, 以第一个数组中元素为底, 以第二个数组中元素为指数.</li>
+<li><code>np.maximum</code>, <code>np.fmax</code>: 一一比较两个数组中元素大小, 返回相应位置最大的. <code>np.fmax</code> 会忽略 np.NAN, 而 <code>np.maximum</code> 则返回 np.NAN.</li>
+<li><code>np.minimum</code>, <code>np.fmin</code>: 一一比较两个数组中元素大小, 返回相应位置最小的. <code>np.fmin</code> 会忽略 np.NAN, 而 <code>np.minimum</code> 则返回 np.NAN.</li>
+<li><code>np.copysign</code>: 把第二个数组中的元素的符号复制给第一个数组中的相应元素.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">nd1 = np.random.randint(0, 20, 10)</span><br><span class="line"># array([ 8, 15, 15,  0, 10, 13, 19,  5, 19, 10])</span><br><span class="line">nd2 = np.random.randint(0, 20, 10)</span><br><span class="line"># array([ 8, 18,  1, 15, 16,  2,  5, 12, 15,  9])</span><br><span class="line">np.add(nd1, nd2)</span><br><span class="line"># array([16, 33, 16, 15, 26, 15, 24, 17, 34, 19])</span><br><span class="line">np.maximum(nd1, nd2)</span><br><span class="line"># array([ 8, 18, 15, 15, 16, 13, 19, 12, 19, 10])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h4><p>我们有时候关心的是数据中有多少个单一的值, 或者两个数据中相同的值有哪些, 这个时候可以通过集合运算函数来获取所关心的值. NumPy 中提供了高效的集合运算的函数.</p>
+<ul>
+<li><code>np.unique</code>: 返回一个包含有输入的数组元素中所有不重复的值的排序的数组.</li>
+<li><code>np.intersect1d</code>: 计算两个数组的一维交集, 返回排序后的交集数组.</li>
+<li><code>np.union1d</code>: 返回两个数组的排序后的并集.</li>
+<li><code>np.in1d</code>: 返回一个布尔值数组, 判断一个数组元素是否在另一个数组中.</li>
+<li><code>np.setdiff1d</code>: 返回一个数组, 其中包含在第一个输入数组而不在第二个输入数组的元素.</li>
+<li><code>np.setxor1d</code> 返回不同时在两个输入数组的元素的数组.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">nd1 = np.random.choice([&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;, &#x27;D&#x27;], 10)</span><br><span class="line"># array([&#x27;A&#x27;, &#x27;D&#x27;, &#x27;B&#x27;, &#x27;C&#x27;, &#x27;B&#x27;, &#x27;B&#x27;, &#x27;D&#x27;, &#x27;A&#x27;, &#x27;C&#x27;, &#x27;B&#x27;], </span><br><span class="line">#       dtype=&#x27;&lt;U1&#x27;)</span><br><span class="line">nd2 = np.random.choice([&#x27;D&#x27;, &#x27;E&#x27;, &#x27;F&#x27;], 10)</span><br><span class="line"># array([&#x27;F&#x27;, &#x27;E&#x27;, &#x27;E&#x27;, &#x27;D&#x27;, &#x27;D&#x27;, &#x27;D&#x27;, &#x27;D&#x27;, &#x27;E&#x27;, &#x27;E&#x27;, &#x27;F&#x27;], </span><br><span class="line">#       dtype=&#x27;&lt;U1&#x27;)</span><br><span class="line">np.unique(nd1)</span><br><span class="line"># array([&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;, &#x27;D&#x27;], </span><br><span class="line">#       dtype=&#x27;&lt;U1&#x27;)</span><br><span class="line">np.intersect1d(nd1, nd2)</span><br><span class="line"># array([&#x27;D&#x27;], </span><br><span class="line">#       dtype=&#x27;&lt;U1&#x27;)</span><br><span class="line">np.setdiff1d(nd1, nd2)</span><br><span class="line"># array([&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;], </span><br><span class="line">#       dtype=&#x27;&lt;U1&#x27;)</span><br><span class="line">np.setdiff1d(nd2, nd1)</span><br><span class="line"># array([&#x27;E&#x27;, &#x27;F&#x27;], </span><br><span class="line">#       dtype=&#x27;&lt;U1&#x27;)</span><br><span class="line">np.setxor1d(nd1, nd2)</span><br><span class="line"># array([&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;, &#x27;E&#x27;, &#x27;F&#x27;], </span><br><span class="line">#       dtype=&#x27;&lt;U1&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="统计量"><a href="#统计量" class="headerlink" title="统计量"></a>统计量</h4><p>NumPy 中有简单的统计计算的方法或者函数, 有着很好的效率. 统计量计算的函数和方法可以通过更高层调用, 如 <code>np.sum(arr)</code>, 或者使用数组的方法, 如 <code>arr.sum</code>.</p>
+<ul>
+<li><code>np.sum</code>: 计算数组的和, 可以设置参数 axis 为 0 或者 1 单独计算每行或每列的和.</li>
+<li><code>np.mean</code>: 计算数组的均值, 可以设置参数 axis 为 0 或者 1 单独计算每行或每列的均值.</li>
+<li><code>np.std</code>: 计算数组的标准差, 可以设置参数 axis 为 0 或者 1 单独计算每行或每列的标准差.</li>
+<li><code>np.var</code>: 计算数组的标准差, 可以设置参数 axis 为 0 或者 1 单独计算每行或每列的标准差.</li>
+<li><code>np.min</code>, <code>np.max</code>: 计算数组的最小值或最大值, 可以设置参数 axis 为 0 或者 1 单独计算每行或每列的最小值或最大值.</li>
+<li><code>np.argmin</code>, <code>np.argmax</code>: 计算数组的最小值或最大值的 index, 可以设置参数 axis 为 0 或者 1 单独计算每行或每列的最小值或最大值 index.</li>
+<li><code>np.cumsum</code>: 累加.</li>
+<li><code>np.cumprod</code>: 累乘.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">nd = np.random.randn(100)  # 随机产生 100 个随机数.</span><br><span class="line">nd.sum()</span><br><span class="line"># -13.300540142526414</span><br><span class="line">np.mean(nd)</span><br><span class="line"># -0.13300540142526412</span><br><span class="line">nd.std()</span><br><span class="line"># 1.0860199448302112</span><br><span class="line">nd.var()</span><br><span class="line"># 1.1794393205690152</span><br><span class="line">nd.min(), np.max(nd)</span><br><span class="line"># (-3.2346987329963834, 2.3950110710189687)</span><br><span class="line">nd.argmin(), np.argmax(nd)</span><br><span class="line"># (24, 31)</span><br><span class="line">nd.cumsum()</span><br><span class="line"># array([ -0.55436107,  -0.86184171,  -2.47687452,  -5.0649675 ,</span><br><span class="line">#            ...            ...            ...          ...</span><br><span class="line">#        -13.96853959, -13.59106636, -14.16799745, -13.30054014])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h4><p>NumPy 中提供了一些线性代数运算的函数, 在 linalg 中有更全的线性代数的计算函数. 更多的线性代数相关函数包含在 scipy.linalg 包中.</p>
+<ul>
+<li><code>np.dot</code>: 矩阵乘法.</li>
+<li><code>np.transpose</code>: 返回转置, 也可以使用一个 ndarray 的 nd.T 属性.</li>
+<li><code>np.diagonal</code>: 返回矩阵的对角元素.</li>
+<li><code>np.trace</code>: 返回矩阵的迹.</li>
+<li><code>np.linalg.eig</code>: 返回方阵的特征值和特征向量.</li>
+<li><code>np.linalg.inv</code>: 返回方阵的逆矩阵.</li>
+<li><code>np.linalg.pinv</code>: 返回方阵的 Moore-Penrose 伪逆矩阵.</li>
+<li><code>np.linalg.solve</code>: 解线性方程组, 输入值是系数矩阵和线性方程组的常数项.</li>
+<li><code>np.linalg.det</code>: 求方阵的行列式.</li>
+<li><code>np.linalg.matrix_rank</code>: 求一个矩阵的秩.</li>
+<li><code>np.linalg.svd</code>: 奇异值分解.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">nd1 = np.arange(9, 1).reshape(2,4)</span><br><span class="line"># array([[1, 2, 3, 4],</span><br><span class="line">#        [5, 6, 7, 8]])</span><br><span class="line">nd2 = np.arange(1, 9).reshape(4,2)</span><br><span class="line"># array([[1, 2],</span><br><span class="line">#        [3, 4],</span><br><span class="line">#        [5, 6],</span><br><span class="line">#        [7, 8]])</span><br><span class="line">nd1.dot(nd2)</span><br><span class="line"># array([[ 50,  60],</span><br><span class="line">#        [114, 140]])</span><br><span class="line">nd1.dot(nd2).trace()</span><br><span class="line"># 190</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="随机数和随机排列"><a href="#随机数和随机排列" class="headerlink" title="随机数和随机排列"></a>随机数和随机排列</h4><p>不论是在构建模拟数据还是实际数据分析中, 我们都需要频繁地生成随机数或者随机抽样. NumPy 提供了众多方便使用的生成各种分布的伪随机数的函数.</p>
+<ul>
+<li><code>np.random.seed</code>: 设置随机数的种子.</li>
+<li><code>np.random.permutation</code>: 返回一个随机打乱的数组.</li>
+<li><code>np.random.shuffle</code>: 在原位随机打乱一个数组.</li>
+<li><code>np.random.rand</code>: 从均匀分布中抽取样本, 其接受参数指定返回的数组的维度. <code>np.random.rand(3, 2)</code> 返回一个 3 乘 2 的矩阵.</li>
+<li><code>np.random.randint</code>: 从指定的最低和最高的范围内抽取指定数量的整数. 如 <code>np.random.randint(1, 100, 20)</code> 从 1 到 100 中随机抽取 20 个整数.</li>
+<li><code>np.random.randn</code>: 从均值为 0, 方差为 1 的正态分布中抽取随机数, 返回指定的数量或者维度的矩阵.</li>
+<li><code>np.random.binomial</code>: 从给定数量 n 和成功概率 p 的二项分布中抽取一定数量的样本. <code>np.random.binomial(n, p, size)</code>, 其中 n 是试验的次数, p 是成功的概率, size 是抽样的数量或者维度.</li>
+<li><code>np.random.normal</code>: 从正态分布中抽取一定数量的样本.</li>
+<li><code>np.random.beta</code>: 从 beta 分布中抽取一定数量的样本.</li>
+<li><code>np.random.chisquare</code>: 从 chisquare 分布中抽取一定数量的样本.</li>
+<li><code>np.random.gamma</code>: 从 gamma 分布中抽取一定数量的样本.</li>
+<li><code>np.random.uniform</code>: 从均匀分布中抽取一定数量的样本.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">np.random.permutation(5)</span><br><span class="line"># array([2, 0, 1, 3, 4])</span><br><span class="line">np.random.permutation(np.arange(6).reshape((2,3)))</span><br><span class="line"># array([[3, 4, 5],</span><br><span class="line">#        [0, 1, 2]])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h4>
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

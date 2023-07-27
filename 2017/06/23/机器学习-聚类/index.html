@@ -1,0 +1,193 @@
+<html>
+  <head>
+    <title>机器学习-聚类 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2017/07/05/docker%E5%92%8Charbor%E7%9A%84%E5%AE%89%E8%A3%85/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2017/05/15/java%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2017-06-23</div>
+            机器学习-聚类
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ml/">ml</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/ml/" rel="tag">ml</a>
+            </font>
+          
+          <hr>
+
+
+          <h2 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>聚类属于无监督学习，以往的回归、朴素贝叶斯、SVM等都是有类别标签y的，也就是说样例中已经给出了样例的分类。</p>
+<h3 id="聚类与分类"><a href="#聚类与分类" class="headerlink" title="聚类与分类"></a>聚类与分类</h3><ul>
+<li>聚类分析中的“类”（cluster）和分类的“类”（class）是不同的，对cluster更加准确的翻译应该是“簇”。聚类的任务是把所有的实例分配到若干的簇，使得同一个簇的实例聚集在一个簇中心的周围，它们之间距离的比较近；而不同簇实例之间的距离比较远。对于由数值型属性刻画的实例来说，这个距离通常指欧氏距离</li>
+<li>两个算法应该都属于机器学习范围，用途非常广，包括机器视觉，数据挖掘等。分类是有监督的学习，需要事先标记样本，而聚类是无监督学习，不需要经验数据，但两者都是为了归类问题</li>
+</ul>
+<h3 id="Clustering-Algorithms分类"><a href="#Clustering-Algorithms分类" class="headerlink" title="Clustering Algorithms分类"></a>Clustering Algorithms分类</h3><ul>
+<li>Partitioning approach:<ul>
+<li>建立数据的不同分割，然后用相同标准评价聚类结果。（比如最小化平方误差和）</li>
+<li>典型算法：K-Means, K-Medoids</li>
+</ul>
+</li>
+<li>Model-based:<ul>
+<li>对于每个类假定一个分布模型，试图找到每个类最好的模型</li>
+<li>典型算法：GMM（混合高斯）</li>
+</ul>
+</li>
+<li>Dimensionality Reduction Approach:<ul>
+<li>先降维，再聚类</li>
+<li>典型算法：Spectral clustering，Ncut</li>
+</ul>
+</li>
+</ul>
+<h2 id="k-means"><a href="#k-means" class="headerlink" title="k-means"></a>k-means</h2><p>样本点满足高斯分布</p>
+<h3 id="如何选择k值？"><a href="#如何选择k值？" class="headerlink" title="如何选择k值？"></a>如何选择k值？</h3><ul>
+<li>按需选择</li>
+<li>观察法</li>
+<li>手肘法</li>
+<li>Gap Statistics方法</li>
+</ul>
+<h2 id="DBSCAN"><a href="#DBSCAN" class="headerlink" title="DBSCAN"></a>DBSCAN</h2><p>两个阈值的选择</p>
+<ul>
+<li>EPS</li>
+<li>MINPTS</li>
+<li>​</li>
+</ul>
+<h2 id="CFSFDP"><a href="#CFSFDP" class="headerlink" title="CFSFDP"></a>CFSFDP</h2><p>Clustering by fast search and find of density peaks—密度中心聚类算法</p>
+<p>“Clustering by fast search and find of density peaks”是在2014年《Science》期刊上发表的一篇论文，这篇文章提出一种新型的基于密度的聚类算法。<strong>这个新聚类算法的核心思想在于对聚类中心的刻画上</strong>。</p>
+<h3 id="算法优点"><a href="#算法优点" class="headerlink" title="算法优点"></a>算法优点</h3><ul>
+<li>该聚类算法可以得到非球形的聚类结果，可以很好地描述数据分布，同时在算法复杂度上也比一般的K-means算法的复杂度低。</li>
+<li>同时此算法的只考虑点与点之间的距离，因此不需要将点映射到一个向量空间中。</li>
+</ul>
+<h3 id="算法缺点"><a href="#算法缺点" class="headerlink" title="算法缺点"></a>算法缺点</h3><ul>
+<li>需要事先计算好所有点与点之间的距离。如果样本太大则整个距离矩阵的内存开销特别大，因此如果只需要得到最终聚类中心，则可以考虑牺牲速度的方式计算每一个样本点的和，避免直接加载距离矩阵。</li>
+<li>文中提到聚类中心可以自动确定，但是从作者提供的示例代码看来，其判定过程还是需要人为地干预选择</li>
+</ul>
+<h2 id="聚类算法应用的领域"><a href="#聚类算法应用的领域" class="headerlink" title="聚类算法应用的领域"></a>聚类算法应用的领域</h2><ul>
+<li>用户画像——企业发掘优质客户</li>
+<li>网站的推荐系统</li>
+<li>社区发现</li>
+<li>计算机集群分析（在大型集群中找到可能有问题的服务器）</li>
+<li>航天数据的分析（告诉我们星系的组成情况）</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/abcjennifer/article/details/8170687">http://blog.csdn.net/abcjennifer/article/details/8170687</a></li>
+<li><a target="_blank" rel="noopener" href="http://people.sissa.it/~laio/Research/Res_clustering.php">http://people.sissa.it/~laio/Research/Res_clustering.php</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/peghoty/p/3945653.html">http://www.cnblogs.com/peghoty/p/3945653.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/taokongcn/p/4034348.html">http://www.cnblogs.com/taokongcn/p/4034348.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://sofasofa.io/forum_main_post.php?postid=1000282#">http://sofasofa.io/forum_main_post.php?postid=1000282#</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>

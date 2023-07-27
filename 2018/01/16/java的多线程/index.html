@@ -1,0 +1,205 @@
+<html>
+  <head>
+    <title>java的多线程 - 十一城</title>
+    <link href='/images/fav.png' rel='shortcut icon'>
+<link href='/atom.xml' rel='alternate' type='application/rss+xml'>
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/highlight.css">
+<link rel="stylesheet" href="/css/responsive.css">
+
+
+<script src="/js/jquery.js"></script>
+<script src="/js/basics.js"></script>
+
+<meta content='width=device-width, initial-scale=1.0, user-scalable=no' name='viewport'>
+<meta content='text/html; charset=utf-8' http-equiv='content-type'>
+
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <header>
+  <!--<a id='go-back-home' href='/'><img alt='Home' width='53' height='59'></a>-->
+  <br>
+  <p>十一城</p>
+  <p>跬步千里，小流江海。</p>
+</header>
+
+    <div id='container'>
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+      <section class='paging'>
+  
+    <div class='left'>
+      <a href='/2018/01/17/Bash%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/'>
+        ‹
+      </a>
+    </div>
+  
+  
+    <div class='right'>
+      <a href='/2018/01/16/%E7%90%86%E8%A7%A3linux%E7%9A%84service%E5%91%BD%E4%BB%A4/'>
+        ›
+      </a>
+    </div>
+  
+</section>
+
+      <div class='content'>
+        <section class='post'>
+          <h1>
+            <div class='date'>2018-01-16</div>
+            java的多线程
+          </h1>
+          
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/java/">java</a>
+            </font>
+          
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-none-link" href="/tags/java/" rel="tag">java</a>
+            </font>
+          
+          <hr>
+
+
+          <blockquote>
+<p>神之双手，从不留痕。我们至今不知道他的存在，但他却操控着一些微妙的连锁反应，从而影响着这个世界的进程。</p>
+</blockquote>
+<h2 id="进程-ps-与线程-thread"><a href="#进程-ps-与线程-thread" class="headerlink" title="进程(ps)与线程(thread)"></a>进程(ps)与线程(thread)</h2><ul>
+<li>进程：正在运行的程序，是系统进行资源分配的独立单位</li>
+<li>线程：进程的执行路径，调度和执行的单位，单个路径单线程，多个路径多线程</li>
+</ul>
+<p>本质区别：每个进程拥有自己的一套变量，而线程只是共享数据。</p>
+<p>多进程的意义：提高CPU的<strong>使用率</strong></p>
+<p>多线程的意义：提高应用程序的<strong>效率</strong></p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><h3 id="线程的五大状态"><a href="#线程的五大状态" class="headerlink" title="线程的五大状态"></a>线程的五大状态</h3><ul>
+<li><p>新建状态：创建线程对象</p>
+</li>
+<li><p>待运行：线程调用<code>start()</code>之后，有执行的资格，没有执行权</p>
+</li>
+<li><p>运行：获得cpu的执行权（当加锁保证线程安全时会进入锁池等待获取锁，即同步阻塞）</p>
+</li>
+<li><p>阻塞： ①等待阻塞：Object的<code>wait()</code>方法调用后， 进入等待队列，唤醒后进入锁池，获得锁后又回到待运行状态</p>
+<p>​            ②同步阻塞：争抢cpu使用权，没抢到手，进入锁池等待获得锁</p>
+<p>​            ③其他阻塞：如<code>sleep()</code>，<code>join()</code>，时间结束后进入待运行状态</p>
+</li>
+<li><p>死亡：run，main执行结束，或因异常退出</p>
+</li>
+</ul>
+<h3 id="线程的两种调度模型"><a href="#线程的两种调度模型" class="headerlink" title="线程的两种调度模型"></a>线程的两种调度模型</h3><ul>
+<li>分时调度模型：所有线程轮流使用CPU的使用全，平均分配每个线程占用cpu的时间</li>
+<li>抢占式调度模型（java采用）：优先级最高为10，最低为1，多个抢占，一个运行</li>
+</ul>
+<h3 id="start-方法和run-方法的区别"><a href="#start-方法和run-方法的区别" class="headerlink" title="start()方法和run()方法的区别"></a><code>start()</code>方法和<code>run()</code>方法的区别</h3><ul>
+<li><code>run()</code>方法仅仅是封装线程执行的代码，直接调用是普通方法</li>
+<li><code>start()</code>方法是启动线程，由java去调用<code>run()</code>方法</li>
+</ul>
+<h3 id="线程终止的两大原因"><a href="#线程终止的两大原因" class="headerlink" title="线程终止的两大原因"></a>线程终止的两大原因</h3><ul>
+<li>当线程的<code>run()</code>执行方法体中最后一条语句后，并经由return语句返回时</li>
+<li>出现没有捕获的异常时，线程将终止</li>
+</ul>
+<h3 id="产生线程安全问题"><a href="#产生线程安全问题" class="headerlink" title="产生线程安全问题"></a>产生线程安全问题</h3><ol>
+<li>是否是多线程环境</li>
+<li>是否有共享数据</li>
+<li>是否有多条语句操作共享数据</li>
+</ol>
+<p>以上三个问题同时出现会出现线程安全问题。解决方案通常为把多个语句操作共享数据的代码给锁起来，让任意时刻只有一个线程执行即可。</p>
+<h3 id="线程间的协作"><a href="#线程间的协作" class="headerlink" title="线程间的协作"></a>线程间的协作</h3><ul>
+<li><code>wait()</code></li>
+<li><code>notify()</code></li>
+<li><code>notifyAll()</code></li>
+</ul>
+<p><code>wait()</code>与<code>sleep()</code>的区别</p>
+<ul>
+<li><code>sleep()</code>来自Thread类，<code>wait()</code>来自Object类</li>
+<li>调用<code>sleep()</code>方法的过程中，线程不会释放对象锁。而调用<code>wait()</code>方法线程会释放对象锁</li>
+<li><code>sleep()</code>睡眠后不出让系统资源，<code>wait()</code>让出系统资源其他线程可以占用CPU</li>
+<li><code>sleep(milliseconds)</code>需要指定一个睡眠时间，时间一到会自动唤醒</li>
+</ul>
+<p>相同点</p>
+<ol>
+<li>在多线程环境下调用可阻塞指定的秒数，并返回</li>
+<li>两者都可以调用interrupt()方法打断线程的暂停状态</li>
+</ol>
+<p>不同点</p>
+<ol>
+<li>每个对象都有一个锁来控制同步访问，<code>Stnchronizad</code>关键字可以和对象的锁交互，来实现线程的同步。<code>sleep()</code>方法没有释放锁，而<code>wait()</code>释放了锁，使得其他线程可以使用同步控制块或者方法</li>
+<li><code>wait()</code>。<code>notify()</code>，<code>notifyAll()</code>只能在同步方法或者同步控制块中使用，而<code>sleep()</code>可以在任何地方使用</li>
+<li><code>sleep()</code>必须捕获异常，而<code>wait()</code>，notify，notifyAll不需要捕获异常</li>
+<li><code>sleep()</code>是线程类<code>Thread</code>的方法，调用会暂停此线程指定的时间，但监控依然保持，不会释放对象锁，到时间自动恢复</li>
+<li><code>wait()</code>是<code>Object</code>的方法，调用会放弃对象锁，进入等待队列，待调用notify唤醒指定的线程或者notifyAll唤醒所有线程，才会进入锁池，当获得对象锁，进入运行状态</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/way_testlife/archive/2011/04/16/2018312.html">http://www.cnblogs.com/way_testlife/archive/2011/04/16/2018312.html</a></li>
+</ol>
+
+          <br>
+<p>dzzxjl</p>
+<!--<p><img src='/images/scribble3.png' alt='scribble'></p>-->
+
+        </section>
+      </div>
+      
+      <div class='block'>
+  
+    <a class='main' href='/'>Home</a>
+  
+    <a class='main' href='/categories/linux'>Linux</a>
+  
+    <a class='main' href='/categories/ml'>ML</a>
+  
+    <a class='main' href='/categories/python'>Python</a>
+  
+    <a class='main' href='/categories/java'>Java</a>
+  
+    <a class='main' href='/thoughts'>Thoughts</a>
+  
+    <a class='main' href='/kmkg'>KmKg</a>
+  
+    <a class='main' href='/bookcan'>BookCan</a>
+  
+    <a class='main' href='/links'>Links</a>
+  
+    <a class='main' href='/about'>About</a>
+  
+</div>
+
+    </div>
+    <footer>
+  <span class='muted'>&copy; dzzxjl. 2023. All Rights Reserved.</span><br>
+  <a target="_blank" rel="noopener" href='https://github.com/saintwinkle/hexo-theme-scribble' class='muted'>一辈子很短，如白驹过隙，转瞬即逝。而这种心情很长，如高山大川，延绵不绝。</a>
+  <br>
+  <br>
+  <!--<img src='/images/scribble2.png' alt='scribble' />-->
+</footer>
+
+  </body>
+</html>
